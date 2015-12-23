@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option java_package = "com.globalways.user.qiniu";
+
+package proto;
+
+import "common.proto";
+
+service QiniuService {
+    // ping
+    rpc Ping(NullRpcRequest) returns (Response) {}
+    // 制作上传凭证 (http url: /qiniu/uptoken [post])
+    rpc MakeUpToken(MakeQiniuUpTokenParam) returns (MakeQiniuUpTokenResp) {}
+}
+
+message MakeQiniuUpTokenParam {
+    // 用户token
+    string token = 1;
+    // 哪个app
+    string appId = 2;
+    // 七牛文件夹
+    string bucket = 3;
+    // 文件的key，可选
+    string key = 4;
+}
+
+message MakeQiniuUpTokenResp {
+    Response resp = 1;
+    // 上传凭证
+    QiniuUpToken upToken = 2;
+}
+
+message QiniuUpToken {
+    // 上传token
+    string uptoken = 1;
+    // 图片的根域名，上传成功后将domain与key结合，合成完整url存到app服务器
+    string domain = 2;
+}

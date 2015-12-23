@@ -1,0 +1,150 @@
+syntax = "proto3";
+
+option java_package = "com.globalways.user";
+
+package proto;
+
+import "common.proto";
+import "user.wallet.common.proto";
+
+// user login token item
+message TokenItem {
+    // 哪个app
+    string appId = 1;
+    // 红id
+    uint64 hongId = 2;
+    // 登陆时间
+    int64 loggedTime = 3;
+    // 过期时间
+    int64 expiredTime = 4;
+}
+
+// 登陆环途用户中心参数, 如果token存在，验证token有效性，无效时再数据库验证
+message LoginParam {
+    // 哪个app
+    string appId = 1;
+    // 用户名
+    string username = 2;
+    // 密码
+    string password = 3;
+    // 登陆token
+    string token = 4;
+}
+
+message LoginResp {
+    Response resp = 1;
+    // 用户对象
+    User user = 2;
+    // 登陆token
+    string token = 3;
+}
+
+// 注册环途app需要的参数，只支持手机号注册
+message RegisterAppUserParam {
+    // 昵称
+    string nick = 1;
+    // 手机号
+    string tel = 2;
+    // 密码
+    string password = 3;
+}
+
+// 登陆APP需要的参数
+message LoginAppParam {
+    // 用户名
+    string username = 1;
+    // 密码
+    string password = 2;
+    // 登陆token
+    string token = 3;
+}
+
+// 注销app需要的参数
+message LogoutParam {
+    // 用户登陆token
+    string token = 1;
+}
+
+// 获取app用户信息
+message GetAppUserParam {
+    uint64 hongId = 1;
+}
+
+enum UserSex {
+    UNKNOWN_Sex = 0;
+    // 男
+    MALE = 1;
+    // 女
+    FAMALE = 2;
+}
+
+enum UserStatus {
+    INVALID = 0;
+    // 未被使用
+    NOTUSE = 1;
+    // 等待被使用
+    PENDING = 2;
+    // 使用中
+    USE = 3;
+    // 锁定中
+    LOCK = 4;
+}
+
+enum UserAuthority {
+    // 基本用户权限
+    USER = 0;
+    // 管理员权限
+    ADMIN = 1;
+}
+
+// user
+message User {
+    int64 id = 1;
+    // 红id
+    uint64 hongId = 2;
+    // 昵称
+    string nick = 3;
+    // 手机号
+    string tel = 4;
+    // 邮箱
+    string email = 5;
+    // 密码
+    string password = 6;
+    // 头像
+    string avatar = 7;
+    // 年龄
+    uint32 age = 8;
+    // 性别
+    UserSex sex = 9;
+    // 权限
+    UserAuthority authority = 10;
+    // 状态
+    UserStatus status = 11;
+    // 注册时间
+    int64 regTime = 12;
+    // 生产时间
+    int64 genTime = 13;
+    // 备注
+    string comment = 14;
+    // 操作者
+    uint64 auditor = 15;
+    // 用户地址
+    repeated UserAddress addrs = 16;
+    // 用户钱包
+    UserWallet wallet = 17;
+}
+
+// 用户地址
+message UserAddress {
+    int64 id = 1;
+    // 收件人
+    string name = 2;
+    // 联系方式
+    string contact = 3;
+    // 所在地区
+    string area = 4;
+    // 详细地址
+    string detail = 5;
+    // 关联用户
+    uint64 userId = 6;
+}

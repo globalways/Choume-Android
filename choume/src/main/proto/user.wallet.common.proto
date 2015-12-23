@@ -1,0 +1,173 @@
+syntax = "proto3";
+
+option java_package = "com.globalways.user.wallet";
+
+package proto;
+
+// 环途用户钱包
+message UserWallet {
+    int64 id = 1;
+    // 用户红id
+    uint64 hongId = 2;
+    // 余额，单位分
+    uint64 amount = 3;
+    // 绑定的第三方钱包
+    repeated ThirdPartyWallet thirdPartyWallets = 4;
+}
+
+// 第三方钱包类型 枚举
+enum ThirdPartyWalletType {
+    INVALID_TPWT = 0;
+    // 支付宝
+    ALIPAY_TPWT = 1;
+    // 微信
+    WEIXIN_TPWT = 2;
+}
+
+// 第三方钱包
+message ThirdPartyWallet {
+    int64 id = 1;
+    // 账户名
+    string name = 2;
+    // 账号
+    string account = 3;
+    // 用户钱包id
+    int64 userWalletId = 4;
+    // 是否验证通过
+    bool varified = 5;
+    // 钱包类型
+    ThirdPartyWalletType type = 6;
+    // 创建时间
+    int64 created = 7;
+    // 预打款额度，单位分
+    uint64 rechargeAmount = 8;
+    // 预打款订单id
+    string orderId = 9;
+    // 后台操作人
+    uint64 auditor = 10;
+    // 来自哪个app
+    string appId = 11;
+    uint64 hongId = 12;
+}
+
+enum UserWalletHistoryType {
+    INVALID_WHT = 0;
+    // 消费
+    CONSUME_WHT = 1;
+    // 充值
+    RECHARGE_WHT = 2;
+    // 退款
+    REFUND_WHT = 3;
+    // 提现
+    WITHDRAW_WHT = 4;
+}
+
+enum UserWalletHistoryStatus {
+    INVALID_WHS = 0;
+    // 等待
+    PENDING_WHS = 1;
+    // 成功
+    SUCCESS_WHS = 2;
+    // 失败
+    FAIL_WHS = 3;
+    // 取消
+    CANCEL_WHS = 4;
+}
+
+// 环途用户钱包明细
+message UserWalletHistory {
+    int64 id = 1;
+    // 用户红id
+    uint64 hongId = 2;
+    // 明细类型
+    UserWalletHistoryType type = 3;
+    // 额度，单位分
+    uint64 amount = 4;
+    // 创建时间
+    int64  created = 5;
+    // 标题
+    string subject = 6;
+    // 剩余余额，单位分
+    uint64 remain = 7;
+    // 来自哪个app
+    string appId = 8;
+    // 订单id
+    string orderId = 9;
+    // 明细状态
+    UserWalletHistoryStatus status = 10;
+    // 操作者
+    uint64 auditor = 11;
+}
+
+// 钱包提现状态
+enum UserWalletWithdrawStatus {
+    INVALID_UWWDS = 0;
+    // 申请中
+    APPLYING = 1;
+    // 拒绝提现
+    REJECT = 2;
+    // 提现完成
+    COMPLETE = 3;
+}
+
+// 环途钱包提现
+message UserWalletWithdraw {
+    int64 id = 1;
+    // 用户红id
+    uint64 hongId = 2;
+    // 账户名
+    string name = 3;
+    // 提现额度，单位分
+    uint64 amount = 4;
+    // 提现申请状态
+    UserWalletWithdrawStatus status = 5;
+    // 订单id
+    string orderId = 6;
+    // 申请时间
+    int64 applyTime = 7;
+    // 处理时间
+    int64 handleTime = 8;
+    // 账户名
+    string account = 9;
+    // 第三方钱包类型
+    ThirdPartyWalletType walletType = 10;
+    // 支付明细id
+    int64 historyId = 11;
+    // 操作者
+    uint64 auditor = 12;
+    // 备注
+    string commit = 13;
+    // 哪个app
+    string appId = 14;
+}
+
+// 支付系统明细，统一环途所有的支付明细
+message PayDetail {
+    int64 id = 1;
+    // 哪个app的付款
+    string appId = 2;
+    // 创建时间
+    int64 created = 3;
+    // 是否已付款。
+    bool paid = 4;
+    // 支付渠道
+    string channel = 5;
+    // 商户订单号，适配每个渠道对此参数的要求，结合appId唯一。
+    string orderNo = 6;
+    // 发起支付请求终端的 ip 地址，格式为 IPV4 整型，如 127.0.0.1。
+    string clientIp = 7;
+    // 商品的标题
+    string subject = 8;
+    // 商品的描述信息
+    string body = 9;
+    // 订单支付完成时间，用 Unix 时间戳表示。
+    int64 timePaid = 10;
+    // pingpp 支付id
+    string pingppId = 11;
+    // 谁购买
+    uint64 hongId = 12;
+    // 付款总额
+    uint64 amount = 13;
+    // 是否退款
+    bool refund = 14;
+}

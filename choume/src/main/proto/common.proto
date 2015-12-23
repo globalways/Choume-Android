@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+option java_package = "com.globalways.proto";
+
+package proto;
+
+// empty rpc request
+message NullRpcRequest {}
+
+// sample rpc response
+message Response{
+    int64 code = 1;
+    string msg = 2;
+}
+
+message AppConfig {
+    string appId = 1;
+    string appName = 2;
+    string key = 3;
+    int64 loginTokenDuration = 4;
+}
+
+// 设备平台
+enum DivicePlatform {
+    INVALID_DP = 0;
+    ANDROID_DP = 1;
+    IOS_DP = 2;
+    WEB_DP = 3;
+}
+
+// 分享平台
+enum ShareChannel {
+    INVALID_SC = 0;
+    WEIBO_SC = 1;
+    WEIXIN_SC = 2;
+    PENGYOUQUAN_SC = 3;
+    QQ_SC = 4;
+}

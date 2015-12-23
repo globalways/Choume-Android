@@ -1,0 +1,77 @@
+syntax = "proto3";
+
+option java_package = "com.globalways.user";
+
+package proto;
+
+import "common.proto";
+import "user.common.proto";
+
+service UserAppService {
+    // ping
+    rpc Ping(NullRpcRequest) returns (Response) {}
+
+    // 修改密码 (http url: /users/password/change [post])
+    rpc ChangePassword(ChangePasswordParam) returns (Response) {}
+    // 忘记密码 (http url: /users/password/forget [post])
+    rpc ForgetPassword(ForgetPasswordParam) returns (Response) {}
+    // 更换头像 (http url: /users/avatar/change [post])
+    rpc ChangeUserAvatar(ChangeUserAvatarParam) returns (Response) {}
+    // 更改昵称 (http url: /users/nick/change [post])
+    rpc ChangeUserNick(ChangeUserNickParam) returns (Response) {}
+    // 新增用户地址 (http url: /users/addrs [post])
+    rpc NewUserAddr(NewUserAddrParam) returns (NewUserAddrResp) {}
+
+    // 获取用户 (http url: /users/single [get])
+    rpc GetUser(GetUserParam) returns (GetUserResp) {}
+}
+
+message GetUserParam {
+    uint64 hongId = 1;
+}
+
+message GetUserResp {
+    Response resp = 1;
+    User user = 2;
+}
+
+message NewUserAddrParam {
+    string token = 1;
+    string name = 2;
+    string contact = 3;
+    string area = 4;
+    string detail = 5;
+}
+
+message NewUserAddrResp {
+    Response resp = 1;
+    UserAddress addr = 2;
+}
+
+enum ChangePasswordType {
+    CHANGE_PASSWORD = 0;
+    FORGET_PASSWORD = 1;
+}
+
+// 修改密码参数
+message ChangePasswordParam {
+    string token = 1;
+    string passwordOld = 2;
+    string passwordNew = 3;
+}
+
+// 忘记密码参数
+message ForgetPasswordParam {
+    uint64 hongId = 1;
+    string passwordNew = 2;
+}
+
+message ChangeUserAvatarParam {
+    string token = 1;
+    string avatar = 2;
+}
+
+message ChangeUserNickParam {
+    string token = 1;
+    string nick = 2;
+}
