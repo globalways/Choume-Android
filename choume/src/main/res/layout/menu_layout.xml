@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="250dp"
+    android:choiceMode="singleChoice"
+    android:drawSelectorOnTop="false"
+    android:background="@color/white"
+    android:layout_gravity="start"
+    android:fitsSystemWindows="true"
+    android:id="@+id/menu"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="#11a2ff"
+        android:layout_height="200dp"
+        android:layout_width="match_parent">
+
+        <com.shichai.www.choume.view.CircleImageView
+            android:id="@+id/im_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/test_head"
+            app:border_width="1dp"
+            app:border_color="@color/white" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张三"
+            android:drawableRight="@mipmap/ico_arrow_right"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:id="@+id/tv_username"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/im_head" />
+    </RelativeLayout>
+
+    <TextView
+        style="@style/menu_text"
+        android:text="@string/my_sponsor"
+        android:drawableLeft="@mipmap/ico_my_sponsor"
+        android:id="@+id/tv_my_sponsor"/>
+    <TextView
+        style="@style/menu_text"
+        android:text="@string/my_join"
+        android:drawableLeft="@mipmap/ico_my_join"
+        android:id="@+id/tv_my_join"/>
+    <TextView
+        style="@style/menu_text"
+        android:text="@string/my_wealth"
+        android:drawableLeft="@mipmap/ico_my_wealth"
+        android:id="@+id/tv_my_wealth"/>
+    <TextView
+        style="@style/menu_text"
+        android:text="@string/my_collection"
+        android:drawableLeft="@mipmap/ico_my_collection"
+        android:id="@+id/tv_my_collection"/>
+    <TextView
+        style="@style/menu_text"
+        android:text="@string/my_message"
+        android:drawableLeft="@mipmap/ico_my_message"
+        android:id="@+id/tv_my_message"/>
+    <TextView
+        style="@style/menu_text"
+        android:text="@string/account_option"
+        android:drawableLeft="@mipmap/ico_my_account_option"
+        android:id="@+id/tv_account_option"/>
+    <TextView
+        style="@style/menu_text"
+        android:text="@string/my_logout"
+        android:drawableLeft="@mipmap/ico_my_logout"
+        android:id="@+id/tv_logout"/>
+
+</LinearLayout>

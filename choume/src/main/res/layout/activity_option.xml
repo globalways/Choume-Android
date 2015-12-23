@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="?attr/colorPrimary"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:showDividers="middle|end"
+        android:divider="@drawable/divider_gray"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+        <include
+            layout="@layout/app_bar_layout">
+        </include>
+
+        <TextView
+            android:onClick="onClick"
+            android:textColor="@color/border_color"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="常见问题"
+            android:id="@+id/tv_normal_question" />
+
+        <TextView
+            android:onClick="onClick"
+            android:textColor="@color/border_color"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="意见反馈"
+            android:id="@+id/tv_feedback" />
+
+        <TextView
+            android:onClick="onClick"
+            android:textColor="@color/border_color"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="加入我们"
+            android:id="@+id/tv_join_us" />
+        <TextView
+            android:onClick="onClick"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:padding="5dp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="检查更新"
+            android:id="@+id/tv_update" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

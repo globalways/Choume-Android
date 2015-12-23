@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="ldrawer_color">#FFFFFF</color>
+
+    <color name="actionbar_color">#bf360c</color>
+    <color name="drawer_arrow_second_color">#303f9f</color>
+
+    <color name="cf2f2f2">#f2f2f2</color>
+    <color name="c007aff">#007aff</color>
+    <color name="c787878">#787878</color>
+    <color name="blue">#0079ff</color>
+    <color name="gray">#e6e6e6</color>
+    <color name="dark_gray">#8a929a</color>
+    <color name="group_selected">#f5f5f5</color>
+    <color name="province_line_border">#D0D0D0</color>
+    <color name="divider_color">#e1e1e1</color>
+    <color name="text_status_unselected">#939393</color>
+    <color name="text_status_selected">#2cb281</color>
+
+    <color name="text_gray">#bfc2c7</color>
+    <!-- 深灰色 -->
+    <color name="dargrey">#666364</color>
+    <!-- 灰色背景 -->
+    <color name="greybackground">#EAE9E7</color>
+    <color name="grey_tour">#EAECEF</color>
+    <!-- 深灰色2 附近内容 列表特性框背景 -->
+    <color name="dargreypane">#F3F3F3</color>
+    <!-- 深灰色2 附近内容 列表特性框边 -->
+    <color name="dar_grey_stroke">#E1E1E1</color>
+    <!-- 深灰色3 附近详情内容框 边 -->
+    <color name="grey3stroke">#d6d5d5</color>
+    <!-- 浅灰 -->
+    <color name="light_gray1">#D3D3D3</color>
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+    <!-- 白色 -->
+    <color name="white">#ffffff</color>
+    <!-- 黑色 -->
+    <color name="black">#000000</color>
+    <!-- 黑色半透明 -->
+    <color name="enblack">#55000000</color>
+    <color name="enlocation">#22000000</color>
+    <!-- 红色 -->
+    <color name="red">#FF0000</color>
+    <color name="red2">#ed3b00</color>
+    <!-- 浅蓝色 -->
+    <color name="watchetblue">#385486</color>
+
+    <color name="plus_sandbox_text_color">#3b3b3b</color>
+
+    <color name="light_grey">#F3F3F3</color>
+    <!--  浅红色-->
+    <color name="red_low">#cb3301</color>
+    <!--  深红色-->
+    <color name="red_drak">#aa2901</color>
+
+    <color name="header_normal">#00000000</color>
+    <color name="header_pressed">#ff7474F6</color>
+    <color name="gold">#b89766</color>
+    <color name="tab_color_normal">#ffffff</color>
+    <color name="tab_color_selected">#ed3b00</color>
+
+    <color name="contents_text">#ff000000</color>
+    <color name="encode_view">#ffffffff</color>
+    <color name="possible_result_points">#c0ffbd21</color> <!-- Android standard ICS color -->
+    <color name="result_minor_text">#ffc0c0c0</color>
+    <color name="result_points">#c099cc00</color> <!-- Android standard ICS color -->
+    <color name="result_text">#ffffffff</color>
+    <color name="result_view">#b0000000</color>
+    <color name="status_text">#ffffffff</color>
+
+    <color name="viewfinder_laser">#ffcc0000</color> <!-- Android standard ICS color -->
+    <color name="viewfinder_mask">#60000000</color>
+    <color name="trans_black">#55000000</color>
+    <color name="transparent_background">#50000000</color>
+    <!-- 白色半透明 -->
+    <color name="translucent_white">#e0FFFFFF</color>
+    <color name="blue_green">#66CCCC</color>
+    <!-- 淡淡的灰 -->
+    <color name="little_gray">#ededed</color>
+    <color name="gray_searsh">#d8d8d8</color>
+    <color name="color_text_version">#727272</color>
+    <color name="color_line_divider_top">#151515</color>
+    <color name="color_line_divider_bottom">#333333</color>
+    <color name="gray_scenery_more">#f1f1f1</color>
+    <color name="orange">#ff6600</color>
+    <color name="des_brief">#368ff4</color>
+    <color name="des_history">#0fc4d9</color>
+    <color name="yellow">#ff9913</color>
+    <color name="gray_deep">#c6c6c6</color>
+    <color name="orange_deep">#feb824</color>
+    <color name="orange_text">#ff5b45</color>
+    <color name="blue_overlay">#660D92DD</color>
+    <color name="gray_rice">#e9e8e8</color>
+    <color name="green_text">#00be78</color>
+    <!-- QQ对话框灰色背景 -->
+    <color name="grey_qq_dialog">#ebebeb</color>
+
+    <color name="vpi__background_holo_dark">#ff000000</color>
+    <color name="vpi__background_holo_light">#fff3f3f3</color>
+    <color name="vpi__bright_foreground_holo_dark">@color/vpi__background_holo_light</color>
+    <color name="vpi__bright_foreground_holo_light">@color/vpi__background_holo_dark</color>
+    <color name="vpi__bright_foreground_disabled_holo_dark">#ff4c4c4c</color>
+    <color name="vpi__bright_foreground_disabled_holo_light">#ffb2b2b2</color>
+    <color name="vpi__bright_foreground_inverse_holo_dark">@color/vpi__bright_foreground_holo_light</color>
+    <color name="vpi__bright_foreground_inverse_holo_light">@color/vpi__bright_foreground_holo_dark</color>
+
+    <color name="scenery_tourism">#d2a836</color>
+
+    <color name="mine_text">#69c7d3</color>
+
+    <color name="background_color">#efeff4</color>
+    
+    <color name="border_color">#666666</color>
+
+    <color name="window_background">#FFF5F5F5</color>
+
+</resources>

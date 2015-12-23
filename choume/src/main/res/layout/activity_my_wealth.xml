@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="?attr/colorPrimary"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+    <include
+        layout="@layout/app_bar_layout">
+    </include>
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/blue"
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent">
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="余额（元）"
+            android:id="@+id/textView3"
+             />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:textSize="40sp"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="600.00"
+            android:id="@+id/tv_balance"
+            android:layout_gravity="center_horizontal" />
+        <View
+            android:layout_marginTop="30dp"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="1px">
+        </View>
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_width="0dp">
+
+                <TextView
+                    android:layout_margin="10dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="积分"
+                    android:id="@+id/textView4" />
+                <TextView
+                    android:textSize="30sp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="500"
+                    android:id="@+id/tv_jifen" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_width="0dp">
+                <TextView
+                    android:layout_margin="10dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="筹币"
+                    android:id="@+id/textView5" />
+                <TextView
+                    android:textSize="30sp"
+                    android:textColor="@color/white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8000"
+                    android:id="@+id/tv_choubi" />
+            </LinearLayout>
+    </LinearLayout>
+        </LinearLayout>
+
+    <TextView
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@mipmap/ico_chongzhi"
+        android:textSize="20sp"
+        android:textColor="@color/border_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="充值"
+        android:onClick="onClick"
+        android:id="@+id/tv_recharge" />
+    <View
+        android:background="@color/grey3stroke"
+        android:layout_width="match_parent"
+        android:layout_height="1px"/>
+
+    <TextView
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@mipmap/ico_tixain"
+        android:textSize="20sp"
+        android:textColor="@color/border_color"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="体现"
+        android:onClick="onClick"
+        android:id="@+id/tv_get_cash" />
+
+</LinearLayout>
+</LinearLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:theme="@style/ThemeOverlay.AppCompat.Light"
+    android:background="?attr/colorPrimary"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:background="#11a2ff"
+        android:layout_height="200dp"
+        android:layout_width="match_parent">
+
+        <com.shichai.www.choume.view.CircleImageView
+            android:id="@+id/im_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/test_head"
+            app:border_width="1dp"
+            app:border_color="@color/white" />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="张三"
+            android:drawableRight="@mipmap/ico_arrow_right"
+            android:drawablePadding="10dp"
+            android:gravity="center"
+            android:id="@+id/tv_username"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/im_head" />
+    </RelativeLayout>
+</LinearLayout>

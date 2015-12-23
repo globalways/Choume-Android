@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single"
+
+        >
+        <item
+            android:id="@+id/my_sponsor"
+            android:icon="@mipmap/ico_my_sponsor"
+            android:actionLayout="@layout/menu_head"
+            android:title="@string/my_sponsor" />
+        <item
+            android:id="@+id/my_join"
+            android:icon="@mipmap/ico_my_join"
+            android:title="@string/my_join" />
+        <item
+            android:id="@+id/my_wealth"
+            android:icon="@mipmap/ico_my_wealth"
+            android:title="@string/my_wealth" />
+        <item
+            android:id="@+id/my_collection"
+            android:icon="@mipmap/ico_my_collection"
+            android:title="@string/my_collection" />
+        <item
+            android:id="@+id/my_message"
+            android:icon="@mipmap/ico_my_message"
+            android:title="@string/my_message" />
+        <item
+            android:id="@+id/account_option"
+            android:icon="@mipmap/ico_my_account_option"
+            android:title="@string/account_option" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@mipmap/ico_my_logout"
+            android:title="@string/my_logout" />
+
+    </group>
+
+</menu>
