@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option java_package = "com.globalways.user.sms";
+
+package proto;
+
+import "common.proto";
+
+service UserSMSService {
+    // 发送sms
+    rpc SendSMS(SendSMSParam) returns (Response) {}
+    // 验证手机验证码
+    rpc VarifySMSCode(VarifySMSCodeParam) returns (Response) {}
+}
+
+enum SMSType {
+    UNKNOWN_Sms = 0;
+    // 操作验证码
+    VARIFY = 1;
+}
+
+message SendSMSParam {
+    string appId = 1;
+    repeated string tels = 2;
+    SMSType type = 3;
+    // 非必须，如果字符串长度不为0，则直接发送text内容
+    string text = 4;
+    // 使用云通讯时，必须指定模板id
+    int64 templateId = 5;
+}
+
+message VarifySMSCodeParam {
+    // 哪个app
+    string appId = 1;
+    // 手机号
+    string tel = 2;
+    // 验证码
+    string code = 3;
+}

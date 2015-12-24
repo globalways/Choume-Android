@@ -1,0 +1,667 @@
+syntax = "proto3";
+
+option java_package = "com.globalways.choume.proto";
+
+package proto;
+
+import "common.proto";
+import "user.common.proto";
+
+service CFAppUserService {
+    // ping
+    rpc Ping(NullRpcRequest) returns (Response) {}
+    // 注册用户 （http url: /users/register[post]）
+    rpc RegisterAppUser(RegisterAppUserParam) returns (RegisterCFAppUserResp) {}
+    // 登陆用户 (http url: /users/login[post])
+    rpc LoginApp(LoginAppParam) returns (LoginCFAppResp) {}
+    // 注销用户 (http url: /users/logout[post])
+    rpc LogoutApp(LogoutParam) returns (Response) {}
+    // 更新用户基本信息 (http url: /users/update [post])
+    rpc UpdateAppUser(UpdateCFUserParam) returns (UpdateCFUserResp) {}
+    // 获取app用户信息 (http url: /users/info [get])
+    rpc GetAppUser(GetAppUserParam) returns (GetCFUserResp) {}
+
+    // 新增用户认证 （http url: /users/cert[post]）
+    rpc UserCertApply(UserCertApplyParam) returns (UserCertApplyResp) {}
+
+    // 收藏项目 （http url: /users/projects/collect[post]）
+    rpc UserCollectProject(UserCollectProjectParam) returns (Response) {}
+    // 取消收藏项目 （http url: /users/projects/collect[delete]）
+    rpc UserUnCollectProject(UserUnCollectProjectParam) returns (Response) {}
+
+    // 融云 （http url: /users/rcToken[post]） 当rcToken 无效时使用，一般情况下忽略，详细内容请查看融云API
+    rpc GetRCCFUserToken(GetRCCFUserTokenParam) returns (GetRCCFUserTokenResp) {}
+
+    // 筹币消费 (http url: /users/cb/consume [post])
+    rpc CfUserCBConsume(CfUserCBConsumeParam) returns (CfUserCBConsumeResp) {}
+    // 筹币兑换 (http url: /users/cb/exchage [post])
+    rpc CfUserCBExchange(CfUserCBExchangeParam) returns (CfUserCBExchangeResp) {}
+    // 筹币提现 (http url: /users/cb/withdraw [post])
+    rpc CfUserWithdraw(CfUserWithdrawParam) returns (CfUserWithdrawResp) {}
+    // 筹币明细 (http url: /users/cb/history [get])
+    rpc CfUserHistories(CfUserHistoriesParam) returns (CfUserHistoriesResp) {}
+}
+
+service CfProjectService {
+    // ping
+    rpc Ping(NullRpcRequest) returns (Response) {}
+
+    // 发起一个项目 （http url: /projects[post]）
+    rpc RaiseCfProject(RaiseCfProjectParam) returns (RaiseCfProjectResp) {}
+    // 查询不同种类的项目(首页分类项目列表) （http url: /projects [get]）
+    rpc FindCfProjects(FindCfProjectsParam) returns (FindCfProjectsResp) {}
+    // 查询一个项目详情 (http url: /projects/single [get])
+    rpc GetCfProject(GetCfProjectParam) returns (GetCfProjectResp) {}
+    // 结束项目 (http url: /projects [delete])
+    rpc CloseCfProject(CloseCfProjectParam) returns (CloseCfProjectResp) {}
+    // 更新项目基本信息 (http url: /projects/single [post])
+    rpc UpdateCfProject(UpdateCfProjectParam) returns (UpdateCfProjectResp) {}
+
+    // 新增项目投资 (http url: /projects/invest [post])
+    rpc NewCfProjectInvest(NewCfProjectInvestParam) returns (NewCfProjectInvestResp) {}
+    // 接受项目投资 (http url: /projects/invest/pass [post])
+    rpc PassCfProjectInvest(PassCfProjectInvestParam) returns (Response) {}
+    // 拒绝项目投资 (http url: /projects/invest/reject [post])
+    rpc RejectCfProjectInvest(RejectCfProjectInvestParam) returns (Response) {}
+}
+
+service CfAdminService {
+    // ping
+    rpc Ping(NullRpcRequest) returns (Response) {}
+
+    // 查询用户认证申请列表
+    rpc FindCfUserCertApplyList(FindCfUserCertApplyListParam) returns (FindCfUserCertApplyListResp) {}
+    // 通过用户验证
+    rpc PassCfUserCertApply(PassCfUserCertApplyParam) returns (Response) {}
+    // 拒绝用户验证
+    rpc RejectCfUserCertApply(RejectCfUserCertApplyParam) returns (Response) {}
+
+    // 筹么用户列表
+    rpc FindCfUsers(FindCfUsersParam) returns (FindCfUsersResp) {}
+
+    // 审核项目
+    rpc AuditCfProject(AuditCfProjectParam) returns (Response) {}
+}
+
+message GetCFUserResp {
+    Response resp = 1;
+    CfUser cfUser = 2;
+}
+
+message PassCfProjectInvestParam {
+    string token = 1;
+    int64 investId = 2;
+}
+
+message RejectCfProjectInvestParam {
+    string token = 1;
+    int64 investId = 2;
+}
+
+message CfUserHistoriesParam {
+    string token = 1;
+    CFCBHistoryType type = 2;
+    int64 startTime = 3;
+    int64 endTime = 4;
+}
+
+message CfUserHistoriesResp {
+    Response resp = 1;
+    repeated CFCBHistory histories = 2;
+}
+
+message CfUserWithdrawParam {
+    string token = 1;
+    uint64 coin = 2;
+    // 提现到绑定的哪一个第三方账户上
+    int64 thirdPartyWalletId = 3;
+}
+
+message CfUserWithdrawResp {
+    Response resp = 1;
+    CFCBHistory history = 2;
+}
+
+message CfUserCBExchangeParam {
+    string token = 1;
+    // 兑换多少钱,单位分
+    uint64 rmb = 2;
+    // 用户密码, 当做支付密码
+    string password = 3;
+}
+
+message CfUserCBExchangeResp {
+    Response resp = 1;
+    CFCBHistory history = 2;
+}
+
+message CfUserCBConsumeParam {
+    string token = 1;
+    uint64 coin = 2;
+    string orderId = 3;
+}
+
+message CfUserCBConsumeResp {
+    Response resp = 1;
+    CFCBHistory history = 2;
+}
+
+message UpdateCFUserParam {
+    string token = 1;
+    CfUser cfUser = 2;
+}
+
+message UpdateCFUserResp {
+    Response resp = 1;
+    CfUser cfUser = 2;
+}
+
+message AuditCfProjectParam {
+    string token = 1;
+    int64 projectId = 2;
+    CfProjectStatus status = 3;
+}
+
+message UpdateCfProjectParam {
+    string token = 1;
+    CfProject project = 2;
+}
+
+message UpdateCfProjectResp {
+    Response resp = 1;
+    CfProject project = 2;
+}
+
+message FindCfUsersParam {
+    string token = 1;
+    CfUserRole role = 2;
+}
+
+message FindCfUsersResp {
+    Response resp = 1;
+    repeated CfUser users = 2;
+}
+
+message PassCfUserCertApplyParam {
+    string token = 1;
+    int64 applyId = 2;
+}
+
+message RejectCfUserCertApplyParam {
+    string token = 1;
+    int64 applyId = 2;
+    string comment = 3;
+}
+
+message FindCfUserCertApplyListParam {
+    string token = 1;
+    CfUserCeritificationStatus status = 2;
+    CfUserCertificationType type = 3;
+}
+
+message FindCfUserCertApplyListResp {
+    Response resp = 1;
+    repeated CfUserCertApply certs = 2;
+}
+
+message GetRCCFUserTokenParam {
+    // 用户登陆token
+    string token = 1;
+}
+
+message GetRCCFUserTokenResp {
+    Response resp = 1;
+    // 融云token
+    string rcToken = 2;
+}
+
+message CloseCfProjectParam {
+    string token = 1;
+    // 项目ID
+    int64 projectId = 2;
+}
+
+message CloseCfProjectResp {
+    Response resp = 1;
+    // 关闭的项目
+    CfProject project = 2;
+}
+
+message GetCfProjectParam {
+    // 项目ID
+    int64 projectId = 1;
+}
+
+message GetCfProjectResp {
+    Response resp = 1;
+    // 项目对象
+    CfProject project = 2;
+}
+
+message NewCfProjectInvestParam {
+    // 登陆token,必须
+    string token = 1;
+    // 项目ID,必须
+    int64 cfProjectId = 2;
+    // 回报ID,必须
+    int64 cfProjectRewardId = 3;
+    // 购买份数
+    uint64 count = 4;
+    // 备注，可选
+    string comment = 5;
+    // 收货地址，可选
+    int64 addrId = 6;
+}
+
+message NewCfProjectInvestResp {
+    Response resp = 1;
+    // 投资记录
+    CfProjectInvest invest = 2;
+}
+
+// 删除收货地址参数
+message DelCfUserAddrParam {
+    string token = 1;
+    // 地址ID
+    int64 addrId = 2;
+}
+
+message UserUnCollectProjectParam {
+    // 用户登陆token
+    string token = 1;
+    // 项目id
+    int64 projectId = 2;
+}
+
+message UserCollectProjectParam {
+    // 用户登陆token
+    string token = 1;
+    // 项目id
+    int64 projectId = 2;
+}
+
+message UserCertApplyParam {
+    // 当前用户登陆token
+    string token = 1;
+    // 认证申请对象
+    CfUserCertApply apply = 2;
+}
+
+message UserCertApplyResp {
+    Response resp = 1;
+    // 认证申请对象
+    CfUserCertApply apply = 2;
+}
+
+message RegisterCFAppUserResp {
+    Response resp = 1;
+    // 筹么用户
+    CfUser cfUser = 2;
+}
+
+message LoginCFAppResp {
+    Response resp = 1;
+    // 筹么用户
+    CfUser cfUser = 2;
+    // 系统登陆token，保存到客户端，在请求私密数据时需要
+    string token = 3;
+}
+
+message RaiseCfProjectParam {
+    string token = 1;
+    // 项目对象
+    CfProject project = 2;
+}
+
+message RaiseCfProjectResp {
+    Response resp = 1;
+    // 项目对象
+    CfProject project = 2;
+}
+
+message FindCfProjectsParam {
+    // 项目分类
+    CrowdFundingCategory category = 1;
+    // 项目状态
+    CfProjectStatus status = 2;
+    // 项目聚合标签
+    CfProjectTag tag = 3;
+    // 第几页
+    int64 page = 4;
+    // 每页个数
+    int64 size = 5;
+}
+
+message FindCfProjectsResp {
+    Response resp = 1;
+    // 项目列表
+    repeated CfProject projects = 2;
+}
+
+// 众筹类别
+enum CrowdFundingCategory {
+    INVALID_CFC = 0;
+    // 筹乐子
+    HAPPY_CFC = 1;
+    // 筹票子
+    MONEY_CFC = 2;
+    // 筹爱心
+    LOVE_CFC = 3;
+    // 校园合伙人-项目
+    PROJECT_CFC = 4;
+    // 校园合伙人-产品
+    PRODUCT_CFC = 5;
+}
+
+// 众筹标签，聚合分类
+enum CfProjectTag {
+    INVALID_CFPT = 0;
+    // 一元秒筹，限时特筹
+    LIMIT_TIME_CFPT = 1;
+    // 世纪难题，周末去哪
+    QUESTION_CFPT = 2;
+    // 热门众筹，非筹不可
+    HOT_CFPT = 3;
+}
+
+// 众筹项目状态
+enum CfProjectStatus {
+    INVALID_CFPS = 0;
+    // 审核中
+    AUDITING_CFPS = 1;
+    // 已发布
+    PUBLISHED_CFPS = 2;
+    // 已筹满(主要目标)
+    FINISH_CFPS = 3;
+    // 失败
+    FAILURE_CFPS = 4;
+    // 已完成
+    COMPLETED_CFPS = 5;
+}
+
+// 支持方式
+enum CfProjectSupportType {
+    INVALID_CFPST = 0;
+    // 钱
+    MONEY_CFPST = 1;
+    // 人
+    PEOPLE_CFPST = 2;
+    // 物
+    GOODS_CFPST = 3;
+    // 股权众筹 校园合伙人项目类专用
+    EQUITY_CFPST = 4;
+}
+
+// 认证类型
+enum CfUserCertificationType {
+    INVALID_CFUCT = 0;
+    STUDENT_CFUCT = 1;
+    AGENCY_CFUCT = 2;
+}
+
+// 认证状态
+enum CfUserCeritificationStatus {
+    INVALID_CFUCS = 0;
+    // 申请中
+    APPLYING_CFUCS = 1;
+    // 成功
+    SUCCESS_CFUCS = 2;
+    // 失败
+    FAILURE_CFUCS = 3;
+}
+
+// 认证申请
+message CfUserCertApply {
+    int64 id = 1;
+    // 认证类型
+    CfUserCertificationType type = 2;
+    // 用户id
+    int64 cfUserId = 3;
+    // 申请时间
+    int64 applyTime = 4;
+    // 认证状态
+    CfUserCeritificationStatus status = 5;
+    // 审核人
+    uint64 auditor = 6;
+    // 备注
+    string comment = 7;
+    // 审核时间
+    int64 auditTime = 8;
+    // 认证名
+    string name = 10;
+    // 所属学校
+    string school = 11;
+    // 材料
+    repeated CfUserCertPic pics = 12;
+    uint64 hongId = 13;
+}
+
+// 认证申请材料
+message CfUserCertPic {
+    int64 id = 1;
+    int64 cfUserCertApplyId = 2;
+    string url = 3;
+}
+
+// 项目投资状态
+enum CfProjectInvestStatus {
+    INVALID_CFPIS = 0;
+    // 等待
+    PENDING_CFPIS = 1;
+    // 已支付
+    PAID_CFPIS = 2;
+    // 成功
+    SUCCESS_CFPIS = 3;
+    // 过期
+    EXPIRED_CFPIS = 4;
+}
+
+// 众筹项目投资记录
+message CfProjectInvest {
+    int64 id = 1;
+    // 项目id
+    int64 cfProjectId = 2;
+    // 回报方式ID
+    int64 cfProjectRewardId = 3;
+    // 投资份数
+    uint64 count = 4;
+    // 投资时间
+    int64 investTime = 5;
+    // 用户
+    uint64 hongId = 6;
+    // 备注
+    string comment = 7;
+    // 地址id
+    int64 addrId = 8;
+    // 过期时间
+    int64 expiredTime = 9;
+    // 投资状态
+    CfProjectInvestStatus status = 10;
+    // 订单
+    string orderId = 11;
+    // // 应该支付的筹币数
+    uint64 coinPay = 12;
+}
+
+// 筹币消费类型
+enum CFCBHistoryType {
+    INVAILD_CB = 0;
+    // 兑换
+    EXCHANGE_CB = 1;
+    // 消费
+    CONSUME_CB = 2;
+    // 提现
+    WITHDRAW_CB = 3;
+    // 退还
+    TURNBACK_CB = 4;
+    // 平台赠送
+    GIVE_CB = 5;
+    // 项目筹集
+    CHOU_CB = 6;
+}
+
+// 筹币消费记录
+message CFCBHistory {
+    int64 id = 1;
+    CFCBHistoryType type = 2;
+    uint64 coin = 3;
+    uint64 remain = 4;
+    int64 time = 5;
+    string orderId = 6;
+    uint64 hongId = 7;
+}
+
+// 回报方式
+message CfProjectReward {
+    int64 id = 1;
+    // 回报描述(255字符)
+    string desc = 2;
+    // 支持方式
+    CfProjectSupportType supportType = 3;
+    // 支持数量(人/钱/物/股权), 股权支持为千分之n
+    uint64 amount = 4;
+    // 限制份数
+    uint64 limitedCount = 5;
+    // 项目id
+    int64 CfProjectId = 6;
+    // 已经投资的份数
+    uint64 alreadyCount = 7;
+    // 附加筹币
+    uint64 additionalCoin = 8;
+    // 是否已被删除
+    bool del = 9;
+}
+
+// 用户与项目的收藏关系 many to many
+message UsersCollectProjects {
+    int64 id = 1;
+    // 项目id
+    int64 CfProjectId = 2;
+    // 用户id
+    int64 CfUserId = 3;
+}
+
+// 众筹项目
+message CfProject {
+    int64 id = 1;
+    // 标题
+    string title = 2;
+    // 描述（255字符）
+    string desc = 3;
+    // 联系人
+    string contact = 4;
+    // 联系方式
+    string tel = 5;
+    // 发起者
+    int64 cfUserId = 6;
+    // 发起时间
+    int64 fundTime = 7;
+    // 图片列表
+    repeated CfProjectPic pics = 8;
+    // 想筹集的钱(筹币)
+    uint64 requiredMoneyAmount = 9;
+    // 想筹集的物品数量
+    uint64 requiredGoodsAmount = 10;
+    // 想筹集的人数
+    uint64 requiredPeopleAmount = 11;
+    // 募集的物品名称
+    string requiredGoodsName = 12;
+    // 截止日期
+    int64 deadline = 13;
+    // 众筹类别
+    CrowdFundingCategory category = 14;
+    // 回报方式列表
+    repeated CfProjectReward rewards = 15;
+    CfProjectStatus status = 16;
+    // 收藏的用户
+    repeated CfUser collectedUsers = 17;
+    // 投资记录
+    repeated CfProjectInvest invests = 18;
+    // 聚合标签
+    CfProjectTag tag = 19;
+    // 发起者hongid
+    uint64 hongId = 20;
+    int64 auditTime = 21;
+    uint64 auditer = 22;
+    // 已筹的钱(筹币)
+    uint64 alreadyMoneyAmount = 23;
+    // 已筹的物品数
+    uint64 alreadyGoodsAmount = 24;
+    // 已筹的人数
+    uint64 alreadyPeopleAmount = 25;
+    // 主要目标类型
+    CfProjectSupportType majarType = 26;
+    // 学校code
+    string school = 27;
+    // 校园合伙人-项目-融资额
+    uint64 requiredProjectAmount = 28;
+    // 校园合伙人-项目-出让股份千分之n
+    uint64 requiredProjectEquity = 29;
+    // 校园合伙人-项目-已筹集的股份
+    uint64 alreadyProjectEquity = 30;
+    // 附加费统计
+    uint64 additionalCoin = 31;
+    // 校园合伙人-产品-二次收益分配股权
+    uint64 secondProductEquity = 32;
+    // 从哪个项目派生
+    int64 parentProjectId = 33;
+    // 利润率  千分之n
+    uint64 profitRate = 34;
+}
+
+// 众筹项目图片
+message CfProjectPic {
+    int64 id = 1;
+    int64 cfProjectId = 2;
+    string url = 3;
+    // 是否已被删除
+    bool del = 4;
+}
+
+enum CfUserRole {
+    INVALID_CFUR = 0;
+    USER_CFUR = 1;
+    ADMIN_CFUR = 2;
+}
+
+// 众筹用户
+message CfUser {
+    int64 id = 1;
+    uint64 hongId = 2;
+    // 我的发起
+    repeated CfProject fundProjects = 3;
+    // 我的认证
+    CfUserCertApply certification = 4;
+    // 我的收藏
+    repeated CfProject collectedProjects = 5;
+    // 积分
+    uint64 point = 6;
+    // 筹币
+    uint64 coin = 7;
+    // 融云token
+    string rcToken = 8;
+    // 权限
+    CfUserRole role = 9;
+    User user = 10;
+}
+
+// 消息类型
+enum CfMessageType {
+    INVALID_CFMT = 0;
+    // 文字消息
+    TXT_CFMT = 1;
+    // 网页链接
+    WEB_CFMT = 2;
+}
+
+// 众筹系统消息
+message CfMessage {
+    // 消息头
+    string title = 1;
+    // 时间
+    int64 time = 2;
+    // 消息类型
+    CfMessageType type = 3;
+    // 消息内容
+    string content = 4;
+}

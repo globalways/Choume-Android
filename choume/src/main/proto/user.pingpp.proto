@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option java_package = "com.globalways.user.pingpp";
+
+package proto;
+
+import "common.proto";
+
+service UserPingppService {
+    // 创建第三方支付凭证
+    rpc PingppCharge(PingppChargeParam) returns (PingppChargeResp) {}
+}
+
+message PingppChargeParam {
+    // 哪个app
+    string appId = 1;
+    // 订单号
+    string orderId = 2;
+    // 渠道，参考ping++文档
+    string channel = 3;
+    // 订单标题
+    string subject = 4;
+    // 订单内容
+    string body = 5;
+    // 订单总额
+    uint64 amount = 6;
+    // 用户登陆token
+    string token = 7;
+}
+
+message PingppChargeResp {
+    Response resp = 1;
+    // charge对象json化后的string，客户端操作请参考ping++的客户端sdk
+    string charge = 2;
+}

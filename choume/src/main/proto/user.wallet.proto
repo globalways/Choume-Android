@@ -1,0 +1,149 @@
+syntax = "proto3";
+
+option java_package = "com.globalways.user.wallet";
+
+package proto;
+
+import "common.proto";
+import "user.wallet.common.proto";
+
+service UserWalletService {
+    // ping
+    rpc Ping(NullRpcRequest) returns (Response) {}
+    // 钱包 (http url: /wallet/info [post])
+    rpc GetUserWallet(GetUserWalletParam) returns (GetUserWalletResp) {}
+    // 钱包明细 (http url: /wallet/history [post])
+    rpc ListUserWalletHistories(ListUserWalletHistoriesParam) returns (ListUserWalletHistoriesResp) {}
+    // 准备钱包充值 (http url: /wallet/recharge/prepare [post])
+    rpc PrepareUserWalletRecharge(PrepareUserWalletRechargeParam) returns (PrepareUserWalletRechargeResp) {}
+    // 钱包付款 (http url: /wallet/pay [post]) 同步返回结果
+    rpc UserWalletPay(UserWalletPayParam) returns (UserWalletPayResp) {}
+    // 第三方钱包绑定 （http url: /wallet/withdraw/bind [post]）
+    rpc ThirdPartyWalletBind(ThirdPartyWalletBindParam) returns (ThirdPartyWalletBindResp) {}
+    // 钱包提现 (http url: /wallet/withdraw/apply [post])
+    rpc UserWalletWithdraw(UserWalletWithdrawParam) returns (UserWalletWithdrawResp) {}
+
+    // 获取支付记录 (app端请忽略)
+    rpc GetPayDetail(GetPayDetailParam) returns (GetPayDetailResp) {}
+}
+
+message GetPayDetailParam {
+    // appId
+    string appId = 1;
+    // 订单号
+    string orderNo = 2;
+}
+
+message GetPayDetailResp {
+    Response resp = 1;
+    // 支付详情
+    PayDetail detail = 2;
+}
+
+message GetUserWalletParam {
+    // 当前登录token, 只能获得自己的钱包
+    string token = 1;
+}
+
+message GetUserWalletResp {
+    Response resp = 1;
+    // 用户钱包对象
+    UserWallet wallet = 2;
+}
+
+message ListUserWalletHistoriesParam {
+    // 当前登录token
+    string token = 1;
+    // 操作类型：消费、充值、提现等等
+    UserWalletHistoryType type = 2;
+    // 开始时间
+    int64 start = 3;
+    // 结束时间
+    int64 end = 4;
+    // 第几页
+    int64 page = 5;
+    // 每页数量
+    int64 count = 6;
+}
+
+message ListUserWalletHistoriesResp {
+    Response resp = 1;
+    // 钱包历史列表
+    repeated UserWalletHistory histories = 2;
+}
+
+message PrepareUserWalletRechargeParam {
+    // 用户登陆token
+    string token = 1;
+    // 充值额度，单位分
+    uint64 amount = 2;
+    // 来自哪个app
+    string appId = 3;
+}
+
+message PrepareUserWalletRechargeResp {
+    Response resp = 1;
+    // 钱包支付历史
+    UserWalletHistory history = 2;
+}
+
+message UserWalletPayParam {
+    // 哪个app
+    string appId = 1;
+    // 订单id
+    string orderId = 2;
+    // 订单标题
+    string subject = 3;
+    // 订单详情描述
+    string body = 4;
+    // 订单额度，单位分
+    uint64 amount = 5;
+    // 用户登陆token
+    string token = 6;
+    // 用户密码，用作于支付密码
+    string password = 7;
+}
+
+message UserWalletPayResp {
+    Response resp = 1;
+    // 支付历史对象
+    UserWalletHistory history = 2;
+}
+
+message ThirdPartyWalletBindParam {
+    // 用户登陆token
+    string token = 1;
+    // 账户用户名
+    string name = 2;
+    // 账号
+    string account = 3;
+    // 第三方钱包类型
+    ThirdPartyWalletType type = 4;
+    // 哪个app
+    string appId = 5;
+}
+
+message ThirdPartyWalletBindResp {
+    Response resp = 1;
+    // 第三方钱包绑定对象
+    ThirdPartyWallet thirdPartyWallet = 2;
+}
+
+message UserWalletWithdrawParam {
+    // 用户登陆token
+    string token = 1;
+    // 第三方钱包id
+    int64 thirdPartyWalletId = 2;
+    // 提现金额，单位分
+    uint64 amount = 3;
+    // 哪个app
+    string appId = 4;
+}
+
+message UserWalletWithdrawResp {
+    Response resp = 1;
+    // 提现申请产生的支付历史对象
+    UserWalletHistory history = 2;
+}
+
+

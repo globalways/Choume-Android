@@ -1,4 +1,20 @@
 apply plugin: 'com.android.application'
+//add by wyp
+apply plugin: 'com.google.protobuf'
+//end
+
+//add by wyp
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.1.1'
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.6.1'
+    }
+}
+//end
 
 android {
     compileSdkVersion 23
@@ -30,4 +46,40 @@ dependencies {
     compile 'com.android.support:design:23.1.1'
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.github.bumptech.glide:glide:3.6.0'
+    //add by wyp
+    compile 'javax.annotation:javax.annotation-api:1.2'
+    compile 'io.grpc:grpc-okhttp:0.9.0'
+    compile 'io.grpc:grpc-protobuf-nano:0.9.0'
+    compile 'io.grpc:grpc-stub:0.9.0'
+    //end
 }
+
+//add by wyp
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.0.0-beta-1'
+    }
+    plugins {
+        grpc {
+            artifact = 'io.grpc:protoc-gen-grpc-java:0.9.0'
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.builtins {
+                javanano {
+                    // Options added to --javanano_out
+                    option 'ignore_services=true'
+                }
+            }
+
+            task.plugins {
+                grpc {
+                    // Options added to --grpc_out
+                    option 'nano=true'
+                }
+            }
+        }
+    }
+}
+//end
