@@ -21,11 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.outsouring.crowdfunding.R;
-import com.shichai.www.choume.activity.mine.MyCollectionActivity;
-import com.shichai.www.choume.activity.mine.MyJoinActivity;
-import com.shichai.www.choume.activity.mine.MyMessageActivity;
-import com.shichai.www.choume.activity.mine.MySponsorActivity;
-import com.shichai.www.choume.activity.mine.MyWealthActivity;
+import com.shichai.www.choume.activity.mine.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -98,7 +94,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                                 case R.id.my_wealth:
                                     startActivity(new Intent(MainActivity.this,MyWealthActivity.class));
                                     break;
+                                //测试注册界面入口 by wyp
                                 case R.id.logout:
+                                    startActivity(new Intent(MainActivity.this,RegisterActivity.class));
                                     break;
                                 case R.id.account_option:
                                     startActivity(new Intent(MainActivity.this,OptionActivity.class));
