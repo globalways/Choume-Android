@@ -24,9 +24,6 @@
         app:theme="@style/menu_style"
         app:menu="@menu/menu_logined"
         />
-    <!--<include-->
-        <!--layout="@layout/menu_layout"-->
-        <!--></include>-->
 
 
 </android.support.v4.widget.DrawerLayout>
