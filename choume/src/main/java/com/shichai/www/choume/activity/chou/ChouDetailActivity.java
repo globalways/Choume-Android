@@ -12,17 +12,23 @@ import android.widget.TextView;
 
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
+import com.shichai.www.choume.adapter.MyMessageAdapter;
+import com.shichai.www.choume.view.ListViewForScrollView;
+
+import java.util.ArrayList;
 
 /**
  * Created by HeJianjun on 2015/12/22.
  */
 public class ChouDetailActivity extends BaseActivity implements View.OnClickListener{
-
+    private ListViewForScrollView listView;
+    private MyMessageAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chou);
         ActionBar();
+        initViews();
     }
 
     private void ActionBar(){
@@ -41,7 +47,17 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         ab.setCustomView(actionbarLayout);
         ab.setDisplayShowCustomEnabled(true);
 
+    }
 
+    private void initViews(){
+        listView = (ListViewForScrollView) findViewById(R.id.listView);
+        adapter = new MyMessageAdapter(this);
+        listView.setAdapter(adapter);
+        ArrayList<String> strings = new ArrayList<>();
+        for (int i=0; i<10 ;i++){
+            strings.add("XXSASD");
+        }
+        adapter.addDatas(strings);
     }
 
     @Override

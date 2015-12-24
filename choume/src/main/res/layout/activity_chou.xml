@@ -212,31 +212,11 @@
                 </LinearLayout>
             </RelativeLayout>
 
-            <!--<com.shichai.www.choume.view.tab.SmartTabLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/viewpagertab"
-                android:layout_width="match_parent"
-                android:layout_height="73dp"
-                android:paddingStart="118dp"
-                android:paddingEnd="118dp"
-                app:stl_customTabTextLayoutId="@layout/custom_tab_color"
-                app:stl_customTabTextViewId="@id/custom_text"
-                app:stl_indicatorColor="@color/blue"
-                app:stl_dividerColor="@android:color/white"
-                app:stl_dividerThickness="0dp"
-                app:stl_indicatorThickness="0dp"
-                app:stl_underlineThickness="0dp"
-                />-->
-            <View
-                android:layout_height="1px"
-                android:background="@color/divider_color"
-                android:layout_width="match_parent"/>
-            <android.support.v4.view.ViewPager
-                android:id="@+id/viewpager"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                />
+           <com.shichai.www.choume.view.ListViewForScrollView
+               android:layout_height="wrap_content"
+               android:layout_width="match_parent"
+               android:id="@+id/listView"/>
+
 
         </LinearLayout>
 
