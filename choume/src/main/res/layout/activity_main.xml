@@ -24,7 +24,6 @@
         app:theme="@style/menu_style"
         app:menu="@menu/menu_login"
         />
-
     <!--<include-->
         <!--layout="@layout/menu_layout"-->
         <!--></include>-->

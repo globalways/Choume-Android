@@ -1,4 +1,4 @@
-package com.shichai.www.choume.network.manager;
+package com.shichai.www.choume.tools;
 
 import android.annotation.SuppressLint;
 
@@ -18,8 +18,6 @@ public class Tool {
 	 * 零售折扣小数点位数
 	 */
 	public final static int RETAIL_APR_SCALE = 2;
-	/** 是否已出现异常 **/
-	public static boolean IS_ERROR = false;
 
 	/**
 	 * 文件是否存在
@@ -338,5 +336,6 @@ public class Tool {
 	public static boolean isEmpty(String str){
 		return str == null || str.isEmpty();
 	}
+
 	
 }

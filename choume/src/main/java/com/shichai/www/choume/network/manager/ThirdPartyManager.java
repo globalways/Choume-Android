@@ -14,10 +14,10 @@ import com.shichai.www.choume.network.task.sms.VarifySMSCodeTask;
  * Created by wyp on 15/12/23.
  */
 public class ThirdPartyManager {
-    private ThirdPartyManager manager;
+    private static ThirdPartyManager manager;
     private ThirdPartyManager(){}
 
-    public ThirdPartyManager getInstance(){
+    public static ThirdPartyManager getInstance(){
         if (manager == null){
             manager = new ThirdPartyManager();
         }
