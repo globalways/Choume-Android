@@ -1,20 +1,12 @@
 package com.shichai.www.choume.activity;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.outsouring.crowdfunding.R;
@@ -34,9 +26,8 @@ public class BaseActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
 
         if (actionBar != null){
-            actionBar.setHomeAsUpIndicator(R.mipmap.ico_arrow_left);
+            actionBar.setHomeAsUpIndicator(R.mipmap.ico_back);
             actionBar.setDisplayHomeAsUpEnabled(true);
-
             actionbarLayout = LayoutInflater.from(this).inflate(
                     R.layout.actionbar_main_layout, null);
             actionBar.setCustomView(actionbarLayout);

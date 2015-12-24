@@ -31,7 +31,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         setSupportActionBar(toolbar);
         ActionBar ab = getSupportActionBar();
 
-        ab.setHomeAsUpIndicator(R.mipmap.ico_arrow_left);
+        ab.setHomeAsUpIndicator(R.mipmap.ico_back);
         ab.setDisplayHomeAsUpEnabled(true);
 
         View actionbarLayout = LayoutInflater.from(this).inflate(

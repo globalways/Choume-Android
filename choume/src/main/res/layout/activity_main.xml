@@ -22,7 +22,7 @@
         app:headerLayout="@layout/menu_head"
         app:itemTextAppearance="@style/menu_text_style"
         app:theme="@style/menu_style"
-        app:menu="@menu/menu_login"
+        app:menu="@menu/menu_logined"
         />
 
     <!--<include-->

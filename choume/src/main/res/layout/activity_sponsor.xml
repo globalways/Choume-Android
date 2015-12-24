@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include
+        layout="@layout/app_bar_layout">
+    </include>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:layout_height="100dp"
+        android:layout_width="match_parent">
+       <LinearLayout
+           android:orientation="horizontal"
+           android:layout_height="50dp"
+           android:gravity="center"
+           android:layout_width="match_parent">
+
+           <ImageView
+               android:adjustViewBounds="true"
+               android:scaleType="fitXY"
+               android:src="@drawable/selector_choose"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/imageView1" />
+           <View
+               android:background="@color/white"
+               android:layout_height="2dp"
+               android:layout_width="50dp"/>
+           <ImageView
+               android:adjustViewBounds="true"
+               android:scaleType="fitXY"
+               android:src="@drawable/selector_choose"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/imageView2" />
+           <View
+               android:background="@color/white"
+               android:layout_height="2dp"
+               android:layout_width="50dp"/>
+           <ImageView
+               android:adjustViewBounds="true"
+               android:scaleType="fitXY"
+               android:src="@drawable/selector_choose"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/imageView3" />
+           <View
+               android:background="@color/white"
+               android:layout_height="2dp"
+               android:layout_width="50dp"/>
+           <ImageView
+               android:adjustViewBounds="true"
+               android:scaleType="fitXY"
+               android:src="@drawable/selector_choose"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/imageView7" />
+       </LinearLayout>
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_height="50dp"
+            android:layout_width="match_parent">
+
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="选择类别"
+                android:id="@+id/textView18" />
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="项目信息"
+                android:id="@+id/textView21" />
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="回报方式"
+                android:id="@+id/textView123" />
+            <TextView
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="审核发布"
+                android:id="@+id/textView32" />
+        </LinearLayout>
+        </LinearLayout>
+
+</LinearLayout>

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -34,6 +35,7 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         initActionBar();
         setTitle("我的发起");
         initViews();
+
     }
 
     private void initViews(){
@@ -68,5 +70,11 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_add, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 }

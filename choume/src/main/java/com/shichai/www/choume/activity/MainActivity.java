@@ -71,7 +71,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         ((TextView)actionbarLayout.findViewById(R.id.textView)).setText(getString(R.string.main_title));
         ab.setCustomView(actionbarLayout);
         ab.setDisplayShowCustomEnabled(true);
-
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         if (mNavigationView != null) {
 
@@ -82,26 +81,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
                             menuItem.setChecked(false);
 
-                            switch (menuItem.getItemId()){
+                            switch (menuItem.getItemId()) {
                                 case R.id.my_sponsor:
-                                    startActivity(new Intent(MainActivity.this,MySponsorActivity.class));
+                                    startActivity(new Intent(MainActivity.this, MySponsorActivity.class));
                                     break;
                                 case R.id.my_join:
-                                    startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                                    startActivity(new Intent(MainActivity.this, MyJoinActivity.class));
                                     break;
                                 case R.id.my_collection:
-                                    startActivity(new Intent(MainActivity.this,MyCollectionActivity.class));
+                                    startActivity(new Intent(MainActivity.this, MyCollectionActivity.class));
                                     break;
                                 case R.id.my_message:
-                                    startActivity(new Intent(MainActivity.this,MyMessageActivity.class));
+                                    startActivity(new Intent(MainActivity.this, MyMessageActivity.class));
                                     break;
                                 case R.id.my_wealth:
-                                    startActivity(new Intent(MainActivity.this,MyWealthActivity.class));
+                                    startActivity(new Intent(MainActivity.this, MyWealthActivity.class));
                                     break;
                                 case R.id.logout:
                                     break;
                                 case R.id.account_option:
-                                    startActivity(new Intent(MainActivity.this,OptionActivity.class));
+                                    startActivity(new Intent(MainActivity.this, OptionActivity.class));
                                     break;
                             }
                             mDrawerLayout.closeDrawers();
@@ -110,7 +109,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     });
 
             mNavigationView.getHeaderView(0).findViewById(R.id.im_head).setOnClickListener(this);
-
+            mNavigationView.getHeaderView(0).findViewById(R.id.head_user).setVisibility(View.GONE);
+            mNavigationView.getHeaderView(0).findViewById(R.id.head_login).setVisibility(View.VISIBLE);
         }
 
 
