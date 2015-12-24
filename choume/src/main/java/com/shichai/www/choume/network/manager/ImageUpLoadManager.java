@@ -11,6 +11,7 @@ import com.qiniu.android.storage.UploadOptions;
 import com.shichai.www.choume.network.HttpConfig;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.task.qiniu.MakeUpTokenTask;
+import com.shichai.www.choume.tools.Tool;
 import org.json.JSONException;
 import org.json.JSONObject;
 
