@@ -1,10 +1,7 @@
 package com.shichai.www.choume.activity.mine;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,17 +9,15 @@ import android.widget.EditText;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.user.nano.UserCommon;
 import com.outsouring.crowdfunding.R;
+import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.application.MyApplication;
-import com.shichai.www.choume.network.HttpConfig;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.MD5;
 import com.shichai.www.choume.tools.UITools;
 
-import java.security.MessageDigest;
-
-public class LoginActivity extends ActionBarActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private Context context = this;
     private EditText etTel, etPassword;
@@ -31,23 +26,17 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initActionBar();
+        setTitle("登录");
         initViews();
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -64,6 +53,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
             case R.id.btnLogin:
                 UITools.ToastMsg(context, "login...");
                 login(context, etTel.getText().toString(), MD5.getMD5(etPassword.getText().toString()));
+
                 break;
         }
     }
@@ -98,6 +88,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
 
             @Override
             public void error(Exception e) {
+                e.getMessage();
                 UITools.ToastServerError(context);
             }
         });

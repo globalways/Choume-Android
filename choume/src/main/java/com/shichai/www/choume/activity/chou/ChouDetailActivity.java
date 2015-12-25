@@ -2,8 +2,6 @@ package com.shichai.www.choume.activity.chou;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -14,6 +12,7 @@ import android.widget.TextView;
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.MyMessageAdapter;
+import com.shichai.www.choume.adapter.SupportAdapter;
 import com.shichai.www.choume.view.ListViewForScrollView;
 
 import java.util.ArrayList;
@@ -23,7 +22,9 @@ import java.util.ArrayList;
  */
 public class ChouDetailActivity extends BaseActivity implements View.OnClickListener{
     private ListViewForScrollView listView;
-    private MyMessageAdapter adapter;
+    private SupportAdapter adapter;
+    private View headerView;
+    private View tv_reply,tv_comment,tv_supporter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,24 +53,56 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     private void initViews(){
         listView = (ListViewForScrollView) findViewById(R.id.listView);
-        adapter = new MyMessageAdapter(this);
-        listView.setAdapter(adapter);
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i=0; i<10 ;i++){
-            strings.add("XXSASD");
-        }
-        adapter.addDatas(strings);
+        adapter = new SupportAdapter(this);
+
 
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        View headerView = inflater.inflate(R.layout.layout_chou_header, null);
+        headerView = inflater.inflate(R.layout.layout_chou_header, null);
 
         listView.addHeaderView(headerView);
+
+        tv_reply = headerView.findViewById(R.id.tv_reply);
+        tv_comment = headerView.findViewById(R.id.tv_comment);
+        tv_supporter = headerView.findViewById(R.id.tv_supporter);
+        tv_reply.setOnClickListener(this);
+        tv_comment.setOnClickListener(this);
+        tv_supporter.setOnClickListener(this);
+
+        tv_reply.performClick();
     }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.tv_reply:
+                adapter.clearDatas();
+                listView.setAdapter(adapter);
+                ArrayList<String> strings = new ArrayList<>();
+                for (int i=0; i<3 ;i++){
+                    strings.add("XXSASD");
+                }
+                adapter.addDatas(strings);
+                break;
+            case R.id.tv_comment:
+                adapter.clearDatas();
+                listView.setAdapter(adapter);
+                ArrayList<String> strings2 = new ArrayList<>();
+                for (int i=0; i<8 ;i++){
+                    strings2.add("XXSASD");
+                }
+                adapter.addDatas(strings2);
+                break;
+            case R.id.tv_supporter:
+                adapter.clearDatas();
+                listView.setAdapter(adapter);
+                ArrayList<String> strings3 = new ArrayList<>();
+                for (int i=0; i<5 ;i++){
+                    strings3.add("XXSASD");
+                }
+                adapter.addDatas(strings3);
+                break;
+        }
     }
 
     @Override

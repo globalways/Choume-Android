@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
     <RelativeLayout
         android:padding="10dp"
         android:layout_width="match_parent"
@@ -158,5 +159,34 @@
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
+    <LinearLayout
+        android:layout_margin="10dp"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <TextView
+            android:id="@+id/tv_reply"
+            android:text="回复"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_comment"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:text="评论"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_supporter"
+            android:gravity="center"
+            android:text="支持者"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
 
 </LinearLayout>

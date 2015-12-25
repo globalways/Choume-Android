@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.outsouring.crowdfunding.R;
@@ -19,6 +20,7 @@ public class BaseActivity extends AppCompatActivity {
     protected NavigationView mNavigationView;
     protected ActionBar actionBar;
     protected View actionbarLayout;
+    protected ImageButton bt_add;
     protected void initActionBar(){
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -32,6 +34,7 @@ public class BaseActivity extends AppCompatActivity {
                     R.layout.actionbar_main_layout, null);
             actionBar.setCustomView(actionbarLayout);
             actionBar.setDisplayShowCustomEnabled(true);
+            bt_add = (ImageButton) actionbarLayout.findViewById(R.id.bt_add);
         }
 
     }

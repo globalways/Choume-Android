@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.outsouring.crowdfunding.R;
 
@@ -13,14 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by HeJianjun on 2015/12/22.
+ * Created by HeJianjun on 2015/12/25.
  */
-public class MyMessageAdapter extends BaseAdapter {
+public class SupportAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private List<String> strings = new ArrayList<>();
 
-    public MyMessageAdapter(Context context) {
+    public SupportAdapter(Context context) {
         this.context = context;
         strings = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -58,15 +58,16 @@ public class MyMessageAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null){
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.item_my_message,null);
+            convertView = inflater.inflate(R.layout.item_suport,null);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
+
         return convertView;
     }
 
     class ViewHolder{
-        ProgressBar progressBar;
+        TextView tt;
     }
 }

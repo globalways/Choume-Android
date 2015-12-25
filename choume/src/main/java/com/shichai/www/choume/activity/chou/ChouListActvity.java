@@ -1,34 +1,38 @@
-package com.shichai.www.choume.activity.mine;
+package com.shichai.www.choume.activity.chou;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.MySponsorAdapter;
+import com.shichai.www.choume.common.Common;
 import com.shichai.www.choume.view.PullToRefreshListView;
 
 import java.util.ArrayList;
 
 /**
- * 我的发起
- * Created by HeJianjun on 2015/12/7.
+ * Created by HeJianjun on 2015/12/25.
  */
-public class MySponsorActivity extends BaseActivity implements View.OnClickListener{
-
+public class ChouListActvity extends BaseActivity implements View.OnClickListener{
     private PullToRefreshListView listView;
 
     private MySponsorAdapter adapter;
+    private String type;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_sponsor);
-        initActionBar();
-        setTitle("我的发起");
-        initViews();
+        type = getIntent().getStringExtra(Common.TYPE);
 
+        initActionBar();
+        if (!TextUtils.isEmpty(type)){
+            setTitle(type);
+        }
+        initViews();
     }
 
     private void initViews(){
@@ -58,13 +62,10 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                finish();
-                break;
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -16,7 +16,7 @@ public class LogoutAppTask extends AsyncTask<Void,Void,Response> {
     private ManagerCallBack<Response> callBack;
     private ManagedChannel managedChannel;
     private LogoutParam logoutParam;
-    private Exception exception;
+    private Exception e;
 
     public LogoutAppTask setLogoutParam(LogoutParam logoutParam) {
         this.logoutParam = logoutParam;
@@ -35,7 +35,7 @@ public class LogoutAppTask extends AsyncTask<Void,Void,Response> {
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(managedChannel);
             return stub.logoutApp(logoutParam);
         } catch (Exception e) {
-            e = e;
+            this.e = e;
             return null;
         }
     }
@@ -43,7 +43,7 @@ public class LogoutAppTask extends AsyncTask<Void,Void,Response> {
     @Override
     protected void onPostExecute(Response response) {
         if (response == null) {
-            callBack.error(exception);
+            callBack.error(e);
         }else if (response.code != 1) {
             callBack.warning((int)response.code,response.msg);
         }else {

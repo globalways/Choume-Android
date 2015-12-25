@@ -71,16 +71,5 @@
     </android.support.design.widget.NavigationView>
 
 
-    <!--<RelativeLayout-->
-            <!--android:fitsSystemWindows="true"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent">-->
-
-        <!--<include-->
-                <!--android:id="@+id/head_login"-->
-                <!--layout="@layout/menu_head_login"/>-->
-
-    <!--</RelativeLayout>-->
-
 
 </android.support.v4.widget.DrawerLayout>

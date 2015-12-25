@@ -42,7 +42,7 @@ public class LoginCFAppTask extends AsyncTask<Void,Void,LoginCFAppResp> {
             mChannel = CMChannel.buildCM();
             return LoginApp(mChannel);
         } catch (Exception e) {
-            e = e;
+            this.e = e;
             return null;
         }
     }
