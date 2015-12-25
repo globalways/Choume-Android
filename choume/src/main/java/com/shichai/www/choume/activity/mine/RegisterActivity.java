@@ -14,44 +14,33 @@ import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserCommon.*;
 import com.globalways.user.sms.nano.UserSms;
 import com.outsouring.crowdfunding.R;
+import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.network.HttpConfig;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.network.manager.ThirdPartyManager;
 import com.shichai.www.choume.tools.UITools;
 
-public class RegisterActivity extends ActionBarActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     private Context context;
     //是否在注册过程（网络请求）
     private boolean isRegister  = false;
 
     private EditText etNick, etTel, etPassword, etSmsCode;
-    private Button btnSubmit, btnRequestSmsCode, btnCancelRegister;
+    private Button btnSubmit, btnRequestSmsCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        initActionBar();
+        setTitle("注册");
         context = this;
         initViews();
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     private void initViews() {
@@ -62,10 +51,8 @@ public class RegisterActivity extends ActionBarActivity implements View.OnClickL
         etSmsCode         = (EditText) findViewById(R.id.etSmsCode);
         btnSubmit         = (Button) findViewById(R.id.btnToRegister);
         btnRequestSmsCode = (Button) findViewById(R.id.btnRequestSmsCode);
-        btnCancelRegister = (Button) findViewById(R.id.btnCancelRegister);
         btnSubmit.setOnClickListener(this);
         btnRequestSmsCode.setOnClickListener(this);
-        btnCancelRegister.setOnClickListener(this);
     }
 
     @Override
@@ -74,13 +61,19 @@ public class RegisterActivity extends ActionBarActivity implements View.OnClickL
             case R.id.btnToRegister:
                 register();
                 break;
-            case R.id.btnCancelRegister:
-                cancelRegister();
-                break;
             case R.id.btnRequestSmsCode:
                 smsCodeRequest();
                 break;
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void register(){
