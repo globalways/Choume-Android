@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
@@ -65,10 +66,15 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
+        switch (item.getItemId()){
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.menu_add:
+                Toast.makeText(this,"TRTRT",Toast.LENGTH_SHORT).show();
+                break;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
