@@ -1,11 +1,13 @@
 package com.shichai.www.choume.activity.mine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
+import com.shichai.www.choume.activity.sponsor.SponsorActivity;
 import com.shichai.www.choume.adapter.MySponsorAdapter;
 import com.shichai.www.choume.view.PullToRefreshListView;
 
@@ -27,11 +29,14 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.activity_my_sponsor);
         initActionBar();
         setTitle("我的发起");
+
         initViews();
 
     }
 
     private void initViews(){
+        bt_add.setVisibility(View.VISIBLE);
+        bt_add.setOnClickListener(this);
 
         listView = (PullToRefreshListView) findViewById(R.id.listView);
         adapter = new MySponsorAdapter(this);
@@ -52,6 +57,9 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         switch (v.getId()){
             case R.id.ib_back:
                 finish();
+                break;
+            case R.id.bt_add:
+                startActivity(new Intent(this, SponsorActivity.class));
                 break;
         }
     }
