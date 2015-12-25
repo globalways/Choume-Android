@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.outsouring.crowdfunding" >
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -68,6 +70,11 @@
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.chou.ChouDetailActivity"
+            android:theme="@style/BaseAppTheme.base"
+            >
+        </activity>
+        <activity
+            android:name="com.shichai.www.choume.activity.mine.RegisterActivity"
             android:theme="@style/BaseAppTheme.base"
             >
         </activity>
