@@ -1,5 +1,6 @@
 package com.shichai.www.choume.activity.chou;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.GravityCompat;
@@ -58,6 +59,12 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             strings.add("XXSASD");
         }
         adapter.addDatas(strings);
+
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        View headerView = inflater.inflate(R.layout.layout_chou_header, null);
+
+        listView.addHeaderView(headerView);
     }
 
     @Override
