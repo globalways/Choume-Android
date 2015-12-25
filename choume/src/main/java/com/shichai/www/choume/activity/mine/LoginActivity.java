@@ -17,7 +17,10 @@ import com.shichai.www.choume.network.HttpConfig;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
+import com.shichai.www.choume.tools.MD5;
 import com.shichai.www.choume.tools.UITools;
+
+import java.security.MessageDigest;
 
 public class LoginActivity extends ActionBarActivity implements View.OnClickListener {
 
@@ -28,6 +31,7 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        initViews();
     }
 
 
@@ -58,12 +62,19 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnLogin:
-                login(context, etTel.getText().toString(), etPassword.getText().toString());
+                UITools.ToastMsg(context, "login...");
+                login(context, etTel.getText().toString(), MD5.getMD5(etPassword.getText().toString()));
                 break;
         }
     }
 
-    public static void login(final Context context, final String tel, final String pwd) {
+    /**
+     *
+     * @param context
+     * @param tel
+     * @param pwd md5加密后的
+     */
+    private void login(final Context context, final String tel, final String pwd) {
         UserCommon.LoginAppParam loginAppParam = new UserCommon.LoginAppParam();
         loginAppParam.password = pwd;
         loginAppParam.username = tel;
@@ -72,11 +83,12 @@ public class LoginActivity extends ActionBarActivity implements View.OnClickList
             public void success(OutsouringCrowdfunding.LoginCFAppResp result) {
                 UITools.ToastMsg(context,"登录成功");
                 //跳转
-                MyApplication.cfUser = result.cfUser;
+                MyApplication.setCfUser(result.cfUser);
                 LocalDataConfig.setToken(context, result.token);
                 LocalDataConfig.setPwd(context, pwd);
                 LocalDataConfig.setTel(context, tel);
-
+                UITools.jumpToMainActivity(context, true);
+                LoginActivity.this.finish();
             }
 
             @Override

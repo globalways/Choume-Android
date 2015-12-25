@@ -41,21 +41,27 @@ public class LocalDataConfig {
         editor.apply();
     }
 
+    public static void logout(Context context) {
+        setToken(context, null);
+        setTel(context, null);
+        setPwd(context, null);
+    }
+
     public static String getToken(Context context){
         SharedPreferences pref = context.getSharedPreferences(
                 CONFIGS_FILE_NAME, Context.MODE_PRIVATE);
-        return pref.getString(CMTOKEN, "");
+        return pref.getString(CMTOKEN, null);
     }
     public static String getTel(Context context){
         SharedPreferences pref = context.getSharedPreferences(
                 CONFIGS_FILE_NAME, Context.MODE_PRIVATE);
-        return pref.getString(CMACCOUNT, "");
+        return pref.getString(CMACCOUNT, null);
     }
 
-    public static String getTPwd(Context context){
+    public static String getPwd(Context context){
         SharedPreferences pref = context.getSharedPreferences(
                 CONFIGS_FILE_NAME, Context.MODE_PRIVATE);
-        return pref.getString(CMPASSWORD, "");
+        return pref.getString(CMPASSWORD, null);
     }
 
 

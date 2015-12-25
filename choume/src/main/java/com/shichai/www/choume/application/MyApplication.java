@@ -8,13 +8,15 @@ import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.shichai.www.choume.activity.mine.LoginActivity;
+import com.shichai.www.choume.tools.LocalDataConfig;
 
 /**
  * Created by HeJianjun on 2015/11/17.
  */
 public class MyApplication extends Application{
 
-    public static OutsouringCrowdfunding.CfUser cfUser;
+    private static OutsouringCrowdfunding.CfUser cfUser;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -34,5 +36,14 @@ public class MyApplication extends Application{
     }
     public static class Config {
         public static final boolean DEVELOPER_MODE = false;
+    }
+
+    public static void setCfUser(OutsouringCrowdfunding.CfUser cfUser) {
+        MyApplication.cfUser = cfUser;
+    }
+
+    public static OutsouringCrowdfunding.CfUser getCfUser() {
+
+        return cfUser;
     }
 }

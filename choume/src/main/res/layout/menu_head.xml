@@ -9,7 +9,4 @@
     <include
         android:id="@+id/head_user"
         layout="@layout/menu_head_user"/>
-    <include
-        android:id="@+id/head_login"
-        layout="@layout/menu_head_login"/>
 </LinearLayout>

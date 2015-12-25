@@ -16,12 +16,17 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 
+import com.globalways.proto.nano.Common;
+import com.globalways.user.nano.UserCommon;
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.mine.*;
+import com.shichai.www.choume.application.MyApplication;
+import com.shichai.www.choume.network.ManagerCallBack;
+import com.shichai.www.choume.network.manager.CfUserManager;
+import com.shichai.www.choume.tools.LocalDataConfig;
+import com.shichai.www.choume.tools.UITools;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -29,7 +34,16 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
+
+    public static final String ISLOGIN = "isLogin";
+    private boolean isLogin = false;
+    //nologin
+    private Button btnToLogin;
+    private TextView toRegister;
+    //logined
+    private TextView tvUserName;
     private View dot1,dot2,dot3,dot4;
+    private RelativeLayout rlNoLoginView;
     private ViewPager viewPager;
     private ViewPagerTask pagerTask;
     private ScheduledExecutorService scheduled;
@@ -47,8 +61,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        isLogin = getIntent().getBooleanExtra(ISLOGIN, false);
         initMainActionBar();
         initViews();
+        loadUserInfo();
 
     }
 
@@ -93,9 +109,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                                 case R.id.my_wealth:
                                     startActivity(new Intent(MainActivity.this, MyWealthActivity.class));
                                     break;
-                                //测试注册界面入口 by wyp
                                 case R.id.logout:
-                                    startActivity(new Intent(MainActivity.this,RegisterActivity.class));
+                                    logout();
                                     break;
                                 case R.id.account_option:
                                     startActivity(new Intent(MainActivity.this, OptionActivity.class));
@@ -107,8 +122,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     });
 
             mNavigationView.getHeaderView(0).findViewById(R.id.im_head).setOnClickListener(this);
-            mNavigationView.getHeaderView(0).findViewById(R.id.head_user).setVisibility(View.GONE);
-            mNavigationView.getHeaderView(0).findViewById(R.id.head_login).setVisibility(View.VISIBLE);
+            //mNavigationView.getHeaderView(0).findViewById(R.id.head_user).setVisibility(View.GONE);
+            //mNavigationView.getHeaderView(0).findViewById(R.id.head_login).setVisibility(View.VISIBLE);
         }
 
 
@@ -116,10 +131,60 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     private void initViews(){
         initViewPager();
+        rlNoLoginView = (RelativeLayout) findViewById(R.id.rlNoLoginView);
+        showLeftPanelView(isLogin);
+
+        //logined
+        tvUserName = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_username);
+        //nologin
+        btnToLogin = (Button) findViewById(R.id.btnToLogin);
+        btnToLogin.setOnClickListener(this);
+        toRegister = (TextView) findViewById(R.id.tvToRegister);
+        toRegister.setOnClickListener(this);
+    }
+
+    /**
+     * 左边面板
+     * @param isLogin
+     */
+    private void showLeftPanelView(boolean isLogin){
+        if (isLogin){
+            rlNoLoginView.setVisibility(View.GONE);
+            mNavigationView.setVisibility(View.VISIBLE);
+        } else {
+            rlNoLoginView.setVisibility(View.VISIBLE);
+            mNavigationView.setVisibility(View.GONE);
+        }
+    }
+
+    private void loadUserInfo(){
+        if (!isLogin)
+            return;
+        tvUserName.setText(MyApplication.getCfUser().user.tel);
     }
 
 
+    private void logout(){
+        UserCommon.LogoutParam logoutParam = new UserCommon.LogoutParam();
+        logoutParam.token = LocalDataConfig.getToken(this);
+        CfUserManager.getInstance().logoutApp(logoutParam, new ManagerCallBack<Common.Response>() {
+            @Override
+            public void success(Common.Response result) {
+                LocalDataConfig.logout(MainActivity.this);
+                showLeftPanelView(true);
+            }
 
+            @Override
+            public void warning(int code, String msg) {
+                UITools.ToastMsg(MainActivity.this, msg);
+            }
+
+            @Override
+            public void error(Exception e) {
+                UITools.ToastServerError(MainActivity.this);
+            }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -162,6 +227,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.most_get:
                 startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                break;
+            case R.id.btnToLogin:
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                break;
+            case R.id.tvToRegister:
                 break;
         }
     }

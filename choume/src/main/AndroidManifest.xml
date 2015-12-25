@@ -2,77 +2,73 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.outsouring.crowdfunding" >
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
+        android:name="com.shichai.www.choume.application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:supportsRtl="true"
         android:label="@string/app_name"
-        android:name="com.shichai.www.choume.application.MyApplication"
-         >
+        android:supportsRtl="true" >
+
         <activity
-            android:name="com.shichai.www.choume.activity.MainActivity"
-            android:theme="@style/AppTheme.base"
-             >
+                android:name="com.shichai.www.choume.activity.WelcomeActivity"
+                android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <activity
+                android:name="com.shichai.www.choume.activity.MainActivity"
+                android:launchMode="singleTask"
+                android:theme="@style/AppTheme.base" >
+        </activity>
+
+        <activity
             android:name="com.shichai.www.choume.activity.mine.MySponsorActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.mine.MyWealthActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.mine.MyMessageActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.mine.MyCollectionActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.mine.MyJoinActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.OptionActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.IndividualActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.wealth.RechargeActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
-
         <activity
             android:name="com.shichai.www.choume.activity.wealth.RechargeSuccessActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.chou.ChouDetailActivity"
-            android:theme="@style/BaseAppTheme.base"
-            >
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
-
-
+        <activity android:name="com.shichai.www.choume.activity.mine.LoginActivity"
+                  android:theme="@style/BaseAppTheme.base">
+        </activity>
     </application>
 
 </manifest>

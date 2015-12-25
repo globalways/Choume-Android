@@ -117,7 +117,7 @@ public class RegisterActivity extends ActionBarActivity implements View.OnClickL
                         UITools.ToastMsg(context, "注册成功，正在自动登录..");
                         isRegister = false;
                         //注册成功自动登录
-                        LoginActivity.login(context,param.tel,param.password);
+
                         RegisterActivity.this.finish();
                     }
                 });

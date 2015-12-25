@@ -1,0 +1,19 @@
+<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:scaleType="centerCrop"
+                android:id="@+id/imageWelcome"
+                android:src="@drawable/welcome"
+                tools:context="com.shichai.www.choume.activity.WelcomeActivity" />
+
+<!--<TextView xmlns:android="http://schemas.android.com/apk/res/android"-->
+           <!--xmlns:tools="http://schemas.android.com/tools"-->
+           <!--android:layout_width="match_parent"-->
+           <!--android:layout_height="match_parent"-->
+           <!--android:background="@null"-->
+           <!--android:scaleType="centerCrop"-->
+           <!--android:id="@+id/imageWelcome"-->
+          <!--android:text="hhh"-->
+           <!--tools:context="com.shichai.www.choume.activity.WelcomeActivity" />-->

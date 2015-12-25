@@ -59,8 +59,10 @@ public class LoginCFAppTask extends AsyncTask<Void,Void,LoginCFAppResp> {
         }else{
             if(resp.resp.code != 1){
                 callBack.warning((int) resp.resp.code, resp.resp.msg);
+            }else {
+                callBack.success(resp);
             }
         }
-        callBack.success(resp);
+
     }
 }

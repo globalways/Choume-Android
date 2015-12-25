@@ -14,16 +14,73 @@
     </include>
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_height="match_parent"
-        android:layout_width="wrap_content"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        app:headerLayout="@layout/menu_head"
-        app:itemTextAppearance="@style/menu_text_style"
-        app:theme="@style/menu_style"
-        app:menu="@menu/menu_logined"
-        />
+            android:id="@+id/navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true">
+
+        //登录后
+        <android.support.design.widget.NavigationView
+            android:id="@+id/nav_view"
+            android:visibility="gone"
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:headerLayout="@layout/menu_head"
+            app:itemTextAppearance="@style/menu_text_style"
+            app:theme="@style/menu_style"
+            app:menu="@menu/menu_logined"
+            />
+
+        //未登录
+        <RelativeLayout
+                android:id="@+id/rlNoLoginView"
+                android:visibility="visible"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include
+                    android:id="@+id/head_login"
+                    layout="@layout/menu_head_login"/>
+
+                <TextView
+                        android:layout_centerInParent="true"
+                        android:text="需要帮助？"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                <RelativeLayout
+                        android:background="@color/black_242729"
+                        android:layout_alignParentBottom="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp">
+                    <TextView
+                            android:id="@+id/tvToRegister"
+                            android:text="没有账号？立即注册>"
+                            android:layout_centerInParent="true"
+                            android:textColor="@color/white"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                </RelativeLayout>
+
+        </RelativeLayout>
+
+    </android.support.design.widget.NavigationView>
+
+
+    <!--<RelativeLayout-->
+            <!--android:fitsSystemWindows="true"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent">-->
+
+        <!--<include-->
+                <!--android:id="@+id/head_login"-->
+                <!--layout="@layout/menu_head_login"/>-->
+
+    <!--</RelativeLayout>-->
 
 
 </android.support.v4.widget.DrawerLayout>
