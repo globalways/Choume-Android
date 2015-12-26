@@ -34,6 +34,11 @@
             >
         </activity>
         <activity
+            android:name="com.shichai.www.choume.activity.sponsor.SponsorActivity"
+            android:theme="@style/BaseAppTheme.base"
+            >
+        </activity>
+        <activity
             android:name="com.shichai.www.choume.activity.mine.MyWealthActivity"
             android:theme="@style/BaseAppTheme.base"
             >
@@ -76,6 +81,11 @@
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.chou.ChouDetailActivity"
+            android:theme="@style/BaseAppTheme.base"
+            >
+        </activity>
+        <activity
+            android:name="com.shichai.www.choume.activity.chou.ChouListActvity"
             android:theme="@style/BaseAppTheme.base"
             >
         </activity>

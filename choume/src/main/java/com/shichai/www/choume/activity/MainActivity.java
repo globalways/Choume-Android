@@ -21,6 +21,7 @@ import android.widget.*;
 import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserCommon;
 import com.outsouring.crowdfunding.R;
+import com.shichai.www.choume.activity.chou.ChouListActvity;
 import com.shichai.www.choume.activity.mine.*;
 import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;
@@ -67,6 +68,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         loadUserInfo();
 
     }
+
 
     private void initMainActionBar(){
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -197,36 +199,56 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
+        Intent intent;
         switch (v.getId()){
             case R.id.im_head:
-                startActivity(new Intent(this,IndividualActivity.class));
+                intent = new Intent(this,IndividualActivity.class);
+                startActivity(intent);
                 break;
             case R.id.big_difficult:
-                startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"世纪难题");
+                startActivity(intent);
                 break;
             case R.id.get_fun:
-                startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹乐子");
+                startActivity(intent);
                 break;
             case R.id.get_love:
-                startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹爱心");
+                startActivity(intent);
                 break;
             case R.id.get_money:
-                startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹票子");
+                startActivity(intent);
                 break;
             case R.id.go_where:
-                startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"周末去哪");
+                startActivity(intent);
                 break;
             case R.id.hot:
-                startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"热门众筹");
+                startActivity(intent);
                 break;
             case R.id.limited:
-                startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"限时特筹");
+                startActivity(intent);
                 break;
             case R.id.miao:
-                startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE, "一元秒筹");
+                startActivity(intent);
                 break;
             case R.id.most_get:
-                startActivity(new Intent(MainActivity.this,MyJoinActivity.class));
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"非筹不可");
+                startActivity(intent);
                 break;
             case R.id.btnToLogin:
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
