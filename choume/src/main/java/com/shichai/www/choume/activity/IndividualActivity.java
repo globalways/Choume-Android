@@ -11,6 +11,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUser;
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.mine.profile.CertApplyActivity;
 import com.shichai.www.choume.application.MyApplication;
+import com.shichai.www.choume.network.protoenum.UserSex;
 
 /**
  * Created by HeJianjun on 2015/12/22.
@@ -67,6 +68,8 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         CfUser cfUser = MyApplication.getCfUser();
         tvNick.setText(cfUser.user.nick);
         tvTel.setText(cfUser.user.tel);
-        //tvSex.setText(cfUser.user.sex);
+        tvSex.setText(UserSex.codeOf(cfUser.user.sex).getDesc());
+        tvCert.setText(cfUser.certification == null?"暂无认证": cfUser.certification.name);
+        tvAddr.setText(cfUser.user.addrs.length == 0?"暂无地址": cfUser.user.addrs[0].name);
     }
 }

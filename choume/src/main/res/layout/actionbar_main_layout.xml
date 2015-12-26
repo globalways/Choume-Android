@@ -17,7 +17,7 @@
 
     <ImageButton
         android:visibility="gone"
-        android:src="@mipmap/ico_add"
+        android:src="@mipmap/ico_add_white"
         android:background="@color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
