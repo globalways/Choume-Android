@@ -2,14 +2,18 @@ package com.shichai.www.choume.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.chou.ChouDetailActivity;
+import com.shichai.www.choume.tools.UITools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +23,23 @@ import java.util.List;
  */
 public class MySponsorAdapter extends BaseAdapter {
 
+    public static final int NORMAL = 1;
+    public static final int STAR   = 2;
+    public static final int CONFIG = 3;
+
+    private int type = NORMAL;
     private LayoutInflater inflater;
     private Context context;
     private List<String> strings;
 
     public MySponsorAdapter(Context context) {
         this.context = context;
+        strings = new ArrayList<>();
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+    public MySponsorAdapter(Context context, int type) {
+        this.context = context;
+        this.type = type;
         strings = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
@@ -59,6 +74,21 @@ public class MySponsorAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_my_sponsor,null);
             holder.progressBar = (ProgressBar) convertView.findViewById(R.id.progressBar);
             holder.main = convertView.findViewById(R.id.main);
+            holder.ibControl = (ImageButton) convertView.findViewById(R.id.ibControl);
+            switch (type) {
+                case NORMAL:
+                    holder.ibControl.setVisibility(View.GONE);
+                    break;
+                case STAR:
+                    holder.ibControl.setImageDrawable(context.getResources().getDrawable(R.mipmap.ico_my_collection));
+                    break;
+                case CONFIG:
+                    holder.ibControl.setImageDrawable(context.getResources().getDrawable(R.mipmap.ico_my_account_option));
+                    break;
+                default:
+                    holder.ibControl.setVisibility(View.GONE);
+                    break;
+            }
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
@@ -77,6 +107,7 @@ public class MySponsorAdapter extends BaseAdapter {
     class ViewHolder{
         View main;
         ProgressBar progressBar;
+        ImageButton ibControl;
     }
 
 }

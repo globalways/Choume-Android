@@ -24,7 +24,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+            android:id="@+id/ibControl"
             android:padding="10dp"
             android:src="@mipmap/ico_my_account_option"
             android:background="#00000000"

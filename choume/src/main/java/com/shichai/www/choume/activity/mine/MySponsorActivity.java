@@ -5,22 +5,29 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.FindCfProjectsParam;
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.activity.sponsor.SponsorActivity;
 import com.shichai.www.choume.adapter.MySponsorAdapter;
+import com.shichai.www.choume.application.MyApplication;
+import com.shichai.www.choume.network.manager.CfProjectManager;
+import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.view.PullToRefreshListView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 我的发起
  * Created by HeJianjun on 2015/12/7.
  */
-public class MySponsorActivity extends BaseActivity implements View.OnClickListener{
+public class MySponsorActivity extends BaseActivity implements View.OnClickListener, PullToRefreshListView.OnRefreshListener, PullToRefreshListView.OnLoadMoreListener {
 
     private PullToRefreshListView listView;
-
+    private ArrayList<CfProject> projects;
     private MySponsorAdapter adapter;
 
     @Override
@@ -39,7 +46,9 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         bt_add.setOnClickListener(this);
 
         listView = (PullToRefreshListView) findViewById(R.id.listView);
-        adapter = new MySponsorAdapter(this);
+        listView.setOnRefreshListener(this);
+        listView.setOnLoadListener(this);
+        adapter = new MySponsorAdapter(this, MySponsorAdapter.CONFIG);
         listView.setAdapter(adapter);
         ArrayList<String> strings = new ArrayList<>();
         for (int i=0; i<10 ;i++){
@@ -75,4 +84,24 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         return super.onOptionsItemSelected(item);
     }
 
+
+    private void loadProjects(){
+        if (MyApplication.getCfUser().fundProjects.length != 0){
+            projects = new ArrayList<CfProject>(Arrays.asList(MyApplication.getCfUser().fundProjects));
+        }
+
+
+    }
+
+    @Override
+    public void onRefresh() {
+        loadProjects();
+        listView.onRefreshComplete();
+    }
+
+    @Override
+    public void onLoadMore() {
+        loadProjects();
+        listView.onLoadMoreComplete();
+    }
 }
