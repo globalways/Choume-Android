@@ -70,7 +70,7 @@
                android:src="@drawable/selector_choose"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:id="@+id/imageView7" />
+               android:id="@+id/imageView4" />
        </LinearLayout>
         <LinearLayout
             android:gravity="center"
@@ -118,17 +118,21 @@
             layout="@layout/layout_choose_type"/>
         <include
             android:id="@+id/layout_program_detail"
+            android:visibility="gone"
             layout="@layout/layout_program_detail">
         </include>
 
         <include
             android:id="@+id/layout_reward_way"
+            android:visibility="gone"
             layout="@layout/layout_reward_way"/>
         <include
             android:id="@+id/layout_publish"
+            android:visibility="gone"
             layout="@layout/layout_publish"/>
 
         <Button
+            android:background="@drawable/selector_next"
             android:textColor="@color/cmwhite"
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"

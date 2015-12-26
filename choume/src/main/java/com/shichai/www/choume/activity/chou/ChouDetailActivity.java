@@ -76,6 +76,9 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_reply:
+                tv_reply.setSelected(true);
+                tv_comment.setSelected(false);
+                tv_supporter.setSelected(false);
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
                 ArrayList<String> strings = new ArrayList<>();
@@ -85,6 +88,9 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 adapter.addDatas(strings);
                 break;
             case R.id.tv_comment:
+                tv_reply.setSelected(false);
+                tv_comment.setSelected(true);
+                tv_supporter.setSelected(false);
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
                 ArrayList<String> strings2 = new ArrayList<>();
@@ -94,6 +100,9 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 adapter.addDatas(strings2);
                 break;
             case R.id.tv_supporter:
+                tv_reply.setSelected(false);
+                tv_comment.setSelected(false);
+                tv_supporter.setSelected(true);
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
                 ArrayList<String> strings3 = new ArrayList<>();

@@ -1,35 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/white"
+    android:layout_height="wrap_content">
 
-    <TextView
+    <RadioGroup
+        android:id="@+id/rg_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView19" />
-
-    <TextView
+        android:text="筹乐子"
+        android:id="@+id/rb_fun" />
+    <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView27" />
-
-    <TextView
+        android:text="筹票子"
+        android:id="@+id/rb_get_money" />
+    <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView28" />
+        android:text="筹爱心"
+        android:id="@+id/rb_get_love" />
+    </RadioGroup>
 
     <TextView
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray"
+        android:textColor="@color/gray_deep"
+        android:text="校园合伙人"
+        android:id="@+id/textView8" />
+    <RadioGroup
+        android:id="@+id/rg_program"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView29" />
-
-    <TextView
+        android:text="项目类"
+        android:id="@+id/rb_program" />
+    <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/textView30" />
+        android:text="产品类"
+        android:id="@+id/rb_product" />
+    </RadioGroup>
 </LinearLayout>

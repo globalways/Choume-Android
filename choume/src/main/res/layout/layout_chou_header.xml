@@ -167,6 +167,7 @@
         <TextView
             android:id="@+id/tv_reply"
             android:text="回复"
+            android:textColor="@drawable/selector_chou_tab_text_color"
             android:onClick="onClick"
             android:gravity="center"
             android:layout_width="0dp"
@@ -175,6 +176,7 @@
         <TextView
             android:id="@+id/tv_comment"
             android:onClick="onClick"
+            android:textColor="@drawable/selector_chou_tab_text_color"
             android:gravity="center"
             android:text="评论"
             android:layout_width="0dp"
@@ -183,6 +185,7 @@
         <TextView
             android:id="@+id/tv_supporter"
             android:gravity="center"
+            android:textColor="@drawable/selector_chou_tab_text_color"
             android:text="支持者"
             android:layout_width="0dp"
             android:layout_weight="1"
