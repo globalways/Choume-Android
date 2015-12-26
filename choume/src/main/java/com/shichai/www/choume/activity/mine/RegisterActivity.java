@@ -1,5 +1,6 @@
 package com.shichai.www.choume.activity.mine;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,14 +12,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.proto.nano.Common;
+import com.globalways.user.nano.UserCommon;
 import com.globalways.user.nano.UserCommon.*;
 import com.globalways.user.sms.nano.UserSms;
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
+import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.HttpConfig;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.network.manager.ThirdPartyManager;
+import com.shichai.www.choume.tools.LocalDataConfig;
+import com.shichai.www.choume.tools.MD5;
 import com.shichai.www.choume.tools.UITools;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
@@ -77,12 +82,14 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void register(){
+        String nick = etNick.getText().toString().trim();
+        final String tel  = etTel.getText().toString().trim();
+        String pwd  = etPassword.getText().toString().trim();
         final RegisterAppUserParam param = new RegisterAppUserParam();
-        param.nick     = etNick.getText().toString();
-        param.tel      = etNick.getText().toString();
-        param.password = etPassword.getText().toString();
+        param.nick     = nick;
+        param.tel      = tel;
+        param.password = MD5.getMD5(pwd);
         isRegister = true;
-
         //验证短信验证码
         UserSms.VarifySMSCodeParam varifyParam = new UserSms.VarifySMSCodeParam();
         varifyParam.appId = HttpConfig.APPID;
@@ -95,7 +102,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 CfUserManager.getInstance().register(param, new ManagerCallBack<OutsouringCrowdfunding.RegisterCFAppUserResp>() {
                     @Override
                     public void error(Exception e) {
-                        super.error(e);
+                        UITools.ToastServerError(context);
                         isRegister = false;
                     }
 
@@ -110,7 +117,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         UITools.ToastMsg(context, "注册成功，正在自动登录..");
                         isRegister = false;
                         //注册成功自动登录
-
+                        login(context, param.tel, param.password);
                         RegisterActivity.this.finish();
                     }
                 });
@@ -149,8 +156,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             return;
         }
         UserSms.SendSMSParam param = new UserSms.SendSMSParam();
-        param.appId = HttpConfig.APPID;
-        param.tels  = new String[]{tel};
+        param.appId      = HttpConfig.APPID;
+        param.tels       = new String[]{tel};
+        param.templateId = 56890;
+        param.type       = UserSms.VARIFY;
         ThirdPartyManager.getInstance().sendSMS(param, new ManagerCallBack<Common.Response>() {
             @Override
             public void success(Common.Response result) {
@@ -165,6 +174,42 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void error(Exception e) {
+                UITools.ToastServerError(context);
+            }
+        });
+    }
+
+    /**
+     *
+     * @param context
+     * @param tel
+     * @param pwd md5加密后的
+     */
+    private void login(final Context context, final String tel, final String pwd) {
+        UserCommon.LoginAppParam loginAppParam = new UserCommon.LoginAppParam();
+        loginAppParam.password = pwd;
+        loginAppParam.username = tel;
+        CfUserManager.getInstance().login(loginAppParam, new ManagerCallBack<OutsouringCrowdfunding.LoginCFAppResp>() {
+            @Override
+            public void success(OutsouringCrowdfunding.LoginCFAppResp result) {
+                UITools.ToastMsg(context,"登录成功");
+                //跳转
+                MyApplication.setCfUser(result.cfUser);
+                LocalDataConfig.setToken(context, result.token);
+                LocalDataConfig.setPwd(context, pwd);
+                LocalDataConfig.setTel(context, tel);
+                setResult(Activity.RESULT_OK);
+            }
+
+            @Override
+            public void warning(int code, String msg) {
+                setResult(Activity.RESULT_CANCELED);
+                UITools.ToastMsg(context, msg);
+            }
+
+            @Override
+            public void error(Exception e) {
+                setResult(Activity.RESULT_CANCELED);
                 UITools.ToastServerError(context);
             }
         });

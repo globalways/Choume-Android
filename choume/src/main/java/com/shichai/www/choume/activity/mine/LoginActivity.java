@@ -1,5 +1,6 @@
 package com.shichai.www.choume.activity.mine;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -77,18 +78,19 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 LocalDataConfig.setToken(context, result.token);
                 LocalDataConfig.setPwd(context, pwd);
                 LocalDataConfig.setTel(context, tel);
-                UITools.jumpToMainActivity(context, true);
+                setResult(Activity.RESULT_OK);
                 LoginActivity.this.finish();
             }
 
             @Override
             public void warning(int code, String msg) {
+                setResult(Activity.RESULT_CANCELED);
                 UITools.ToastMsg(context, msg);
             }
 
             @Override
             public void error(Exception e) {
-                e.getMessage();
+                setResult(Activity.RESULT_CANCELED);
                 UITools.ToastServerError(context);
             }
         });

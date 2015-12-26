@@ -1,5 +1,6 @@
 package com.shichai.www.choume.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +38,8 @@ import java.util.concurrent.TimeUnit;
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     public static final String ISLOGIN = "isLogin";
+    private static final int CODE_TO_LOGIN = 10001;
+    private static final int CODE_TO_REGISTER = 10002;
     private boolean isLogin = false;
     //nologin
     private Button btnToLogin;
@@ -62,13 +65,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        isLogin = getIntent().getBooleanExtra(ISLOGIN, false);
         initMainActionBar();
         initViews();
-        loadUserInfo();
-
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isLogin = getIntent().getExtras().getBoolean(ISLOGIN);
+        showLeftPanelView(isLogin);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case CODE_TO_LOGIN:
+                if (resultCode == Activity.RESULT_OK) {
+                    showLeftPanelView(true);
+                } else {
+                    showLeftPanelView(false);
+                }
+                break;
+            case CODE_TO_REGISTER:
+                if (resultCode == Activity.RESULT_OK) {
+                    showLeftPanelView(true);
+                } else {
+                    showLeftPanelView(false);
+                }
+                break;
+        }
+    }
 
     private void initMainActionBar(){
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -150,16 +176,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
      * @param isLogin
      */
     private void showLeftPanelView(boolean isLogin){
+        if(this.isLogin != isLogin){
+            this.isLogin = isLogin;
+        }
         if (isLogin){
             rlNoLoginView.setVisibility(View.GONE);
             mNavigationView.setVisibility(View.VISIBLE);
+            setUserNameAndAvatar();
         } else {
             rlNoLoginView.setVisibility(View.VISIBLE);
             mNavigationView.setVisibility(View.GONE);
         }
     }
 
-    private void loadUserInfo(){
+    /**
+     * 设置左侧面板头像和用户名
+     */
+    private void setUserNameAndAvatar(){
         if (!isLogin)
             return;
         tvUserName.setText(MyApplication.getCfUser().user.tel);
@@ -173,7 +206,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             @Override
             public void success(Common.Response result) {
                 LocalDataConfig.logout(MainActivity.this);
-                showLeftPanelView(true);
+                showLeftPanelView(false);
             }
 
             @Override
@@ -251,9 +284,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 startActivity(intent);
                 break;
             case R.id.btnToLogin:
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivityForResult(new Intent(MainActivity.this, LoginActivity.class),CODE_TO_LOGIN);
                 break;
             case R.id.tvToRegister:
+                startActivityForResult(new Intent(MainActivity.this, RegisterActivity.class),CODE_TO_REGISTER);
                 break;
         }
     }
