@@ -67,12 +67,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
         initMainActionBar();
         initViews();
+        isLogin = getIntent().getExtras().getBoolean(ISLOGIN);
+        showLeftPanelView(isLogin);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        isLogin = getIntent().getExtras().getBoolean(ISLOGIN);
         showLeftPanelView(isLogin);
     }
 

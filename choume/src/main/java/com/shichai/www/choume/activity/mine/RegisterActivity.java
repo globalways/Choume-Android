@@ -118,7 +118,6 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                         isRegister = false;
                         //注册成功自动登录
                         login(context, param.tel, param.password);
-                        RegisterActivity.this.finish();
                     }
                 });
             }
@@ -163,8 +162,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         ThirdPartyManager.getInstance().sendSMS(param, new ManagerCallBack<Common.Response>() {
             @Override
             public void success(Common.Response result) {
-                UITools.ToastMsg(context, Long.toString(result.code));
-                btnRequestSmsCode.setText(String.valueOf(result.code));
+                UITools.ToastMsg(context, "验证码已经发送，注意查收");
+                //btnRequestSmsCode.setText(String.valueOf(result.code));
             }
 
             @Override
@@ -199,6 +198,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 LocalDataConfig.setPwd(context, pwd);
                 LocalDataConfig.setTel(context, tel);
                 setResult(Activity.RESULT_OK);
+                RegisterActivity.this.finish();
             }
 
             @Override
