@@ -35,7 +35,7 @@ public class LogoutAppTask extends AsyncTask<Void,Void,Response> {
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(managedChannel);
             return stub.logoutApp(logoutParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

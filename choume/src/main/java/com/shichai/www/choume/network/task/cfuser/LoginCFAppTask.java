@@ -18,7 +18,7 @@ public class LoginCFAppTask extends AsyncTask<Void,Void,LoginCFAppResp> {
     private ManagerCallBack<LoginCFAppResp> callBack;
     private ManagedChannel mChannel;
     private UserCommon.LoginAppParam loginAppParam;
-    private Exception e;
+    private Exception exception;
 
     public LoginCFAppTask setCallBack(ManagerCallBack<LoginCFAppResp> callBack){
         this.callBack = callBack;
@@ -42,7 +42,7 @@ public class LoginCFAppTask extends AsyncTask<Void,Void,LoginCFAppResp> {
             mChannel = CMChannel.buildCM();
             return LoginApp(mChannel);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }
@@ -55,7 +55,7 @@ public class LoginCFAppTask extends AsyncTask<Void,Void,LoginCFAppResp> {
             Thread.currentThread().interrupt();
         }
         if(resp == null){
-            callBack.error(e);
+            callBack.error(exception);
         }else{
             if(resp.resp.code != 1){
                 callBack.warning((int) resp.resp.code, resp.resp.msg);
