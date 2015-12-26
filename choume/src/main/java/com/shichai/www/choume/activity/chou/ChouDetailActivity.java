@@ -9,10 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.MyMessageAdapter;
+import com.shichai.www.choume.adapter.MySponsorAdapter;
 import com.shichai.www.choume.adapter.SupportAdapter;
+import com.shichai.www.choume.network.ManagerCallBack;
+import com.shichai.www.choume.network.manager.CfProjectManager;
+import com.shichai.www.choume.tools.UITools;
 import com.shichai.www.choume.view.ListViewForScrollView;
 
 import java.util.ArrayList;
@@ -25,12 +32,21 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private SupportAdapter adapter;
     private View headerView;
     private View tv_reply,tv_comment,tv_supporter;
+
+    private CfProject currentProject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chou);
         ActionBar();
         initViews();
+
+        long projectId = getIntent().getLongExtra(MySponsorAdapter.PROJECT_ID, -1);
+        if (projectId != -1) {
+            loadProject(projectId);
+        }else {
+            UITools.ToastMsg(this, "获取项目信息错误");
+        }
     }
 
     private void ActionBar(){
@@ -112,5 +128,26 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadProject(long projetId){
+        GetCfProjectParam projectParam = new GetCfProjectParam();
+        projectParam.projectId = projetId;
+        CfProjectManager.getInstance().getCfProject(projectParam, new ManagerCallBack<OutsouringCrowdfunding.GetCfProjectResp>() {
+            @Override
+            public void success(OutsouringCrowdfunding.GetCfProjectResp result) {
+                super.success(result);
+            }
+
+            @Override
+            public void warning(int code, String msg) {
+                super.warning(code, msg);
+            }
+
+            @Override
+            public void error(Exception e) {
+                super.error(e);
+            }
+        });
     }
 }
