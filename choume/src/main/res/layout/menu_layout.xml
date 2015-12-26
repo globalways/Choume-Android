@@ -5,7 +5,7 @@
     android:layout_width="250dp"
     android:choiceMode="singleChoice"
     android:drawSelectorOnTop="false"
-    android:background="@color/white"
+    android:background="@color/cmwhite"
     android:layout_gravity="start"
     android:fitsSystemWindows="true"
     android:id="@+id/menu"
@@ -25,11 +25,11 @@
             android:layout_centerHorizontal="true"
             android:src="@mipmap/test_head"
             app:border_width="1dp"
-            app:border_color="@color/white" />
+            app:border_color="@color/cmwhite" />
 
         <TextView
             android:layout_marginTop="10dp"
-            android:textColor="@color/white"
+            android:textColor="@color/cmwhite"
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

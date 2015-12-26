@@ -5,7 +5,7 @@
     android:background="?attr/colorPrimary"
     android:layout_height="match_parent">
     <LinearLayout
-        android:background="@color/white"
+        android:background="@color/cmwhite"
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_width="match_parent">

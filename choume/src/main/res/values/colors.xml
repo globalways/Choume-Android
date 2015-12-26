@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
-    <color name="black_242729">#242729</color>
+
+    <color name="cmblack_242729">#242729</color>  <!--首页侧边底部黑色-->
+    <color name="cmblack_333333">#333333</color>  <!--通用字体颜色-->
+    <color name="cmblue_11a2ff">#11a2ff</color>   <!--通用蓝色-->
+    <color name="cmblue_269afd">#269afd</color>   <!--蓝色按钮pressed-->
+    <color name="cmwhite">#ffffff</color>
+    <color name="cmgray">#eeeeee</color>          <!--蓝色按钮disable-->
+    <color name="cmgray_light">#f3f3f3</color>
+    <color name="cmgray_dark">#d8d8d8</color>
     
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

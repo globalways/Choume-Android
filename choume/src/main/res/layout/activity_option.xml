@@ -9,7 +9,7 @@
     <LinearLayout
         android:showDividers="middle|end"
         android:divider="@drawable/divider_gray"
-        android:background="@color/white"
+        android:background="@color/cmwhite"
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
@@ -48,7 +48,7 @@
             android:id="@+id/tv_join_us" />
         <TextView
             android:onClick="onClick"
-            android:textColor="@color/blue"
+            android:textColor="@color/cmblue_11a2ff"
             android:textSize="18sp"
             android:padding="5dp"
             android:gravity="center"

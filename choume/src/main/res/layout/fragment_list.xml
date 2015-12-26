@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:paddingLeft="38dp"
         android:paddingRight="38dp"
-        android:background="@color/white"
+        android:background="@color/cmwhite"
         android:headerDividersEnabled="false"
         android:footerDividersEnabled="false"
         android:cacheColorHint="@android:color/transparent"

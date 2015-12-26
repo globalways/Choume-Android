@@ -5,9 +5,9 @@
         </style>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="colorPrimary">@color/cmwhite</item>
+        <item name="colorPrimaryDark">@color/cmwhite</item>
+        <item name="colorAccent">@color/cmwhite</item>
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 
@@ -18,9 +18,9 @@
     </style>
 
     <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
-        <item name="colorAccent">@color/blue</item>
+        <item name="colorPrimary">@color/cmblue_11a2ff</item>
+        <item name="colorPrimaryDark">@color/cmblue_11a2ff</item>
+        <item name="colorAccent">@color/cmblue_11a2ff</item>
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 
@@ -81,11 +81,11 @@
     </style>
 
     <style name="actionbar_def_style" parent="@android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/cmwhite</item>
         <item name="android:displayOptions">useLogo</item>
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/blue</item>
-        <item name="colorAccent">@color/blue</item>
+        <item name="colorPrimary">@color/cmblue_11a2ff</item>
+        <item name="colorPrimaryDark">@color/cmblue_11a2ff</item>
+        <item name="colorAccent">@color/cmblue_11a2ff</item>
         <item name="android:windowBackground">@color/window_background</item>
     </style>
 

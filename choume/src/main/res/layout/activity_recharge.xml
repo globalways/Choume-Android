@@ -5,7 +5,7 @@
     android:background="?attr/colorPrimary"
     android:layout_height="match_parent">
     <LinearLayout
-        android:background="@color/white"
+        android:background="@color/cmwhite"
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
@@ -16,14 +16,14 @@
     <LinearLayout
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/blue"
+        android:background="@color/cmblue_11a2ff"
         android:gravity="center_horizontal"
         android:layout_width="match_parent">
 
         <TextView
             android:layout_marginTop="10dp"
             android:textSize="15sp"
-            android:textColor="@color/white"
+            android:textColor="@color/cmwhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="余额（元）"
@@ -33,7 +33,7 @@
         <TextView
             android:layout_margin="40dp"
             android:textSize="40sp"
-            android:textColor="@color/white"
+            android:textColor="@color/cmwhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="600.00"
@@ -42,14 +42,14 @@
 
     </LinearLayout>
 
-    <TextView
+    <EditText
         android:layout_margin="5dp"
         android:textColor="@color/border_color"
         android:textSize="18sp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="充值金额"
-        android:id="@+id/textView8" />
+        android:layout_height="50dp"
+        android:hint="充值金额"
+        android:id="@+id/etRechargeAmount" />
     <View
         android:layout_margin="5dp"
         android:background="@color/border_color"
@@ -73,8 +73,8 @@
     <Button
         android:layout_margin="10dp"
         android:textSize="18sp"
-        android:background="@color/blue"
-        android:textColor="@color/white"
+        android:background="@color/cmblue_11a2ff"
+        android:textColor="@color/cmwhite"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -5,7 +5,7 @@
     android:background="?attr/colorPrimary"
     android:layout_height="match_parent">
     <LinearLayout
-        android:background="@color/white"
+        android:background="@color/cmwhite"
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
@@ -32,8 +32,8 @@
 
         <Button
             android:layout_margin="10dp"
-            android:background="@color/blue"
-            android:textColor="@color/white"
+            android:background="@color/cmblue_11a2ff"
+            android:textColor="@color/cmwhite"
             android:textSize="20sp"
             android:paddingRight="20dp"
             android:paddingLeft="20dp"

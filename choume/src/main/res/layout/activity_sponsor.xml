@@ -11,13 +11,13 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="@color/white"
+        android:background="@color/cmwhite"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
     <LinearLayout
         android:orientation="vertical"
-        android:background="@color/blue"
+        android:background="@color/cmblue_11a2ff"
         android:gravity="center"
         android:layout_height="100dp"
         android:layout_width="match_parent">
@@ -37,7 +37,7 @@
                android:id="@+id/imageView1" />
            <View
                android:layout_weight="1"
-               android:background="@color/white"
+               android:background="@color/cmwhite"
                android:layout_height="2dp"
                android:layout_width="0dp"/>
            <ImageView
@@ -49,7 +49,7 @@
                android:id="@+id/imageView2" />
            <View
                android:layout_weight="1"
-               android:background="@color/white"
+               android:background="@color/cmwhite"
                android:layout_height="2dp"
                android:layout_width="0dp"/>
            <ImageView
@@ -61,7 +61,7 @@
                android:id="@+id/imageView3" />
            <View
                android:layout_weight="1"
-               android:background="@color/white"
+               android:background="@color/cmwhite"
                android:layout_height="2dp"
                android:layout_width="0dp"/>
            <ImageView
@@ -79,7 +79,7 @@
             android:layout_width="match_parent">
 
             <TextView
-                android:textColor="@color/white"
+                android:textColor="@color/cmwhite"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -87,7 +87,7 @@
                 android:text="选择类别"
                 android:id="@+id/textView18" />
             <TextView
-                android:textColor="@color/white"
+                android:textColor="@color/cmwhite"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -95,7 +95,7 @@
                 android:text="项目信息"
                 android:id="@+id/textView21" />
             <TextView
-                android:textColor="@color/white"
+                android:textColor="@color/cmwhite"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -103,7 +103,7 @@
                 android:text="回报方式"
                 android:id="@+id/textView123" />
             <TextView
-                android:textColor="@color/white"
+                android:textColor="@color/cmwhite"
                 android:gravity="center"
                 android:layout_weight="1"
                 android:layout_width="0dp"
@@ -129,7 +129,7 @@
             layout="@layout/layout_publish"/>
 
         <Button
-            android:textColor="@color/white"
+            android:textColor="@color/cmwhite"
             android:layout_gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

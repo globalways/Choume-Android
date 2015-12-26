@@ -18,7 +18,7 @@
         android:background="@mipmap/ico_share" />
 
     <TextView
-        android:textColor="@color/white"
+        android:textColor="@color/cmwhite"
         android:textSize="20sp"
         android:id="@+id/actionbar_title"
         android:layout_width="wrap_content"

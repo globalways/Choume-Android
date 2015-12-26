@@ -52,7 +52,7 @@
                         android:layout_height="wrap_content"/>
 
                 <RelativeLayout
-                        android:background="@color/black_242729"
+                        android:background="@color/cmblack_242729"
                         android:layout_alignParentBottom="true"
                         android:layout_width="match_parent"
                         android:layout_height="60dp">
@@ -60,7 +60,7 @@
                             android:id="@+id/tvToRegister"
                             android:text="没有账号？立即注册>"
                             android:layout_centerInParent="true"
-                            android:textColor="@color/white"
+                            android:textColor="@color/cmwhite"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
 

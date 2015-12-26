@@ -9,7 +9,7 @@
     </include>
 
     <RelativeLayout
-        android:background="@color/white"
+        android:background="@color/cmwhite"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
@@ -70,9 +70,9 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/llFormArea"
             android:layout_marginTop="10dp"
-            android:background="@color/blue"
+            android:background="@color/cmblue_11a2ff"
             android:text="注册"
-            android:textColor="@color/white"
+            android:textColor="@color/cmwhite"
             android:layout_width="300dp"
             android:layout_height="35dp"/>
         </RelativeLayout>

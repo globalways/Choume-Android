@@ -5,7 +5,7 @@
     android:background="?attr/colorPrimary"
     android:layout_height="match_parent">
     <LinearLayout
-        android:background="@color/white"
+        android:background="@color/cmwhite"
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
@@ -15,14 +15,14 @@
     <LinearLayout
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@color/blue"
+        android:background="@color/cmblue_11a2ff"
         android:gravity="center_horizontal"
         android:layout_width="match_parent">
 
         <TextView
             android:layout_marginTop="10dp"
             android:textSize="15sp"
-            android:textColor="@color/white"
+            android:textColor="@color/cmwhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="余额（元）"
@@ -32,7 +32,7 @@
         <TextView
             android:layout_marginTop="20dp"
             android:textSize="40sp"
-            android:textColor="@color/white"
+            android:textColor="@color/cmwhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="600.00"
@@ -40,7 +40,7 @@
             android:layout_gravity="center_horizontal" />
         <View
             android:layout_marginTop="30dp"
-            android:background="@color/white"
+            android:background="@color/cmwhite"
             android:layout_width="match_parent"
             android:layout_height="1px">
         </View>
@@ -58,14 +58,14 @@
                 <TextView
                     android:layout_margin="10dp"
                     android:textSize="15sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/cmwhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="积分"
                     android:id="@+id/textView4" />
                 <TextView
                     android:textSize="30sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/cmwhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="500"
@@ -80,14 +80,14 @@
                 <TextView
                     android:layout_margin="10dp"
                     android:textSize="15sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/cmwhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="筹币"
                     android:id="@+id/textView5" />
                 <TextView
                     android:textSize="30sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/cmwhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="8000"
