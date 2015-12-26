@@ -19,7 +19,7 @@ public class PassCfProjectInvestTask extends CommonTask<PassCfProjectInvestParam
             CfProjectServiceGrpc.CfProjectServiceBlockingStub stub = CfProjectServiceGrpc.newBlockingStub(channel);
             return stub.passCfProjectInvest(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

@@ -18,7 +18,7 @@ public class GetPayDetailTask extends CommonTask<UserWallet.GetPayDetailParam,Us
             UserWalletServiceGrpc.UserWalletServiceBlockingStub stub = UserWalletServiceGrpc.newBlockingStub(channel);
             return stub.getPayDetail(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

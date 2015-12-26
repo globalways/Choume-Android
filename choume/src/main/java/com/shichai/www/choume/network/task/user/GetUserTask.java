@@ -18,7 +18,7 @@ public class GetUserTask extends CommonTask<UserApp.GetUserParam,UserApp.GetUser
             UserAppServiceGrpc.UserAppServiceBlockingStub stub = UserAppServiceGrpc.newBlockingStub(channel);
             return stub.getUser(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

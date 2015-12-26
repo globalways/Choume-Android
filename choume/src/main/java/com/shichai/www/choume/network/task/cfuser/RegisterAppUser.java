@@ -36,7 +36,7 @@ public class RegisterAppUser extends AsyncTask<Void,Void,RegisterCFAppUserResp> 
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(managedChannel);
             return stub.registerAppUser(param);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

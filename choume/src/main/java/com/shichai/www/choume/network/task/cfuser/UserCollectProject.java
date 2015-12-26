@@ -37,7 +37,7 @@ public class UserCollectProject extends AsyncTask<Void,Void,Response> {
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(channel);
             return stub.userCollectProject(param);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

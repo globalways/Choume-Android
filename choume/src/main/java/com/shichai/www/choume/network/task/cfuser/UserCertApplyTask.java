@@ -36,7 +36,7 @@ public class UserCertApplyTask extends AsyncTask<Void,Void,UserCertApplyResp> {
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(channel);
             return stub.userCertApply(param);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

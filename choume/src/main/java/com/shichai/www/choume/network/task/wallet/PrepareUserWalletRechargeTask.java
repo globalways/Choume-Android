@@ -18,7 +18,7 @@ public class PrepareUserWalletRechargeTask extends CommonTask<UserWallet.Prepare
             UserWalletServiceGrpc.UserWalletServiceBlockingStub stub = UserWalletServiceGrpc.newBlockingStub(channel);
             return stub.prepareUserWalletRecharge(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

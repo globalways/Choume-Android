@@ -19,7 +19,7 @@ public class SendSMSTask extends CommonTask<UserSms.SendSMSParam,Common.Response
             UserSMSServiceGrpc.UserSMSServiceBlockingStub stub = UserSMSServiceGrpc.newBlockingStub(channel);
             return stub.sendSMS(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

@@ -19,7 +19,7 @@ public class GetRCCFUserTokenTask extends CommonTask<GetRCCFUserTokenParam,GetRC
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(channel);
             return stub.getRCCFUserToken(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

@@ -20,7 +20,7 @@ public class UserUnCollectProject extends CommonTask<UserUnCollectProjectParam,R
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(channel);
             return stub.userUnCollectProject(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

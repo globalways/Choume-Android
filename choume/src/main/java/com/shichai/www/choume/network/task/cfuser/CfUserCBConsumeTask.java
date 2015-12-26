@@ -19,7 +19,7 @@ public class CfUserCBConsumeTask extends CommonTask<CfUserCBConsumeParam,CfUserC
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(channel);
             return stub.cfUserCBConsume(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

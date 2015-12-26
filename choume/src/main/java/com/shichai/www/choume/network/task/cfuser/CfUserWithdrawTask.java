@@ -20,7 +20,7 @@ public class CfUserWithdrawTask extends CommonTask<CfUserWithdrawParam,CfUserWit
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(channel);
             return stub.cfUserWithdraw(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

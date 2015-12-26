@@ -38,7 +38,7 @@ public class GetAppUserTask extends AsyncTask<Void, Void, GetCFUserResp> {
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(channel);
             return stub.getAppUser(param);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

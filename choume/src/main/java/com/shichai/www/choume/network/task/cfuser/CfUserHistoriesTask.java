@@ -19,7 +19,7 @@ public class CfUserHistoriesTask extends CommonTask<CfUserHistoriesParam,CfUserH
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(channel);
             return stub.cfUserHistories(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

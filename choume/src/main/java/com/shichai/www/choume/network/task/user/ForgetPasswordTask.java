@@ -19,7 +19,7 @@ public class ForgetPasswordTask extends CommonTask<UserApp.ForgetPasswordParam,C
             UserAppServiceGrpc.UserAppServiceBlockingStub stub = UserAppServiceGrpc.newBlockingStub(channel);
             return stub.forgetPassword(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

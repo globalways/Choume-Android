@@ -20,7 +20,7 @@ public class CfUserCBExchangeTask extends CommonTask<CfUserCBExchangeParam,CfUse
             CFAppUserServiceGrpc.CFAppUserServiceBlockingStub stub = CFAppUserServiceGrpc.newBlockingStub(channel);
             return stub.cfUserCBExchange(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

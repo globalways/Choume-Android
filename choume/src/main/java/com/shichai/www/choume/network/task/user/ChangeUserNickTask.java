@@ -19,7 +19,7 @@ public class ChangeUserNickTask extends CommonTask<UserApp.ChangeUserNickParam,C
             UserAppServiceGrpc.UserAppServiceBlockingStub stub = UserAppServiceGrpc.newBlockingStub(channel);
             return stub.changeUserNick(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

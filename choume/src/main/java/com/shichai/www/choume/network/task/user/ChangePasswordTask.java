@@ -20,7 +20,7 @@ public class ChangePasswordTask extends CommonTask<UserApp.ChangePasswordParam,C
             UserAppServiceGrpc.UserAppServiceBlockingStub stub = UserAppServiceGrpc.newBlockingStub(channel);
             return stub.changePassword(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

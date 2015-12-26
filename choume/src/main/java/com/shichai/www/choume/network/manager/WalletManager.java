@@ -9,10 +9,10 @@ import com.shichai.www.choume.network.task.wallet.*;
  * Created by wyp on 15/12/23.
  */
 public class WalletManager {
-    private WalletManager manager;
+    private static WalletManager manager;
     private WalletManager(){}
 
-    public WalletManager getInstance(){
+    public static WalletManager getInstance(){
         if (manager == null){
             manager = new WalletManager();
         }

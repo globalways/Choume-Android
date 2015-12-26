@@ -18,7 +18,7 @@ public class MakeUpTokenTask extends CommonTask<UserQiniu.MakeQiniuUpTokenParam,
         QiniuServiceGrpc.QiniuServiceBlockingStub stub = QiniuServiceGrpc.newBlockingStub(channel);
             return stub.makeUpToken(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

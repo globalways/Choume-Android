@@ -18,7 +18,7 @@ public class NewUserAddrTask extends CommonTask<UserApp.NewUserAddrParam,UserApp
             UserAppServiceGrpc.UserAppServiceBlockingStub stub = UserAppServiceGrpc.newBlockingStub(channel);
             return stub.newUserAddr(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

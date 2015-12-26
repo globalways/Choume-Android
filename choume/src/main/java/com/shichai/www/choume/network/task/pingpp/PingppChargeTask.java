@@ -20,7 +20,7 @@ public class PingppChargeTask extends CommonTask<PingppChargeParam,PingppChargeR
             UserPingppServiceGrpc.UserPingppServiceBlockingStub stub = UserPingppServiceGrpc.newBlockingStub(channel);
             return stub.pingppCharge(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
 

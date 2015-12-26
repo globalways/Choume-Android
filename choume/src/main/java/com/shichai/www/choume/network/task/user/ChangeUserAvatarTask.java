@@ -20,7 +20,7 @@ public class ChangeUserAvatarTask extends CommonTask<UserApp.ChangeUserAvatarPar
             UserAppServiceGrpc.UserAppServiceBlockingStub stub = UserAppServiceGrpc.newBlockingStub(channel);
             return stub.changeUserAvatar(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

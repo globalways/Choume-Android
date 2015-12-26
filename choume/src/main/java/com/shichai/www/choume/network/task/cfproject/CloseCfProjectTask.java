@@ -19,7 +19,7 @@ public class CloseCfProjectTask extends CommonTask<CloseCfProjectParam,CloseCfPr
             CfProjectServiceGrpc.CfProjectServiceBlockingStub stub = CfProjectServiceGrpc.newBlockingStub(channel);
             return stub.closeCfProject(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

@@ -19,7 +19,7 @@ public class FindCfProjectsTask extends CommonTask<FindCfProjectsParam,FindCfPro
             CfProjectServiceGrpc.CfProjectServiceBlockingStub stub = CfProjectServiceGrpc.newBlockingStub(channel);
             return stub.findCfProjects(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

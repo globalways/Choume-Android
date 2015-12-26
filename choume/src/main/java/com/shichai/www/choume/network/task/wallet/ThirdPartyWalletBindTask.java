@@ -18,7 +18,7 @@ public class ThirdPartyWalletBindTask extends CommonTask<UserWallet.ThirdPartyWa
             UserWalletServiceGrpc.UserWalletServiceBlockingStub stub = UserWalletServiceGrpc.newBlockingStub(channel);
             return stub.thirdPartyWalletBind(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

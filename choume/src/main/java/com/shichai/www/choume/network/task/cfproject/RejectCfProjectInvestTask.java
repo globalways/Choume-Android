@@ -19,7 +19,7 @@ public class RejectCfProjectInvestTask extends CommonTask<RejectCfProjectInvestP
             CfProjectServiceGrpc.CfProjectServiceBlockingStub stub = CfProjectServiceGrpc.newBlockingStub(channel);
             return stub.rejectCfProjectInvest(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

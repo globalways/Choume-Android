@@ -19,7 +19,7 @@ public class VarifySMSCodeTask extends CommonTask<UserSms.VarifySMSCodeParam,Com
             UserSMSServiceGrpc.UserSMSServiceBlockingStub stub = UserSMSServiceGrpc.newBlockingStub(channel);
             return stub.varifySMSCode(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }

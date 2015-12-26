@@ -19,7 +19,7 @@ public class UpdateCfProjectTask extends CommonTask<UpdateCfProjectParam,UpdateC
             CfProjectServiceGrpc.CfProjectServiceBlockingStub stub = CfProjectServiceGrpc.newBlockingStub(channel);
             return stub.updateCfProject(taskParam);
         } catch (Exception e) {
-            e = e;
+            exception = e;
             return null;
         }
     }
