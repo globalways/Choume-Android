@@ -5,11 +5,25 @@
     android:layout_height="200dp">
 
     <Button
-        android:background="@drawable/bg_rectangle_shape_gray"
+        android:background="@drawable/shape_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="登录"
+        android:textSize="18sp"
+        android:textColor="@color/white"
         android:id="@+id/btnToLogin"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="众筹"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:id="@+id/textView17"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/btnToLogin"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

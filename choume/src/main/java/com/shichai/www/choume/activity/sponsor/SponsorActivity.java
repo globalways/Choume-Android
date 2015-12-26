@@ -1,6 +1,13 @@
 package com.shichai.www.choume.activity.sponsor;
 
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.Camera;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -11,14 +18,20 @@ import android.widget.Toast;
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
 
+import java.io.ByteArrayOutputStream;
+
 /**
  * Created by HeJianjun on 2015/12/24.
  */
 public class SponsorActivity extends BaseActivity implements View.OnClickListener,RadioGroup.OnCheckedChangeListener{
 
+    private static final int CAPTURE_CODE = 2;
+
     private View layout_choose_type,layout_program_detail,layout_reward_way,layout_publish;
 
     private ImageView imageView1,imageView2,imageView3,imageView4;
+
+    private View tv_upload_image;
 
     private RadioGroup rg_type,rg_program;
 
@@ -55,6 +68,9 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
         rg_type = (RadioGroup) findViewById(R.id.rg_type);
         rg_program = (RadioGroup) findViewById(R.id.rg_program);
 
+        tv_upload_image = findViewById(R.id.tv_upload_image);
+
+        tv_upload_image.setOnClickListener(this);
         rg_type.setOnCheckedChangeListener(this);
         rg_program.setOnCheckedChangeListener(this);
         bt_next.setOnClickListener(this);
@@ -119,6 +135,25 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
                     next();
                 }
                 break;
+            case R.id.tv_upload_image:
+                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                intent.setType("image/*");
+                startActivityForResult(intent, CAPTURE_CODE);
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAPTURE_CODE){
+            Uri uri = data.getData();
+//            img.setImageURI(uri);//设置图片
+            ContentResolver cr = this.getContentResolver();
+            Cursor c = cr.query(uri, null, null, null, null);
+            c.moveToFirst();
+            //这是获取的图片保存在sdcard中的位置
+            String srcPath = c.getString(c.getColumnIndex("_data"));
         }
     }
 
