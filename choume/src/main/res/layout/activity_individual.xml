@@ -14,7 +14,7 @@
         </include>
         <View
             android:layout_height="1px"
-            android:background="@color/grey3stroke"
+            android:background="@color/cmgray"
             android:layout_width="match_parent"/>
         <RelativeLayout
             android:padding="10dp"
@@ -22,9 +22,7 @@
             android:layout_height="100dp">
 
             <TextView
-                android:textSize="18sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/setting_attr_text"
                 android:text="头像"
                 android:id="@+id/textView11"
                 android:layout_centerVertical="true"
@@ -42,7 +40,7 @@
         </RelativeLayout>
         <View
             android:layout_height="1px"
-            android:background="@color/grey3stroke"
+            android:background="@color/cmgray"
             android:layout_width="match_parent"/>
         <RelativeLayout
             android:padding="10dp"
@@ -50,10 +48,7 @@
             android:layout_height="50dp">
 
             <TextView
-                android:textSize="18sp"
-                android:textColor="@color/border_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/setting_attr_text"
                 android:text="昵称"
                 android:id="@+id/textView12"
                 android:layout_centerVertical="true"
@@ -63,14 +58,14 @@
             <TextView
                 style="@style/setting_text"
                 android:text="小明"
-                android:id="@+id/textView13"
+                android:id="@+id/tvNick"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
         <View
             android:layout_height="1px"
-            android:background="@color/grey3stroke"
+            android:background="@color/cmgray"
             android:layout_width="match_parent"/>
         <RelativeLayout
             android:padding="10dp"
@@ -78,12 +73,8 @@
             android:layout_height="50dp">
 
             <TextView
-                android:textSize="18sp"
-                android:textColor="@color/border_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/setting_attr_text"
                 android:text="性别"
-                android:id="@+id/textView14"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -91,14 +82,14 @@
             <TextView
                 style="@style/setting_text"
                 android:text="男"
-                android:id="@+id/textView15"
+                android:id="@+id/tvSex"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
         <View
                 android:layout_height="1px"
-                android:background="@color/grey3stroke"
+                android:background="@color/cmgray"
                 android:layout_width="match_parent"/>
 
         <RelativeLayout
@@ -107,12 +98,8 @@
             android:layout_height="50dp">
 
             <TextView
-                android:textSize="18sp"
-                android:textColor="@color/border_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/setting_attr_text"
                 android:text="手机"
-                android:id="@+id/textView16"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
@@ -120,19 +107,14 @@
             <TextView
                 style="@style/setting_text"
                 android:text="13786958745"
-                android:id="@+id/textView17"
+                android:id="@+id/tvTel"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
         <View
             android:layout_height="1px"
-            android:background="@color/grey3stroke"
-            android:layout_width="match_parent"/>
-
-        <View
-            android:layout_height="1px"
-            android:background="@color/grey3stroke"
+            android:background="@color/cmgray"
             android:layout_width="match_parent"/>
 
         <RelativeLayout android:id="@+id/rlToCert"
@@ -141,10 +123,7 @@
             android:layout_height="50dp">
 
             <TextView
-                android:textSize="18sp"
-                android:textColor="@color/border_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/setting_attr_text"
                 android:text="认证"
                 android:id="@+id/textView20"
                 android:layout_centerVertical="true"
@@ -154,14 +133,14 @@
             <TextView
                 style="@style/setting_text"
                 android:text="学生"
-                android:id="@+id/textView21"
+                android:id="@+id/tvCertType"
                 android:layout_alignTop="@+id/textView20"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
         <View
             android:layout_height="1px"
-            android:background="@color/grey3stroke"
+            android:background="@color/cmgray"
             android:layout_width="match_parent"/>
         <RelativeLayout
             android:padding="10dp"
@@ -169,10 +148,7 @@
             android:layout_height="50dp">
 
             <TextView
-                android:textSize="18sp"
-                android:textColor="@color/border_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/setting_attr_text"
                 android:text="收获地址"
                 android:id="@+id/textView22"
                 android:layout_centerVertical="true"
@@ -182,14 +158,14 @@
             <TextView
                 style="@style/setting_text"
                 android:text="北京市大城区112号"
-                android:id="@+id/textView23"
+                android:id="@+id/tvAddr"
                 android:layout_alignTop="@+id/textView22"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
         <View
             android:layout_height="1px"
-            android:background="@color/grey3stroke"
+            android:background="@color/cmgray"
             android:layout_width="match_parent"/>
         <RelativeLayout
             android:padding="10dp"
@@ -197,10 +173,7 @@
             android:layout_height="50dp">
 
             <TextView
-                android:textSize="18sp"
-                android:textColor="@color/border_color"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/setting_attr_text"
                 android:text="修改密码"
                 android:id="@+id/textView25"
                 android:layout_centerVertical="true"
@@ -210,14 +183,13 @@
             <TextView
                 style="@style/setting_text"
                 android:text=""
-                android:id="@+id/textView24"
                 android:layout_alignTop="@+id/textView25"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
         </RelativeLayout>
         <View
             android:layout_height="1px"
-            android:background="@color/grey3stroke"
+            android:background="@color/cmgray"
             android:layout_width="match_parent"/>
 
 

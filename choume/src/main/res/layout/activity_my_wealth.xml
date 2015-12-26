@@ -38,12 +38,6 @@
             android:text="600.00"
             android:id="@+id/tv_balance"
             android:layout_gravity="center_horizontal" />
-        <View
-            android:layout_marginTop="30dp"
-            android:background="@color/cmwhite"
-            android:layout_width="match_parent"
-            android:layout_height="1px">
-        </View>
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent">

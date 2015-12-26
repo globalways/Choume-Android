@@ -33,7 +33,6 @@
                 android:text="登录"
                 android:textColor="@color/cmwhite"
                 android:background="@color/selector_btn_cmbule"
-                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
     </LinearLayout>
