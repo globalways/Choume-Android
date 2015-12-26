@@ -9,10 +9,10 @@ import com.shichai.www.choume.network.task.cfproject.*;
  * Created by wyp on 15/12/23.
  */
 public class CfProjectManager {
-    private  CfProjectManager manager;
+    private static CfProjectManager manager;
     private CfProjectManager(){}
 
-    public CfProjectManager getInstance(){
+    public static CfProjectManager getInstance(){
         if (manager == null){
             manager = new CfProjectManager();
         }

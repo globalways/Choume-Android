@@ -32,7 +32,7 @@ public class MyCollectionActivity extends BaseActivity implements View.OnClickLi
     private void initViews(){
 
         listView = (PullToRefreshListView) findViewById(R.id.listView);
-        adapter = new MySponsorAdapter(this);
+        adapter = new MySponsorAdapter(this, MySponsorAdapter.STAR);
         listView.setAdapter(adapter);
         ArrayList<String> strings = new ArrayList<>();
         for (int i=0; i<10 ;i++){

@@ -98,6 +98,9 @@
             android:theme="@style/BaseAppTheme.base"
             >
         </activity>
+        <activity android:name="com.shichai.www.choume.activity.mine.profile.CertApplyActivity"
+                  android:theme="@style/BaseAppTheme.base">
+        </activity>
 
 
     </application>
