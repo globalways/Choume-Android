@@ -13,7 +13,7 @@ import com.globalways.user.pingpp.nano.UserPingpp;
 import com.globalways.user.wallet.nano.UserWallet;
 import com.globalways.user.wallet.nano.UserWalletCommon.UserWalletHistory;
 import com.outsouring.crowdfunding.R;
-import com.pingplusplus.android.PaymentActivity;
+//import com.pingplusplus.android.PaymentActivity;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.network.HttpConfig;
 import com.shichai.www.choume.network.ManagerCallBack;
@@ -76,7 +76,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
         WalletManager.getInstance().prepareUserWalletRecharge(param, new ManagerCallBack<UserWallet.PrepareUserWalletRechargeResp>() {
             @Override
             public void success(UserWallet.PrepareUserWalletRechargeResp result) {
-                Log.i(UITools.TAGW, "success: prepareUserWalletRecharge");
+//                Log.i(UITools.TAGW, "success: prepareUserWalletRecharge");
                 pingpp(result.history);
             }
 
@@ -107,7 +107,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                 String packageName = getPackageName();
                 ComponentName componentName = new ComponentName(packageName, packageName + ".wxapi.WXPayEntryActivity");
                 intent.setComponent(componentName);
-                intent.putExtra(PaymentActivity.EXTRA_CHARGE, result.charge);
+//                intent.putExtra(PaymentActivity.EXTRA_CHARGE, result.charge);
                 startActivityForResult(intent, REQUEST_CODE_PAYMENT);
             }
 

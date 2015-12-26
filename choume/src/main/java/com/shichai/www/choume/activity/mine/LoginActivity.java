@@ -3,10 +3,13 @@ package com.shichai.www.choume.activity.mine;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.user.nano.UserCommon;
 import com.outsouring.crowdfunding.R;
@@ -17,16 +20,19 @@ import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.MD5;
 import com.shichai.www.choume.tools.UITools;
+import com.shichai.www.choume.tools.Utils;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
-
-    private Context context = this;
+    private Context context;
     private EditText etTel, etPassword;
     private Button btnLogin;
+
+    private String tel,pwd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        context = this;
         initActionBar();
         setTitle("登录");
         initViews();
@@ -52,20 +58,32 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnLogin:
-                UITools.ToastMsg(context, "login...");
-                login(context, etTel.getText().toString(), MD5.getMD5(etPassword.getText().toString()));
+                tel = etTel.getText().toString().trim();
+                pwd = etPassword.getText().toString().trim();
+                login();
 
                 break;
         }
     }
 
     /**
-     *
-     * @param context
-     * @param tel
-     * @param pwd md5加密后的
      */
-    private void login(final Context context, final String tel, final String pwd) {
+    private void login() {
+        if (TextUtils.isEmpty(tel)){
+            Toast.makeText(this,"手机号码不能为空",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(pwd)){
+            Toast.makeText(this,"密码不能为空",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (!Utils.isNumber(tel)|| !tel.startsWith("1")){
+            Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        UITools.ToastMsg(this, "login...");
+
+        pwd = MD5.getMD5(pwd);
         UserCommon.LoginAppParam loginAppParam = new UserCommon.LoginAppParam();
         loginAppParam.password = pwd;
         loginAppParam.username = tel;
@@ -76,8 +94,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 //跳转
                 MyApplication.setCfUser(result.cfUser);
                 LocalDataConfig.setToken(context, result.token);
-                LocalDataConfig.setPwd(context, pwd);
-                LocalDataConfig.setTel(context, tel);
+                LocalDataConfig.setPwd(context,pwd);
+                LocalDataConfig.setTel(context,tel);
                 setResult(Activity.RESULT_OK);
                 LoginActivity.this.finish();
             }

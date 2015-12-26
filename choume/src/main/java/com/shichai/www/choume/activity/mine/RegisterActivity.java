@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     private EditText etNick, etTel, etPassword, etSmsCode;
     private Button btnSubmit, btnRequestSmsCode;
+
+    private String nick,tel,pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +85,24 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     private void register(){
-        String nick = etNick.getText().toString().trim();
-        final String tel  = etTel.getText().toString().trim();
-        String pwd  = etPassword.getText().toString().trim();
+        nick = etNick.getText().toString().trim();
+        tel  = etTel.getText().toString().trim();
+        pwd  = etPassword.getText().toString().trim();
+
+        if (TextUtils.isEmpty(nick)){
+            Toast.makeText(this,"昵称不能为空",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(tel)){
+            Toast.makeText(this,"手机号码不能为空",Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(pwd)){
+            Toast.makeText(this,"密码不能为空",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
         final RegisterAppUserParam param = new RegisterAppUserParam();
         param.nick     = nick;
         param.tel      = tel;
