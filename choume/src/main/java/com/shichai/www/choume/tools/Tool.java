@@ -346,6 +346,10 @@ public class Tool {
 		return str == null || str.isEmpty();
 	}
 
+	public static boolean notEmpty(String string) {
+		return !isEmpty(string);
+	}
+
 
 	public static Bitmap getCorrectlyOrientedImage(Context context, Uri photoUri) throws IOException {
 		InputStream is = context.getContentResolver().openInputStream(photoUri);

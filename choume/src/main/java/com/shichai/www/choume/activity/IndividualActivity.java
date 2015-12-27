@@ -1,5 +1,6 @@
 package com.shichai.www.choume.activity;
 
+import android.app.AlertDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,7 +22,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUser;
 import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserApp;
 import com.outsouring.crowdfunding.R;
-import com.shichai.www.choume.activity.mine.profile.CertApplyActivity;
+import com.shichai.www.choume.activity.mine.profile.*;
 import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.ImageUpLoadManager;
@@ -45,7 +46,7 @@ import java.util.List;
 public class IndividualActivity extends BaseActivity implements View.OnClickListener {
 
     private final int CAPTURE_CODE = 1;
-    private RelativeLayout rlToCert;
+    private RelativeLayout rlToCert, rlToChangeNick, rlToChangeSex, rlToManageAddress, rlToChangePwd;
     private TextView tvNick, tvTel, tvSex, tvCert, tvAddr;
     private ImageView ivAvatar;
     private PicassoImageLoader imageLoader;
@@ -69,8 +70,17 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
     }
 
     private void initViews() {
-        rlToCert = (RelativeLayout) findViewById(R.id.rlToCert);
+        rlToCert           = (RelativeLayout) findViewById(R.id.rlToCert);
+        rlToChangeNick  = (RelativeLayout) findViewById(R.id.rlToChangeNick);
+        rlToChangeSex = (RelativeLayout) findViewById(R.id.rlToChangeSex);
+        rlToManageAddress = (RelativeLayout) findViewById(R.id.rlToManageAddress);
+        rlToChangePwd = (RelativeLayout) findViewById(R.id.rlToChangePwd);
         rlToCert.setOnClickListener(this);
+        rlToChangePwd.setOnClickListener(this);
+        rlToManageAddress.setOnClickListener(this);
+        rlToChangeSex.setOnClickListener(this);
+        rlToChangeNick.setOnClickListener(this);
+
         tvNick = (TextView) findViewById(R.id.tvNick);
         tvTel = (TextView) findViewById(R.id.tvTel);
         tvSex = (TextView) findViewById(R.id.tvSex);
@@ -85,6 +95,18 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()){
             case R.id.rlToCert:
                 startActivity(new Intent(IndividualActivity.this, CertApplyActivity.class));
+                break;
+            case R.id.rlToChangeNick:
+                startActivity(new Intent(IndividualActivity.this, ChangeNickActivity.class));
+                break;
+            case R.id.rlToChangeSex:
+                startActivity(new Intent(IndividualActivity.this, ChangeSexActivity.class));
+                break;
+            case R.id.rlToManageAddress:
+                startActivity(new Intent(IndividualActivity.this, AddressManagerActivity.class));
+                break;
+            case R.id.rlToChangePwd:
+                startActivity(new Intent(IndividualActivity.this, ChangePwdActivity.class));
                 break;
             case R.id.ivAvatar:
                 PhotoPickerIntent intent = new PhotoPickerIntent(this);
@@ -116,7 +138,6 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode == RESULT_OK && requestCode == CAPTURE_CODE) {
             if (data != null) {
                 ArrayList<String> photos = data.getStringArrayListExtra(PhotoPickerActivity.KEY_SELECTED_PHOTOS);
@@ -156,7 +177,6 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
 
                      @Override
                      public void progress(int progress) {
-
                      }
 
                      @Override

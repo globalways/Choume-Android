@@ -30,4 +30,8 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_change_nick">ChangeNick</string>
     <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="title_activity_change_pwd">ChangePwdActivity</string>
+    <string name="title_activity_change_sex">ChangeSexActivity</string>
+    <string name="title_activity_address_manager">AddressManagerActivity</string>
+    <string name="title_activity_address_detail">AddressDetailActivity</string>
 </resources>

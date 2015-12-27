@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/cmwhite"
+                android:orientation="vertical"
+                tools:context="com.shichai.www.choume.activity.mine.profile.ChangeSexActivity">
+
+    <include
+            layout="@layout/app_bar_layout">
+    </include>
+
+    <RadioGroup
+            android:id="@+id/rgChooseSex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <RadioButton
+                android:text="男"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+        <RadioButton
+                android:text="女"
+                android:button="@null"
+                android:background="@android:color/transparent"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+    </RadioGroup>
+
+</LinearLayout>

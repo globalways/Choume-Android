@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     public static final String ISLOGIN = "isLogin";
     private static final int CODE_TO_LOGIN = 10001;
     private static final int CODE_TO_REGISTER = 10002;
-    private boolean isLogin = false;
+    public static boolean isLogin = false;
     //nologin
     private Button btnToLogin;
     private TextView toRegister;
@@ -231,6 +231,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             }
         });
     }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

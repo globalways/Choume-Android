@@ -1,12 +1,15 @@
 package com.shichai.www.choume.activity.chou;
 
 import android.content.Context;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
@@ -32,6 +35,13 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private SupportAdapter adapter;
     private View headerView;
     private View tv_reply,tv_comment,tv_supporter;
+
+    //项目信息
+    private TextView tvProjectName, tvProjectDesc, tvProgressPercent;
+    private ImageView ivProjectCfuserAvatar;
+    private ProgressBar progressBar;
+
+
 
     private CfProject currentProject;
     @Override

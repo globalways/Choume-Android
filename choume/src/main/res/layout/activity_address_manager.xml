@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:fitsSystemWindows="true"
+              android:background="@color/cmwhite"
+              android:orientation="vertical"
+              tools:context="com.shichai.www.choume.activity.mine.profile.CertApplyActivity">
+
+
+    <include
+            layout="@layout/app_bar_layout">
+    </include>
+
+    <ListView
+            android:id="@+id/lvAddrList"
+            android:divider="@color/cmgray"
+            android:dividerHeight="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    </ListView>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/cmgray"
+            />
+
+</LinearLayout>

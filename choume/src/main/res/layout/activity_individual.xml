@@ -44,6 +44,7 @@
             android:background="@color/cmgray"
             android:layout_width="match_parent"/>
         <RelativeLayout
+            android:id="@+id/rlToChangeNick"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -69,6 +70,7 @@
             android:background="@color/cmgray"
             android:layout_width="match_parent"/>
         <RelativeLayout
+            android:id="@+id/rlToChangeSex"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">
@@ -144,13 +146,14 @@
             android:background="@color/cmgray"
             android:layout_width="match_parent"/>
         <RelativeLayout
+            android:id="@+id/rlToManageAddress"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">
 
             <TextView
                 style="@style/setting_attr_text"
-                android:text="收获地址"
+                android:text="收货地址"
                 android:id="@+id/textView22"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
@@ -169,6 +172,7 @@
             android:background="@color/cmgray"
             android:layout_width="match_parent"/>
         <RelativeLayout
+            android:id="@+id/rlToChangePwd"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="50dp">

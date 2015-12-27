@@ -1,5 +1,6 @@
 package com.shichai.www.choume.activity;
 
+import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,6 +23,7 @@ public class BaseActivity extends AppCompatActivity {
     protected ActionBar actionBar;
     protected View actionbarLayout;
     protected ImageButton bt_add;
+    protected Button bt_right;
     protected void initActionBar(){
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -35,6 +38,7 @@ public class BaseActivity extends AppCompatActivity {
             actionBar.setCustomView(actionbarLayout);
             actionBar.setDisplayShowCustomEnabled(true);
             bt_add = (ImageButton) actionbarLayout.findViewById(R.id.bt_add);
+            bt_right = (Button) actionbarLayout.findViewById(R.id.bt_right);
         }
 
     }
@@ -44,6 +48,11 @@ public class BaseActivity extends AppCompatActivity {
             ((TextView)actionbarLayout.findViewById(R.id.textView)).setTextColor(getResources().getColor(R.color.white));
             ((TextView)actionbarLayout.findViewById(R.id.textView)).setText(title);
         }
+    }
+
+    protected void setRightButton(String title) {
+        bt_right.setVisibility(View.VISIBLE);
+        bt_right.setText(title);
     }
 
 
