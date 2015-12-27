@@ -19,14 +19,18 @@
         <EditText
                 android:id="@+id/etTel"
                 android:hint="手机号"
+                android:background="@color/selector_edittext_bg"
                 android:inputType="phone"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
                 android:layout_height="50dp"/>
         <EditText
                 android:id="@+id/etPassword"
+                android:background="@color/selector_edittext_bg"
                 android:hint="密码"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
                 android:layout_height="50dp"/>
         <Button
                 android:id="@+id/btnLogin"

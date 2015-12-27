@@ -138,7 +138,6 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                          UserManager.getInstance().changeUserAvatar(p, new ManagerCallBack<Common.Response>() {
                              @Override
                              public void success(Common.Response result) {
-                                 UITools.ToastMsg(IndividualActivity.this, result.desc);
                                  MyApplication.getCfUser().user.avatar = p.avatar;
                                  imageLoader.loadUrlImageToView(p.avatar,200,200,R.mipmap.test_head,R.mipmap.test_head,ivAvatar);
                              }
