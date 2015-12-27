@@ -28,6 +28,7 @@ import com.shichai.www.choume.network.manager.ImageUpLoadManager;
 import com.shichai.www.choume.network.manager.UserManager;
 import com.shichai.www.choume.network.protoenum.UserSex;
 import com.shichai.www.choume.tools.LocalDataConfig;
+import com.shichai.www.choume.tools.PicassoImageLoader;
 import com.shichai.www.choume.tools.Tool;
 import com.shichai.www.choume.tools.UITools;
 import me.iwf.photopicker.PhotoPickerActivity;
@@ -47,6 +48,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
     private RelativeLayout rlToCert;
     private TextView tvNick, tvTel, tvSex, tvCert, tvAddr;
     private ImageView ivAvatar;
+    private PicassoImageLoader imageLoader;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         initActionBar();
         setTitle("个人设置");
         initViews();
+        imageLoader = new PicassoImageLoader(this);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -107,6 +110,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         tvSex.setText(UserSex.codeOf(cfUser.user.sex).getDesc());
         tvCert.setText(cfUser.certification == null?"暂无认证": cfUser.certification.name);
         tvAddr.setText(cfUser.user.addrs.length == 0?"暂无地址": cfUser.user.addrs[0].name);
+        imageLoader.loadUrlImageToView(cfUser.user.avatar,200,200,R.mipmap.test_head,R.mipmap.test_head,ivAvatar);
     }
 
     @Override
@@ -136,6 +140,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                              public void success(Common.Response result) {
                                  UITools.ToastMsg(IndividualActivity.this, result.desc);
                                  MyApplication.getCfUser().user.avatar = p.avatar;
+                                 imageLoader.loadUrlImageToView(p.avatar,200,200,R.mipmap.test_head,R.mipmap.test_head,ivAvatar);
                              }
 
                              @Override

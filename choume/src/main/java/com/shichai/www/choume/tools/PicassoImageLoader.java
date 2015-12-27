@@ -14,8 +14,6 @@ import java.lang.ref.SoftReference;
 /**
  * Picasso图片加载器
  *
- * @author James
- *
  */
 public class PicassoImageLoader {
     private SoftReference<Context> mContext = null;
@@ -24,42 +22,7 @@ public class PicassoImageLoader {
         mContext = new SoftReference<Context>(context);
     }
 
-    public void showImage(String uri, int placeholderResId, int errorResId, ImageView view) {
-        if (null != mContext && null != uri && !uri.isEmpty() && getKeysByStr(uri).length > 0) {
-            Picasso.with(mContext.get()).load(getUrlByKey(getKeysByStr(uri)[0])).placeholder(placeholderResId)
-                    .error(errorResId).into(view);
-        }
-    }
-
-
-    public void showImage(String uri, int targetWidth, int targetHeight, int placeholderResId, int errorResId,
-                          ImageView view) {
-        if (null != mContext && null != uri && !uri.isEmpty() && getKeysByStr(uri).length > 0) {
-            Picasso.with(mContext.get()).load(getUrlByKey(targetWidth, targetHeight, getKeysByStr(uri)[0]))
-                    .resize(targetWidth, targetHeight).centerCrop().placeholder(placeholderResId).error(errorResId)
-                    .into(view);
-        }
-    }
-
-
-//    public void showListRoundImage(String uri, int placeholderResId, int errorResId, ImageView view) {
-//        if (null != mContext && null != uri && !uri.isEmpty() && getKeysByStr(uri).length > 0) {
-//            Picasso.with(mContext.get()).load(getUrlByKey(200, 200, getKeysByStr(uri)[0])).resize(200, 200)
-//                    .centerCrop().placeholder(placeholderResId).error(errorResId)
-//                    .transform(new RoundedCornerTransformation(60)).into(view);
-//        }
-//    }
-//
-//
-//    public void showRoundCornerImage(String uri, int size, int placeholderResId, int errorResId, ImageView view) {
-//        if (null != mContext && null != uri && !uri.isEmpty() && getKeysByStr(uri).length > 0) {
-//            Picasso.with(mContext.get()).load(getUrlByKey(size, size, getKeysByStr(uri)[0])).resize(size, size)
-//                    .centerCrop().placeholder(placeholderResId).error(errorResId)
-//                    .transform(new RoundedCornerTransformation(size)).into(view);
-//        }
-//    }
-
-    public void showImage(File image, int targetWidth, int targetHeight, int placeholderResId, int errorResId,
+    public void loadImageToView(File image, int targetWidth, int targetHeight, int placeholderResId, int errorResId,
                           ImageView view) {
         if (null != image && image.exists()) {
             Picasso.with(mContext.get()).load(image).resize(targetWidth, targetHeight).centerCrop()
@@ -67,36 +30,24 @@ public class PicassoImageLoader {
         }
     }
 
-    public void showImage(File image, int placeholderResId, int errorResId, ImageView view) {
+    public void loadImageToView(File image, int placeholderResId, int errorResId, ImageView view) {
         if (null != image && image.exists()) {
             Picasso.with(mContext.get()).load(image).placeholder(placeholderResId).error(errorResId).into(view);
         }
     }
 
-    private String[] getKeysByStr(String str) {
-        String[] strs = str.split(",");
-        return strs;
-    }
-
-    private static final String QINIU_URL = "http://7tea1q.com1.z0.glb.clouddn.com/";
-    private static final String IMAGEVIEW_KEY = "imageView";
-
-    private String getUrlByKey(String key) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(QINIU_URL).append(key);
-        return sb.toString();
-    }
-
-    private String getUrlByKey(int targetWidth, int targetHeight, String key) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(QINIU_URL).append(key).append("?").append(IMAGEVIEW_KEY).append("/2/w/").append(targetWidth)
-                .append("/h/").append(targetHeight);
-        return sb.toString();
+    public void loadUrlImageToView(String uri, int targetWidth, int targetHeight, int placeholderResId, int errorResId,
+                                   ImageView view) {
+        if (null != mContext && null != uri && !uri.isEmpty() ) {
+            Picasso.with(mContext.get()).load(getUrl(targetWidth, targetHeight, uri))
+                    .resize(targetWidth, targetHeight).centerCrop().placeholder(placeholderResId).error(errorResId)
+                    .into(view);
+        }
     }
 
     private String getUrl(int targetWidth, int targetHeight, String url) {
         StringBuilder sb = new StringBuilder(url);
-        sb.append("?").append(IMAGEVIEW_KEY).append("/2/w/").append(targetWidth)
+        sb.append("?").append("imageView2/1/w/").append(targetWidth)
                 .append("/h/").append(targetHeight);
         return sb.toString();
     }

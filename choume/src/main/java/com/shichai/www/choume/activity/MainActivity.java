@@ -28,6 +28,8 @@ import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
+import com.shichai.www.choume.tools.PicassoImageLoader;
+import com.shichai.www.choume.tools.Tool;
 import com.shichai.www.choume.tools.UITools;
 
 import java.util.ArrayList;
@@ -45,7 +47,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     private Button btnToLogin;
     private TextView toRegister;
     //logined
+    private PicassoImageLoader imageLoader;
     private TextView tvUserName;
+    private ImageView ivAvatar;
     private View dot1,dot2,dot3,dot4;
     private RelativeLayout rlNoLoginView;
     private ViewPager viewPager;
@@ -165,6 +169,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         //logined
         tvUserName = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.tv_username);
+        ivAvatar   = (ImageView) mNavigationView.getHeaderView(0).findViewById(R.id.im_head);
         //nologin
         btnToLogin = (Button) findViewById(R.id.btnToLogin);
         btnToLogin.setOnClickListener(this);
@@ -194,9 +199,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
      * 设置左侧面板头像和用户名
      */
     private void setUserNameAndAvatar(){
+        if(imageLoader == null) {
+            imageLoader = new PicassoImageLoader(this);
+        }
         if (!isLogin)
             return;
         tvUserName.setText(MyApplication.getCfUser().user.tel);
+        imageLoader.loadUrlImageToView(MyApplication.getCfUser().user.avatar, 200, 200, R.mipmap.test_head, R.mipmap.test_head, ivAvatar);
+
     }
 
 
