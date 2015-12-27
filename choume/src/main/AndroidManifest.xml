@@ -3,6 +3,10 @@
     package="com.outsouring.crowdfunding" >
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
 
     <application
         android:allowBackup="true"
@@ -102,6 +106,13 @@
                   android:theme="@style/BaseAppTheme.base">
         </activity>
 
+        <!--PhotoPicker-->
+        <activity android:name="me.iwf.photopicker.PhotoPickerActivity"
+                  android:theme="@style/Theme.AppCompat.NoActionBar"
+                />
+
+        <activity android:name="me.iwf.photopicker.PhotoPagerActivity"
+                  android:theme="@style/Theme.AppCompat.NoActionBar"/>
 
     </application>
 

@@ -11,10 +11,10 @@ import com.shichai.www.choume.network.task.user.*;
  * Created by wyp on 15/12/23.
  */
 public class UserManager {
-    private UserManager manager;
+    private static UserManager manager;
     private UserManager(){}
 
-    public UserManager getInstance(){
+    public static UserManager getInstance(){
         if (manager == null){
             manager = new UserManager();
         }
