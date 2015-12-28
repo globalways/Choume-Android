@@ -9,9 +9,13 @@
         layout="@layout/app_bar_layout">
     </include>
 
+    <ScrollView
+        android:background="@color/default_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <LinearLayout
         android:orientation="vertical"
-        android:background="@color/cmwhite"
+        android:background="@color/default_bg"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
@@ -113,23 +117,11 @@
         </LinearLayout>
         </LinearLayout>
 
-        <include
-            android:id="@+id/layout_choose_type"
-            layout="@layout/layout_choose_type"/>
-        <include
-            android:id="@+id/layout_program_detail"
-            android:visibility="gone"
-            layout="@layout/layout_program_detail">
-        </include>
-
-        <include
-            android:id="@+id/layout_reward_way"
-            android:visibility="gone"
-            layout="@layout/layout_reward_way"/>
-        <include
-            android:id="@+id/layout_publish"
-            android:visibility="gone"
-            layout="@layout/layout_publish"/>
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
 
         <Button
             android:background="@drawable/selector_next"
@@ -144,7 +136,7 @@
             android:id="@+id/bt_next" />
 
     </LinearLayout>
-
+    </ScrollView>
 
 
 </LinearLayout>

@@ -10,7 +10,8 @@
     <color name="cmgray_light">#f3f3f3</color>
     <color name="cmgray_dark">#d8d8d8</color>
     <color name="cmgray_b3b3b3">#b3b3b3</color>   <!--个人设置属性值颜色-->
-    
+    <color name="default_bg">#e6e6e6</color>
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>

@@ -155,6 +155,14 @@
 
 
 
+        <activity
+            android:name="com.shichai.www.choume.activity.sponsor.AddRewardWayActivity"
+            android:theme="@style/BaseAppTheme.base" >
+        </activity>
+        <activity
+            android:name="com.shichai.www.choume.activity.sponsor.AddRewardTypeActivity"
+            android:theme="@style/BaseAppTheme.base" >
+        </activity>
     </application>
 
 </manifest>

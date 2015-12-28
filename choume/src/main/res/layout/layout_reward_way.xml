@@ -1,42 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:background="@color/default_bg"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
+        <com.shichai.www.choume.view.ListViewForScrollView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.shichai.www.choume.view.ListViewForScrollView>
 
-    <EditText
-        android:hint="标题"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:hint="描述"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:hint="联系人"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:hint="联系电话"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:hint="回复描述"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:hint="需要支持"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-    <EditText
-        android:hint="截至日期"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
+        <TextView
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:id="@+id/tv_add_reward_way"
+            android:textSize="20sp"
+            android:textColor="@color/border_color"
+            android:gravity="center"
+            android:text="添加回报方式"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 </LinearLayout>
+
+</ScrollView>
