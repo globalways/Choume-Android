@@ -2,19 +2,16 @@ package com.shichai.www.choume.activity.sponsor.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.outsouring.crowdfunding.R;
-import com.shichai.www.choume.adapter.PhotoAdapter;
+import com.shichai.www.choume.adapter.ImageAdapter;
+import com.shichai.www.choume.view.GridViewForScrollView;
 import com.shichai.www.choume.view.dateareapicker.PickerDialog;
 import com.shichai.www.choume.view.dateareapicker.PickerManager;
 
@@ -36,8 +33,8 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
     private EditText et_title,et_des,et_money,et_person_count,et_product,et_product_count;
     private TextView tv_upload_image,tv_end_time;
 
-    private RecyclerView recyclerView;
-    private PhotoAdapter photoAdapter;
+    private GridViewForScrollView gridView;
+    private ImageAdapter adapter;
     private ArrayList<String> selectedPhotos = new ArrayList<>();
 
     public static void setOnNextListener(OnNextListener mOnNextListener) {
@@ -57,10 +54,9 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         et_product = (EditText) rootView.findViewById(R.id.et_product);
         et_product_count = (EditText) rootView.findViewById(R.id.et_product_count);
 
-        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-        photoAdapter = new PhotoAdapter(getActivity(),selectedPhotos);
-        recyclerView.setLayoutManager(new StaggeredGridLayoutManager(4, OrientationHelper.VERTICAL));
-        recyclerView.setAdapter(photoAdapter);
+        gridView = (GridViewForScrollView) rootView.findViewById(R.id.gridView);
+        adapter = new ImageAdapter(getActivity());
+        gridView.setAdapter(adapter);
 
         et_title.addTextChangedListener(this);
         et_des.addTextChangedListener(this);
@@ -77,7 +73,7 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         switch (v.getId()){
             case R.id.tv_upload_image:
                 PhotoPickerIntent intent = new PhotoPickerIntent(getActivity());
-                intent.setPhotoCount(6);
+                intent.setPhotoCount(10);
                 startActivityForResult(intent, REQUEST_CODE);
                 break;
             case R.id.tv_end_time:
@@ -117,8 +113,8 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
             selectedPhotos.clear();
             if (photos != null && photos.size() > 0) {
                 selectedPhotos.addAll(photos);
+                adapter.setDatas(selectedPhotos);
             }
-            photoAdapter.notifyDataSetChanged();
         }
     }
 
