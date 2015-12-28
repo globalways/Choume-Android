@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="wrap_content">
 
     <EditText
         android:hint="标题"
+        android:id="@+id/et_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
          />
     <EditText
         android:hint="描述"
+        android:id="@+id/et_des"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
@@ -21,29 +24,45 @@
         android:drawableBottom="@mipmap/ico_add"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        />
 
     <EditText
+        android:id="@+id/et_money"
         android:hint="筹资额"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
     <EditText
+        android:id="@+id/et_person_count"
+        android:inputType="number"
         android:hint="人员数量"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
     <EditText
+        android:id="@+id/et_product"
         android:hint="物品"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
     <EditText
+        android:id="@+id/et_product_count"
         android:hint="物品数量"
+        android:inputType="number"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
-    <EditText
+    <TextView
+        android:id="@+id/tv_end_time"
+        android:layout_margin="10dp"
         android:hint="截至日期"
+        android:textSize="20sp"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
