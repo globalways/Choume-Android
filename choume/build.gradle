@@ -85,6 +85,9 @@ dependencies {
 
     //image loader
     compile 'com.squareup.picasso:picasso:2.5.2'
+
+    //SwipeMenuListView
+    compile 'com.baoyz.swipemenulistview:library:1.3.0'
 }
 
 

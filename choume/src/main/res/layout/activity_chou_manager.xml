@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="?attr/colorPrimary"
+    android:layout_height="match_parent">
+    <include
+        layout="@layout/app_bar_layout">
+    </include>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView6" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView9" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textView19" />
+
+    <TextView
+        android:gravity="center_vertical"
+        android:drawableRight="@mipmap/ico_arrow_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="参与管理"
+        android:onClick="onClick"
+        android:layout_margin="10dp"
+        android:id="@+id/tv_manager" />
+
+    <TextView
+        android:onClick="onClick"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:drawableRight="@mipmap/ico_arrow_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="支持方式"
+        android:id="@+id/tv_support_way" />
+
+
+</LinearLayout>
