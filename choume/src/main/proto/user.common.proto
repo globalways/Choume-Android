@@ -76,6 +76,8 @@ enum UserSex {
     MALE = 1;
     // 女
     FAMALE = 2;
+    // 人妖
+    SHEMAIL = 3;
 }
 
 enum UserStatus {

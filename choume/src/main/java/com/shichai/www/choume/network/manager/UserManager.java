@@ -42,8 +42,20 @@ public class UserManager {
         new ChangeUserNickTask().setCallBack(callBack).setTaskParam(param).execute();
     }
 
+    public void changeUserSex(final UserApp.ChangeUserSexParam param, ManagerCallBack<Common.Response> callBack) {
+        new ChangeUserSexTask().setCallBack(callBack).setTaskParam(param).execute();
+    }
+
     public void newUserAddr(final UserApp.NewUserAddrParam param, ManagerCallBack<UserApp.NewUserAddrResp> callBack) {
         new NewUserAddrTask().setCallBack(callBack).setTaskParam(param).execute();
+    }
+
+    public void updateUserAddrs(final UserApp.UpdateUserAddrsParam param, ManagerCallBack<Common.Response> callBack) {
+        new UpdateUserAddrsTask().setCallBack(callBack).setTaskParam(param).execute();
+    }
+
+    public void delUserAddr(final UserApp.DelUserAddrParam param, ManagerCallBack<Common.Response> callBack) {
+        new DelUserAddrTask().setCallBack(callBack).setTaskParam(param).execute();
     }
 
     public void GetUser(final UserApp.GetUserParam param, ManagerCallBack<UserApp.GetUserResp> callBack){
