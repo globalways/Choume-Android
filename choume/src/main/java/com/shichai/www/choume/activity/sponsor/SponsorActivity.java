@@ -33,13 +33,11 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
 
     private View tv_upload_image;
 
-    private RadioGroup rg_type,rg_program;
+    private RadioGroup rg_type;
 
     private Button bt_next;
 
     private int type = 0;
-
-    private int program = 0;
 
     private int nextIndex = 1;
 
@@ -66,13 +64,11 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
         bt_next = (Button) findViewById(R.id.bt_next);
 
         rg_type = (RadioGroup) findViewById(R.id.rg_type);
-        rg_program = (RadioGroup) findViewById(R.id.rg_program);
 
         tv_upload_image = findViewById(R.id.tv_upload_image);
 
         tv_upload_image.setOnClickListener(this);
         rg_type.setOnCheckedChangeListener(this);
-        rg_program.setOnCheckedChangeListener(this);
         bt_next.setOnClickListener(this);
         bt_next.setClickable(false);
         bt_next.setSelected(false);
@@ -185,10 +181,14 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
                 bt_next.setSelected(true);
                 break;
             case R.id.rb_product:
-                program = 2;
+                type = 4;
+                bt_next.setClickable(true);
+                bt_next.setSelected(true);
                 break;
             case R.id.rb_program:
-                program = 1;
+                type = 4;
+                bt_next.setClickable(true);
+                bt_next.setSelected(true);
                 break;
         }
     }
