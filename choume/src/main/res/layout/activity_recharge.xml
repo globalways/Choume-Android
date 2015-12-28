@@ -14,6 +14,7 @@
     </include>
 
     <LinearLayout
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@color/cmblue_11a2ff"
@@ -43,37 +44,57 @@
     </LinearLayout>
 
     <EditText
-        android:layout_margin="5dp"
+        android:background="@color/selector_edittext_bg"
+        android:layout_margin="10dp"
         android:textColor="@color/border_color"
         android:textSize="18sp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:hint="充值金额"
+        android:hint="充值金额(元)"
+        android:inputType="numberDecimal"
         android:id="@+id/etRechargeAmount" />
     <View
         android:layout_margin="5dp"
-        android:background="@color/border_color"
+        android:background="@color/cmgray"
         android:layout_width="match_parent"
         android:layout_height="1px"/>
 
     <TextView
-        android:layout_margin="5dp"
-        android:textColor="@color/border_color"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="付款方式"
-        android:id="@+id/textView9" />
-    <View
-        android:layout_margin="5dp"
-        android:background="@color/border_color"
+        android:background="@color/cmgray"
+        android:textColor="@color/cmgray_b3b3b3"
+        android:paddingLeft="10dp"
+        android:gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="1px"/>
+        android:layout_height="35dp"
+        android:text="付款方式"
+        />
+
+    <RadioGroup
+            android:id="@+id/rgPayChannel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <RadioButton
+                android:text="支付宝"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                />
+        <RadioButton
+                android:text="微信"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                />
+    </RadioGroup>
 
     <Button
         android:layout_margin="10dp"
         android:textSize="18sp"
-        android:background="@color/cmblue_11a2ff"
+        android:background="@color/selector_btn_cmbule"
         android:textColor="@color/cmwhite"
         android:layout_gravity="center_horizontal"
         android:layout_width="wrap_content"

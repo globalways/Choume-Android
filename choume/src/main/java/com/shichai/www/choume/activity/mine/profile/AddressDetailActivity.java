@@ -89,6 +89,7 @@ public class AddressDetailActivity extends BaseActivity {
         if (addrInfo != null) {
             etAddrName.setText(addrInfo[0]);
             etAddrContact.setText(addrInfo[1]);
+            tvAddrArea.setText(addrInfo[2]);
             etAddrDetail.setText(addrInfo[3]);
         }
     }

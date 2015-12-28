@@ -125,7 +125,8 @@ public class MySponsorAdapter extends BaseAdapter {
                     willCollect = !isCollectedByCurrentUser(cfProjects.get(position));
                     onCollectListener.onCollect(cfProjects.get(position).id, willCollect);
                 }else if (type == CONFIG) {
-                    onConfigListener.onConfig(cfProjects.get(position).id);
+                    //onConfigListener.onConfig(cfProjects.get(position).id);
+                    onConfigListener.onConfig(1234);
                 }
             }
         });
