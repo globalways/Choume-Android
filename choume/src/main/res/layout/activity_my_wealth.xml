@@ -35,7 +35,7 @@
             android:textColor="@color/cmwhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="600.00"
+            android:text="00.00"
             android:id="@+id/tv_balance"
             android:layout_gravity="center_horizontal" />
         <LinearLayout
@@ -62,7 +62,7 @@
                     android:textColor="@color/cmwhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="500"
+                    android:text="0"
                     android:id="@+id/tv_jifen" />
             </LinearLayout>
             <LinearLayout
@@ -84,41 +84,50 @@
                     android:textColor="@color/cmwhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8000"
+                    android:text="0"
                     android:id="@+id/tv_choubi" />
             </LinearLayout>
     </LinearLayout>
         </LinearLayout>
 
     <TextView
-        android:layout_margin="5dp"
-        android:gravity="center"
+        android:background="@drawable/selector_pressed_gray"
+        android:padding="10dp"
+        android:gravity="left|center_vertical"
         android:drawablePadding="10dp"
+        android:drawableRight="@mipmap/ico_arrow_right_ccc_small"
         android:drawableLeft="@mipmap/ico_chongzhi"
         android:textSize="20sp"
         android:textColor="@color/border_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:text="充值"
         android:onClick="onClick"
         android:id="@+id/tv_recharge" />
     <View
-        android:background="@color/grey3stroke"
+        android:background="@color/cmgray"
         android:layout_width="match_parent"
         android:layout_height="1px"/>
 
     <TextView
-        android:layout_margin="5dp"
-        android:gravity="center"
+        android:background="@drawable/selector_pressed_gray"
+        android:padding="10dp"
+        android:gravity="left|center_vertical"
         android:drawablePadding="10dp"
+        android:drawableRight="@mipmap/ico_arrow_right_ccc_small"
         android:drawableLeft="@mipmap/ico_tixain"
         android:textSize="20sp"
         android:textColor="@color/border_color"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:text="体现"
         android:onClick="onClick"
         android:id="@+id/tv_get_cash" />
+
+        <View
+                android:background="@color/cmgray"
+                android:layout_width="match_parent"
+                android:layout_height="1px"/>
 
 </LinearLayout>
 </LinearLayout>

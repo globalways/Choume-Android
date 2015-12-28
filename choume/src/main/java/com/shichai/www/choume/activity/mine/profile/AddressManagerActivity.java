@@ -60,9 +60,9 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
     }
 
     private void loadAddrs() {
-       List<UserCommon.UserAddress> addrList = new ArrayList<UserCommon.UserAddress>
+        addrList = new ArrayList<UserCommon.UserAddress>
                (Arrays.asList(MyApplication.getCfUser().user.addrs));
-       adapter.setDatas(addrList);
+        adapter.setDatas(addrList);
     }
 
     @Override
