@@ -1,16 +1,49 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_vertical_margin"
-                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@color/cmwhite"
+                android:orientation="vertical"
                 tools:context="com.shichai.www.choume.activity.mine.profile.ChangePwdActivity">
 
-    <TextView
-            android:text="@string/hello_world"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+    <include
+            layout="@layout/app_bar_layout">
+    </include>
 
-</RelativeLayout>
+    <RelativeLayout
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <EditText
+                android:id="@+id/etOldPwd"
+                android:background="@color/selector_edittext_bg"
+                android:layout_width="match_parent"
+                android:hint="原密码"
+                android:layout_height="50dp"/>
+        <EditText
+                android:layout_below="@id/etOldPwd"
+                android:id="@+id/etNewPwd"
+                android:hint="新密码"
+                android:inputType="textPassword"
+                android:layout_marginTop="20dp"
+                android:background="@color/selector_edittext_bg"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+        <EditText
+                android:layout_below="@id/etNewPwd"
+                android:id="@+id/etRepeat"
+                android:hint="确认新密码"
+                android:inputType="textPassword"
+                android:layout_marginTop="20dp"
+                android:background="@color/selector_edittext_bg"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

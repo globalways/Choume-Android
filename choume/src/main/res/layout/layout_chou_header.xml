@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="项目的名字"
-            android:id="@+id/tv_name"
+            android:id="@+id/tvProjectName"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -25,8 +25,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="项目的小名字     更多>>"
-            android:id="@+id/tv_more"
-            android:layout_below="@+id/tv_name"
+            android:id="@+id/tvProjectDesc"
+            android:layout_below="@+id/tvProjectName"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -34,8 +34,8 @@
             android:src="@mipmap/test_head"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:id="@+id/imageView5"
-            android:layout_alignTop="@+id/tv_name"
+            android:id="@+id/ivProjectCfuserAvatar"
+            android:layout_alignTop="@+id/tvProjectName"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
@@ -46,9 +46,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/progressBar"
-            android:layout_below="@+id/tv_more"
-            android:layout_alignLeft="@+id/tv_more"
-            android:layout_alignStart="@+id/tv_more" />
+            android:layout_below="@+id/tvProjectDesc"
+            android:layout_alignLeft="@+id/tvProjectDesc"
+            android:layout_alignStart="@+id/tvProjectDesc" />
 
         <LinearLayout
             android:layout_marginTop="10dp"
@@ -75,6 +75,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tvProgressPercent"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -100,6 +101,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tvAlreadyMoneyAmount"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"
@@ -121,10 +123,11 @@
                     android:textColor="@color/border_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="众筹进度"
+                    android:text="一抽物品"
                     />
 
                 <TextView
+                    android:id="@+id/tvAlreadyGoodsAmount"
                     android:textColor="@color/black"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
@@ -150,6 +153,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/tvRemainDays"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_width="wrap_content"

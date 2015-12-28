@@ -24,7 +24,7 @@ import java.util.Arrays;
  * 我的发起
  * Created by HeJianjun on 2015/12/7.
  */
-public class MySponsorActivity extends BaseActivity implements View.OnClickListener, PullToRefreshListView.OnRefreshListener, PullToRefreshListView.OnLoadMoreListener {
+public class MySponsorActivity extends BaseActivity implements View.OnClickListener, PullToRefreshListView.OnRefreshListener, PullToRefreshListView.OnLoadMoreListener, MySponsorAdapter.OnConfigListener {
 
     private PullToRefreshListView listView;
     private ArrayList<CfProject> projects;
@@ -49,6 +49,7 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         listView.setOnRefreshListener(this);
         listView.setOnLoadListener(this);
         adapter = new MySponsorAdapter(this, MySponsorAdapter.CONFIG);
+        adapter.setOnConfigListener(this);
         listView.setAdapter(adapter);
         ArrayList<String> strings = new ArrayList<>();
         for (int i=0; i<10 ;i++){
@@ -88,6 +89,7 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
     private void loadProjects(){
         if (MyApplication.getCfUser().fundProjects.length != 0){
             projects = new ArrayList<CfProject>(Arrays.asList(MyApplication.getCfUser().fundProjects));
+            adapter.setData(true, projects);
         }
 
 
@@ -103,5 +105,10 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
     public void onLoadMore() {
         loadProjects();
         listView.onLoadMoreComplete();
+    }
+
+    @Override
+    public void onConfig(long projectId) {
+        //管理project
     }
 }
