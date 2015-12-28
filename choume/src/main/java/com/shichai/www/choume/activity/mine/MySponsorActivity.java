@@ -14,6 +14,7 @@ import com.shichai.www.choume.adapter.MySponsorAdapter;
 import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.manager.CfProjectManager;
 import com.shichai.www.choume.network.manager.CfUserManager;
+import com.shichai.www.choume.tools.UITools;
 import com.shichai.www.choume.view.PullToRefreshListView;
 
 import java.lang.reflect.Array;
@@ -109,6 +110,7 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onConfig(long projectId) {
-        //管理project
+        //管理project入口
+        UITools.ToastMsg(this, "入口在 MySponsorActivity onConfig方法");
     }
 }
