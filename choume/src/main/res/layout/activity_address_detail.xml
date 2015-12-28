@@ -33,8 +33,21 @@
                 android:background="@color/selector_edittext_bg"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
-        <EditText
+
+        <TextView
                 android:layout_below="@id/etAddrContact"
+                android:id="@+id/etAddrArea"
+                android:text="选择地区"
+                android:textSize="18sp"
+                android:textColor="@color/cmblack_333333"
+                android:layout_marginTop="20dp"
+                android:background="@color/selector_edittext_bg"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_height="50dp"/>
+
+        <EditText
+                android:layout_below="@id/etAddrArea"
                 android:id="@+id/etAddrDetail"
                 android:hint="详细地址"
                 android:layout_marginTop="20dp"

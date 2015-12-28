@@ -98,6 +98,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
         pingppChargeParam.orderId = history.orderId;
         pingppChargeParam.channel = CHANNEL_ALIPAY;
         pingppChargeParam.subject = history.subject;
+        pingppChargeParam.body    = history.subject;
         pingppChargeParam.amount  = history.amount;
         pingppChargeParam.token   = LocalDataConfig.getToken(this);
         ThirdPartyManager.getInstance().pingppCharge(pingppChargeParam, new ManagerCallBack<UserPingpp.PingppChargeResp>() {

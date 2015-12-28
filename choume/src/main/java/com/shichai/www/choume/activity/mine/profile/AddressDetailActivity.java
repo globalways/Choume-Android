@@ -1,11 +1,11 @@
 package com.shichai.www.choume.activity.mine.profile;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 import com.globalways.user.nano.UserApp;
 import com.globalways.user.nano.UserCommon;
 import com.outsouring.crowdfunding.R;
@@ -15,12 +15,15 @@ import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.UserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.UITools;
+import com.shichai.www.choume.view.dateareapicker.PickerDialog;
+import com.shichai.www.choume.view.dateareapicker.PickerManager;
 
 import java.util.Arrays;
 
 public class AddressDetailActivity extends BaseActivity {
 
     private EditText etAddrName, etAddrContact, etAddrDetail;
+    private TextView tvAddrArea;
     private String[] addrInfo;
 
     @Override
@@ -54,6 +57,31 @@ public class AddressDetailActivity extends BaseActivity {
         etAddrContact = (EditText) findViewById(R.id.etAddrContact);
         etAddrDetail = (EditText) findViewById(R.id.etAddrDetail);
         etAddrName = (EditText) findViewById(R.id.etAddrName);
+        tvAddrArea = (TextView) findViewById(R.id.etAddrArea);
+
+        final PickerManager.AreaPicker areaPicker = new PickerManager(this).initAreaPicker();
+        tvAddrArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final PickerDialog areaPickerDialog = new PickerDialog(AddressDetailActivity.this)
+                        .builder()
+                        .setTitle("选择地区")
+                        .setView(areaPicker.getAreaView())
+                        .setNegativeButton("取消", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        });
+                areaPickerDialog.setPositiveButton("保存", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        tvAddrArea.setText(areaPicker.getAreaStr());
+                    }
+                });
+                areaPickerDialog.show();
+            }
+        });
     }
 
     private void initDatas() {
@@ -98,4 +126,6 @@ public class AddressDetailActivity extends BaseActivity {
             }
         });
     }
+
+
 }

@@ -31,6 +31,13 @@
     <color name="text_status_unselected">#939393</color>
     <color name="text_status_selected">#2cb281</color>
 
+    <!-- dateareapicker_-->
+    <color name="trans">#00000000</color>
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
+
     <color name="text_gray">#bfc2c7</color>
     <!-- 深灰色 -->
     <color name="dargrey">#666364</color>
