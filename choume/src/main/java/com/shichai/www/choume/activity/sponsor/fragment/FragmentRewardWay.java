@@ -100,12 +100,21 @@ public class FragmentRewardWay extends BaseFragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            ViewHolder holder;
             if (convertView == null) {
+                holder = new ViewHolder();
                 convertView = LayoutInflater.from(getContext()).inflate(R.layout.fragment_reward_list_item, null);
+                holder.tvRewardAbbr = (TextView) convertView.findViewById(R.id.tvRewardAbbr);
+                convertView.setTag(holder);
+            }else {
+                holder = (ViewHolder) convertView.getTag();
             }
-            TextView rewardAbbr = (TextView) convertView.findViewById(R.id.tvRewardAbbr);
-            rewardAbbr.setText(rewardArrayList.get(position).desc);
-            return rewardAbbr;
+            holder.tvRewardAbbr.setText(rewardArrayList.get(position).desc);
+            return convertView;
         }
+    }
+
+    class ViewHolder{
+        TextView tvRewardAbbr;
     }
 }
