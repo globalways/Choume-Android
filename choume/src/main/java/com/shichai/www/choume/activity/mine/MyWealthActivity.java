@@ -82,12 +82,12 @@ public class MyWealthActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(MyWealthActivity.this, msg);
+                UITools.toastMsg(MyWealthActivity.this, msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(MyWealthActivity.this);
+                UITools.toastServerError(MyWealthActivity.this);
             }
         });
     }

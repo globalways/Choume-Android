@@ -1,7 +1,6 @@
 package com.shichai.www.choume.activity.chou;
 
 import android.content.Context;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -17,7 +16,6 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
-import com.shichai.www.choume.adapter.MyMessageAdapter;
 import com.shichai.www.choume.adapter.MySponsorAdapter;
 import com.shichai.www.choume.adapter.SupportAdapter;
 import com.shichai.www.choume.network.ManagerCallBack;
@@ -55,7 +53,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         if (projectId != -1) {
             loadProject(projectId);
         }else {
-            UITools.ToastMsg(this, "获取项目信息错误");
+            UITools.toastMsg(this, "获取项目信息错误");
         }
     }
 

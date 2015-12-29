@@ -29,7 +29,6 @@ import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.PicassoImageLoader;
-import com.shichai.www.choume.tools.Tool;
 import com.shichai.www.choume.tools.UITools;
 
 import java.util.ArrayList;
@@ -222,12 +221,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(MainActivity.this, msg);
+                UITools.toastMsg(MainActivity.this, msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(MainActivity.this);
+                UITools.toastServerError(MainActivity.this);
             }
         });
     }

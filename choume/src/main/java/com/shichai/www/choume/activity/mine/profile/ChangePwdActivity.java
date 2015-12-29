@@ -1,9 +1,7 @@
 package com.shichai.www.choume.activity.mine.profile;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -19,7 +17,6 @@ import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.network.manager.UserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.MD5;
-import com.shichai.www.choume.tools.Tool;
 import com.shichai.www.choume.tools.UITools;
 
 public class ChangePwdActivity extends BaseActivity {
@@ -65,7 +62,7 @@ public class ChangePwdActivity extends BaseActivity {
         if (oldPwd.isEmpty() || newPwd.isEmpty() || repeat.isEmpty())
             return;
         if (!newPwd.equals(repeat)) {
-            UITools.ToastMsg(this, "两次输入的密码不一致");
+            UITools.toastMsg(this, "两次输入的密码不一致");
             return;
         }
         UserApp.ChangePasswordParam passwordParam = new UserApp.ChangePasswordParam();
@@ -81,12 +78,12 @@ public class ChangePwdActivity extends BaseActivity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(ChangePwdActivity.this, msg);
+                UITools.toastMsg(ChangePwdActivity.this, msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(ChangePwdActivity.this);
+                UITools.toastServerError(ChangePwdActivity.this);
             }
         });
     }
@@ -108,12 +105,12 @@ public class ChangePwdActivity extends BaseActivity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(ChangePwdActivity.this, msg);
+                UITools.toastMsg(ChangePwdActivity.this, msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(ChangePwdActivity.this);
+                UITools.toastServerError(ChangePwdActivity.this);
             }
         });
     }

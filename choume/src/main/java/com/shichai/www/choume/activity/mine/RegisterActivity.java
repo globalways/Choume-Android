@@ -2,10 +2,8 @@ package com.shichai.www.choume.activity.mine;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -120,7 +118,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 CfUserManager.getInstance().register(param, new ManagerCallBack<OutsouringCrowdfunding.RegisterCFAppUserResp>() {
                     @Override
                     public void error(Exception e) {
-                        UITools.ToastServerError(context);
+                        UITools.toastServerError(context);
                         isRegister = false;
                     }
 
@@ -132,7 +130,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                     @Override
                     public void success(OutsouringCrowdfunding.RegisterCFAppUserResp result) {
-                        UITools.ToastMsg(context, "注册成功，正在自动登录..");
+                        UITools.toastMsg(context, "注册成功，正在自动登录..");
                         isRegister = false;
                         //注册成功自动登录
                         login(context, param.tel, param.password);
@@ -142,12 +140,12 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(context, msg);
+                UITools.toastMsg(context, msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(context);
+                UITools.toastServerError(context);
             }
         });
 
@@ -180,18 +178,18 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         ThirdPartyManager.getInstance().sendSMS(param, new ManagerCallBack<Common.Response>() {
             @Override
             public void success(Common.Response result) {
-                UITools.ToastMsg(context, "验证码已经发送，注意查收");
+                UITools.toastMsg(context, "验证码已经发送，注意查收");
                 //btnRequestSmsCode.setText(String.valueOf(result.code));
             }
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(context, msg);
+                UITools.toastMsg(context, msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(context);
+                UITools.toastServerError(context);
             }
         });
     }
@@ -209,7 +207,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         CfUserManager.getInstance().login(loginAppParam, new ManagerCallBack<OutsouringCrowdfunding.LoginCFAppResp>() {
             @Override
             public void success(OutsouringCrowdfunding.LoginCFAppResp result) {
-                UITools.ToastMsg(context,"登录成功");
+                UITools.toastMsg(context, "登录成功");
                 //跳转
                 MyApplication.setCfUser(result.cfUser);
                 LocalDataConfig.setToken(context, result.token);
@@ -222,13 +220,13 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void warning(int code, String msg) {
                 setResult(Activity.RESULT_CANCELED);
-                UITools.ToastMsg(context, msg);
+                UITools.toastMsg(context, msg);
             }
 
             @Override
             public void error(Exception e) {
                 setResult(Activity.RESULT_CANCELED);
-                UITools.ToastServerError(context);
+                UITools.toastServerError(context);
             }
         });
     }
