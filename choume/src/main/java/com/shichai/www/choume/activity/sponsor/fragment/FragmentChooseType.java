@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioGroup;
 
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.outsouring.crowdfunding.R;
+import com.shichai.www.choume.network.protoenum.CrowdFundingCategory;
 
 /**
  * Created by HeJianjun on 2015/12/28.
@@ -35,25 +37,31 @@ public class FragmentChooseType extends BaseFragment implements RadioGroup.OnChe
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId){
             case R.id.rb_fun:
-                type = 1;
+                type = OutsouringCrowdfunding.HAPPY_CFC;
                 onNextListener.onNext(true);
                 break;
             case R.id.rb_get_love:
-                type = 3;
+                type = OutsouringCrowdfunding.LOVE_CFC;
                 onNextListener.onNext(true);
                 break;
             case R.id.rb_get_money:
-                type = 2;
+                type = OutsouringCrowdfunding.MONEY_CFC;
                 onNextListener.onNext(true);
                 break;
             case R.id.rb_product:
-                type = 4;
+                type = OutsouringCrowdfunding.PRODUCT_CFC;
                 onNextListener.onNext(true);
                 break;
             case R.id.rb_program:
-                type = 4;
+                type = OutsouringCrowdfunding.PROJECT_CFC;
                 onNextListener.onNext(true);
                 break;
         }
+    }
+
+    @Override
+    public void commitData(OutsouringCrowdfunding.CfProject cfProject) {
+        super.commitData(cfProject);
+        cfProject.category = type;
     }
 }

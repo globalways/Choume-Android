@@ -75,6 +75,7 @@
             android:layout_height="wrap_content">
         <RadioButton
                 android:text="支付宝"
+                android:id="@+id/rbChannelAlipay"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:background="@null"
@@ -83,6 +84,7 @@
                 />
         <RadioButton
                 android:text="微信"
+                android:id="@+id/rbChannelWX"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:background="@null"

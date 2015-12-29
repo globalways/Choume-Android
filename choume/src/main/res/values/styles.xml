@@ -109,5 +109,20 @@
     </style>
 
 
+    <style name="CMEditText">
+        <item name="android:background">@color/selector_edittext_bg</item>
+        <item name="android:textColor">@color/cmblack_333333</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+
+    <style name="CMSectionTitle">
+        <item name="android:background">@color/cmgray</item>
+        <item name="android:textColor">@color/cmgray_b3b3b3</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35dp</item>
+    </style>
+
 
 </resources>

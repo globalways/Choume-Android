@@ -8,10 +8,11 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
         <com.shichai.www.choume.view.ListViewForScrollView
-            android:id="@+id/listView"
+            android:id="@+id/rewardListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </com.shichai.www.choume.view.ListViewForScrollView>
+
 
         <TextView
             android:layout_marginTop="10dp"
@@ -19,7 +20,7 @@
             android:padding="10dp"
             android:id="@+id/tv_add_reward_way"
             android:textSize="20sp"
-            android:textColor="@color/border_color"
+            android:textColor="@color/cmblue_11a2ff"
             android:gravity="center"
             android:text="添加回报方式"
             android:layout_width="match_parent"

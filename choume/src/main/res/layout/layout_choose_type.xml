@@ -9,42 +9,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <RadioButton
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@null"
         android:text="筹乐子"
         android:id="@+id/rb_fun" />
     <RadioButton
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@null"
         android:text="筹票子"
         android:id="@+id/rb_get_money" />
     <RadioButton
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@null"
         android:text="筹爱心"
         android:id="@+id/rb_get_love" />
         <TextView
-            android:textSize="20sp"
-            android:padding="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/gray"
-            android:textColor="@color/gray_deep"
-            android:text="校园合伙人"
-            android:id="@+id/textView8" />
+            style="@style/CMSectionTitle"
+            android:text="校园合伙人"/>
         <RadioButton
-            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:text="项目类"
             android:id="@+id/rb_program" />
         <RadioButton
-            android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:text="产品类"
             android:id="@+id/rb_product" />
     </RadioGroup>

@@ -21,36 +21,65 @@
 
             <EditText
                 android:hint="标题"
+                android:visibility="gone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/CMEditText"
+                android:layout_margin="10dp"
                 android:id="@+id/et_title" />
 
             <EditText
                 android:hint="描述"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/CMEditText"
+                android:layout_margin="10dp"
                 android:id="@+id/et_des" />
 
             <EditText
                 android:hint="联系人"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_contact" />
 
             <EditText
                 android:hint="联系电话"
+                android:visibility="gone"
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/et_contact_number"
                 android:layout_gravity="center_horizontal" />
 
+
+            <RelativeLayout
+                    android:id="@+id/rlToManageAddress"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp">
+
+                <TextView
+                        style="@style/setting_attr_text"
+                        android:text="需要支持"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true" />
+
+                <TextView
+                        style="@style/setting_text"
+                        android:text="选支持方式"
+                        android:id="@+id/tvSupportDesc"
+                        android:layout_alignTop="@+id/textView22"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
             <EditText
-                android:hint="限制人数"
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/et_limited_member" />
+                    android:hint="限制份数"
+                    android:inputType="number"
+                    android:layout_width="match_parent"
+                    style="@style/CMEditText"
+                    android:layout_margin="10dp"
+                    android:id="@+id/et_limited" />
         </LinearLayout>
     </LinearLayout>
 

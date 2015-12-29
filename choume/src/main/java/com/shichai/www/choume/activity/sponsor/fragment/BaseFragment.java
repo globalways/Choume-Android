@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
+import com.shichai.www.choume.activity.sponsor.SponsorActivity;
 
 
 /**
@@ -36,6 +38,11 @@ public abstract class BaseFragment extends Fragment {
 		return rootView;
 	}
 
+	public SponsorActivity getSponsorActivity(){
+		return (SponsorActivity)getActivity();
+	}
 
+	public void commitData(CfProject cfProject){
 
+	}
 }

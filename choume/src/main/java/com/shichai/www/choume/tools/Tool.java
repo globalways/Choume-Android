@@ -14,6 +14,7 @@ import android.util.Log;
 
 import java.io.*;
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -136,6 +137,16 @@ public class Tool {
 		sb.append(now.getTimeInMillis() - todayStart.getTimeInMillis());
 		return sb.toString();
 	}
+
+
+	public static long getDateLong(String date){
+		try {
+			return new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
 	/**
 	 * 格式化输出日期
@@ -216,6 +227,20 @@ public class Tool {
 	public static long yuanToFen(String yuan)
 	{
 		return Tool.mulAsLong(yuan, String.valueOf(100));
+	}
+
+	/**
+	 * 元转分
+	 * @param yuan
+	 * @return long型的分
+	 */
+	public static long yuanToFen(String yuan, long defVal)
+	{
+		try {
+			return Tool.mulAsLong(yuan, String.valueOf(100));
+		} catch (Exception e) {
+			return defVal;
+		}
 	}
 	
 	/**

@@ -67,9 +67,9 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
         rgPayChannel.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId == 1)
+                if (checkedId == R.id.rbChannelAlipay)
                     selectedChannel = CHANNEL_ALIPAY;
-                if (checkedId == 2)
+                if (checkedId == R.id.rbChannelWX)
                     selectedChannel = CHANNEL_WECHAT;
             }
         });
