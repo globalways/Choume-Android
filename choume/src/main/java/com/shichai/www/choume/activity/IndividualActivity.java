@@ -34,10 +34,11 @@ import java.util.List;
  * Created by HeJianjun on 2015/12/22.
  */
 public class IndividualActivity extends BaseActivity implements View.OnClickListener {
+    private static final int REQUEST_CODE_AUTH = 2;
+    private static final int CAPTURE_CODE = 1;
 
-    private final int CAPTURE_CODE = 1;
     private RelativeLayout rlToCert, rlToChangeNick, rlToChangeSex, rlToManageAddress, rlToChangePwd;
-    private TextView tvNick, tvTel, tvSex, tvCert, tvAddr;
+    private TextView tvNick, tvTel, tvSex, tvCert, tvAddr,tvCertType;
     private ImageView ivAvatar;
     private PicassoImageLoader imageLoader;
 
@@ -77,11 +78,15 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         tvAddr = (TextView) findViewById(R.id.tvAddr);
         tvCert = (TextView) findViewById(R.id.tvCertType);
         ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
+        tvCertType = (TextView) findViewById(R.id.tvCertType);
+
         ivAvatar.setOnClickListener(this);
+        tvCertType.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
+        PhotoPickerIntent intent;
         switch (v.getId()){
             case R.id.rlToCert:
                 startActivity(new Intent(IndividualActivity.this, CertApplyActivity.class));
@@ -99,13 +104,19 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                 startActivity(new Intent(IndividualActivity.this, ChangePwdActivity.class));
                 break;
             case R.id.ivAvatar:
-                PhotoPickerIntent intent = new PhotoPickerIntent(this);
+                intent= new PhotoPickerIntent(this);
                 intent.setPhotoCount(1);
                 intent.setShowCamera(true);
                 intent.setShowGif(false);
                 startActivityForResult(intent, CAPTURE_CODE);
                 break;
-            default:break;
+            case R.id.tvCertType:
+                intent = new PhotoPickerIntent(this);
+                intent.setPhotoCount(1);
+                intent.setShowCamera(true);
+                intent.setShowGif(false);
+                startActivityForResult(intent, REQUEST_CODE_AUTH);
+                break;
         }
     }
 
@@ -182,6 +193,8 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                      }
                  });
             }
+        }else  if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_AUTH) {//认证图片处理
+
         }
 
 
