@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.globalways.choume.R;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,34 +19,37 @@ import java.util.List;
 public class SupportWayAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private List<String> strings = new ArrayList<>();
+    private CfProjectReward[] rewards;
 
     public SupportWayAdapter(Context context) {
         this.context = context;
-        strings = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void addDatas(List<String> strings) {
-        if (strings != null && strings.size() > 0) {
-            this.strings.addAll(strings);
-            notifyDataSetChanged();
-        }
+    public void addDatas(CfProjectReward[] rewards) {
+        this.rewards = rewards;
+        notifyDataSetChanged();
     }
 
     public void clearDatas() {
-        strings.clear();
+        this.rewards = null;
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return strings.size();
+        if (rewards != null) {
+            return rewards.length;
+        }
+        return 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return strings.get(position);
+        if (rewards != null) {
+            return rewards[position];
+        }
+        return null;
     }
 
     @Override
@@ -59,15 +63,20 @@ public class SupportWayAdapter extends BaseAdapter {
         if (convertView == null) {
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.item_support_way, null);
+            holder.tvRewardDesc = (TextView) convertView.findViewById(R.id.tvRewardDesc);
+            holder.tvRewardSupports = (TextView) convertView.findViewById(R.id.tvRewardSupports);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
+        holder.tvRewardDesc.setText(rewards[position].desc);
+        holder.tvRewardSupports.setText("支持数:"+rewards[position].alreadyCount);
+
         return convertView;
     }
 
     class ViewHolder {
-        TextView tt;
+        TextView tvRewardSupports, tvRewardDesc;
     }
 }

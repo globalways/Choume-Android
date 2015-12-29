@@ -9,8 +9,8 @@
         android:textColor="@color/cmblack_333333"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="支持方式XXX"
-        android:id="@+id/textView19"
+        android:text=""
+        android:id="@+id/tvRewardDesc"
         android:layout_alignBottom="@+id/textView23"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -21,9 +21,9 @@
         android:textColor="@color/cmblack_333333"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="已获支持：133人"
+        android:text="已获支持:"
         android:drawableRight="@mipmap/ico_arrow_right"
-        android:id="@+id/textView23"
+        android:id="@+id/tvRewardSupports"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />

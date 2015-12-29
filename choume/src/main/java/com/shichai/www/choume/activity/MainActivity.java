@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserCommon;
 import com.globalways.choume.R;
@@ -37,6 +38,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
+
+    //cfproject
+    public static final String PROJECT_CATEGORY = "project_category";
+    public static final String PROJECT_TAG = "project_tag";
 
     public static final String ISLOGIN = "isLogin";
     private static final int CODE_TO_LOGIN = 10001;
@@ -252,46 +257,55 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case R.id.big_difficult:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"世纪难题");
+                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.QUESTION_CFPT);
                 startActivity(intent);
                 break;
             case R.id.get_fun:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹乐子");
+                intent.putExtra(PROJECT_CATEGORY, OutsouringCrowdfunding.HAPPY_CFC);
                 startActivity(intent);
                 break;
             case R.id.get_love:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹爱心");
+                intent.putExtra(PROJECT_CATEGORY, OutsouringCrowdfunding.LOVE_CFC);
                 startActivity(intent);
                 break;
             case R.id.get_money:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹票子");
+                intent.putExtra(PROJECT_CATEGORY, OutsouringCrowdfunding.MONEY_CFC);
                 startActivity(intent);
                 break;
             case R.id.go_where:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"周末去哪");
+                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.QUESTION_CFPT);
                 startActivity(intent);
                 break;
             case R.id.hot:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"热门众筹");
+                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.HOT_CFPT);
                 startActivity(intent);
                 break;
             case R.id.limited:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"限时特筹");
+                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.LIMIT_TIME_CFPT);
                 startActivity(intent);
                 break;
             case R.id.miao:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE, "一元秒筹");
+                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.LIMIT_TIME_CFPT);
                 startActivity(intent);
                 break;
             case R.id.most_get:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"非筹不可");
+                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.HOT_CFPT);
                 startActivity(intent);
                 break;
             case R.id.btnToLogin:

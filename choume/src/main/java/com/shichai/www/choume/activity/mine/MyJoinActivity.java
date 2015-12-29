@@ -34,12 +34,6 @@ public class MyJoinActivity extends BaseActivity implements View.OnClickListener
         listView = (PullToRefreshListView) findViewById(R.id.listView);
         adapter = new MySponsorAdapter(this);
         listView.setAdapter(adapter);
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i=0; i<10 ;i++){
-            strings.add("XXSASD");
-        }
-        adapter.addDatas(strings);
-
     }
 
 

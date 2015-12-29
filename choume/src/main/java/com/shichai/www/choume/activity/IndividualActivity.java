@@ -80,7 +80,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         tvCertType = (TextView) findViewById(R.id.tvCertType);
 
         ivAvatar.setOnClickListener(this);
-        tvCertType.setOnClickListener(this);
+        //tvCertType.setOnClickListener(this);
     }
 
     @Override
@@ -88,7 +88,10 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         PhotoPickerIntent intent;
         switch (v.getId()){
             case R.id.rlToCert:
-                startActivity(new Intent(IndividualActivity.this, CertApplyActivity.class));
+                //没有认证信息才能去提交认证材料
+                if (MyApplication.getCfUser().certification == null) {
+                    startActivity(new Intent(this,CertApplyActivity.class));
+                }
                 break;
             case R.id.rlToChangeNick:
                 startActivity(new Intent(IndividualActivity.this, ChangeNickActivity.class));
@@ -108,12 +111,6 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                 intent.setShowCamera(true);
                 intent.setShowGif(false);
                 startActivityForResult(intent, CAPTURE_CODE);
-                break;
-            case R.id.tvCertType:
-                //没有认证信息才能去提交认证材料
-                if (MyApplication.getCfUser().certification == null) {
-                    startActivity(new Intent(this,CertApplyActivity.class));
-                }
                 break;
         }
     }

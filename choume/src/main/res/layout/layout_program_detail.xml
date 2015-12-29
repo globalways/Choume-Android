@@ -38,7 +38,7 @@
 
     <TextView
             style="@style/CMSectionTitle"
-            android:text="筹集类型（至少一种）"/>
+            android:text="您需要筹集什么？（至少一种）"/>
 
     <EditText
         style="@style/CMEditText"
@@ -56,21 +56,63 @@
         android:layout_width="match_parent"
         android:layout_margin="10dp"
         />
-    <EditText
-        style="@style/CMEditText"
-        android:id="@+id/et_product"
-        android:hint="物品"
-        android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        />
-    <EditText
-        android:id="@+id/et_product_count"
-        android:hint="物品数量"
-        android:inputType="number"
-        android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        style="@style/CMEditText"
-        />
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+                style="@style/CMEditText"
+                android:id="@+id/et_product"
+                android:hint="物品"
+                android:layout_width="100dp"
+                android:layout_margin="10dp"
+                />
+        <EditText
+                android:id="@+id/et_product_count"
+                android:layout_toRightOf="@id/et_product"
+                android:hint="物品数量"
+                android:inputType="number"
+                android:layout_width="100dp"
+                android:layout_margin="10dp"
+                style="@style/CMEditText"
+                />
+
+    </RelativeLayout>
+    <TextView
+            style="@style/CMSectionTitle"
+            android:text="主要完成指标(必选)"/>
+    <RadioGroup
+            android:id="@+id/rgMajorType"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_margin="10dp"
+            android:layout_height="50dp">
+        <RadioButton
+            android:id="@+id/rbMoney"
+            android:text="钱"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <RadioButton
+            android:id="@+id/rbPeoPle"
+            android:text="人"
+            android:layout_gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <RadioButton
+            android:id="@+id/rbGoods"
+            android:text="物"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+        <RadioButton
+            android:id="@+id/rbEquity"
+            android:text="股权"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"/>
+    </RadioGroup>
     <TextView
         android:id="@+id/tv_end_time"
         android:hint="截至日期(必填)"

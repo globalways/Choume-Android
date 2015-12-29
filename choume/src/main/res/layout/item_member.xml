@@ -8,6 +8,6 @@
         android:textSize="18sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="参与者：小王"
+        android:text=""
         android:id="@+id/textView" />
 </LinearLayout>

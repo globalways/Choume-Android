@@ -23,6 +23,7 @@ import java.util.Arrays;
  */
 public class MySponsorActivity extends BaseActivity implements View.OnClickListener, PullToRefreshListView.OnRefreshListener, PullToRefreshListView.OnLoadMoreListener, MySponsorAdapter.OnConfigListener {
 
+    public static final String PROJECT_ID = "project_id";
     private PullToRefreshListView listView;
     private ArrayList<CfProject> projects;
     private MySponsorAdapter adapter;
@@ -35,6 +36,7 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         setTitle("我的发起");
 
         initViews();
+        loadProjects();
 
     }
 
@@ -48,12 +50,6 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         adapter = new MySponsorAdapter(this, MySponsorAdapter.CONFIG);
         adapter.setOnConfigListener(this);
         listView.setAdapter(adapter);
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i=0; i<10 ;i++){
-            strings.add("XXSASD");
-        }
-        adapter.addDatas(strings);
-
     }
 
 
@@ -106,6 +102,8 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onConfig(long projectId, int position) {
-        startActivity(new Intent(this, ChouManagerActivity.class));
+        Intent intent = new Intent(this, ChouManagerActivity.class);
+        intent.putExtra(PROJECT_ID, projectId);
+        startActivity(intent);
     }
 }

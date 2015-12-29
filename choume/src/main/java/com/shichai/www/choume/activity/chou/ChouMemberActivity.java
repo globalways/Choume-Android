@@ -11,8 +11,19 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 import com.globalways.choume.R;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectResp;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectInvest;
+import com.globalways.proto.nano.Common;
 import com.shichai.www.choume.activity.BaseActivity;
-import com.shichai.www.choume.adapter.MemberAdapter;
+import com.shichai.www.choume.activity.mine.MySponsorActivity;
+import com.shichai.www.choume.adapter.InvestRecordAdapter;
+import com.shichai.www.choume.network.ManagerCallBack;
+import com.shichai.www.choume.network.manager.CfProjectManager;
+import com.shichai.www.choume.tools.LocalDataConfig;
+import com.shichai.www.choume.tools.UITools;
 import com.shichai.www.choume.tools.Utils;
 
 import java.util.ArrayList;
@@ -23,60 +34,59 @@ import java.util.List;
  */
 public class ChouMemberActivity extends BaseActivity implements View.OnClickListener{
 
+    private long projectId;
+    private CfProject cfProject;
+
     private SwipeMenuListView listView;
-    private MemberAdapter adapter;
+    private InvestRecordAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chou_member);
         initActionBar();
+        projectId = getIntent().getLongExtra(MySponsorActivity.PROJECT_ID, 0);
         setTitle("参与者");
         initViews();
+        getProject();
     }
     private void initViews(){
         listView = (SwipeMenuListView) findViewById(R.id.listView);
-        adapter = new MemberAdapter(this);
+        adapter = new InvestRecordAdapter(this);
         listView.setAdapter(adapter);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
             @Override
             public void create(SwipeMenu menu) {
-                  createMenu1(menu);
-            }
+                SwipeMenuItem itemNotPass = new SwipeMenuItem(getApplicationContext());
+                itemNotPass.setBackground(new ColorDrawable(Color.parseColor("#eeeeee")));
+                itemNotPass.setWidth(Utils.dp2px(ChouMemberActivity.this, 90));
+                itemNotPass.setTitle("不同意");
+                itemNotPass.setTitleColor(Color.WHITE);
+                menu.addMenuItem(itemNotPass);
 
-            private void createMenu1(SwipeMenu menu) {
-                SwipeMenuItem item1 = new SwipeMenuItem(
-                        getApplicationContext());
-                item1.setBackground(new ColorDrawable(Color.rgb(0xE5, 0x18,
-                        0x5E)));
-                item1.setWidth(Utils.dp2px(ChouMemberActivity.this, 90));
-                item1.setTitle("不同意");
-                item1.setTitleColor(getResources().getColor(R.color.white));
-                menu.addMenuItem(item1);
-                SwipeMenuItem item2 = new SwipeMenuItem(
-                        getApplicationContext());
-                item2.setBackground(new ColorDrawable(Color.rgb(0xC9, 0xC9,
-                        0xCE)));
-                item2.setWidth(Utils.dp2px(ChouMemberActivity.this, 90));
-                item2.setTitle("同意");
-                item2.setTitleColor(getResources().getColor(R.color.white));
-                menu.addMenuItem(item2);
+                SwipeMenuItem itemPass = new SwipeMenuItem(getApplicationContext());
+                itemPass.setBackground(new ColorDrawable(Color.parseColor("#11a2ff")));
+                itemPass.setWidth(Utils.dp2px(ChouMemberActivity.this, 90));
+                itemPass.setTitle("同意");
+                itemPass.setTitleColor(Color.WHITE);
+                menu.addMenuItem(itemPass);
             }
-
         };
         listView.setMenuCreator(creator);
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
+                //UITools.toastMsg(ChouMemberActivity.this,menu.getMenuItem(index).getTitle())
+                switch (index) {
+                    case 0: rejectInvest(adapter.getInvests()[position]);
+                        break;
+                    case 1: passInvest(adapter.getInvests()[position]);
+                        break;
+                }
                 return false;
             }
         });
-        List<String> strings = new ArrayList<>();
-        for (int i=0;i<10;i++){
-            strings.add("XXXX");
-        }
-        adapter.setDatas(strings);
     }
 
     @Override
@@ -94,4 +104,76 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
 
         }
     }
+
+    private void getProject() {
+        GetCfProjectParam projectParam  = new GetCfProjectParam();
+        projectParam.projectId = projectId;
+        CfProjectManager.getInstance().getCfProject(projectParam, new ManagerCallBack<GetCfProjectResp>() {
+            @Override
+            public void success(GetCfProjectResp result) {
+                cfProject = result.project;
+                adapter.setDatas(cfProject.invests);
+            }
+
+            @Override
+            public void error(Exception e) {
+                UITools.toastServerError(ChouMemberActivity.this);
+            }
+
+            @Override
+            public void warning(int code, String msg) {
+                UITools.warning(ChouMemberActivity.this, "获取项目详细失败", msg);
+            }
+        });
+    }
+
+
+    private void rejectInvest(final CfProjectInvest invest) {
+        OutsouringCrowdfunding.RejectCfProjectInvestParam param = new OutsouringCrowdfunding.RejectCfProjectInvestParam();
+        param.investId = invest.id;
+        param.token = LocalDataConfig.getToken(this);
+        CfProjectManager.getInstance().rejectCfProjectInvest(param, new ManagerCallBack<Common.Response>() {
+            @Override
+            public void success(Common.Response result) {
+                UITools.toastMsg(ChouMemberActivity.this, "拒绝投资成功");
+            }
+
+            @Override
+            public void warning(int code, String msg) {
+                UITools.warning(ChouMemberActivity.this, "拒绝投资失败", msg);
+            }
+
+            @Override
+            public void error(Exception e) {
+                UITools.toastServerError(ChouMemberActivity.this);
+            }
+        });
+    }
+
+
+
+    private void passInvest(final CfProjectInvest invest) {
+        OutsouringCrowdfunding.PassCfProjectInvestParam param = new OutsouringCrowdfunding.PassCfProjectInvestParam();
+        param.investId = invest.id;
+        param.token = LocalDataConfig.getToken(this);
+        CfProjectManager.getInstance().passCfProjectInvest(param, new ManagerCallBack<Common.Response>() {
+            @Override
+            public void success(Common.Response result) {
+                UITools.toastMsg(ChouMemberActivity.this, "通过投资成功");
+            }
+
+            @Override
+            public void warning(int code, String msg) {
+                UITools.warning(ChouMemberActivity.this,"通过投资失败",msg);
+            }
+
+            @Override
+            public void error(Exception e) {
+                UITools.toastServerError(ChouMemberActivity.this);
+            }
+        });
+    }
+
+
+
 }

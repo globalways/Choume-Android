@@ -12,6 +12,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.R;
 import com.shichai.www.choume.activity.chou.ChouDetailActivity;
 import com.shichai.www.choume.application.MyApplication;
+import com.shichai.www.choume.tools.CMTool;
 import com.shichai.www.choume.tools.PicassoImageLoader;
 
 import java.util.ArrayList;
@@ -26,8 +27,6 @@ public class MySponsorAdapter extends BaseAdapter {
     public static final int STAR   = 2;
     public static final int CONFIG = 3;
 
-    public static final String PROJECT_ID = "project_id";
-
     private OnCollectListener onCollectListener;
     private OnConfigListener onConfigListener;
 
@@ -37,35 +36,23 @@ public class MySponsorAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context context;
     private List<CfProject> cfProjects;
-    private List<String> strings;
 
     private PicassoImageLoader imageLoader;
 
     public MySponsorAdapter(Context context) {
         this.context = context;
         imageLoader = new PicassoImageLoader(context);
-        strings = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     public MySponsorAdapter(Context context, int type) {
         imageLoader = new PicassoImageLoader(context);
         this.context = context;
         this.type = type;
-        strings = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
-
-
-    public void addDatas(List<String> strings){
-        if (strings != null && strings.size() > 0 ){
-            this.strings.addAll(strings);
-            notifyDataSetChanged();
-        }
     }
 
     @Override
     public int getCount() {
-//        return strings.size();
         if (cfProjects != null) {
             return cfProjects.size();
         }
@@ -74,7 +61,6 @@ public class MySponsorAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-//        return strings.get(position);
         if (cfProjects != null) {
             return cfProjects.get(position);
         }
@@ -100,6 +86,7 @@ public class MySponsorAdapter extends BaseAdapter {
             holder.tvProgress            = (TextView) convertView.findViewById(R.id.tvProgress);
             holder.ivProjectPic          = (ImageView) convertView.findViewById(R.id.ivProjectPic);
             holder.ivProjectCfuserAvatar = (ImageView) convertView.findViewById(R.id.ivProjectCfuserAvatar);
+            holder.tvProjectStatus       = (TextView) convertView.findViewById(R.id.tvProjectStatus);
             switch (type) {
                 case NORMAL:
                     holder.ibControl.setVisibility(View.GONE);
@@ -109,8 +96,9 @@ public class MySponsorAdapter extends BaseAdapter {
                     break;
                 case CONFIG:
                     holder.ibControl.setImageDrawable(context.getResources().getDrawable(R.mipmap.ico_my_account_option));
-                    //自己的项目隐藏头像
+                    //自己的项目隐藏头像显示项目状态
                     holder.ivProjectCfuserAvatar.setVisibility(View.GONE);
+                    holder.tvProjectStatus.setVisibility(View.VISIBLE);
                     break;
                 default:
                     holder.ibControl.setVisibility(View.GONE);
@@ -121,12 +109,12 @@ public class MySponsorAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.progressBar.setProgress((int)(50+Math.random()*(100)));
+        holder.progressBar.setProgress(CMTool.generateProjectProgress(cfProjects.get(position)));
         holder.main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, ChouDetailActivity.class);
-                //intent.putExtra(PROJECT_ID, cfProjects.get(position).id);
+                intent.putExtra(ChouDetailActivity.PROJECT_ID, cfProjects.get(position).id);
                 context.startActivity(intent);
             }
         });
@@ -140,13 +128,15 @@ public class MySponsorAdapter extends BaseAdapter {
                     onCollectListener.onCollect(cfProjects.get(position).id, willCollect);
                 }else if (type == CONFIG) {
                     onConfigListener.onConfig(cfProjects.get(position).id, position);
-                    //onConfigListener.onConfig(1234);
                 }
             }
         });
         //set datas
+        CMTool.loadProjectUserAvatar(cfProjects.get(position).hongId,context,holder.ivProjectCfuserAvatar);
         holder.tvCfProjectName.setText(cfProjects.get(position).title);
         holder.tvProgress.setText(cfProjects.get(position).desc);
+        holder.tvProjectStatus.setText(CMTool.getProjectStatus(cfProjects.get(position).status));
+        //没有项目图片就隐藏ImageView
         if(cfProjects.get(position).pics == null || cfProjects.get(position).pics.length ==0){
             holder.ivProjectPic.setVisibility(View.GONE);
         }else {
@@ -159,7 +149,7 @@ public class MySponsorAdapter extends BaseAdapter {
         View main;
         ProgressBar progressBar;
         ImageButton ibControl;
-        TextView tvCfProjectName, tvProgress;
+        TextView tvCfProjectName, tvProgress, tvProjectStatus;
         ImageView ivProjectPic, ivProjectCfuserAvatar;
     }
 

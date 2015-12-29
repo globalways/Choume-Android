@@ -22,8 +22,8 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="已经筹到的钱：10000元"
-        android:id="@+id/textView2" />
+        android:text=""
+        android:id="@+id/tvAlreadyMoneyAmount" />
 
     <TextView
         android:padding="10dp"
@@ -32,8 +32,8 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="截至日期：2015.12.30"
-        android:id="@+id/textView6" />
+        android:text=""
+        android:id="@+id/tvAlreadyPeopleAmount" />
 
     <TextView
         android:padding="10dp"
@@ -42,8 +42,8 @@
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="众筹类别：筹钱"
-        android:id="@+id/textView9" />
+        android:text=""
+        android:id="@+id/tvAlreadyGoodsAmount" />
 
         <TextView
         android:textColor="@color/cmblack_333333"

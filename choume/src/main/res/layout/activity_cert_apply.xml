@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="?attr/colorPrimary"
+    android:background="@color/cmwhite"
     android:orientation="vertical"
     tools:context="com.shichai.www.choume.activity.mine.profile.CertApplyActivity">
 
@@ -13,7 +13,7 @@
     </include>
 
     <LinearLayout
-        android:background="@color/default_bg"
+        android:background="@color/cmwhite"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -28,22 +28,33 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"/>
     <RadioGroup
+        android:id="@+id/rgApplyType"
         android:background="@color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RadioButton
             android:text="机构"
+            android:id="@+id/rbCertAgency"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="50dp"/>
 
         <RadioButton
             android:text="学生"
+            android:id="@+id/rbCertStudent"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="50dp"/>
     </RadioGroup>
+
+    <EditText
+            android:layout_width="match_parent"
+            style="@style/CMEditText"
+            android:layout_margin="10dp"
+            android:hint="认证姓名"
+            android:id="@+id/etRealName"
+            />
 
     <TextView
         android:id="@+id/ibToSelectImage"

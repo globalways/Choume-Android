@@ -139,13 +139,26 @@ public class Tool {
 	}
 
 
+	/**
+	 * 获取指定时间XXXX-XX-XX 距离1970  XXX 秒
+	 * @param date
+	 * @return
+	 */
 	public static long getDateLong(String date){
 		try {
-			return new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime();
+			return new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime()/1000;
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	/**
+	 * 获取当前时间 距离1970  XXX 秒
+	 * @return
+	 */
+	public static long getCurrentDateTime(){
+		return Calendar.getInstance().getTimeInMillis()/1000;
 	}
 	
 	/**

@@ -34,12 +34,6 @@ public class MyCollectionActivity extends BaseActivity implements View.OnClickLi
         listView = (PullToRefreshListView) findViewById(R.id.listView);
         adapter = new MySponsorAdapter(this, MySponsorAdapter.STAR);
         listView.setAdapter(adapter);
-        ArrayList<String> strings = new ArrayList<>();
-        for (int i=0; i<10 ;i++){
-            strings.add("XXSASD");
-        }
-        adapter.addDatas(strings);
-
     }
 
 

@@ -9,17 +9,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="回报方式"
-        android:id="@+id/reward_way" />
+        android:id="@+id/tvRewardDesc" />
 
     <TextView
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="XXXXXXXXX所需金额，YYYYYY"
-        android:id="@+id/textView26"
-        android:layout_below="@+id/reward_way"
-        android:layout_alignLeft="@+id/reward_way"
-        android:layout_alignStart="@+id/reward_way" />
+        android:text=""
+        android:id="@+id/tvRewardAbbr"
+        android:layout_below="@+id/tvRewardDesc"
+        android:layout_alignLeft="@+id/tvRewardDesc"
+        android:layout_alignStart="@+id/tvRewardDesc" />
 
     <TextView
         android:paddingLeft="10dp"
@@ -31,8 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="支持"
-        android:id="@+id/tv_support"
-        android:layout_alignTop="@+id/reward_way"
+        android:id="@+id/tvSupport"
+        android:layout_alignTop="@+id/tvRewardDesc"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>

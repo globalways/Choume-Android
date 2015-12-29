@@ -12,6 +12,8 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
 import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.activity.sponsor.fragment.FragmentRewardWay;
+import com.shichai.www.choume.tools.Tool;
+import com.shichai.www.choume.tools.UITools;
 
 /**
  * Created by HeJianjun on 2015/12/28.
@@ -45,7 +47,16 @@ public class AddRewardWayActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.bt_right:
                 // add to list
+                if (Tool.isEmpty(et_des.getText().toString().trim())){
+                    UITools.toastMsg(this, "请输入描述信息");
+                    return;
+                }
+                if (Tool.isEmpty(et_limited.getText().toString().trim())){
+                    UITools.toastMsg(this, "请输入份数限制");
+                    return;
+                }
                 reward.desc = et_des.getText().toString().trim();
+                reward.limitedCount =  Long.parseLong(et_limited.getText().toString().trim());
                 FragmentRewardWay.fragmentRewardWay.getRewardArrayList().add(reward);
                 finish();
                 break;

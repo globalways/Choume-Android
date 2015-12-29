@@ -77,6 +77,7 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
         cfProject = new CfProject();
         cfProject.hongId = MyApplication.getCfUser().hongId;
         cfProject.cfUserId = MyApplication.getCfUser().id;
+        cfProject.school = "西南石油大学";
     }
 
     public CfProject getCfProject() {
@@ -132,6 +133,7 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_next:
+                currentFragment.commitData(cfProject);
                 if (nextIndex == 4){
                     Toast.makeText(this,"提交项目..",Toast.LENGTH_SHORT).show();
                     saveProject();
@@ -156,7 +158,6 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
     private void next(){
         if (nextIndex <4 ){
             nextIndex++;
-            currentFragment.commitData(cfProject);
             selectPace(nextIndex);
             if (nextIndex == 4){
                 bt_next.setText("提交");

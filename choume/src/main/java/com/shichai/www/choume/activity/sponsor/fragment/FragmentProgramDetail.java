@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
@@ -28,12 +30,16 @@ import me.iwf.photopicker.utils.PhotoPickerIntent;
 /**
  * Created by HeJianjun on 2015/12/28.
  */
-public class FragmentProgramDetail extends BaseFragment implements View.OnClickListener,TextWatcher{
+public class FragmentProgramDetail extends BaseFragment implements View.OnClickListener,TextWatcher, RadioGroup.OnCheckedChangeListener {
     public static OnNextListener onNextListener;
     private static final int REQUEST_CODE = 3;
 
     private EditText et_title,et_des,et_money,et_person_count,et_product,et_product_count;
     private TextView tv_upload_image,tv_end_time;
+    private RadioGroup rgMajorType;
+    //主要完成指标类型
+    private int majorType = -100;
+    private long deadline = 0;
 
     private GridViewForScrollView gridView;
     private ImageAdapter adapter;
@@ -69,6 +75,8 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
 
         tv_upload_image = (TextView) rootView.findViewById(R.id.tv_upload_image);
         tv_end_time = (TextView) rootView.findViewById(R.id.tv_end_time);
+        rgMajorType = (RadioGroup) rootView.findViewById(R.id.rgMajorType);
+        rgMajorType.setOnCheckedChangeListener(this);
 
         tv_upload_image.setOnClickListener(this);
         tv_end_time.setOnClickListener(this);
@@ -100,6 +108,8 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
                     @Override
                     public void onClick(View v) {
                         tv_end_time.setText(datePicker.getCurrentDate());
+                        deadline = Tool.getDateLong(datePicker.getCurrentDate());
+                        onNextListener.onNext(checkFields());
                     }
                 });
                 dialog.show();
@@ -125,20 +135,15 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
     }
 
     @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-    }
-
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
     @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
+    public void onTextChanged(CharSequence s, int start, int before, int count) {}
     @Override
     public void afterTextChanged(Editable s) {
         onNextListener.onNext(checkFields());
     }
 
+    //检查字段是否符合要求
     private boolean checkFields(){
         String titleStr = et_title.getText().toString().trim();
         String descStr = et_des.getText().toString().trim();
@@ -162,8 +167,15 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
             return false;
         }
 
-        if (Tool.isEmpty(goodName) && !Tool.isEmpty(goodStr)){
+        if (!(Tool.isEmpty(goodName) == Tool.isEmpty(goodStr))){
             //UITools.toastMsg(getContext(),"您填了物品数量但没有填写物品名称");
+            return false;
+        }
+        //主要完成指标类型不是指定类型
+        if (majorType > 4 || majorType < 0) {
+            return false;
+        }
+        if (deadline <= Tool.getCurrentDateTime()){
             return false;
         }
 
@@ -200,7 +212,6 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
 //            UITools.toastMsg(getContext(),"您填了物品数量但没有填写物品名称");
             cfProject.requiredGoodsAmount = Integer.parseInt(goodStr);
             cfProject.requiredGoodsName = goodName;
-            return;
         }
         try {
             cfProject.requiredMoneyAmount = Tool.yuanToFen(moneyStr,0);
@@ -210,8 +221,28 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         }
         cfProject.title = titleStr;
         cfProject.desc  = descStr;
-        cfProject.fundTime = Calendar.getInstance().getTimeInMillis();
-        cfProject.deadline = Tool.getDateLong(tv_end_time.getText().toString());
+        cfProject.majarType = majorType;
+        cfProject.fundTime = Tool.getCurrentDateTime();
+        cfProject.deadline = deadline;
         getSponsorActivity().selectedPhotos = selectedPhotos;
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            case R.id.rbMoney:
+                majorType = OutsouringCrowdfunding.MONEY_CFPST;
+                break;
+            case R.id.rbPeoPle:
+                majorType = OutsouringCrowdfunding.PEOPLE_CFPST;
+                break;
+            case R.id.rbGoods:
+                majorType = OutsouringCrowdfunding.GOODS_CFPST;
+                break;
+            case R.id.rbEquity:
+                majorType = OutsouringCrowdfunding.EQUITY_CFPST;
+                break;
+        }
+        onNextListener.onNext(checkFields());
     }
 }
