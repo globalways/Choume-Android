@@ -16,13 +16,12 @@
             android:layout_height="wrap_content">
         <RadioButton
                 android:text="男"
+                android:id="@+id/rbMale"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
         <RadioButton
                 android:text="女"
-                android:button="@null"
-                android:background="@android:color/transparent"
-                android:drawableRight="@android:drawable/btn_radio"
+                android:id="@+id/rbFemale"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"/>
     </RadioGroup>

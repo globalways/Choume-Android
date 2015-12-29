@@ -7,7 +7,7 @@ import com.globalways.user.nano.UserCommon;
  */
 public enum  UserSex {
     UNKNOWN_Sex(UserCommon.UNKNOWN_Sex), MALE(UserCommon.MALE), FAMALE(UserCommon.FAMALE);
-    private int code;
+    public int code;
     private String desc;
 
     private UserSex(int code){

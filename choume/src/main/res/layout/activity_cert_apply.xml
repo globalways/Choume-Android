@@ -39,10 +39,12 @@
     </RadioGroup>
 
     <TextView
+            android:id="@+id/ibToSelectImage"
             android:text="提交材料"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:layout_gravity="left"
+            android:drawableRight="@mipmap/ico_add"
             android:gravity="center_vertical"
             android:background="@color/cmgray"
             android:layout_width="match_parent"

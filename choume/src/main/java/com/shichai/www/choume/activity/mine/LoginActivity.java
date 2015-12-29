@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
             return;
         }
-        UITools.toastMsg(this, "login...");
+        UITools.toastMsg(this, "登录...");
 
         pwd = MD5.getMD5(pwd);
         UserCommon.LoginAppParam loginAppParam = new UserCommon.LoginAppParam();

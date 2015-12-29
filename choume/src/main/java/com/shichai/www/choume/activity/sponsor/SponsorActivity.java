@@ -272,6 +272,7 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
     private void newProject(){
         RaiseCfProjectParam projectParam = new RaiseCfProjectParam();
         projectParam.token = LocalDataConfig.getToken(this);
+        projectParam.project = cfProject;
         CfProjectManager.getInstance().raiseCfProject(projectParam, new ManagerCallBack<RaiseCfProjectResp>() {
             @Override
             public void success(RaiseCfProjectResp result) {

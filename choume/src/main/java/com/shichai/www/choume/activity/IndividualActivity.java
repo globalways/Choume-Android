@@ -34,7 +34,6 @@ import java.util.List;
  * Created by HeJianjun on 2015/12/22.
  */
 public class IndividualActivity extends BaseActivity implements View.OnClickListener {
-    private static final int REQUEST_CODE_AUTH = 2;
     private static final int CAPTURE_CODE = 1;
 
     private RelativeLayout rlToCert, rlToChangeNick, rlToChangeSex, rlToManageAddress, rlToChangePwd;
@@ -111,11 +110,10 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                 startActivityForResult(intent, CAPTURE_CODE);
                 break;
             case R.id.tvCertType:
-                intent = new PhotoPickerIntent(this);
-                intent.setPhotoCount(1);
-                intent.setShowCamera(true);
-                intent.setShowGif(false);
-                startActivityForResult(intent, REQUEST_CODE_AUTH);
+                //没有认证信息才能去提交认证材料
+                if (MyApplication.getCfUser().certification == null) {
+                    startActivity(new Intent(this,CertApplyActivity.class));
+                }
                 break;
         }
     }
@@ -193,8 +191,6 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                      }
                  });
             }
-        }else  if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_AUTH) {//认证图片处理
-
         }
 
 
