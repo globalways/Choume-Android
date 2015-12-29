@@ -1,6 +1,8 @@
 package com.shichai.www.choume.activity.mine.profile;
 
+import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -68,12 +70,12 @@ public class ChangeNickActivity extends BaseActivity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(ChangeNickActivity.this, msg);
+                UITools.ToastMsg(ChangeNickActivity.this, msg);
             }
 
             @Override
             public void error(Exception e) {
-               UITools.toastServerError(ChangeNickActivity.this);
+               UITools.ToastServerError(ChangeNickActivity.this);
             }
         });
     }

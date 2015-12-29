@@ -251,12 +251,12 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
 
                 @Override
                 public void warning(int code, String msg) {
-                    UITools.toastMsg(SponsorActivity.this, "上传图片失败" + msg);
+                    UITools.ToastMsg(SponsorActivity.this, "上传图片失败"+msg);
                 }
 
                 @Override
                 public void error(Exception e) {
-                    UITools.toastServerError(SponsorActivity.this);
+                    UITools.ToastServerError(SponsorActivity.this);
                 }
 
                 @Override
@@ -275,18 +275,18 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
         CfProjectManager.getInstance().raiseCfProject(projectParam, new ManagerCallBack<RaiseCfProjectResp>() {
             @Override
             public void success(RaiseCfProjectResp result) {
-                UITools.toastMsg(SponsorActivity.this, "创建项目成功，等待审核！");
+                UITools.ToastMsg(SponsorActivity.this, "创建项目成功，等待审核！");
                 SponsorActivity.this.finish();
             }
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(SponsorActivity.this, "创建项目失败:" + msg);
+                UITools.ToastMsg(SponsorActivity.this, "创建项目失败:"+msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.toastServerError(SponsorActivity.this);
+                UITools.ToastServerError(SponsorActivity.this);
             }
         });
     }

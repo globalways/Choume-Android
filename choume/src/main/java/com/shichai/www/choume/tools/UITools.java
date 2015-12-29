@@ -10,16 +10,12 @@ import com.shichai.www.choume.activity.MainActivity;
  */
 public class UITools {
 
-    public static void toastMsg(Context context, String msg){
+    public static void ToastMsg(Context context, String msg){
         Toast.makeText(context,msg, Toast.LENGTH_SHORT).show();
     }
 
-    public static void toastServerError(Context context){
-        Toast.makeText(context,"连接服务器失败!", Toast.LENGTH_SHORT).show();
-    }
-
-    public static void warning(Context context,String friendlymsg, String msg){
-        Toast.makeText(context,friendlymsg + "("+msg+")", Toast.LENGTH_SHORT).show();
+    public static void ToastServerError(Context context){
+        Toast.makeText(context,"网络错误!请确认您的网络是正常的", Toast.LENGTH_SHORT).show();
     }
 
     public static void jumpToMainActivity(Context context, boolean isLogin) {
