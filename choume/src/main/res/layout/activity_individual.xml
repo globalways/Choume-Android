@@ -4,14 +4,20 @@
     android:fitsSystemWindows="true"
     android:background="?attr/colorPrimary"
     android:layout_height="match_parent">
+
+    <include
+        layout="@layout/app_bar_layout">
+    </include>
     <LinearLayout
-        android:background="@color/cmwhite"
+        android:background="@color/default_bg"
         android:orientation="vertical"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
-        <include
-            layout="@layout/app_bar_layout">
-        </include>
+        <LinearLayout
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
         <View
             android:layout_height="1px"
             android:background="@color/cmgray"
@@ -196,7 +202,7 @@
             android:layout_height="1px"
             android:background="@color/cmgray"
             android:layout_width="match_parent"/>
-
+</LinearLayout>
 
     </LinearLayout>
 

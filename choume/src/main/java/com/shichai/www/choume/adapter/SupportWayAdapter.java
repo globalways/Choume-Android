@@ -13,27 +13,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by HeJianjun on 2015/12/25.
+ * Created by HeJianjun on 2015/12/29.
  */
-public class SupportAdapter extends BaseAdapter {
+public class SupportWayAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
     private List<String> strings = new ArrayList<>();
 
-    public SupportAdapter(Context context) {
+    public SupportWayAdapter(Context context) {
         this.context = context;
         strings = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void addDatas(List<String> strings){
-        if (strings != null && strings.size() > 0 ){
+    public void addDatas(List<String> strings) {
+        if (strings != null && strings.size() > 0) {
             this.strings.addAll(strings);
             notifyDataSetChanged();
         }
     }
 
-    public void clearDatas(){
+    public void clearDatas() {
         strings.clear();
         notifyDataSetChanged();
     }
@@ -56,18 +56,18 @@ public class SupportAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
-        if (convertView == null){
+        if (convertView == null) {
             holder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.item_support,null);
+            convertView = inflater.inflate(R.layout.item_support_way, null);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         return convertView;
     }
 
-    class ViewHolder{
+    class ViewHolder {
         TextView tt;
     }
 }

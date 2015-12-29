@@ -11,6 +11,9 @@
         android:gravity="center"
         android:textColor="#2d3b4a"
         android:textSize="20sp"
+        android:maxEms="6"
+        android:ellipsize="end"
+        android:singleLine="true"
         android:paddingRight="40dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />

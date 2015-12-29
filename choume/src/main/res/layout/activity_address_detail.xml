@@ -1,61 +1,67 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/cmwhite"
-              android:orientation="vertical"
-              tools:context="com.shichai.www.choume.activity.mine.profile.ChangePwdActivity">
+      xmlns:tools="http://schemas.android.com/tools"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:orientation="vertical"
+      android:fitsSystemWindows="true"
+      android:background="?attr/colorPrimary"
+      tools:context="com.shichai.www.choume.activity.mine.profile.ChangePwdActivity">
 
     <include
             layout="@layout/app_bar_layout">
     </include>
 
-    <RelativeLayout
+    <LinearLayout
+        android:background="@color/default_bg"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
             android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:padding="10dp"
+            android:background="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
 
         <EditText
-                android:id="@+id/etAddrName"
-                android:background="@color/selector_edittext_bg"
-                android:layout_width="match_parent"
-                android:hint="收货人"
-                android:layout_height="50dp"/>
+            android:id="@+id/etAddrName"
+            android:background="@color/selector_edittext_bg"
+            android:layout_width="match_parent"
+            android:hint="收货人"
+            android:layout_height="50dp"/>
         <EditText
-                android:layout_below="@id/etAddrName"
-                android:id="@+id/etAddrContact"
-                android:hint="联系电话"
-                android:inputType="number"
-                android:layout_marginTop="20dp"
-                android:background="@color/selector_edittext_bg"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+            android:layout_below="@id/etAddrName"
+            android:id="@+id/etAddrContact"
+            android:hint="联系电话"
+            android:inputType="number"
+            android:layout_marginTop="20dp"
+            android:background="@color/selector_edittext_bg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
 
         <TextView
-                android:layout_below="@id/etAddrContact"
-                android:id="@+id/etAddrArea"
-                android:text="选择地区"
-                android:textSize="18sp"
-                android:textColor="@color/cmblack_333333"
-                android:layout_marginTop="20dp"
-                android:background="@color/selector_edittext_bg"
-                android:layout_width="match_parent"
-                android:gravity="center_vertical"
-                android:layout_height="50dp"/>
+            android:layout_below="@id/etAddrContact"
+            android:id="@+id/etAddrArea"
+            android:text="选择地区"
+            android:textSize="18sp"
+            android:textColor="@color/cmblack_333333"
+            android:layout_marginTop="20dp"
+            android:background="@color/selector_edittext_bg"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="50dp"/>
 
         <EditText
-                android:layout_below="@id/etAddrArea"
-                android:id="@+id/etAddrDetail"
-                android:hint="详细地址"
-                android:layout_marginTop="20dp"
-                android:background="@color/selector_edittext_bg"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+            android:layout_below="@id/etAddrArea"
+            android:id="@+id/etAddrDetail"
+            android:hint="详细地址"
+            android:layout_marginTop="20dp"
+            android:background="@color/selector_edittext_bg"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+            </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

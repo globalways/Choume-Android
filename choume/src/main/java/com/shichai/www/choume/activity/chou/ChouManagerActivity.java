@@ -18,7 +18,7 @@ public class ChouManagerActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chou_manager);
         initActionBar();
-        setTitle("项目管理");
+        setTitle("筹钱买电脑");
     }
 
     @Override

@@ -1,53 +1,68 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:fitsSystemWindows="true"
-                android:background="@color/cmwhite"
-                android:orientation="vertical"
-                tools:context="com.shichai.www.choume.activity.mine.profile.CertApplyActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical"
+    tools:context="com.shichai.www.choume.activity.mine.profile.CertApplyActivity">
 
 
     <include
             layout="@layout/app_bar_layout">
     </include>
 
+    <LinearLayout
+        android:background="@color/default_bg"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <TextView
-            android:text="认证类型"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_gravity="left"
-            android:gravity="center_vertical"
-            android:background="@color/cmgray"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"/>
+        android:text="认证类型"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_gravity="left"
+        android:gravity="center_vertical"
+        android:background="@color/cmgray"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
     <RadioGroup
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <RadioButton
-                android:text="机构"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="50dp"/>
+            android:text="机构"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
 
         <RadioButton
-                android:text="学生"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="50dp"/>
+            android:text="学生"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="50dp"/>
     </RadioGroup>
 
     <TextView
-            android:id="@+id/ibToSelectImage"
-            android:text="提交材料"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:layout_gravity="left"
-            android:drawableRight="@mipmap/ico_add"
-            android:gravity="center_vertical"
-            android:background="@color/cmgray"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"/>
+        android:id="@+id/ibToSelectImage"
+        android:text="提交材料"
+        android:drawableRight="@mipmap/ico_add"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_gravity="left"
+        android:gravity="center_vertical"
+        android:background="@color/cmgray"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"/>
 
+    <com.shichai.www.choume.view.GridViewForScrollView
+        android:id="@+id/gridView"
+        android:numColumns="4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        />
+    </LinearLayout>
 </LinearLayout>
