@@ -1,6 +1,5 @@
 package com.shichai.www.choume.activity;
 
-import android.graphics.Color;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -12,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 /**
  * Created by HeJianjun on 2015/12/7.

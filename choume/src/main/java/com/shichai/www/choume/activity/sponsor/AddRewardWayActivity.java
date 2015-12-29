@@ -9,11 +9,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.activity.sponsor.fragment.FragmentRewardWay;
-
-import java.io.Serializable;
 
 /**
  * Created by HeJianjun on 2015/12/28.

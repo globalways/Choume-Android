@@ -3,10 +3,9 @@ package com.shichai.www.choume.activity.mine;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.MyMessageAdapter;
-import com.shichai.www.choume.adapter.MySponsorAdapter;
 import com.shichai.www.choume.view.PullToRefreshListView;
 
 import java.util.ArrayList;

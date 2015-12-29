@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.globalways.user.pingpp.nano.UserPingpp;
 import com.globalways.user.wallet.nano.UserWallet;
 import com.globalways.user.wallet.nano.UserWalletCommon.UserWalletHistory;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 //import com.pingplusplus.android.PaymentActivity;
 import com.pingplusplus.android.PaymentActivity;
 import com.shichai.www.choume.activity.BaseActivity;

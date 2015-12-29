@@ -1,14 +1,12 @@
 package com.shichai.www.choume.activity.wealth;
 
-import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 
 /**

@@ -9,10 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.tools.Tool;
-import com.shichai.www.choume.tools.Utils;
 
 /**
  * Created by HeJianjun on 2015/12/28.

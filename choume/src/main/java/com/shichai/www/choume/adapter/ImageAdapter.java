@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 import java.io.File;
 import java.util.ArrayList;

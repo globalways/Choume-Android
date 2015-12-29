@@ -42,7 +42,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 /**
  * Numeric wheel view.

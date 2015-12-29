@@ -1,15 +1,11 @@
 package com.shichai.www.choume.view.dateareapicker.wheelview;
 
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.List;
 
 
-import android.R.integer;
-import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.View;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 public class WheelMain {
 

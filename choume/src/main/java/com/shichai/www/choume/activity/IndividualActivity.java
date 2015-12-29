@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUser;
 import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserApp;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.mine.profile.*;
 import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;

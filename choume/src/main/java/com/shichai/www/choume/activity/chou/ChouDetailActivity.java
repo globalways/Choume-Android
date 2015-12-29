@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.MySponsorAdapter;
 import com.shichai.www.choume.adapter.SupportAdapter;

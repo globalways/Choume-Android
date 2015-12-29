@@ -8,7 +8,7 @@ import android.widget.EditText;
 import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserApp;
 import com.globalways.user.nano.UserCommon;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.activity.MainActivity;
 import com.shichai.www.choume.application.MyApplication;

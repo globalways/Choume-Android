@@ -1,17 +1,12 @@
 package com.shichai.www.choume.activity.mine.profile;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.RadioGroup;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
-import com.shichai.www.choume.application.MyApplication;
-import com.shichai.www.choume.network.manager.UserManager;
 import com.shichai.www.choume.network.protoenum.UserSex;
-import com.shichai.www.choume.tools.UITools;
 
 public class ChangeSexActivity extends BaseActivity {
 

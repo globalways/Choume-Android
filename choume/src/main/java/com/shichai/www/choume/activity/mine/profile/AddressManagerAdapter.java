@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.globalways.user.nano.UserCommon;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 import java.util.List;
 

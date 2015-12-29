@@ -21,7 +21,7 @@ import android.widget.*;
 
 import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserCommon;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.chou.ChouListActvity;
 import com.shichai.www.choume.activity.mine.*;
 import com.shichai.www.choume.application.MyApplication;

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.sponsor.AddRewardWayActivity;
 
 import java.util.ArrayList;

@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 
 public class PickerDialog {

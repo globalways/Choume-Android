@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.view.dateareapicker.wheelcity.AddressData;
 import com.shichai.www.choume.view.dateareapicker.wheelcity.OnWheelChangedListener;
 import com.shichai.www.choume.view.dateareapicker.wheelcity.WheelView;
@@ -19,7 +19,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by wyp on 15/12/28.

@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.*;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.activity.sponsor.fragment.BaseFragment;
 import com.shichai.www.choume.activity.sponsor.fragment.FragmentChooseType;

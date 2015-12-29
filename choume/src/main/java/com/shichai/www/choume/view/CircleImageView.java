@@ -16,7 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 public class CircleImageView extends ImageView {
 

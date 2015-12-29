@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 /**
  * Created by HeJianjun on 2015/12/23.

@@ -27,7 +27,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 
 /**

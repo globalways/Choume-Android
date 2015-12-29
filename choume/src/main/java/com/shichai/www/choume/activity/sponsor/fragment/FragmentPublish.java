@@ -7,7 +7,7 @@ import android.view.View;
 
 import android.widget.EditText;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.tools.Tool;
 
 /**

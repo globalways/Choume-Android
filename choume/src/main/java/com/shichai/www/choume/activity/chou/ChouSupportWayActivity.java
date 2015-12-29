@@ -3,7 +3,7 @@ package com.shichai.www.choume.activity.chou;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 
 /**

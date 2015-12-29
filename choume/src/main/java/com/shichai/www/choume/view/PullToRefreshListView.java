@@ -23,7 +23,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 
 /**

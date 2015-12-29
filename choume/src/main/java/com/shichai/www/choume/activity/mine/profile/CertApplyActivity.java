@@ -1,10 +1,8 @@
 package com.shichai.www.choume.activity.mine.profile;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 
 public class CertApplyActivity extends BaseActivity {

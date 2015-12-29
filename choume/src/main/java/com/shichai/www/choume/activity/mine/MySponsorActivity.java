@@ -6,19 +6,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
-import com.globalways.choume.proto.nano.OutsouringCrowdfunding.FindCfProjectsParam;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.activity.chou.ChouManagerActivity;
 import com.shichai.www.choume.activity.sponsor.SponsorActivity;
 import com.shichai.www.choume.adapter.MySponsorAdapter;
 import com.shichai.www.choume.application.MyApplication;
-import com.shichai.www.choume.network.manager.CfProjectManager;
-import com.shichai.www.choume.network.manager.CfUserManager;
-import com.shichai.www.choume.tools.UITools;
 import com.shichai.www.choume.view.PullToRefreshListView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 

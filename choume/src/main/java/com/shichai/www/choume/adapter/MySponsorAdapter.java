@@ -2,8 +2,6 @@ package com.shichai.www.choume.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +9,9 @@ import android.widget.*;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUser;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.chou.ChouDetailActivity;
 import com.shichai.www.choume.application.MyApplication;
-import com.shichai.www.choume.tools.UITools;
 
 import java.util.ArrayList;
 import java.util.List;

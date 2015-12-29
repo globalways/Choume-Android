@@ -5,7 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 /**
  * Created by HeJianjun on 2015/12/22.

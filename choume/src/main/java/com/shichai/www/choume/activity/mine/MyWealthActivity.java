@@ -8,7 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.globalways.user.wallet.nano.UserWallet;
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.activity.wealth.RechargeActivity;
 import com.shichai.www.choume.application.MyApplication;

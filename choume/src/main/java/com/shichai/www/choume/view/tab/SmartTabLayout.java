@@ -33,7 +33,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.outsouring.crowdfunding.R;
+import com.globalways.choume.R;
 
 
 /**
