@@ -58,6 +58,7 @@
         android:id="@+id/textView19" />
 
     <TextView
+        android:textSize="20sp"
         android:padding="10dp"
         android:background="@color/white"
         android:gravity="center_vertical"
@@ -66,14 +67,14 @@
         android:layout_height="wrap_content"
         android:text="参与管理"
         android:onClick="onClick"
-        android:layout_margin="10dp"
+        android:layout_marginBottom="10dp"
         android:id="@+id/tv_manager" />
 
     <TextView
+        android:textSize="20sp"
         android:padding="10dp"
         android:background="@color/white"
         android:onClick="onClick"
-        android:layout_margin="10dp"
         android:gravity="center_vertical"
         android:drawableRight="@mipmap/ico_arrow_right"
         android:layout_width="match_parent"
