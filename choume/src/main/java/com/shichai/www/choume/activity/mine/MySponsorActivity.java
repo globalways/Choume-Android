@@ -105,8 +105,7 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
-    public void onConfig(long projectId) {
+    public void onConfig(long projectId, int position) {
         startActivity(new Intent(this, ChouManagerActivity.class));
-
     }
 }

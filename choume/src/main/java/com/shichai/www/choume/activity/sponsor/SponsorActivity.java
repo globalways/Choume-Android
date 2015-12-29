@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.*;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.R;
@@ -243,7 +244,9 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
 
                     CfProjectPic[] pics = new CfProjectPic[result.size()];
                     for (int i = 0;i< result.size();i++) {
-                        pics[i].url = result.get(i);
+                        CfProjectPic pic = new CfProjectPic();
+                        pic.url = result.get(i);
+                        pics[i] = pic;
                     }
                     cfProject.pics = pics;
                     newProject();

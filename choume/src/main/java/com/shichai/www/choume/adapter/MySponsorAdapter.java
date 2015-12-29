@@ -12,6 +12,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.R;
 import com.shichai.www.choume.activity.chou.ChouDetailActivity;
 import com.shichai.www.choume.application.MyApplication;
+import com.shichai.www.choume.tools.PicassoImageLoader;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,19 +32,23 @@ public class MySponsorAdapter extends BaseAdapter {
     private OnConfigListener onConfigListener;
 
     private static final int INIT_PAGE = 1;
+    private int next_page = INIT_PAGE;
     private int type = NORMAL;
     private LayoutInflater inflater;
     private Context context;
     private List<CfProject> cfProjects;
-    private int next_page = INIT_PAGE;
     private List<String> strings;
+
+    private PicassoImageLoader imageLoader;
 
     public MySponsorAdapter(Context context) {
         this.context = context;
+        imageLoader = new PicassoImageLoader(context);
         strings = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     public MySponsorAdapter(Context context, int type) {
+        imageLoader = new PicassoImageLoader(context);
         this.context = context;
         this.type = type;
         strings = new ArrayList<>();
@@ -60,12 +65,20 @@ public class MySponsorAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return strings.size();
+//        return strings.size();
+        if (cfProjects != null) {
+            return cfProjects.size();
+        }
+        return 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return strings.get(position);
+//        return strings.get(position);
+        if (cfProjects != null) {
+            return cfProjects.get(position);
+        }
+        return null;
     }
 
     @Override
@@ -80,11 +93,13 @@ public class MySponsorAdapter extends BaseAdapter {
         if (convertView == null){
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.item_my_sponsor,null);
-            holder.progressBar     = (ProgressBar) convertView.findViewById(R.id.progressBar);
-            holder.main            = convertView.findViewById(R.id.main);
-            holder.ibControl       = (ImageButton) convertView.findViewById(R.id.ibControl);
-            holder.tvCfProjectName = (TextView) convertView.findViewById(R.id.tv_my_sponsor_name);
-            holder.tvProgress      = (TextView) convertView.findViewById(R.id.tvProgress);
+            holder.progressBar           = (ProgressBar) convertView.findViewById(R.id.progressBar);
+            holder.main                  = convertView.findViewById(R.id.main);
+            holder.ibControl             = (ImageButton) convertView.findViewById(R.id.ibControl);
+            holder.tvCfProjectName       = (TextView) convertView.findViewById(R.id.tv_my_sponsor_name);
+            holder.tvProgress            = (TextView) convertView.findViewById(R.id.tvProgress);
+            holder.ivProjectPic          = (ImageView) convertView.findViewById(R.id.ivProjectPic);
+            holder.ivProjectCfuserAvatar = (ImageView) convertView.findViewById(R.id.ivProjectCfuserAvatar);
             switch (type) {
                 case NORMAL:
                     holder.ibControl.setVisibility(View.GONE);
@@ -94,6 +109,8 @@ public class MySponsorAdapter extends BaseAdapter {
                     break;
                 case CONFIG:
                     holder.ibControl.setImageDrawable(context.getResources().getDrawable(R.mipmap.ico_my_account_option));
+                    //自己的项目隐藏头像
+                    holder.ivProjectCfuserAvatar.setVisibility(View.GONE);
                     break;
                 default:
                     holder.ibControl.setVisibility(View.GONE);
@@ -122,11 +139,19 @@ public class MySponsorAdapter extends BaseAdapter {
                     willCollect = !isCollectedByCurrentUser(cfProjects.get(position));
                     onCollectListener.onCollect(cfProjects.get(position).id, willCollect);
                 }else if (type == CONFIG) {
-                    //onConfigListener.onConfig(cfProjects.get(position).id);
-                    onConfigListener.onConfig(1234);
+                    onConfigListener.onConfig(cfProjects.get(position).id, position);
+                    //onConfigListener.onConfig(1234);
                 }
             }
         });
+        //set datas
+        holder.tvCfProjectName.setText(cfProjects.get(position).title);
+        holder.tvProgress.setText(cfProjects.get(position).desc);
+        if(cfProjects.get(position).pics == null || cfProjects.get(position).pics.length ==0){
+            holder.ivProjectPic.setVisibility(View.GONE);
+        }else {
+            imageLoader.loadUrlImageToView(cfProjects.get(position).pics[0].url,400,400,R.mipmap.guangyuan_1,R.mipmap.guangyuan_1,holder.ivProjectPic);
+        }
         return convertView;
     }
 
@@ -135,6 +160,7 @@ public class MySponsorAdapter extends BaseAdapter {
         ProgressBar progressBar;
         ImageButton ibControl;
         TextView tvCfProjectName, tvProgress;
+        ImageView ivProjectPic, ivProjectCfuserAvatar;
     }
 
     public void setData(boolean isInit, List<CfProject> list) {
@@ -190,7 +216,7 @@ public class MySponsorAdapter extends BaseAdapter {
     }
 
     public interface OnConfigListener{
-        public void onConfig(long projectId);
+        public void onConfig(long projectId, int position);
     }
 
 }

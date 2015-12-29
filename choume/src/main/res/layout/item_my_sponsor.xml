@@ -45,7 +45,7 @@
         android:paddingBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:id="@+id/ivProjectPic"
          />
     <RelativeLayout
         android:layout_height="50dp"
@@ -76,7 +76,7 @@
             android:src="@mipmap/test_head"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/imageView2"
+            android:id="@+id/ivProjectCfuserAvatar"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
