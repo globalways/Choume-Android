@@ -6,7 +6,6 @@ import android.widget.RadioGroup;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.outsouring.crowdfunding.R;
-import com.shichai.www.choume.network.protoenum.CrowdFundingCategory;
 
 /**
  * Created by HeJianjun on 2015/12/28.
