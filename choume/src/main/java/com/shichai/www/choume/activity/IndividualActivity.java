@@ -1,17 +1,8 @@
 package com.shichai.www.choume.activity;
 
-import android.app.AlertDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.graphics.drawable.Drawable;
-import android.media.ExifInterface;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import android.view.View;
@@ -36,7 +27,6 @@ import me.iwf.photopicker.PhotoPickerActivity;
 import me.iwf.photopicker.utils.PhotoPickerIntent;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,12 +155,12 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
 
                              @Override
                              public void warning(int code, String msg) {
-                                 UITools.ToastMsg(IndividualActivity.this, msg);
+                                 UITools.toastMsg(IndividualActivity.this, msg);
                              }
 
                              @Override
                              public void error(Exception e) {
-                                UITools.ToastServerError(IndividualActivity.this);
+                                UITools.toastServerError(IndividualActivity.this);
                              }
                          });
                      }
@@ -182,13 +172,13 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                      @Override
                      public void error(Exception e) {
                          super.error(e);
-                         UITools.ToastServerError(IndividualActivity.this);
+                         UITools.toastServerError(IndividualActivity.this);
                      }
 
                      @Override
                      public void warning(int code, String msg) {
                          super.warning(code, msg);
-                         UITools.ToastMsg(IndividualActivity.this, msg);
+                         UITools.toastMsg(IndividualActivity.this, msg);
                      }
                  });
             }

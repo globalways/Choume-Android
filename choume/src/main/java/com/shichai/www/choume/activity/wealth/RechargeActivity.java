@@ -5,7 +5,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -13,7 +12,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import com.alipay.sdk.app.PayTask;
 import com.globalways.user.pingpp.nano.UserPingpp;
 import com.globalways.user.wallet.nano.UserWallet;
 import com.globalways.user.wallet.nano.UserWalletCommon.UserWalletHistory;
@@ -21,8 +19,6 @@ import com.outsouring.crowdfunding.R;
 //import com.pingplusplus.android.PaymentActivity;
 import com.pingplusplus.android.PaymentActivity;
 import com.shichai.www.choume.activity.BaseActivity;
-import com.shichai.www.choume.activity.mine.RegisterActivity;
-import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.HttpConfig;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.ThirdPartyManager;
@@ -99,7 +95,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
         if (Tool.isEmpty(amountStr))
             return;
         if (selectedChannel == null) {
-            UITools.ToastMsg(this, "请选择支付方式");
+            UITools.toastMsg(this, "请选择支付方式");
             return;
         }
         long amount = Tool.yuanToFen(amountStr);
@@ -115,12 +111,12 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(context, msg);
+                UITools.toastMsg(context, msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(context);
+                UITools.toastServerError(context);
             }
         });
     }
@@ -148,12 +144,12 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(context, msg);
+                UITools.toastMsg(context, msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(context);
+                UITools.toastServerError(context);
             }
         });
     }
@@ -185,7 +181,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                         intent.putExtra(RechargeSuccessActivity.ISSUCCESS, false);
                         startActivity(intent);
                         this.finish();
-                        UITools.ToastMsg(this,result+"  "+ errorMsg+"  "+ extraMsg);
+                        UITools.toastMsg(this, result + "  " + errorMsg + "  " + extraMsg);
                         break;
                 }
             }

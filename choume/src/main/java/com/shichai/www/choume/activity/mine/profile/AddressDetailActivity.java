@@ -5,7 +5,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import com.globalways.user.nano.UserApp;
 import com.globalways.user.nano.UserCommon;
 import com.outsouring.crowdfunding.R;
@@ -118,12 +117,12 @@ public class AddressDetailActivity extends BaseActivity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(AddressDetailActivity.this,msg);
+                UITools.toastMsg(AddressDetailActivity.this, msg);
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(AddressDetailActivity.this);
+                UITools.toastServerError(AddressDetailActivity.this);
             }
         });
     }

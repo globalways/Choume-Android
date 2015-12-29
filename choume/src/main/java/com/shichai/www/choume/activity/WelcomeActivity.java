@@ -1,10 +1,7 @@
 package com.shichai.www.choume.activity;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -77,14 +74,14 @@ public class WelcomeActivity extends Activity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.ToastMsg(WelcomeActivity.this, msg);
+                UITools.toastMsg(WelcomeActivity.this, msg);
                 UITools.jumpToMainActivity(WelcomeActivity.this, false);
                 WelcomeActivity.this.finish();
             }
 
             @Override
             public void error(Exception e) {
-                UITools.ToastServerError(WelcomeActivity.this);
+                UITools.toastServerError(WelcomeActivity.this);
                 UITools.jumpToMainActivity(WelcomeActivity.this, false);
                 WelcomeActivity.this.finish();
             }

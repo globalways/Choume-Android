@@ -151,22 +151,22 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         String goodName = et_product.getText().toString().trim();
 
         if (Tool.isEmpty(titleStr)){
-            //UITools.ToastMsg(getContext(),"请填写标题");
+            //UITools.toastMsg(getContext(),"请填写标题");
             return false;
         }
 
         if (Tool.isEmpty(descStr)) {
-            //UITools.ToastMsg(getContext(),"请填写描述");
+            //UITools.toastMsg(getContext(),"请填写描述");
             return false;
         }
 
         if (Tool.isEmpty(moneyStr) && Tool.isEmpty(peopleStr) && Tool.isEmpty(goodStr)) {
-            //UITools.ToastMsg(getContext(),"筹资／召集人员／筹集物品 至少填一种");
+            //UITools.toastMsg(getContext(),"筹资／召集人员／筹集物品 至少填一种");
             return false;
         }
 
         if (Tool.isEmpty(goodName) && !Tool.isEmpty(goodStr)){
-            //UITools.ToastMsg(getContext(),"您填了物品数量但没有填写物品名称");
+            //UITools.toastMsg(getContext(),"您填了物品数量但没有填写物品名称");
             return false;
         }
 
@@ -185,22 +185,22 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         String goodName = et_product.getText().toString().trim();
 
 //        if (Tool.isEmpty(titleStr)){
-//            UITools.ToastMsg(getContext(),"请填写标题");
+//            UITools.toastMsg(getContext(),"请填写标题");
 //            return;
 //        }
 //
 //        if (Tool.isEmpty(descStr)) {
-//            UITools.ToastMsg(getContext(),"请填写描述");
+//            UITools.toastMsg(getContext(),"请填写描述");
 //            return;
 //        }
 //
 //        if (Tool.isEmpty(moneyStr) && Tool.isEmpty(peopleStr) && Tool.isEmpty(goodStr)) {
-//            UITools.ToastMsg(getContext(),"筹资／召集人员／筹集物品 至少填一种");
+//            UITools.toastMsg(getContext(),"筹资／召集人员／筹集物品 至少填一种");
 //            return;
 //        }
 //
         if (!Tool.isEmpty(goodName) && !Tool.isEmpty(goodStr)){
-//            UITools.ToastMsg(getContext(),"您填了物品数量但没有填写物品名称");
+//            UITools.toastMsg(getContext(),"您填了物品数量但没有填写物品名称");
             cfProject.requiredGoodsAmount = Integer.parseInt(goodStr);
             cfProject.requiredGoodsName = goodName;
             return;

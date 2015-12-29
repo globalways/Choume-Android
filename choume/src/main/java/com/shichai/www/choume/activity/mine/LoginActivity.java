@@ -81,7 +81,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
             return;
         }
-        UITools.ToastMsg(this, "login...");
+        UITools.toastMsg(this, "login...");
 
         pwd = MD5.getMD5(pwd);
         UserCommon.LoginAppParam loginAppParam = new UserCommon.LoginAppParam();
@@ -90,7 +90,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         CfUserManager.getInstance().login(loginAppParam, new ManagerCallBack<OutsouringCrowdfunding.LoginCFAppResp>() {
             @Override
             public void success(OutsouringCrowdfunding.LoginCFAppResp result) {
-                UITools.ToastMsg(context,"登录成功");
+                UITools.toastMsg(context, "登录成功");
                 //跳转
                 MyApplication.setCfUser(result.cfUser);
                 LocalDataConfig.setToken(context, result.token);
@@ -103,13 +103,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void warning(int code, String msg) {
                 setResult(Activity.RESULT_CANCELED);
-                UITools.ToastMsg(context, msg);
+                UITools.toastMsg(context, msg);
             }
 
             @Override
             public void error(Exception e) {
                 setResult(Activity.RESULT_CANCELED);
-                UITools.ToastServerError(context);
+                UITools.toastServerError(context);
             }
         });
     }
