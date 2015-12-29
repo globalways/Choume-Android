@@ -9,6 +9,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.FindCfProjectsParam;
 import com.outsouring.crowdfunding.R;
 import com.shichai.www.choume.activity.BaseActivity;
+import com.shichai.www.choume.activity.chou.ChouManagerActivity;
 import com.shichai.www.choume.activity.sponsor.SponsorActivity;
 import com.shichai.www.choume.adapter.MySponsorAdapter;
 import com.shichai.www.choume.application.MyApplication;
@@ -110,7 +111,7 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onConfig(long projectId) {
-        //管理project入口
-        UITools.ToastMsg(this, "入口在 MySponsorActivity onConfig方法");
+        startActivity(new Intent(this, ChouManagerActivity.class));
+
     }
 }
