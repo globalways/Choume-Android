@@ -1,4 +1,4 @@
-package com.shichai.www.choume.activity.mine.profile;
+package com.shichai.www.choume.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

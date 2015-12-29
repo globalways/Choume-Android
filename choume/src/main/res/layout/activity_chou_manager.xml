@@ -11,53 +11,42 @@
     <LinearLayout
         android:background="@color/default_bg"
         android:orientation="vertical"
+        android:showDividers="middle|end"
+        android:divider="@drawable/divider_gray"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
     <TextView
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:layout_marginBottom="10dp"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="名称：筹钱买电脑"
+        android:text="已经筹到的钱：10000元"
         android:id="@+id/textView2" />
 
     <TextView
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:layout_marginBottom="10dp"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="描述：一定会好好学习"
+        android:text="截至日期：2015.12.30"
         android:id="@+id/textView6" />
 
     <TextView
         android:padding="10dp"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:layout_marginBottom="10dp"
         android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="我阿成"
+        android:text="众筹类别：筹钱"
         android:id="@+id/textView9" />
 
-    <TextView
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:layout_marginBottom="10dp"
-        android:background="@color/white"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="操"
-        android:id="@+id/textView19" />
-
-    <TextView
+        <TextView
+        android:textColor="@color/cmblack_333333"
         android:textSize="20sp"
         android:padding="10dp"
         android:background="@color/white"
@@ -67,10 +56,10 @@
         android:layout_height="wrap_content"
         android:text="参与管理"
         android:onClick="onClick"
-        android:layout_marginBottom="10dp"
         android:id="@+id/tv_manager" />
 
     <TextView
+        android:textColor="@color/cmblack_333333"
         android:textSize="20sp"
         android:padding="10dp"
         android:background="@color/white"

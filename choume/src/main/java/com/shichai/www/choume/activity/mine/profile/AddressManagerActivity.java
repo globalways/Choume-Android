@@ -9,6 +9,7 @@ import android.widget.ListView;
 import com.globalways.user.nano.UserCommon;
 import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
+import com.shichai.www.choume.adapter.AddressManagerAdapter;
 import com.shichai.www.choume.application.MyApplication;
 
 import java.util.ArrayList;
