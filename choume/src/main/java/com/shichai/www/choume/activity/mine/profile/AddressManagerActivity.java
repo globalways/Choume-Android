@@ -21,7 +21,7 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
     private AddressManagerAdapter adapter;
     private ListView lvAddrList;
     private List<UserCommon.UserAddress> addrList;
-    public static final String ADDR_INFO = "addr_info";
+    public static final String ADDR_INDEX = "addr_index";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,10 +72,8 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        UserCommon.UserAddress address = addrList.get(position);
-        String[] addrInfo = new String[]{address.name, address.contact, address.area, address.detail};
         Intent intent = new Intent(this, AddressDetailActivity.class);
-        intent.putExtra(ADDR_INFO, addrInfo);
+        intent.putExtra(ADDR_INDEX, position);
         startActivity(intent);
     }
 }

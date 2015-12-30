@@ -59,6 +59,16 @@
             android:background="@color/selector_edittext_bg"
             android:layout_width="match_parent"
             android:layout_height="50dp"/>
+
+            <Button
+                    android:visibility="gone"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/btnDeleteAddr"
+                    android:background="@color/selector_btn_cmbule"
+                    android:text="删除"
+                    android:textColor="@color/cmwhite"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"/>
             </LinearLayout>
 
     </LinearLayout>
