@@ -2,6 +2,7 @@ package com.shichai.www.choume.tools;
 
 import android.content.Context;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.globalways.choume.R;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
@@ -78,7 +79,7 @@ public class CMTool {
     }
 
     /**
-     * 加载项目发起者的头像
+     * 项目发起者的头像
      * @param hongId 发起者hongId
      */
     public static void loadProjectUserAvatar(long hongId, final Context context, final ImageView view) {
@@ -89,6 +90,22 @@ public class CMTool {
             @Override
             public void success(OutsouringCrowdfunding.GetCFUserResp result) {
                 loadAvatar(result.cfUser.user.avatar,context,view);
+            }
+        });
+    }
+
+    /**
+     * 加载指定用户的名称
+     * @param hongId 发起者hongId
+     */
+    public static void loadUserName(long hongId,final TextView view) {
+        UserCommon.GetAppUserParam param = new UserCommon.GetAppUserParam();
+        param.hongId = hongId;
+        CfUserManager.getInstance().getAppUser(param, new ManagerCallBack<OutsouringCrowdfunding.GetCFUserResp>() {
+            @Override
+            public void success(OutsouringCrowdfunding.GetCFUserResp result) {
+
+                view.setText(result.cfUser.user.nick);
             }
         });
     }

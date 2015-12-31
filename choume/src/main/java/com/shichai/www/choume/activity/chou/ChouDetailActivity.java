@@ -16,11 +16,14 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.NewCfProjectInves
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUserCBConsumeParam;
 import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.ProjectDetailAdapter;
+import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfProjectManager;
+import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.*;
 import com.shichai.www.choume.view.ListViewForScrollView;
 
@@ -204,29 +207,57 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onNewInvest(CfProjectReward reward) {
 
-        UITools.toastMsg(this, "搞不懂写的参与项目是哪个方法");
+        //UITools.toastMsg(this, "搞不懂写的参与项目是哪个方法");
 
-//        NewCfProjectInvestParam projectInvestParam = new NewCfProjectInvestParam();
-//        projectInvestParam.cfProjectId  = reward.cfProjectId;
-//        projectInvestParam.count = 1;
-//        projectInvestParam.token = LocalDataConfig.getToken(context);
-//        projectInvestParam.cfProjectRewardId = reward.id;
-//        CfProjectManager.getInstance().newCfProjectInvest(projectInvestParam, new ManagerCallBack<OutsouringCrowdfunding.NewCfProjectInvestResp>() {
-//            @Override
-//            public void success(OutsouringCrowdfunding.NewCfProjectInvestResp result) {
-//                UITools.toastMsg(context,"参与项目成功");
-//            }
-//
-//            @Override
-//            public void warning(int code, String msg) {
-//                UITools.warning(context,"参与项目失败",msg);
-//            }
-//
-//            @Override
-//            public void error(Exception e) {
-//                UITools.toastServerError(context);
-//            }
-//        });
+        NewCfProjectInvestParam projectInvestParam = new NewCfProjectInvestParam();
+        projectInvestParam.cfProjectId  = reward.cfProjectId;
+        projectInvestParam.count = 1;
+        projectInvestParam.token = LocalDataConfig.getToken(context);
+        projectInvestParam.cfProjectRewardId = reward.id;
+        CfProjectManager.getInstance().newCfProjectInvest(projectInvestParam, new ManagerCallBack<OutsouringCrowdfunding.NewCfProjectInvestResp>() {
+            @Override
+            public void success(OutsouringCrowdfunding.NewCfProjectInvestResp result) {
+                //如果是需要付钱的方式，则立马付钱
+                if (result.invest.coinPay > 0) {
+                    UITools.toastMsg(context, "参与项目成功，支付...");
+                    CfUserCBConsumeParam param = new CfUserCBConsumeParam();
+                    param.coin = result.invest.coinPay;
+                    param.orderId = result.invest.orderId;
+                    param.token = LocalDataConfig.getToken(ChouDetailActivity.this);
+                    CfUserManager.getInstance().cfUserCBConsume(param, new ManagerCallBack<OutsouringCrowdfunding.CfUserCBConsumeResp>() {
+                        @Override
+                        public void success(OutsouringCrowdfunding.CfUserCBConsumeResp result) {
+                            //result.history.
+                            UITools.toastMsg(ChouDetailActivity.this, "支付成功");
+                            //修改本地数据
+                            MyApplication.getCfUser().coin -= result.history.coin;
+                        }
+
+                        @Override
+                        public void warning(int code, String msg) {
+                            UITools.warning(ChouDetailActivity.this, "支付筹币失败", msg);
+                        }
+
+                        @Override
+                        public void error(Exception e) {
+                            UITools.toastServerError(ChouDetailActivity.this);
+                        }
+                    });
+                } else {
+                    UITools.toastMsg(context, "参与项目成功");
+                }
+            }
+
+            @Override
+            public void warning(int code, String msg) {
+                UITools.warning(context,"参与项目失败",msg);
+            }
+
+            @Override
+            public void error(Exception e) {
+                UITools.toastServerError(context);
+            }
+        });
 
     }
 }

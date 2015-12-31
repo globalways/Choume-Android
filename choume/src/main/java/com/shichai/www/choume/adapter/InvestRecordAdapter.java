@@ -71,6 +71,7 @@ public class InvestRecordAdapter extends BaseAdapter{
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
+        //CMTool.loadUserName(invests[position].hongId, holder.textView);
         holder.textView.setText(invests[position].hongId+"  支付筹币:"+invests[position].coinPay +" "+CMTool.getCfProjectInvestStatus(invests[position].status));
         return convertView;
     }

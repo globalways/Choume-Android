@@ -110,19 +110,39 @@
         android:layout_height="1px"/>
 
     <TextView
-        android:background="@drawable/selector_pressed_gray"
-        android:padding="10dp"
-        android:gravity="left|center_vertical"
-        android:drawablePadding="10dp"
-        android:drawableRight="@mipmap/ico_arrow_right_ccc_small"
-        android:drawableLeft="@mipmap/ico_tixain"
-        android:textSize="20sp"
-        android:textColor="@color/border_color"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="体现"
-        android:onClick="onClick"
-        android:id="@+id/tv_get_cash" />
+            android:background="@drawable/selector_pressed_gray"
+            android:padding="10dp"
+            android:gravity="left|center_vertical"
+            android:drawablePadding="10dp"
+            android:drawableRight="@mipmap/ico_arrow_right_ccc_small"
+            android:drawableLeft="@mipmap/ico_tixain"
+            android:textSize="20sp"
+            android:textColor="@color/border_color"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="提现"
+            android:onClick="onClick"
+            android:id="@+id/tv_get_cash" />
+
+        <View
+                android:background="@color/cmgray"
+                android:layout_width="match_parent"
+                android:layout_height="1px"/>
+
+        <TextView
+                android:background="@drawable/selector_pressed_gray"
+                android:padding="10dp"
+                android:gravity="left|center_vertical"
+                android:drawablePadding="10dp"
+                android:drawableRight="@mipmap/ico_arrow_right_ccc_small"
+                android:drawableLeft="@mipmap/ico_tixain"
+                android:textSize="20sp"
+                android:textColor="@color/border_color"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="兑换筹币"
+                android:onClick="onClick"
+                android:id="@+id/tv_exchange_cb" />
 
         <View
                 android:background="@color/cmgray"

@@ -7,9 +7,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.globalways.user.wallet.nano.UserWallet;
 import com.globalways.choume.R;
+import com.globalways.user.wallet.nano.UserWallet;
 import com.shichai.www.choume.activity.BaseActivity;
+import com.shichai.www.choume.activity.wealth.ExchangeCBActivity;
 import com.shichai.www.choume.activity.wealth.RechargeActivity;
 import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;
@@ -18,12 +19,16 @@ import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.Tool;
 import com.shichai.www.choume.tools.UITools;
 
+import java.lang.ref.SoftReference;
+
 /**
  * Created by HeJianjun on 2015/12/22.
  */
 public class MyWealthActivity extends BaseActivity implements View.OnClickListener{
 
+    public static final String BALANCE = "balance";
     private TextView tv_balance, tv_jifen, tv_choubi;
+    private long balance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +36,14 @@ public class MyWealthActivity extends BaseActivity implements View.OnClickListen
         setContentView(R.layout.activity_my_wealth);
         initActionBar();
         setTitle("我的财富");
+        setRightButton("刷新");
         initViews();
+        bt_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadDatas();
+            }
+        });
     }
 
     @Override
@@ -56,7 +68,12 @@ public class MyWealthActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(this, RechargeActivity.class));
                 break;
             case R.id.tv_get_cash:
-                Toast.makeText(this,"暂无体现功能",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"暂无提现功能",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tv_exchange_cb:
+                Intent intent = new Intent(this, ExchangeCBActivity.class);
+                intent.putExtra(BALANCE, balance);
+                startActivity(intent);
                 break;
         }
     }
@@ -78,6 +95,7 @@ public class MyWealthActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void success(UserWallet.GetUserWalletResp result) {
                 tv_balance.setText(Tool.fenToYuan(result.wallet.amount));
+                balance = result.wallet.amount;
             }
 
             @Override

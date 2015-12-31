@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- ping++ -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -132,29 +132,26 @@
         <!-- 支付 -->
         <!-- Ping++ SDK 注册 -->
         <activity
-                android:name="com.pingplusplus.android.PaymentActivity"
-                android:launchMode="singleTop"
-                android:configChanges="orientation|screenSize"
-                android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+            android:name="com.pingplusplus.android.PaymentActivity"
+            android:configChanges="orientation|screenSize"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- 微信支付注册 -->
         <activity-alias
-                android:name=".wxapi.WXPayEntryActivity"
-                android:exported="true"
-                android:targetActivity="com.pingplusplus.android.PaymentActivity" />
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:targetActivity="com.pingplusplus.android.PaymentActivity" />
         <!-- 支付宝注册 -->
         <activity
-                android:name="com.alipay.sdk.app.H5PayActivity"
-                android:configChanges="orientation|keyboardHidden|navigation"
-                android:exported="false"
-                android:screenOrientation="behind" />
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
         <activity
-                android:name="com.alipay.sdk.auth.AuthActivity"
-                android:configChanges="orientation|keyboardHidden|navigation"
-                android:exported="false"
-                android:screenOrientation="behind" />
-
-
-
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind" />
         <activity
             android:name="com.shichai.www.choume.activity.sponsor.AddRewardWayActivity"
             android:theme="@style/BaseAppTheme.base" >
@@ -173,6 +170,10 @@
         </activity>
         <activity
             android:name="com.shichai.www.choume.activity.chou.ChouSupportWayActivity"
+            android:theme="@style/BaseAppTheme.base" >
+        </activity>
+        <activity
+            android:name="com.shichai.www.choume.activity.wealth.ExchangeCBActivity"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
     </application>

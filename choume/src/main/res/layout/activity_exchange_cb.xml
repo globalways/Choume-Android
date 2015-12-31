@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical" android:layout_width="match_parent"
+              android:fitsSystemWindows="true"
+              android:background="?attr/colorPrimary"
+              android:layout_height="match_parent">
+    <LinearLayout
+            android:background="@color/cmwhite"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+        <include
+                layout="@layout/app_bar_layout">
+        </include>
+
+        <LinearLayout
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/cmblue_11a2ff"
+                android:gravity="center_horizontal"
+                android:layout_width="match_parent">
+
+            <TextView
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/cmwhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="余额（元）"
+                    android:id="@+id/textView3"
+                    />
+
+            <TextView
+                    android:layout_margin="40dp"
+                    android:textSize="40sp"
+                    android:textColor="@color/cmwhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="600.00"
+                    android:id="@+id/tv_balance"
+                    android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <EditText
+                android:background="@color/selector_edittext_bg"
+                android:layout_margin="10dp"
+                android:textColor="@color/border_color"
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="需要兑换多少筹币"
+                android:inputType="number"
+                android:id="@+id/etExchangeAmount" />
+        <View
+                android:visibility="gone"
+                android:layout_margin="5dp"
+                android:background="@color/cmgray"
+                android:layout_width="match_parent"
+                android:layout_height="1px"/>
+
+        <TextView
+                android:textColor="@color/cmgray_b3b3b3"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="兑换说明：1RMB ＝ 100筹币"
+                />
+
+        <RadioGroup
+                android:visibility="gone"
+                android:id="@+id/rgPayChannel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            <RadioButton
+                    android:text="支付宝"
+                    android:id="@+id/rbChannelAlipay"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
+            <RadioButton
+                    android:text="微信"
+                    android:id="@+id/rbChannelWX"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:background="@null"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    />
+        </RadioGroup>
+
+        <Button
+                android:layout_margin="10dp"
+                android:textSize="18sp"
+                android:background="@color/selector_btn_cmbule"
+                android:textColor="@color/cmwhite"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="兑换"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:onClick="onClick"
+                android:id="@+id/btnToExchange" />
+    </LinearLayout>
+
+</LinearLayout>

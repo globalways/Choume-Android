@@ -2,6 +2,7 @@ package com.shichai.www.choume.activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,6 +14,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUser;
 import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserApp;
 import com.globalways.choume.R;
+import com.pnikosis.materialishprogress.ProgressWheel;
 import com.shichai.www.choume.activity.mine.profile.*;
 import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;
@@ -122,6 +124,9 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
     }
 
     private void loadUserInfo(){
+        ProgressWheel wheel = new ProgressWheel(IndividualActivity.this);
+        wheel.setBarColor(Color.BLUE);
+        rlToChangeNick.addView(wheel);
         CfUser cfUser = MyApplication.getCfUser();
         tvNick.setText(cfUser.user.nick);
         tvTel.setText(cfUser.user.tel);

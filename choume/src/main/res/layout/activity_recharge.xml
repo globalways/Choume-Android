@@ -45,7 +45,10 @@
 
     <EditText
         android:background="@color/selector_edittext_bg"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="3dp"
         android:textColor="@color/border_color"
         android:textSize="18sp"
         android:layout_width="match_parent"
@@ -53,6 +56,15 @@
         android:hint="充值金额(元)"
         android:inputType="numberDecimal"
         android:id="@+id/etRechargeAmount" />
+
+        <TextView
+                android:textColor="@color/cmgray_b3b3b3"
+                android:paddingLeft="10dp"
+                android:gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:text="充值过程有一定延迟，但通常不会超过10～20分钟"
+                />
     <View
         android:layout_margin="5dp"
         android:background="@color/cmgray"

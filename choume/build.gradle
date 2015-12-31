@@ -88,6 +88,9 @@ dependencies {
 
     //SwipeMenuListView
     compile 'com.baoyz.swipemenulistview:library:1.3.0'
+
+    //prgress
+    compile 'com.pnikosis:materialish-progress:1.7'
 }
 
 

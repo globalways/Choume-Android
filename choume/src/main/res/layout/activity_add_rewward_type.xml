@@ -39,6 +39,7 @@
                 android:id="@+id/rb_get_goods" />
             </RadioGroup>
 
+
             <EditText
                 android:hint="输入数量"
                 android:layout_width="match_parent"

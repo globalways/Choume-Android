@@ -34,4 +34,5 @@
     <string name="title_activity_change_sex">ChangeSexActivity</string>
     <string name="title_activity_address_manager">AddressManagerActivity</string>
     <string name="title_activity_address_detail">AddressDetailActivity</string>
+    <string name="title_activity_exchange_cb">ExchangeCBActivity</string>
 </resources>

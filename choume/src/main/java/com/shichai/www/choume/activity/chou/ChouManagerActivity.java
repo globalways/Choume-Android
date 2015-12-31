@@ -33,7 +33,7 @@ public class ChouManagerActivity extends BaseActivity implements View.OnClickLis
         initActionBar();
         projectId = getIntent().getLongExtra(MySponsorActivity.PROJECT_ID, 0);
         getProject();
-        setTitle("筹钱买电脑");
+        setTitle("加载项目名称...");
 
         tvAlreadyGoodsAmount = (TextView) findViewById(R.id.tvAlreadyGoodsAmount);
         tvAlreadyMoneyAmount = (TextView) findViewById(R.id.tvAlreadyMoneyAmount);
