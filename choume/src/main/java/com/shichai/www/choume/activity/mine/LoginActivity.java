@@ -81,8 +81,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             Toast.makeText(this,"请输入正确的手机号码",Toast.LENGTH_SHORT).show();
             return;
         }
-        UITools.toastMsg(this, "登录...");
-
+        dialog.show();
         pwd = MD5.getMD5(pwd);
         UserCommon.LoginAppParam loginAppParam = new UserCommon.LoginAppParam();
         loginAppParam.password = pwd;
@@ -94,9 +93,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 //跳转
                 MyApplication.setCfUser(result.cfUser);
                 LocalDataConfig.setToken(context, result.token);
-                LocalDataConfig.setPwd(context,pwd);
-                LocalDataConfig.setTel(context,tel);
+                LocalDataConfig.setPwd(context, pwd);
+                LocalDataConfig.setTel(context, tel);
                 setResult(Activity.RESULT_OK);
+                dialog.cancel();
                 LoginActivity.this.finish();
             }
 
@@ -104,12 +104,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             public void warning(int code, String msg) {
                 setResult(Activity.RESULT_CANCELED);
                 UITools.toastMsg(context, msg);
+                dialog.cancel();
             }
 
             @Override
             public void error(Exception e) {
                 setResult(Activity.RESULT_CANCELED);
                 UITools.toastServerError(context);
+                dialog.cancel();
             }
         });
     }

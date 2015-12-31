@@ -1,5 +1,7 @@
 package com.shichai.www.choume.activity;
 
+import android.app.ProgressDialog;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -12,6 +14,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.globalways.choume.R;
+import com.shichai.www.choume.view.MyDialog;
 
 /**
  * Created by HeJianjun on 2015/12/7.
@@ -23,6 +26,23 @@ public class BaseActivity extends AppCompatActivity {
     protected View actionbarLayout;
     protected ImageButton bt_add;
     protected Button bt_right;
+    protected ProgressDialog progressDialog;
+    protected MyDialog dialog;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.setTitle("提示");
+        progressDialog.setMessage("正在提交数据...");
+        progressDialog.setCancelable(true);
+
+        dialog = new MyDialog(this,R.style.Custom_Progress);
+        dialog.setCancelable(true);
+    }
+
     protected void initActionBar(){
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
