@@ -314,6 +314,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case R.id.tvToRegister:
                 startActivityForResult(new Intent(MainActivity.this, RegisterActivity.class),CODE_TO_REGISTER);
                 break;
+            case R.id.fl_chou_product:
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹产品");
+                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.HOT_CFPT);//修改
+                startActivity(intent);
+                break;
+            case R.id.fl_chou_program:
+                intent = new Intent(this,ChouListActvity.class);
+                intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹项目");
+                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.HOT_CFPT);//修改
+                startActivity(intent);
+                break;
         }
     }
 
