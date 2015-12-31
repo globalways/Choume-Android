@@ -59,10 +59,11 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
             @Override
             public void create(SwipeMenu menu) {
                 SwipeMenuItem itemNotPass = new SwipeMenuItem(getApplicationContext());
-                itemNotPass.setBackground(new ColorDrawable(Color.parseColor("#eeeeee")));
+                itemNotPass.setBackground(new ColorDrawable(Color.parseColor("#8a929a")));
                 itemNotPass.setWidth(Utils.dp2px(ChouMemberActivity.this, 90));
                 itemNotPass.setTitle("不同意");
                 itemNotPass.setTitleColor(Color.WHITE);
+                itemNotPass.setTitleSize(18);
                 menu.addMenuItem(itemNotPass);
 
                 SwipeMenuItem itemPass = new SwipeMenuItem(getApplicationContext());
@@ -70,6 +71,7 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
                 itemPass.setWidth(Utils.dp2px(ChouMemberActivity.this, 90));
                 itemPass.setTitle("同意");
                 itemPass.setTitleColor(Color.WHITE);
+                itemPass.setTitleSize(18);
                 menu.addMenuItem(itemPass);
             }
         };

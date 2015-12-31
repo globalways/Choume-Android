@@ -124,10 +124,11 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <LinearLayout
+            <FrameLayout
+                android:onClick="onClick"
+                android:id="@+id/fl_chou_program"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
                 android:layout_height="wrap_content"
                 android:layout_width="0dp">
                 <ImageView
@@ -135,11 +136,21 @@
                     android:src="@mipmap/mine_bg"
                     android:layout_height="80dp"
                     android:layout_width="match_parent"/>
-                </LinearLayout>
-            <LinearLayout
+
+                <TextView
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="筹项目"
+                    android:id="@+id/textView2"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+            <FrameLayout
+                android:id="@+id/fl_chou_product"
+                android:onClick="onClick"
                 android:layout_marginLeft="1dp"
                 android:layout_weight="1"
-                android:orientation="vertical"
                 android:layout_height="wrap_content"
                 android:layout_width="0dp">
                 <ImageView
@@ -147,7 +158,14 @@
                     android:src="@mipmap/mine_bg"
                     android:layout_height="80dp"
                     android:layout_width="match_parent"/>
-            </LinearLayout>
+                <TextView
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="筹产品"
+                    android:layout_gravity="center" />
+            </FrameLayout>
             </LinearLayout>
             </LinearLayout>
 

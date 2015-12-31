@@ -38,7 +38,7 @@
             <com.shichai.www.choume.view.CircleImageView
                 android:id="@+id/ivAvatar"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/test_head"
+                android:src="@mipmap/ico_progress"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_centerVertical="true"
