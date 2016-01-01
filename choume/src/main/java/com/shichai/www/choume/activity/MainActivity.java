@@ -31,6 +31,7 @@ import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.PicassoImageLoader;
 import com.shichai.www.choume.tools.UITools;
+import com.shichai.www.choume.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
@@ -317,13 +318,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             case R.id.fl_chou_product:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹产品");
-                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.HOT_CFPT);//修改
+                intent.putExtra(PROJECT_CATEGORY, OutsouringCrowdfunding.PRODUCT_CFC);
                 startActivity(intent);
                 break;
             case R.id.fl_chou_program:
                 intent = new Intent(this,ChouListActvity.class);
                 intent.putExtra(com.shichai.www.choume.common.Common.TYPE,"筹项目");
-                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.HOT_CFPT);//修改
+                intent.putExtra(PROJECT_TAG, OutsouringCrowdfunding.PROJECT_CFC);
                 startActivity(intent);
                 break;
         }

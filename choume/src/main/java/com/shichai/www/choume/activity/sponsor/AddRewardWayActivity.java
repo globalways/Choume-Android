@@ -84,7 +84,7 @@ public class AddRewardWayActivity extends BaseActivity implements View.OnClickLi
 
             String desc = "";
             switch (reward.supportType) {
-                case OutsouringCrowdfunding.MONEY_CFPST: desc = "需要"+reward.amount+"元";break;
+                case OutsouringCrowdfunding.MONEY_CFPST: desc = "需要"+reward.amount+"筹币";break;
                 case OutsouringCrowdfunding.PEOPLE_CFPST: desc = "需要人员"+reward.amount+"名";break;
                 case OutsouringCrowdfunding.GOODS_CFPST: desc = "需要"+reward.amount+"件物品";;break;
                 case OutsouringCrowdfunding.EQUITY_CFPST: desc = "股权？";break;

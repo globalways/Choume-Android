@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -41,6 +42,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private View headerView;
     private View tv_reply,tv_comment,tv_supporter;
     private Context context = this;
+    private long projectId;
 
     private TextView tvTitle;
     //项目信息
@@ -58,7 +60,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         ActionBar();
         initViews();
 
-        long projectId = getIntent().getLongExtra(PROJECT_ID, -1);
+        projectId = getIntent().getLongExtra(PROJECT_ID, -1);
         if (projectId != -1) {
             loadProject(projectId);
         }else {
@@ -162,13 +164,17 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void loadProject(long projetId){
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
         GetCfProjectParam projectParam = new GetCfProjectParam();
         projectParam.projectId = projetId;
         CfProjectManager.getInstance().getCfProject(projectParam, new ManagerCallBack<OutsouringCrowdfunding.GetCfProjectResp>() {
             @Override
             public void success(OutsouringCrowdfunding.GetCfProjectResp result) {
                 currentProject = result.project;
-                loadDataToViews(result.project);
+                loadDataToViews(currentProject);
+
+                Log.i("yangping","loadproject status：" + CMTool.getProjectStatus(currentProject.status));
                 //默认显示支持方式
                 tv_reply.performClick();
             }
@@ -202,15 +208,26 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
         tvRemainDays.setText(String.valueOf(TimeUnit.SECONDS.toDays(currentProject.deadline - currentProject.fundTime)));
         tvTitle.setText(currentProject.title);
+        dialog.dismiss();
     }
 
     @Override
-    public void onNewInvest(CfProjectReward reward) {
+    public void onNewInvest(final CfProjectReward reward) {
 
-        //UITools.toastMsg(this, "搞不懂写的参与项目是哪个方法");
+        if (MyApplication.getCfUser() == null) {
+            UITools.toastMsg(this, "请先登录");
+            return;
+        }
+
+        Log.i("yangping", CMTool.getProjectStatus(currentProject.status));
+        //如果项目不是在已发布状态则不能再参与项目
+        if (currentProject.status != OutsouringCrowdfunding.PUBLISHED_CFPS) {
+            UITools.toastMsg(this, "项目不接受支持");
+            return;
+        }
 
         NewCfProjectInvestParam projectInvestParam = new NewCfProjectInvestParam();
-        projectInvestParam.cfProjectId  = reward.cfProjectId;
+        projectInvestParam.cfProjectId = reward.cfProjectId;
         projectInvestParam.count = 1;
         projectInvestParam.token = LocalDataConfig.getToken(context);
         projectInvestParam.cfProjectRewardId = reward.id;
@@ -229,8 +246,10 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                         public void success(OutsouringCrowdfunding.CfUserCBConsumeResp result) {
                             //result.history.
                             UITools.toastMsg(ChouDetailActivity.this, "支付成功");
-                            //修改本地数据
+                            //修改本地用户筹币数目
                             MyApplication.getCfUser().coin -= result.history.coin;
+
+                            refreshProjectDatas(reward);
                         }
 
                         @Override
@@ -245,12 +264,14 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                     });
                 } else {
                     UITools.toastMsg(context, "参与项目成功");
+                    //重新加载数据
+                    refreshProjectDatas(reward);
                 }
             }
 
             @Override
             public void warning(int code, String msg) {
-                UITools.warning(context,"参与项目失败",msg);
+                UITools.warning(context, "参与项目失败", msg);
             }
 
             @Override
@@ -260,4 +281,32 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         });
 
     }
+
+    /**
+     * 当众筹成功后，不从网络获取数据，直接修改本地数据
+     * @param reward
+     */
+    private void refreshProjectDatas(CfProjectReward reward) {
+
+        switch (reward.supportType) {
+            case OutsouringCrowdfunding.GOODS_CFPST:
+                currentProject.alreadyGoodsAmount += reward.amount;
+                break;
+            case OutsouringCrowdfunding.MONEY_CFPST:
+                currentProject.alreadyMoneyAmount += reward.amount;
+                break;
+            case OutsouringCrowdfunding.PEOPLE_CFPST:
+                currentProject.alreadyPeopleAmount += reward.amount;
+                break;
+            case OutsouringCrowdfunding.EQUITY_CFPST:
+                currentProject.alreadyProjectEquity += reward.amount;
+                break;
+        }
+
+        tvProgressPercent.setText(CMTool.generateProjectProgress(currentProject) + "%");
+        tvAlreadyMoneyAmount.setText(Tool.fenToYuan(currentProject.alreadyMoneyAmount));
+        tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
+        progressBar.setProgress(CMTool.generateProjectProgress(currentProject));
+    }
+
 }

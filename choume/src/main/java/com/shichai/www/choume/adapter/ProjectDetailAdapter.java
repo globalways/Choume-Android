@@ -142,7 +142,7 @@ public class ProjectDetailAdapter extends BaseAdapter {
         String abbr = "";
         switch (reward.supportType) {
             case OutsouringCrowdfunding.MONEY_CFPST:
-                abbr = "需要支持"+reward.amount+"元";
+                abbr = "需要支持"+reward.amount+"筹币";
                 break;
             case OutsouringCrowdfunding.PEOPLE_CFPST:
                 abbr = "需要"+reward.amount+"人参与项目";

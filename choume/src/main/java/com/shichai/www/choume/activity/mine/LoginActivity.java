@@ -89,7 +89,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         CfUserManager.getInstance().login(loginAppParam, new ManagerCallBack<OutsouringCrowdfunding.LoginCFAppResp>() {
             @Override
             public void success(OutsouringCrowdfunding.LoginCFAppResp result) {
-                UITools.toastMsg(context, "登录成功");
+                //UITools.toastMsg(context, "登录成功");
                 //跳转
                 MyApplication.setCfUser(result.cfUser);
                 LocalDataConfig.setToken(context, result.token);

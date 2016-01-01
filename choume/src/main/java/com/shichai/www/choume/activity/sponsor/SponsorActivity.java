@@ -236,6 +236,8 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void saveProject(){
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
         if (selectedPhotos.size() != 0) {
             String[] imgs = new String[selectedPhotos.size()];
             selectedPhotos.toArray(imgs);
@@ -256,16 +258,17 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
                 @Override
                 public void warning(int code, String msg) {
                     UITools.toastMsg(SponsorActivity.this, "上传图片失败" + msg);
+                    dialog.dismiss();
                 }
 
                 @Override
                 public void error(Exception e) {
                     UITools.toastServerError(SponsorActivity.this);
+                    dialog.dismiss();
                 }
 
                 @Override
                 public void progress(int progress) {
-                    super.progress(progress);
                 }
             });
         } else {
@@ -282,16 +285,19 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
             public void success(RaiseCfProjectResp result) {
                 UITools.toastMsg(SponsorActivity.this, "创建项目成功，等待审核！");
                 SponsorActivity.this.finish();
+                dialog.dismiss();
             }
 
             @Override
             public void warning(int code, String msg) {
                 UITools.toastMsg(SponsorActivity.this, "创建项目失败:" + msg);
+                dialog.dismiss();
             }
 
             @Override
             public void error(Exception e) {
                 UITools.toastServerError(SponsorActivity.this);
+                dialog.dismiss();
             }
         });
     }
