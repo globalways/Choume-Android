@@ -135,7 +135,6 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
             case R.id.bt_next:
                 currentFragment.commitData(cfProject);
                 if (nextIndex == 4){
-                    Toast.makeText(this,"提交项目..",Toast.LENGTH_SHORT).show();
                     saveProject();
                     return;
                 }else {

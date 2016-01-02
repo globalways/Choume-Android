@@ -20,7 +20,7 @@ public class CMTool {
         switch (status) {
             case OutsouringCrowdfunding.INVALID_CFPS: return "不合法";
             case OutsouringCrowdfunding.AUDITING_CFPS: return "审核中";
-            case OutsouringCrowdfunding.PUBLISHED_CFPS: return "已发布";
+            case OutsouringCrowdfunding.PUBLISHED_CFPS: return "筹集中";
             case OutsouringCrowdfunding.FINISH_CFPS: return "已筹满";
             case OutsouringCrowdfunding.FAILURE_CFPS: return "失败";
             case OutsouringCrowdfunding.COMPLETED_CFPS: return "已完成";

@@ -12,9 +12,6 @@ import com.globalways.choume.R;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectInvest;
 import com.shichai.www.choume.tools.CMTool;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * 投资记录（参与项目）
@@ -66,17 +63,17 @@ public class InvestRecordAdapter extends BaseAdapter{
         if (convertView == null){
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.item_member,null);
-            holder.textView = (TextView) convertView.findViewById(R.id.textView);
+            holder.tvCfUserName = (TextView) convertView.findViewById(R.id.tvCfUserName);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        //CMTool.loadUserName(invests[position].hongId, holder.textView);
-        holder.textView.setText(invests[position].hongId+"  支付筹币:"+invests[position].coinPay +" "+CMTool.getCfProjectInvestStatus(invests[position].status));
+        //CMTool.loadUserName(invests[position].hongId, holder.tvCfUserName);
+        holder.tvCfUserName.setText(invests[position].hongId + "  支付筹币:" + invests[position].coinPay + " " + CMTool.getCfProjectInvestStatus(invests[position].status));
         return convertView;
     }
 
     class ViewHolder{
-        TextView textView;
+        TextView tvCfUserName;
     }
 }

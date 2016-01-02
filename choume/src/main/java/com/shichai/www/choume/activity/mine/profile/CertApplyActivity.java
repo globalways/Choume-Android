@@ -114,6 +114,8 @@ public class CertApplyActivity extends BaseActivity implements RadioGroup.OnChec
             UITools.toastMsg(this, "请输入认证姓名");
             return;
         }
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
         String[] photosPath = new String[selectedPhotos.size()];
         selectedPhotos.toArray(photosPath);
         new ImageUpLoadManager().upLoadImage(photosPath, LocalDataConfig.getToken(this), new ManagerCallBack<List<String>>() {
@@ -132,11 +134,13 @@ public class CertApplyActivity extends BaseActivity implements RadioGroup.OnChec
             @Override
             public void warning(int code, String msg) {
                 UITools.warning(CertApplyActivity.this, "上传图片失败", msg);
+                dialog.dismiss();
             }
 
             @Override
             public void error(Exception e) {
                 UITools.toastServerError(CertApplyActivity.this);
+                dialog.dismiss();
             }
 
             @Override
@@ -162,17 +166,20 @@ public class CertApplyActivity extends BaseActivity implements RadioGroup.OnChec
             public void success(OutsouringCrowdfunding.UserCertApplyResp result) {
                 //提交申请完成
                 MyApplication.getCfUser().certification = result.apply;
+                dialog.dismiss();
                 CertApplyActivity.this.finish();
             }
 
             @Override
             public void warning(int code, String msg) {
                 UITools.warning(CertApplyActivity.this, "提交认证失败", msg);
+                dialog.dismiss();
             }
 
             @Override
             public void error(Exception e) {
                 UITools.toastServerError(CertApplyActivity.this);
+                dialog.dismiss();
             }
         });
     }

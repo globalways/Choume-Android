@@ -114,9 +114,11 @@
 
         <!-- PhotoPicker -->
         <activity
+            android:screenOrientation="portrait"
             android:name="me.iwf.photopicker.PhotoPickerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
+            android:screenOrientation="portrait"
             android:name="me.iwf.photopicker.PhotoPagerActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity

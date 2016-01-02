@@ -22,6 +22,7 @@ import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.ProjectDetailAdapter;
 import com.shichai.www.choume.application.MyApplication;
+import com.shichai.www.choume.network.HttpStatus;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfProjectManager;
 import com.shichai.www.choume.network.manager.CfUserManager;
@@ -46,7 +47,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     private TextView tvTitle;
     //项目信息
-    private TextView tvProjectName, tvProjectDesc, tvProgressPercent, tvAlreadyMoneyAmount, tvAlreadyGoodsAmount,tvRemainDays;
+    private TextView tvProjectName ,tvProjectStatus, tvProjectDesc, tvProgressPercent, tvAlreadyMoneyAmount, tvAlreadyGoodsAmount,tvRemainDays;
     private ImageView ivProjectCfuserAvatar, ivProjectDetailHeader;
     private ProgressBar progressBar;
 
@@ -105,6 +106,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
         ivProjectDetailHeader = (ImageView) findViewById(R.id.ivProjectDetailHeader);
         tvProjectName = (TextView) headerView.findViewById(R.id.tvProjectName);
+        tvProjectStatus = (TextView) headerView.findViewById(R.id.tvProjectStatus);
         tvProjectDesc = (TextView) headerView.findViewById(R.id.tvProjectDesc);
         progressBar   = (ProgressBar) headerView.findViewById(R.id.progressBar);
         ivProjectCfuserAvatar = (ImageView) headerView.findViewById(R.id.ivProjectCfuserAvatar);
@@ -145,11 +147,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 tv_supporter.setSelected(true);
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
-                ArrayList<String> strings3 = new ArrayList<>();
-                for (int i=0; i<5 ;i++){
-                    strings3.add("XXSASD");
-                }
-                //adapter.addDatas(strings3);
+                adapter.setDataSupporter(currentProject.invests);
                 break;
         }
     }
@@ -199,6 +197,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         }
 
         tvProjectName.setText(cfProject.title);
+        tvProjectStatus.setText(CMTool.getProjectStatus(cfProject.status));
         tvProjectDesc.setText(cfProject.desc);
         CMTool.loadProjectUserAvatar(currentProject.hongId,this,ivProjectCfuserAvatar);
         progressBar.setProgress(CMTool.generateProjectProgress(cfProject));
@@ -219,10 +218,9 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             return;
         }
 
-        Log.i("yangping", CMTool.getProjectStatus(currentProject.status));
         //如果项目不是在已发布状态则不能再参与项目
         if (currentProject.status != OutsouringCrowdfunding.PUBLISHED_CFPS) {
-            UITools.toastMsg(this, "项目不接受支持");
+            UITools.toastMsg(this, "项目当前不接受新的支持");
             return;
         }
 
@@ -245,16 +243,15 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                         @Override
                         public void success(OutsouringCrowdfunding.CfUserCBConsumeResp result) {
                             //result.history.
-                            UITools.toastMsg(ChouDetailActivity.this, "支付成功");
+                            //UITools.toastMsg(ChouDetailActivity.this, "支付成功");
                             //修改本地用户筹币数目
                             MyApplication.getCfUser().coin -= result.history.coin;
-
                             refreshProjectDatas(reward);
                         }
 
                         @Override
                         public void warning(int code, String msg) {
-                            UITools.warning(ChouDetailActivity.this, "支付筹币失败", msg);
+                            UITools.warning(ChouDetailActivity.this, "支付筹币失败", HttpStatus.codeOf(code).desc);
                         }
 
                         @Override
@@ -271,7 +268,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void warning(int code, String msg) {
-                UITools.warning(context, "参与项目失败", msg);
+                UITools.warning(context, "参与项目失败", HttpStatus.codeOf(code).desc);
             }
 
             @Override
@@ -307,6 +304,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvAlreadyMoneyAmount.setText(Tool.fenToYuan(currentProject.alreadyMoneyAmount));
         tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
         progressBar.setProgress(CMTool.generateProjectProgress(currentProject));
+
     }
 
 }

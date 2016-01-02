@@ -5,12 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.globalways.choume.R;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUser;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectInvest;
+import com.shichai.www.choume.tools.CMTool;
 
 import java.util.List;
 
@@ -28,6 +31,7 @@ public class ProjectDetailAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private CfProjectReward[] rewards;
     private CfUser[] cfUsers;
+    private CfProjectInvest[] invests;
     private InvestListener investListener;
 
     public ProjectDetailAdapter(Context context) {
@@ -45,9 +49,9 @@ public class ProjectDetailAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    public void setDataSupporter(CfUser[] users) {
+    public void setDataSupporter(CfProjectInvest[] invests) {
         this.currentType = TYPE_SUPPORTER;
-        this.cfUsers = users;
+        this.invests = invests;
         notifyDataSetChanged();
     }
 
@@ -65,7 +69,9 @@ public class ProjectDetailAdapter extends BaseAdapter {
                     return 0;
                 return rewards.length;
             case TYPE_SUPPORTER:
-                return cfUsers.length;
+                if (invests == null)
+                    return 0;
+                return invests.length;
             default: return 0;
         }
     }
@@ -78,7 +84,9 @@ public class ProjectDetailAdapter extends BaseAdapter {
                     return null;
                 return rewards[position];
             case TYPE_SUPPORTER:
-                return cfUsers[position];
+                if (invests == null)
+                    return null;
+                return invests[position];
             default: return null;
         }
     }
@@ -94,7 +102,7 @@ public class ProjectDetailAdapter extends BaseAdapter {
             case TYPE_REWARD:
                 return getViewReward(convertView, rewards[position]);
             case TYPE_SUPPORTER:
-                return null;
+                return getViewSupport(convertView, invests[position]);
             default:return null;
         }
     }
@@ -127,6 +135,25 @@ public class ProjectDetailAdapter extends BaseAdapter {
         return convertView;
     }
 
+    private View getViewSupport(View convertView, final CfProjectInvest invest) {
+        ViewHolderSupport holder;
+        if (convertView == null){
+            holder = new ViewHolderSupport();
+            convertView = inflater.inflate(R.layout.item_member,null);
+            holder.tvUserNick = (TextView) convertView.findViewById(R.id.tvCfUserName);
+            holder.ivUserAvatar = (ImageView) convertView.findViewById(R.id.ivUserAvatar);
+
+            convertView.setTag(holder);
+        }else {
+            holder = (ViewHolderSupport) convertView.getTag();
+        }
+
+        holder.tvUserNick.setText(String.valueOf(invest.hongId));
+        CMTool.loadProjectUserAvatar(invest.hongId, context, holder.ivUserAvatar);
+
+        return convertView;
+    }
+
 
 
 
@@ -134,7 +161,8 @@ public class ProjectDetailAdapter extends BaseAdapter {
         TextView tvRewardDesc, tvRewardAbbr, tvSupport;
     }
     class ViewHolderSupport{
-
+        TextView tvUserNick;
+        ImageView ivUserAvatar;
     }
 
 

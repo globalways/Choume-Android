@@ -7,6 +7,7 @@
     <TextView
         android:id="@+id/tvRewardAbbr"
         android:textSize="18sp"
+        android:paddingLeft="10dp"
         android:gravity="left|center_vertical"
         android:background="@color/cmwhite"
         android:textColor="@color/cmblack_333333"
