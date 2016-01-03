@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUser;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectInvest;
 import com.globalways.choume.R;
 import com.shichai.www.choume.activity.chou.ChouDetailActivity;
 import com.shichai.www.choume.application.MyApplication;
@@ -27,7 +29,6 @@ public class MySponsorAdapter extends BaseAdapter {
     public static final int STAR   = 2;
     public static final int CONFIG = 3;
 
-    private OnCollectListener onCollectListener;
     private OnConfigListener onConfigListener;
 
     private static final int INIT_PAGE = 1;
@@ -36,6 +37,7 @@ public class MySponsorAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private Context context;
     private List<CfProject> cfProjects;
+    private List<CfProjectInvest> invests;
 
     private PicassoImageLoader imageLoader;
 
@@ -56,6 +58,9 @@ public class MySponsorAdapter extends BaseAdapter {
         if (cfProjects != null) {
             return cfProjects.size();
         }
+        if (invests != null) {
+            return invests.size();
+        }
         return 0;
     }
 
@@ -63,6 +68,9 @@ public class MySponsorAdapter extends BaseAdapter {
     public Object getItem(int position) {
         if (cfProjects != null) {
             return cfProjects.get(position);
+        }
+        if (invests != null) {
+            return invests.get(position);
         }
         return null;
     }
@@ -109,15 +117,6 @@ public class MySponsorAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.progressBar.setProgress(CMTool.generateProjectProgress(cfProjects.get(position)));
-        holder.main.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, ChouDetailActivity.class);
-                intent.putExtra(ChouDetailActivity.PROJECT_ID, cfProjects.get(position).id);
-                context.startActivity(intent);
-            }
-        });
 
         holder.ibControl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,22 +124,48 @@ public class MySponsorAdapter extends BaseAdapter {
                 if (type == STAR) {
                     boolean willCollect = true;
                     willCollect = !isCollectedByCurrentUser(cfProjects.get(position));
-                    onCollectListener.onCollect(cfProjects.get(position).id, willCollect);
-                }else if (type == CONFIG) {
+                    onConfigListener.onCollect(cfProjects.get(position).id, willCollect);
+                } else if (type == CONFIG) {
                     onConfigListener.onConfig(cfProjects.get(position).id, position);
                 }
             }
         });
         //set datas
-        CMTool.loadProjectUserAvatar(cfProjects.get(position).hongId,context,holder.ivProjectCfuserAvatar);
-        holder.tvCfProjectName.setText(cfProjects.get(position).title);
-        holder.tvProgress.setText(cfProjects.get(position).desc);
-        holder.tvProjectStatus.setText(CMTool.getProjectStatus(cfProjects.get(position).status));
-        //没有项目图片就隐藏ImageView
-        if(cfProjects.get(position).pics == null || cfProjects.get(position).pics.length ==0){
-            holder.ivProjectPic.setVisibility(View.GONE);
-        }else {
-            imageLoader.loadUrlImageToView(cfProjects.get(position).pics[0].url,400,400,R.mipmap.guangyuan_1,R.mipmap.guangyuan_1,holder.ivProjectPic);
+        if (cfProjects != null) {
+            holder.main.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ChouDetailActivity.class);
+                    intent.putExtra(ChouDetailActivity.PROJECT_ID, cfProjects.get(position).id);
+                    context.startActivity(intent);
+                }
+            });
+
+
+            holder.progressBar.setProgress(CMTool.generateProjectProgress(cfProjects.get(position)));
+            CMTool.loadProjectUserAvatar(cfProjects.get(position).hongId, context, holder.ivProjectCfuserAvatar);
+            holder.tvCfProjectName.setText(cfProjects.get(position).title);
+            holder.tvProgress.setText(cfProjects.get(position).desc);
+            holder.tvProjectStatus.setText(CMTool.getProjectStatus(cfProjects.get(position).status));
+            //没有项目图片就隐藏ImageView
+            if (cfProjects.get(position).pics == null || cfProjects.get(position).pics.length == 0) {
+                holder.ivProjectPic.setVisibility(View.GONE);
+            } else {
+                imageLoader.loadUrlImageToView(cfProjects.get(position).pics[0].url, 400, 400, R.mipmap.guangyuan_1, R.mipmap.guangyuan_1, holder.ivProjectPic);
+            }
+        } else if (invests != null) {
+            final CfProjectInvest invest = invests.get(position);
+            holder.main.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, ChouDetailActivity.class);
+                    intent.putExtra(ChouDetailActivity.PROJECT_ID, invest.cfProjectId);
+                    context.startActivity(intent);
+                }
+            });
+            holder.progressBar.setVisibility(View.GONE);
+            imageLoader.loadUrlImageToView(invest.projectPic, 400, 400, R.mipmap.guangyuan_1, R.mipmap.guangyuan_1, holder.ivProjectPic);
+            holder.tvProgress.setText(invest.rewardName + invest.rewardCount+ invest.rewardAmount);
         }
         return convertView;
     }
@@ -153,6 +178,10 @@ public class MySponsorAdapter extends BaseAdapter {
         ImageView ivProjectPic, ivProjectCfuserAvatar;
     }
 
+    /**
+     * @param isInit 是否是初始
+     * @param list 数据
+     */
     public void setData(boolean isInit, List<CfProject> list) {
         if(isInit){
             setCfProjects(list);
@@ -178,7 +207,10 @@ public class MySponsorAdapter extends BaseAdapter {
         this.cfProjects = cfProjects;
     }
 
-
+    public void setInvests(List<CfProjectInvest> invests) {
+        this.invests = invests;
+        notifyDataSetChanged();
+    }
 
     private boolean isCollectedByCurrentUser(CfProject cfProject) {
         for (CfUser currentUser : cfProject.collectedUsers) {
@@ -190,23 +222,14 @@ public class MySponsorAdapter extends BaseAdapter {
     }
 
 
-
-    public void setOnCollectListener(OnCollectListener onCollectListener) {
-        this.onCollectListener = onCollectListener;
-    }
-
     public void setOnConfigListener(OnConfigListener onConfigListener) {
         this.onConfigListener = onConfigListener;
     }
 
-    abstract class OnCollectListener{
-        public void onCollect(long projectId, boolean willCollet){
-
-        }
-    }
 
     public interface OnConfigListener{
         public void onConfig(long projectId, int position);
+        public void onCollect(long projectId, boolean willCollet);
     }
 
 }

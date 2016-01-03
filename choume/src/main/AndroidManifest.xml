@@ -36,19 +36,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.MainActivity"
             android:launchMode="singleTask"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.MySponsorActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.sponsor.SponsorActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
@@ -62,93 +62,93 @@
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.MyCollectionActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.MyJoinActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.OptionActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.IndividualActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.wealth.RechargeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.wealth.RechargeSuccessActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.chou.ChouDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.chou.ChouListActvity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.LoginActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.RegisterActivity"
-            android:theme="@style/BaseAppTheme.base">
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme.base" >
         </activity>
 
         <!-- PhotoPicker -->
         <activity
-            android:screenOrientation="portrait"
             android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.profile.ChangeNickActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.profile.ChangePwdActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.profile.ChangeSexActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.profile.CertApplyActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.profile.AddressManagerActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.mine.profile.AddressDetailActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
 
@@ -176,33 +176,38 @@
             android:exported="false"
             android:screenOrientation="behind" />
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.sponsor.AddRewardWayActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.sponsor.AddRewardTypeActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.chou.ChouManagerActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.chou.ChouMemberActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.chou.ChouSupportWayActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity
-            android:screenOrientation="portrait"
             android:name="com.shichai.www.choume.activity.wealth.ExchangeCBActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/BaseAppTheme.base" >
+        </activity>
+        <activity
+            android:name="com.shichai.www.choume.activity.chou.ConfirmActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
     </application>

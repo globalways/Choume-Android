@@ -40,6 +40,8 @@
             style="@style/CMSectionTitle"
             android:text="您需要筹集什么？（至少一种）"/>
 
+
+
     <EditText
         style="@style/CMEditText"
         android:id="@+id/et_money"
@@ -78,6 +80,7 @@
                 />
 
     </RelativeLayout>
+    
     <TextView
             style="@style/CMSectionTitle"
             android:text="主要完成指标(必选)"/>

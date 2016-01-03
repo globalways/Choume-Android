@@ -1,6 +1,7 @@
 package com.shichai.www.choume.activity.chou;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUserCBConsumeParam;
 import com.globalways.choume.R;
+import com.globalways.proto.nano.Common;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.ProjectDetailAdapter;
 import com.shichai.www.choume.application.MyApplication;
@@ -28,8 +31,10 @@ import com.shichai.www.choume.network.manager.CfProjectManager;
 import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.*;
 import com.shichai.www.choume.view.ListViewForScrollView;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -43,6 +48,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private View headerView;
     private View tv_reply,tv_comment,tv_supporter;
     private Context context = this;
+    private Button btnCollect;
     private long projectId;
 
     private TextView tvTitle;
@@ -50,9 +56,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private TextView tvProjectName ,tvProjectStatus, tvProjectDesc, tvProgressPercent, tvAlreadyMoneyAmount, tvAlreadyGoodsAmount,tvRemainDays;
     private ImageView ivProjectCfuserAvatar, ivProjectDetailHeader;
     private ProgressBar progressBar;
-
     private PicassoImageLoader imageLoader = new PicassoImageLoader(this);
-
     private CfProject currentProject;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +86,68 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 R.layout.actionbar_main_layout, null);
         ((TextView)actionbarLayout.findViewById(R.id.textView)).setTextColor(getResources().getColor(R.color.white));
         tvTitle = ((TextView)actionbarLayout.findViewById(R.id.textView));
+        btnCollect = (Button) actionbarLayout.findViewById(R.id.bt_right);
         ab.setCustomView(actionbarLayout);
         ab.setDisplayShowCustomEnabled(true);
 
     }
 
     private void initViews() {
+        btnCollect.setVisibility(View.VISIBLE);
+        btnCollect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!CMTool.isCollectedByCurrentUser(currentProject)) {
+                    OutsouringCrowdfunding.UserCollectProjectParam param = new OutsouringCrowdfunding.UserCollectProjectParam();
+                    param.projectId = projectId;
+                    param.token = LocalDataConfig.getToken(ChouDetailActivity.this);
+                    CfUserManager.getInstance().userCollectProject(param, new ManagerCallBack<Common.Response>() {
+                        @Override
+                        public void success(Common.Response result) {
+                            btnCollect.setText("取消收藏");
+                            MyApplication.getCfUser().collectedProjects = ArrayUtils.add(MyApplication.getCfUser().collectedProjects, currentProject);
+                        }
+
+                        @Override
+                        public void warning(int code, String msg) {
+                            UITools.warning(ChouDetailActivity.this, "收藏失败", HttpStatus.codeOf(code).desc);
+                        }
+
+                        @Override
+                        public void error(Exception e) {
+                            UITools.toastServerError(ChouDetailActivity.this);
+                        }
+                    });
+                } else {
+                    OutsouringCrowdfunding.UserUnCollectProjectParam param = new OutsouringCrowdfunding.UserUnCollectProjectParam();
+                    param.projectId = projectId;
+                    param.token = LocalDataConfig.getToken(ChouDetailActivity.this);
+                    CfUserManager.getInstance().userUnCollectProject(param, new ManagerCallBack<Common.Response>() {
+                        @Override
+                        public void success(Common.Response result) {
+                            int index = 0;
+                            for (; index < MyApplication.getCfUser().collectedProjects.length; index++) {
+                                if (MyApplication.getCfUser().collectedProjects[index].id == currentProject.id) {
+                                    break;
+                                }
+                            }
+                            MyApplication.getCfUser().collectedProjects = ArrayUtils.remove((MyApplication.getCfUser().collectedProjects), index);
+                            btnCollect.setText("收藏");
+                        }
+
+                        @Override
+                        public void warning(int code, String msg) {
+                            UITools.warning(ChouDetailActivity.this, "取消收藏失败", HttpStatus.codeOf(code).desc);
+                        }
+
+                        @Override
+                        public void error(Exception e) {
+                            UITools.toastServerError(ChouDetailActivity.this);
+                        }
+                    });
+                }
+            }
+        });
 
         listView = (ListViewForScrollView) findViewById(R.id.projectDetailListView);
         adapter = new ProjectDetailAdapter(this);
@@ -135,11 +195,6 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 tv_supporter.setSelected(false);
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
-                ArrayList<String> strings2 = new ArrayList<>();
-                for (int i=0; i<8 ;i++){
-                    strings2.add("XXSASD");
-                }
-                //adapter.addDatas(strings2);
                 break;
             case R.id.tv_supporter:
                 tv_reply.setSelected(false);
@@ -171,8 +226,6 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             public void success(OutsouringCrowdfunding.GetCfProjectResp result) {
                 currentProject = result.project;
                 loadDataToViews(currentProject);
-
-                Log.i("yangping","loadproject status：" + CMTool.getProjectStatus(currentProject.status));
                 //默认显示支持方式
                 tv_reply.performClick();
             }
@@ -190,6 +243,12 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     private void loadDataToViews(CfProject cfProject) {
+        if (CMTool.isCollectedByCurrentUser(currentProject)) {
+            btnCollect.setText("取消收藏");
+        } else {
+            btnCollect.setText("收藏");
+        }
+
         if (cfProject.pics == null || cfProject.pics.length == 0) {
             ivProjectDetailHeader.setVisibility(View.GONE);
         }else {
@@ -207,11 +266,15 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
         tvRemainDays.setText(String.valueOf(TimeUnit.SECONDS.toDays(currentProject.deadline - currentProject.fundTime)));
         tvTitle.setText(currentProject.title);
+
+
         dialog.dismiss();
     }
 
     @Override
     public void onNewInvest(final CfProjectReward reward) {
+        //Intent intent = new Intent(this, ConfirmActivity.class);
+        //startActivity(intent);
 
         if (MyApplication.getCfUser() == null) {
             UITools.toastMsg(this, "请先登录");
@@ -221,6 +284,11 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         //如果项目不是在已发布状态则不能再参与项目
         if (currentProject.status != OutsouringCrowdfunding.PUBLISHED_CFPS) {
             UITools.toastMsg(this, "项目当前不接受新的支持");
+            return;
+        }
+        //如果用户没那么多筹币就不能参与
+        if (reward.supportType == OutsouringCrowdfunding.MONEY_CFPST && MyApplication.getCfUser().coin < reward.amount) {
+            UITools.toastMsg(this, "您的筹币不足，请先充值兑换");
             return;
         }
 

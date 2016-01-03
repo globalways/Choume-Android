@@ -1,0 +1,139 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/cmwhite"
+              android:orientation="vertical"
+              tools:context="com.shichai.www.choume.activity.mine.profile.ChangeNickActivity">
+
+    <include
+            layout="@layout/app_bar_layout">
+    </include>
+
+    <RelativeLayout
+            android:padding="10dp"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+                android:id="@+id/etNick"
+                android:background="@color/selector_edittext_bg"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"/>
+
+    </RelativeLayout>
+
+    <TextView
+            style="@style/CMSectionTitle"
+            android:text="备注信息"/>
+
+    <EditText
+            style="@style/CMEditText"
+            android:hint=""
+            android:id="@+id/et_des"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            />
+    <TextView
+            style="@style/CMSectionTitle"
+            android:text="支持信息"/>
+
+    <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <TextView
+                style="@style/setting_attr_text"
+                android:text="选择份数"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+        <LinearLayout
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:baselineAligned="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+            <Button
+                    android:id="@+id/btnLess"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@color/selector_btn_plus"
+                    android:text="-"
+                    android:textSize="20sp" />
+
+            <TextView
+                    android:id="@+id/tvNumber"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="-1dp"
+                    android:layout_marginRight="-1dp"
+                    android:background="@android:color/transparent"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/cmgray_b3b3b3"
+                    android:textSize="18sp" />
+
+            <Button
+                    android:id="@+id/btnAdd"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:background="@color/selector_btn_plus"
+                    android:text="+"
+                    android:textSize="20sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:id="@+id/rlToChangeNick"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        <TextView
+                style="@style/setting_attr_text"
+                android:text="需要支持"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+        <TextView
+                style="@style/setting_text"
+                android:text="小明"
+                android:drawableRight="@null"
+                android:id="@+id/tvRewardAbbr"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+        <TextView
+                style="@style/setting_attr_text"
+                android:text="总计"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+        <TextView
+                style="@style/setting_text"
+                android:text="小明"
+                android:drawableRight="@null"
+                android:id="@+id/tvTotal"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+    </RelativeLayout>
+
+
+</LinearLayout>

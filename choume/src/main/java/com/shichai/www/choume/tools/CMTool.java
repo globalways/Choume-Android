@@ -8,6 +8,7 @@ import com.globalways.choume.R;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.user.nano.UserCommon;
+import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfUserManager;
 
@@ -108,6 +109,23 @@ public class CMTool {
                 view.setText(result.cfUser.user.nick);
             }
         });
+    }
+
+    /**
+     * 指定项目是否被当前用户收藏
+     * @param cfProject
+     * @return true 收藏了，false 没被收藏
+     */
+    public static boolean isCollectedByCurrentUser(CfProject cfProject) {
+        if (MyApplication.getCfUser() == null){
+            return false;
+        }
+        for (CfProject project : MyApplication.getCfUser().collectedProjects) {
+            if (project.id == cfProject.id) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

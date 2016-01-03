@@ -5,13 +5,24 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.UserCollectProjectParam;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.UserUnCollectProjectParam;
 import com.globalways.choume.R;
+import com.globalways.proto.nano.Common;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.activity.chou.ChouManagerActivity;
 import com.shichai.www.choume.activity.sponsor.SponsorActivity;
 import com.shichai.www.choume.adapter.MySponsorAdapter;
 import com.shichai.www.choume.application.MyApplication;
+import com.shichai.www.choume.network.HttpConfig;
+import com.shichai.www.choume.network.HttpStatus;
+import com.shichai.www.choume.network.ManagerCallBack;
+import com.shichai.www.choume.network.manager.CfProjectManager;
+import com.shichai.www.choume.network.manager.CfUserManager;
+import com.shichai.www.choume.tools.LocalDataConfig;
+import com.shichai.www.choume.tools.UITools;
 import com.shichai.www.choume.view.PullToRefreshListView;
 
 import java.util.ArrayList;
@@ -84,8 +95,6 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
             projects = new ArrayList<CfProject>(Arrays.asList(MyApplication.getCfUser().fundProjects));
             adapter.setData(true, projects);
         }
-
-
     }
 
     @Override
@@ -106,4 +115,50 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         intent.putExtra(PROJECT_ID, projectId);
         startActivity(intent);
     }
+
+    @Override
+    public void onCollect(long projectId, boolean willCollet) {
+        if (willCollet) {
+            UserCollectProjectParam param = new UserCollectProjectParam();
+            param.projectId = projectId;
+            param.token = LocalDataConfig.getToken(this);
+            CfUserManager.getInstance().userCollectProject(param, new ManagerCallBack<Common.Response>() {
+                @Override
+                public void success(Common.Response result) {
+                    UITools.toastMsg(MySponsorActivity.this, "收藏成功");
+                }
+
+                @Override
+                public void warning(int code, String msg) {
+                    UITools.warning(MySponsorActivity.this, "收藏失败", HttpStatus.codeOf(code).desc);
+                }
+
+                @Override
+                public void error(Exception e) {
+                    UITools.toastServerError(MySponsorActivity.this);
+                }
+            });
+        } else {
+            UserUnCollectProjectParam param = new UserUnCollectProjectParam();
+            param.projectId = projectId;
+            param.token = LocalDataConfig.getToken(this);
+            CfUserManager.getInstance().userUnCollectProject(param, new ManagerCallBack<Common.Response>() {
+                @Override
+                public void success(Common.Response result) {
+                    UITools.toastMsg(MySponsorActivity.this, "取消收藏成功");
+                }
+
+                @Override
+                public void warning(int code, String msg) {
+                    UITools.warning(MySponsorActivity.this, "取消收藏失败", HttpStatus.codeOf(code).desc);
+                }
+
+                @Override
+                public void error(Exception e) {
+                    UITools.toastServerError(MySponsorActivity.this);
+                }
+            });
+        }
+    }
+
 }

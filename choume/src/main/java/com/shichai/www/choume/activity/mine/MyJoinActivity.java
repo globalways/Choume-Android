@@ -5,11 +5,15 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.globalways.choume.R;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectInvest;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.MySponsorAdapter;
+import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.view.PullToRefreshListView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by HeJianjun on 2015/12/22.
@@ -17,7 +21,7 @@ import java.util.ArrayList;
 public class MyJoinActivity extends BaseActivity implements View.OnClickListener{
 
     private PullToRefreshListView listView;
-
+    private ArrayList<CfProjectInvest> invests;
     private MySponsorAdapter adapter;
 
     @Override
@@ -27,6 +31,7 @@ public class MyJoinActivity extends BaseActivity implements View.OnClickListener
         initActionBar();
         setTitle("我的参与");
         initViews();
+        loadProjects();
     }
 
     private void initViews(){
@@ -55,5 +60,12 @@ public class MyJoinActivity extends BaseActivity implements View.OnClickListener
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void loadProjects(){
+        if (MyApplication.getCfUser().investProjects.length != 0){
+            invests = new ArrayList<CfProjectInvest>(Arrays.asList(MyApplication.getCfUser().investProjects));
+            adapter.setInvests(invests);
+        }
     }
 }

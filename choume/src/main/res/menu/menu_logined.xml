@@ -13,13 +13,13 @@
                   android:icon="@mipmap/ico_my_join"
                   android:title="@string/my_join" />
               <item
+                      android:id="@+id/my_collection"
+                      android:icon="@mipmap/ico_my_collection"
+                      android:title="@string/my_collection" />
+              <item
                   android:id="@+id/my_wealth"
                   android:icon="@mipmap/ico_my_wealth"
                   android:title="@string/my_wealth" />
-              <item
-                  android:id="@+id/my_collection"
-                  android:icon="@mipmap/ico_my_collection"
-                  android:title="@string/my_collection" />
               <item
                   android:id="@+id/my_message"
                   android:icon="@mipmap/ico_my_message"

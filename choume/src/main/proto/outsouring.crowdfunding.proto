@@ -481,6 +481,18 @@ message CfProjectInvest {
     string orderId = 11;
     // // 应该支付的筹币数
     uint64 coinPay = 12;
+    // 回报方式
+    string rewardName = 13;
+    // 项目
+    string projectName = 14;
+    // 投资者内部id,关联用,客户端不管
+    int64 cfUserId = 15;
+    // 项目头一张图
+    string projectPic = 16;
+    // 支持份数
+    uint64 rewardCount = 17;
+    // 每份的量
+    uint64 rewardAmount = 18;
 }
 
 // 筹币消费类型
@@ -509,6 +521,7 @@ message CFCBHistory {
     int64 time = 5;
     string orderId = 6;
     uint64 hongId = 7;
+    bool finished = 8;
 }
 
 // 回报方式
@@ -634,15 +647,17 @@ message CfUser {
     CfUserCertApply certification = 4;
     // 我的收藏
     repeated CfProject collectedProjects = 5;
+    // 我的参与
+    repeated CfProjectInvest investProjects = 6;
     // 积分
-    uint64 point = 6;
+    uint64 point = 7;
     // 筹币
-    uint64 coin = 7;
+    uint64 coin = 8;
     // 融云token
-    string rcToken = 8;
+    string rcToken = 9;
     // 权限
-    CfUserRole role = 9;
-    User user = 10;
+    CfUserRole role = 10;
+    User user = 11;
 }
 
 // 消息类型
