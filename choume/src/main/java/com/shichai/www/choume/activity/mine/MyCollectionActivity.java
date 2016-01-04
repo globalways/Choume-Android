@@ -17,7 +17,7 @@ import java.util.Arrays;
 /**
  * Created by HeJianjun on 2015/12/22.
  */
-public class MyCollectionActivity extends BaseActivity implements View.OnClickListener{
+public class MyCollectionActivity extends BaseActivity implements View.OnClickListener,MySponsorAdapter.OnCollectListener{
 
     private PullToRefreshListView listView;
     private ArrayList<OutsouringCrowdfunding.CfProject> projects;
@@ -69,4 +69,8 @@ public class MyCollectionActivity extends BaseActivity implements View.OnClickLi
     }
 
 
+    @Override
+    public void onCollect(int position,boolean isCollect) {
+
+    }
 }

@@ -2,6 +2,8 @@ package com.shichai.www.choume.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,7 +102,7 @@ public class MySponsorAdapter extends BaseAdapter {
                     holder.ibControl.setVisibility(View.GONE);
                     break;
                 case STAR:
-                    holder.ibControl.setImageDrawable(context.getResources().getDrawable(R.mipmap.ico_my_collection));
+                    holder.ibControl.setImageDrawable(context.getResources().getDrawable(R.drawable.seletor_collect));
                     break;
                 case CONFIG:
                     holder.ibControl.setImageDrawable(context.getResources().getDrawable(R.mipmap.ico_my_account_option));
@@ -228,8 +230,12 @@ public class MySponsorAdapter extends BaseAdapter {
 
 
     public interface OnConfigListener{
-        public void onConfig(long projectId, int position);
-        public void onCollect(long projectId, boolean willCollet);
+         void onConfig(long projectId, int position);
+         void onCollect(long projectId, boolean willCollet);
+    }
+
+    public interface OnCollectListener{
+         void onCollect(int position,boolean isCollect);
     }
 
 }

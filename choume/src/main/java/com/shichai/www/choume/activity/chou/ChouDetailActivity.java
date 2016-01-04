@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -48,7 +49,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private View headerView;
     private View tv_reply,tv_comment,tv_supporter;
     private Context context = this;
-    private Button btnCollect;
+    private ImageButton btnCollect;
     private long projectId;
 
     private TextView tvTitle;
@@ -86,7 +87,8 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 R.layout.actionbar_main_layout, null);
         ((TextView)actionbarLayout.findViewById(R.id.textView)).setTextColor(getResources().getColor(R.color.white));
         tvTitle = ((TextView)actionbarLayout.findViewById(R.id.textView));
-        btnCollect = (Button) actionbarLayout.findViewById(R.id.bt_right);
+        btnCollect = (ImageButton) actionbarLayout.findViewById(R.id.bt_add);
+        btnCollect.setImageDrawable(getResources().getDrawable(R.drawable.seletor_collect));
         ab.setCustomView(actionbarLayout);
         ab.setDisplayShowCustomEnabled(true);
 
@@ -104,7 +106,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                     CfUserManager.getInstance().userCollectProject(param, new ManagerCallBack<Common.Response>() {
                         @Override
                         public void success(Common.Response result) {
-                            btnCollect.setText("取消收藏");
+                            btnCollect.setSelected(false);
                             MyApplication.getCfUser().collectedProjects = ArrayUtils.add(MyApplication.getCfUser().collectedProjects, currentProject);
                         }
 
@@ -132,7 +134,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                                 }
                             }
                             MyApplication.getCfUser().collectedProjects = ArrayUtils.remove((MyApplication.getCfUser().collectedProjects), index);
-                            btnCollect.setText("收藏");
+                            btnCollect.setSelected(true);
                         }
 
                         @Override
@@ -244,9 +246,9 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     private void loadDataToViews(CfProject cfProject) {
         if (CMTool.isCollectedByCurrentUser(currentProject)) {
-            btnCollect.setText("取消收藏");
+            btnCollect.setSelected(false);
         } else {
-            btnCollect.setText("收藏");
+            btnCollect.setSelected(true);
         }
 
         if (cfProject.pics == null || cfProject.pics.length == 0) {
