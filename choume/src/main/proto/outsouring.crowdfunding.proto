@@ -493,6 +493,8 @@ message CfProjectInvest {
     uint64 rewardCount = 17;
     // 每份的量
     uint64 rewardAmount = 18;
+    // 回报方式类型
+    CfProjectSupportType rewardSupportType = 19;
 }
 
 // 筹币消费类型
