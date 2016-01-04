@@ -95,6 +95,8 @@ dependencies {
     //prgress
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'org.apache.commons:commons-lang3:3.3.2'
+    compile 'com.google.code.gson:gson:2.2.4'
+
 }
 
 

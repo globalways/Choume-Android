@@ -26,12 +26,12 @@
 
     <TextView
             style="@style/CMSectionTitle"
-            android:text="备注信息"/>
+            android:text="备注信息(可选)"/>
 
     <EditText
             style="@style/CMEditText"
             android:hint=""
-            android:id="@+id/et_des"
+            android:id="@+id/etComments"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
             />
@@ -105,7 +105,6 @@
 
         <TextView
                 style="@style/setting_text"
-                android:text="小明"
                 android:drawableRight="@null"
                 android:id="@+id/tvRewardAbbr"
                 android:layout_centerVertical="true"
@@ -127,7 +126,6 @@
 
         <TextView
                 style="@style/setting_text"
-                android:text="小明"
                 android:drawableRight="@null"
                 android:id="@+id/tvTotal"
                 android:layout_centerVertical="true"

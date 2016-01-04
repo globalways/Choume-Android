@@ -22,6 +22,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUserCBConsumeParam;
 import com.globalways.choume.R;
 import com.globalways.proto.nano.Common;
+import com.google.gson.Gson;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.ProjectDetailAdapter;
 import com.shichai.www.choume.application.MyApplication;
@@ -43,6 +44,7 @@ import java.util.concurrent.TimeUnit;
 public class ChouDetailActivity extends BaseActivity implements View.OnClickListener, ProjectDetailAdapter.InvestListener{
 
     public static final String PROJECT_ID = "project_id";
+    private final int REQUEST_NEW_INVEST = 100;
     private ListViewForScrollView listView;
     private ProjectDetailAdapter adapter;
     private View headerView;
@@ -272,9 +274,42 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_NEW_INVEST) {
+            int supportType = data.getIntExtra(ConfirmActivity.REWARD_SUPPORT_TYPE, -1);
+            long amount = data.getLongExtra(ConfirmActivity.REWARD_AMOUNT, 0);
+            switch (supportType) {
+                case OutsouringCrowdfunding.GOODS_CFPST:
+                    currentProject.alreadyGoodsAmount += amount;
+                    break;
+                case OutsouringCrowdfunding.MONEY_CFPST:
+                    currentProject.alreadyMoneyAmount += amount;
+                    break;
+                case OutsouringCrowdfunding.PEOPLE_CFPST:
+                    currentProject.alreadyPeopleAmount += amount;
+                    break;
+                case OutsouringCrowdfunding.EQUITY_CFPST:
+                    currentProject.alreadyProjectEquity += amount;
+                    break;
+            }
+
+            tvProgressPercent.setText(CMTool.generateProjectProgress(currentProject) + "%");
+            tvAlreadyMoneyAmount.setText(Tool.fenToYuan(currentProject.alreadyMoneyAmount));
+            tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
+            progressBar.setProgress(CMTool.generateProjectProgress(currentProject));
+        }
+    }
+
+    @Override
     public void onNewInvest(final CfProjectReward reward) {
-        //Intent intent = new Intent(this, ConfirmActivity.class);
-        //startActivity(intent);
+
+        Log.i("yang", new Gson().toJson(reward));
+        Gson gson = new Gson();
+        Intent intent = new Intent(this, ConfirmActivity.class);
+        intent.putExtra(ConfirmActivity.REWARD_CONFIRM, gson.toJson(reward));
+        intent.putExtra(ConfirmActivity.PROJECT_CONFIRM, gson.toJson(currentProject));
+        startActivityForResult(intent, REQUEST_NEW_INVEST);
+
 
         if (MyApplication.getCfUser() == null) {
             UITools.toastMsg(this, "请先登录");
@@ -292,63 +327,64 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             return;
         }
 
-        NewCfProjectInvestParam projectInvestParam = new NewCfProjectInvestParam();
-        projectInvestParam.cfProjectId = reward.cfProjectId;
-        projectInvestParam.count = 1;
-        projectInvestParam.token = LocalDataConfig.getToken(context);
-        projectInvestParam.cfProjectRewardId = reward.id;
-        CfProjectManager.getInstance().newCfProjectInvest(projectInvestParam, new ManagerCallBack<OutsouringCrowdfunding.NewCfProjectInvestResp>() {
-            @Override
-            public void success(OutsouringCrowdfunding.NewCfProjectInvestResp result) {
-                //如果是需要付钱的方式，则立马付钱
-                if (result.invest.coinPay > 0) {
-                    UITools.toastMsg(context, "参与项目成功，支付...");
-                    CfUserCBConsumeParam param = new CfUserCBConsumeParam();
-                    param.coin = result.invest.coinPay;
-                    param.orderId = result.invest.orderId;
-                    param.token = LocalDataConfig.getToken(ChouDetailActivity.this);
-                    CfUserManager.getInstance().cfUserCBConsume(param, new ManagerCallBack<OutsouringCrowdfunding.CfUserCBConsumeResp>() {
-                        @Override
-                        public void success(OutsouringCrowdfunding.CfUserCBConsumeResp result) {
-                            //result.history.
-                            //UITools.toastMsg(ChouDetailActivity.this, "支付成功");
-                            //修改本地用户筹币数目
-                            MyApplication.getCfUser().coin -= result.history.coin;
-                            refreshProjectDatas(reward);
-                        }
-
-                        @Override
-                        public void warning(int code, String msg) {
-                            UITools.warning(ChouDetailActivity.this, "支付筹币失败", HttpStatus.codeOf(code).desc);
-                        }
-
-                        @Override
-                        public void error(Exception e) {
-                            UITools.toastServerError(ChouDetailActivity.this);
-                        }
-                    });
-                } else {
-                    UITools.toastMsg(context, "参与项目成功");
-                    //重新加载数据
-                    refreshProjectDatas(reward);
-                }
-            }
-
-            @Override
-            public void warning(int code, String msg) {
-                UITools.warning(context, "参与项目失败", HttpStatus.codeOf(code).desc);
-            }
-
-            @Override
-            public void error(Exception e) {
-                UITools.toastServerError(context);
-            }
-        });
+//        NewCfProjectInvestParam projectInvestParam = new NewCfProjectInvestParam();
+//        projectInvestParam.cfProjectId = reward.cfProjectId;
+//        projectInvestParam.count = 1;
+//        projectInvestParam.token = LocalDataConfig.getToken(context);
+//        projectInvestParam.cfProjectRewardId = reward.id;
+//        CfProjectManager.getInstance().newCfProjectInvest(projectInvestParam, new ManagerCallBack<OutsouringCrowdfunding.NewCfProjectInvestResp>() {
+//            @Override
+//            public void success(OutsouringCrowdfunding.NewCfProjectInvestResp result) {
+//                //如果是需要付钱的方式，则立马付钱
+//                if (result.invest.coinPay > 0) {
+//                    UITools.toastMsg(context, "参与项目成功，支付...");
+//                    CfUserCBConsumeParam param = new CfUserCBConsumeParam();
+//                    param.coin = result.invest.coinPay;
+//                    param.orderId = result.invest.orderId;
+//                    param.token = LocalDataConfig.getToken(ChouDetailActivity.this);
+//                    CfUserManager.getInstance().cfUserCBConsume(param, new ManagerCallBack<OutsouringCrowdfunding.CfUserCBConsumeResp>() {
+//                        @Override
+//                        public void success(OutsouringCrowdfunding.CfUserCBConsumeResp result) {
+//                            //result.history.
+//                            //UITools.toastMsg(ChouDetailActivity.this, "支付成功");
+//                            //修改本地用户筹币数目
+//                            MyApplication.getCfUser().coin -= result.history.coin;
+//                            refreshProjectDatas(reward);
+//                        }
+//
+//                        @Override
+//                        public void warning(int code, String msg) {
+//                            UITools.warning(ChouDetailActivity.this, "支付筹币失败", HttpStatus.codeOf(code).desc);
+//                        }
+//
+//                        @Override
+//                        public void error(Exception e) {
+//                            UITools.toastServerError(ChouDetailActivity.this);
+//                        }
+//                    });
+//                } else {
+//                    UITools.toastMsg(context, "参与项目成功");
+//                    //重新加载数据
+//                    refreshProjectDatas(reward);
+//                }
+//            }
+//
+//            @Override
+//            public void warning(int code, String msg) {
+//                UITools.warning(context, "参与项目失败", HttpStatus.codeOf(code).desc);
+//            }
+//
+//            @Override
+//            public void error(Exception e) {
+//                UITools.toastServerError(context);
+//            }
+//        });
 
     }
 
     /**
-     * 当众筹成功后，不从网络获取数据，直接修改本地数据
+     * 当众筹成功后，不从网络获取数据，直接修改本地数据<br>
+     * 调整alreadyXXX的数量
      * @param reward
      */
     private void refreshProjectDatas(CfProjectReward reward) {

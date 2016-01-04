@@ -165,7 +165,7 @@ public class MySponsorAdapter extends BaseAdapter {
             });
             holder.progressBar.setVisibility(View.GONE);
             imageLoader.loadUrlImageToView(invest.projectPic, 400, 400, R.mipmap.guangyuan_1, R.mipmap.guangyuan_1, holder.ivProjectPic);
-            holder.tvProgress.setText(invest.rewardName + invest.rewardCount+ invest.rewardAmount);
+            holder.tvProgress.setText(getSupportInfo(invest));
         }
         return convertView;
     }
@@ -232,4 +232,26 @@ public class MySponsorAdapter extends BaseAdapter {
         public void onCollect(long projectId, boolean willCollet);
     }
 
+
+    private String getSupportInfo(CfProjectInvest invest) {
+        String abbr = "";
+        switch (invest.rewardSupportType) {
+            case OutsouringCrowdfunding.MONEY_CFPST:
+                abbr = "支持了 "+invest.rewardAmount*invest.rewardCount+" 筹币";
+                break;
+            case OutsouringCrowdfunding.PEOPLE_CFPST:
+                abbr = "支持了人员 "+invest.rewardAmount*invest.rewardCount+"名";
+                break;
+            case OutsouringCrowdfunding.GOODS_CFPST:
+                abbr = "支持了物品 "+invest.rewardAmount*invest.rewardCount+" 件";
+                break;
+            case OutsouringCrowdfunding.EQUITY_CFPST:
+                abbr = "支持了股权 "+invest.rewardAmount*invest.rewardCount+"‰";
+                break;
+            case OutsouringCrowdfunding.INVALID_CFPST:
+                abbr = "未知";
+                break;
+        }
+        return abbr;
+    }
 }
