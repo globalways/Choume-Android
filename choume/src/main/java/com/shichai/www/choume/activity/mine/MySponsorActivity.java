@@ -24,6 +24,7 @@ import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.UITools;
 import com.shichai.www.choume.view.PullToRefreshListView;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -117,48 +118,7 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
-    public void onCollect(long projectId, boolean willCollet) {
-        if (willCollet) {
-            UserCollectProjectParam param = new UserCollectProjectParam();
-            param.projectId = projectId;
-            param.token = LocalDataConfig.getToken(this);
-            CfUserManager.getInstance().userCollectProject(param, new ManagerCallBack<Common.Response>() {
-                @Override
-                public void success(Common.Response result) {
-                    UITools.toastMsg(MySponsorActivity.this, "收藏成功");
-                }
-
-                @Override
-                public void warning(int code, String msg) {
-                    UITools.warning(MySponsorActivity.this, "收藏失败", HttpStatus.codeOf(code).desc);
-                }
-
-                @Override
-                public void error(Exception e) {
-                    UITools.toastServerError(MySponsorActivity.this);
-                }
-            });
-        } else {
-            UserUnCollectProjectParam param = new UserUnCollectProjectParam();
-            param.projectId = projectId;
-            param.token = LocalDataConfig.getToken(this);
-            CfUserManager.getInstance().userUnCollectProject(param, new ManagerCallBack<Common.Response>() {
-                @Override
-                public void success(Common.Response result) {
-                    UITools.toastMsg(MySponsorActivity.this, "取消收藏成功");
-                }
-
-                @Override
-                public void warning(int code, String msg) {
-                    UITools.warning(MySponsorActivity.this, "取消收藏失败", HttpStatus.codeOf(code).desc);
-                }
-
-                @Override
-                public void error(Exception e) {
-                    UITools.toastServerError(MySponsorActivity.this);
-                }
-            });
-        }
+    public void onCollect(long projectId, boolean willCollet, final int index) {
     }
 
 }

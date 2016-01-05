@@ -1,5 +1,6 @@
 package com.shichai.www.choume.activity.chou;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -108,7 +109,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                     CfUserManager.getInstance().userCollectProject(param, new ManagerCallBack<Common.Response>() {
                         @Override
                         public void success(Common.Response result) {
-                            btnCollect.setSelected(false);
+                            btnCollect.setSelected(true);
                             MyApplication.getCfUser().collectedProjects = ArrayUtils.add(MyApplication.getCfUser().collectedProjects, currentProject);
                         }
 
@@ -136,7 +137,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                                 }
                             }
                             MyApplication.getCfUser().collectedProjects = ArrayUtils.remove((MyApplication.getCfUser().collectedProjects), index);
-                            btnCollect.setSelected(true);
+                            btnCollect.setSelected(false);
                         }
 
                         @Override
@@ -248,9 +249,9 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     private void loadDataToViews(CfProject cfProject) {
         if (CMTool.isCollectedByCurrentUser(currentProject)) {
-            btnCollect.setSelected(false);
-        } else {
             btnCollect.setSelected(true);
+        } else {
+            btnCollect.setSelected(false);
         }
 
         if (cfProject.pics == null || cfProject.pics.length == 0) {
@@ -278,34 +279,35 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_NEW_INVEST) {
-            int supportType = data.getIntExtra(ConfirmActivity.REWARD_SUPPORT_TYPE, -1);
-            long amount = data.getLongExtra(ConfirmActivity.REWARD_AMOUNT, 0);
-            switch (supportType) {
-                case OutsouringCrowdfunding.GOODS_CFPST:
-                    currentProject.alreadyGoodsAmount += amount;
-                    break;
-                case OutsouringCrowdfunding.MONEY_CFPST:
-                    currentProject.alreadyMoneyAmount += amount;
-                    break;
-                case OutsouringCrowdfunding.PEOPLE_CFPST:
-                    currentProject.alreadyPeopleAmount += amount;
-                    break;
-                case OutsouringCrowdfunding.EQUITY_CFPST:
-                    currentProject.alreadyProjectEquity += amount;
-                    break;
-            }
+            if (resultCode == Activity.RESULT_OK) {
+                int supportType = data.getIntExtra(ConfirmActivity.REWARD_SUPPORT_TYPE, -1);
+                long amount = data.getLongExtra(ConfirmActivity.REWARD_AMOUNT, 0);
+                switch (supportType) {
+                    case OutsouringCrowdfunding.GOODS_CFPST:
+                        currentProject.alreadyGoodsAmount += amount;
+                        break;
+                    case OutsouringCrowdfunding.MONEY_CFPST:
+                        currentProject.alreadyMoneyAmount += amount;
+                        break;
+                    case OutsouringCrowdfunding.PEOPLE_CFPST:
+                        currentProject.alreadyPeopleAmount += amount;
+                        break;
+                    case OutsouringCrowdfunding.EQUITY_CFPST:
+                        currentProject.alreadyProjectEquity += amount;
+                        break;
+                }
 
-            tvProgressPercent.setText(CMTool.generateProjectProgress(currentProject) + "%");
-            tvAlreadyMoneyAmount.setText(Tool.fenToYuan(currentProject.alreadyMoneyAmount));
-            tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
-            progressBar.setProgress(CMTool.generateProjectProgress(currentProject));
+                tvProgressPercent.setText(CMTool.generateProjectProgress(currentProject) + "%");
+                tvAlreadyMoneyAmount.setText(Tool.fenToYuan(currentProject.alreadyMoneyAmount));
+                tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
+                progressBar.setProgress(CMTool.generateProjectProgress(currentProject));
+            }
         }
     }
 
     @Override
     public void onNewInvest(final CfProjectReward reward) {
 
-        Log.i("yang", new Gson().toJson(reward));
         Gson gson = new Gson();
         Intent intent = new Intent(this, ConfirmActivity.class);
         intent.putExtra(ConfirmActivity.REWARD_CONFIRM, gson.toJson(reward));

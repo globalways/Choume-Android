@@ -103,6 +103,7 @@ public class MySponsorAdapter extends BaseAdapter {
                     break;
                 case STAR:
                     holder.ibControl.setImageDrawable(context.getResources().getDrawable(R.drawable.seletor_collect));
+                    holder.ibControl.setSelected(true);
                     break;
                 case CONFIG:
                     holder.ibControl.setImageDrawable(context.getResources().getDrawable(R.mipmap.ico_my_account_option));
@@ -125,8 +126,8 @@ public class MySponsorAdapter extends BaseAdapter {
             public void onClick(View v) {
                 if (type == STAR) {
                     boolean willCollect = true;
-                    willCollect = !isCollectedByCurrentUser(cfProjects.get(position));
-                    onConfigListener.onCollect(cfProjects.get(position).id, willCollect);
+                    willCollect = !CMTool.isCollectedByCurrentUser(cfProjects.get(position));
+                    onConfigListener.onCollect(cfProjects.get(position).id, willCollect, position);
                 } else if (type == CONFIG) {
                     onConfigListener.onConfig(cfProjects.get(position).id, position);
                 }
@@ -142,8 +143,6 @@ public class MySponsorAdapter extends BaseAdapter {
                     context.startActivity(intent);
                 }
             });
-
-
             holder.progressBar.setProgress(CMTool.generateProjectProgress(cfProjects.get(position)));
             CMTool.loadProjectUserAvatar(cfProjects.get(position).hongId, context, holder.ivProjectCfuserAvatar);
             holder.tvCfProjectName.setText(cfProjects.get(position).title);
@@ -166,6 +165,8 @@ public class MySponsorAdapter extends BaseAdapter {
                 }
             });
             holder.progressBar.setVisibility(View.GONE);
+            holder.ivProjectCfuserAvatar.setVisibility(View.INVISIBLE);
+            holder.tvCfProjectName.setText(invest.projectName);
             imageLoader.loadUrlImageToView(invest.projectPic, 400, 400, R.mipmap.guangyuan_1, R.mipmap.guangyuan_1, holder.ivProjectPic);
             holder.tvProgress.setText(getSupportInfo(invest));
         }
@@ -214,16 +215,6 @@ public class MySponsorAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    private boolean isCollectedByCurrentUser(CfProject cfProject) {
-        for (CfUser currentUser : cfProject.collectedUsers) {
-            if (currentUser.hongId == MyApplication.getCfUser().hongId){
-                return true;
-            }
-        }
-        return false;
-    }
-
-
     public void setOnConfigListener(OnConfigListener onConfigListener) {
         this.onConfigListener = onConfigListener;
     }
@@ -231,13 +222,8 @@ public class MySponsorAdapter extends BaseAdapter {
 
     public interface OnConfigListener{
          void onConfig(long projectId, int position);
-         void onCollect(long projectId, boolean willCollet);
+         void onCollect(long projectId, boolean willCollet, int index);
     }
-
-    public interface OnCollectListener{
-         void onCollect(int position,boolean isCollect);
-    }
-
 
     private String getSupportInfo(CfProjectInvest invest) {
         String abbr = "";

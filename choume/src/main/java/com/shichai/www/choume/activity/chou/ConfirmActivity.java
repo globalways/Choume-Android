@@ -50,7 +50,7 @@ public class ConfirmActivity extends BaseActivity implements View.OnClickListene
         String rewardJson = getIntent().getStringExtra(REWARD_CONFIRM);
         String projectJson = getIntent().getStringExtra(PROJECT_CONFIRM);
         currentReward = gson.fromJson(rewardJson, CfProjectReward.class);
-        currentProject = gson.fromJson(rewardJson, CfProject.class);
+        currentProject = gson.fromJson(projectJson, CfProject.class);
 
         initDatas();
     }
