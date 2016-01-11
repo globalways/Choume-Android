@@ -41,7 +41,16 @@
             android:text="您需要筹集什么？（至少一种）"/>
 
 
-
+    <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginLeft="10dp"
+            android:text="- 筹集资金"
+            android:textSize="12sp"
+            android:textColor="@color/cmblue_11a2ff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
     <EditText
         style="@style/CMEditText"
         android:id="@+id/et_money"
@@ -49,6 +58,19 @@
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_margin="10dp"
+            />
+
+
+
+    <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginLeft="10dp"
+            android:text="- 筹集人员"
+            android:textSize="12sp"
+            android:textColor="@color/cmblue_11a2ff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             />
     <EditText
         style="@style/CMEditText"
@@ -58,28 +80,83 @@
         android:layout_width="match_parent"
         android:layout_margin="10dp"
         />
-    <RelativeLayout
+
+
+    <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginLeft="10dp"
+            android:text="- 筹集物品"
+            android:textSize="12sp"
+            android:textColor="@color/cmblue_11a2ff"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
             android:layout_height="wrap_content">
 
         <EditText
                 style="@style/CMEditText"
                 android:id="@+id/et_product"
                 android:hint="物品"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_margin="10dp"
                 />
         <EditText
                 android:id="@+id/et_product_count"
-                android:layout_toRightOf="@id/et_product"
                 android:hint="物品数量"
                 android:inputType="number"
-                android:layout_width="100dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_margin="10dp"
                 style="@style/CMEditText"
                 />
 
-    </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+    <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="-10dp"
+            android:layout_marginLeft="10dp"
+            android:text="- 募股"
+            android:textSize="12sp"
+            android:textColor="@color/cmblue_11a2ff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+        <EditText
+                style="@style/CMEditText"
+                android:id="@+id/et_requiredProjectAmount"
+                android:hint="融资额(元)"
+                android:inputType="number"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                />
+        <EditText
+                android:id="@+id/et_requiredProjectEquity"
+                android:hint="出让股份(‰)"
+                android:inputType="number"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                style="@style/CMEditText"
+                />
+
+    </LinearLayout>
+
+
     
     <TextView
             style="@style/CMSectionTitle"

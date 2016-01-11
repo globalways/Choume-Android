@@ -131,12 +131,12 @@
 
                 <TextView
                     android:drawablePadding="10dp"
-                    android:drawableTop="@mipmap/ico_progress"
+                    android:drawableTop="@mipmap/ico_goods"
                     android:textSize="14sp"
                     android:textColor="@color/border_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="一抽物品"
+                    android:text="已筹物品"
                     />
 
                 <TextView

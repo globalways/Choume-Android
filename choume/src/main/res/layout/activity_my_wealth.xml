@@ -135,7 +135,7 @@
                 android:gravity="left|center_vertical"
                 android:drawablePadding="10dp"
                 android:drawableRight="@mipmap/ico_arrow_right_ccc_small"
-                android:drawableLeft="@mipmap/ico_tixain"
+                android:drawableLeft="@mipmap/ico_exchange"
                 android:textSize="20sp"
                 android:textColor="@color/border_color"
                 android:layout_width="match_parent"

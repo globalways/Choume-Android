@@ -34,7 +34,7 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
     public static OnNextListener onNextListener;
     private static final int REQUEST_CODE = 3;
 
-    private EditText et_title,et_des,et_money,et_person_count,et_product,et_product_count;
+    private EditText et_title,et_des,et_money,et_person_count,et_product,et_product_count, et_requiredProjectAmount, et_requiredProjectEquity;
     private TextView tv_upload_image,tv_end_time;
     private RadioGroup rgMajorType;
     //主要完成指标类型
@@ -61,6 +61,8 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         et_person_count = (EditText) rootView.findViewById(R.id.et_person_count);
         et_product = (EditText) rootView.findViewById(R.id.et_product);
         et_product_count = (EditText) rootView.findViewById(R.id.et_product_count);
+        et_requiredProjectAmount = (EditText) rootView.findViewById(R.id.et_requiredProjectAmount);
+        et_requiredProjectEquity = (EditText) rootView.findViewById(R.id.et_requiredProjectEquity);
 
         gridView = (GridViewForScrollView) rootView.findViewById(R.id.gridView);
         adapter = new ImageAdapter(getActivity());
@@ -72,6 +74,8 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         et_person_count.addTextChangedListener(this);
         et_product.addTextChangedListener(this);
         et_product_count.addTextChangedListener(this);
+        et_requiredProjectAmount.addTextChangedListener(this);
+        et_requiredProjectEquity.addTextChangedListener(this);
 
         tv_upload_image = (TextView) rootView.findViewById(R.id.tv_upload_image);
         tv_end_time = (TextView) rootView.findViewById(R.id.tv_end_time);
@@ -151,6 +155,9 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         String peopleStr = et_person_count.getText().toString().trim();
         String goodStr = et_product_count.getText().toString().trim();
         String goodName = et_product.getText().toString().trim();
+        String equityAmountStr  = et_requiredProjectAmount.getText().toString().trim();
+        String equitStr = et_requiredProjectEquity.getText().toString().trim();
+
 
         if (Tool.isEmpty(titleStr)){
             //UITools.toastMsg(getContext(),"请填写标题");
@@ -162,13 +169,17 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
             return false;
         }
 
-        if (Tool.isEmpty(moneyStr) && Tool.isEmpty(peopleStr) && Tool.isEmpty(goodStr)) {
-            //UITools.toastMsg(getContext(),"筹资／召集人员／筹集物品 至少填一种");
+        if (Tool.isEmpty(moneyStr) && Tool.isEmpty(peopleStr) && Tool.isEmpty(goodStr) && Tool.isEmpty(equitStr)) {
+            //UITools.toastMsg(getContext(),"筹资／召集人员／筹集物品/融资 至少填一种");
             return false;
         }
 
         if (!(Tool.isEmpty(goodName) == Tool.isEmpty(goodStr))){
-            //UITools.toastMsg(getContext(),"您填了物品数量但没有填写物品名称");
+            return false;
+        }
+
+        //融资额跟募股数必须同时存在或没有
+        if (!(Tool.isEmpty(equityAmountStr) == Tool.isEmpty(equitStr))){
             return false;
         }
         //主要完成指标类型不是指定类型
@@ -192,6 +203,8 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         String peopleStr = et_person_count.getText().toString().trim();
         String goodStr = et_product_count.getText().toString().trim();
         String goodName = et_product.getText().toString().trim();
+        String equityAmountStr  = et_requiredProjectAmount.getText().toString().trim();
+        String equitStr = et_requiredProjectEquity.getText().toString().trim();
 
 //        if (Tool.isEmpty(titleStr)){
 //            UITools.toastMsg(getContext(),"请填写标题");
@@ -213,6 +226,13 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
             cfProject.requiredGoodsAmount = Integer.parseInt(goodStr);
             cfProject.requiredGoodsName = goodName;
         }
+
+        if (!Tool.isEmpty(equitStr) && !Tool.isEmpty(equityAmountStr)){
+            cfProject.requiredProjectAmount = Integer.parseInt(equityAmountStr);
+            cfProject.requiredProjectEquity = Integer.parseInt(equitStr);
+        }
+
+
         try {
             cfProject.requiredMoneyAmount = Tool.yuanToFen(moneyStr,0);
             cfProject.requiredPeopleAmount = Integer.parseInt(peopleStr);
