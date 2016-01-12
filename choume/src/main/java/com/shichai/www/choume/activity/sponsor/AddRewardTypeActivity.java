@@ -40,6 +40,10 @@ public class AddRewardTypeActivity extends BaseActivity implements View.OnClickL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+            Intent intent = new Intent();
+            intent.putExtra(SUPPORT_TYPE,-1);
+            intent.putExtra(SUPPORT_AMOUNT,0);
+            setResult(Activity.RESULT_OK, intent);
             finish();
             return true;
         }
