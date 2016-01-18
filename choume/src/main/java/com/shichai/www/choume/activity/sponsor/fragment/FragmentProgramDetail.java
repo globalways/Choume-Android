@@ -34,7 +34,7 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
     public static OnNextListener onNextListener;
     private static final int REQUEST_CODE = 3;
 
-    private EditText et_title,et_des,et_money,et_person_count,et_product,et_product_count, et_requiredProjectAmount, et_requiredProjectEquity;
+    private EditText et_title,et_des,et_money,et_product,et_product_count, et_requiredProjectAmount, et_requiredProjectEquity;
     private TextView tv_upload_image,tv_end_time;
     private RadioGroup rgMajorType;
     //主要完成指标类型
@@ -58,7 +58,6 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         et_title = (EditText) rootView.findViewById(R.id.et_title);
         et_des = (EditText) rootView.findViewById(R.id.et_des);
         et_money = (EditText) rootView.findViewById(R.id.et_money);
-        et_person_count = (EditText) rootView.findViewById(R.id.et_person_count);
         et_product = (EditText) rootView.findViewById(R.id.et_product);
         et_product_count = (EditText) rootView.findViewById(R.id.et_product_count);
         et_requiredProjectAmount = (EditText) rootView.findViewById(R.id.et_requiredProjectAmount);
@@ -71,7 +70,6 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         et_title.addTextChangedListener(this);
         et_des.addTextChangedListener(this);
         et_money.addTextChangedListener(this);
-        et_person_count.addTextChangedListener(this);
         et_product.addTextChangedListener(this);
         et_product_count.addTextChangedListener(this);
         et_requiredProjectAmount.addTextChangedListener(this);
@@ -152,7 +150,6 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         String titleStr = et_title.getText().toString().trim();
         String descStr = et_des.getText().toString().trim();
         String moneyStr =  et_money.getText().toString().trim();
-        String peopleStr = et_person_count.getText().toString().trim();
         String goodStr = et_product_count.getText().toString().trim();
         String goodName = et_product.getText().toString().trim();
         String equityAmountStr  = et_requiredProjectAmount.getText().toString().trim();
@@ -169,10 +166,6 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
             return false;
         }
 
-        if (Tool.isEmpty(moneyStr) && Tool.isEmpty(peopleStr) && Tool.isEmpty(goodStr) && Tool.isEmpty(equitStr)) {
-            //UITools.toastMsg(getContext(),"筹资／召集人员／筹集物品/融资 至少填一种");
-            return false;
-        }
 
         if (!(Tool.isEmpty(goodName) == Tool.isEmpty(goodStr))){
             return false;
@@ -200,7 +193,6 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         String titleStr = et_title.getText().toString().trim();
         String descStr = et_des.getText().toString().trim();
         String moneyStr =  et_money.getText().toString().trim();
-        String peopleStr = et_person_count.getText().toString().trim();
         String goodStr = et_product_count.getText().toString().trim();
         String goodName = et_product.getText().toString().trim();
         String equityAmountStr  = et_requiredProjectAmount.getText().toString().trim();
@@ -235,7 +227,6 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
 
         try {
             cfProject.requiredMoneyAmount = Tool.yuanToFen(moneyStr,0);
-            cfProject.requiredPeopleAmount = Integer.parseInt(peopleStr);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }

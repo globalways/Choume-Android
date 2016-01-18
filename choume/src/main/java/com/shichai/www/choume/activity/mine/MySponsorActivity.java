@@ -2,6 +2,8 @@ package com.shichai.www.choume.activity.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -53,8 +55,8 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void initViews(){
-        bt_add.setVisibility(View.VISIBLE);
-        bt_add.setOnClickListener(this);
+//        bt_add.setVisibility(View.VISIBLE);
+//        bt_add.setOnClickListener(this);
 
         listView = (PullToRefreshListView) findViewById(R.id.listView);
         listView.setOnRefreshListener(this);
@@ -62,6 +64,14 @@ public class MySponsorActivity extends BaseActivity implements View.OnClickListe
         adapter = new MySponsorAdapter(this, MySponsorAdapter.CONFIG);
         adapter.setOnConfigListener(this);
         listView.setAdapter(adapter);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MySponsorActivity.this, SponsorActivity.class));
+            }
+        });
     }
 
 

@@ -13,8 +13,17 @@
         android:layout_margin="10dp"
         android:layout_marginBottom="10dp"
          />
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/shape_rec_gray"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent">
     <EditText
-        style="@style/CMEditText"
+        android:background="@color/white"
+        android:textColor="@color/cmblack_333333"
+        android:layout_height="wrap_content"
         android:hint="描述(必填)"
         android:id="@+id/et_des"
         android:layout_margin="10dp"
@@ -35,6 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         />
+        </LinearLayout>
 
     <TextView
             style="@style/CMSectionTitle"
@@ -45,7 +55,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="-10dp"
             android:layout_marginLeft="10dp"
-            android:text="- 筹集资金"
+            android:text="- 筹资金"
             android:textSize="12sp"
             android:textColor="@color/cmblue_11a2ff"
             android:layout_width="match_parent"
@@ -54,32 +64,11 @@
     <EditText
         style="@style/CMEditText"
         android:id="@+id/et_money"
-        android:hint="筹资额"
+        android:hint="筹资总额"
         android:inputType="number"
         android:layout_width="match_parent"
         android:layout_margin="10dp"
             />
-
-
-
-    <TextView
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="-10dp"
-            android:layout_marginLeft="10dp"
-            android:text="- 筹集人员"
-            android:textSize="12sp"
-            android:textColor="@color/cmblue_11a2ff"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
-    <EditText
-        style="@style/CMEditText"
-        android:id="@+id/et_person_count"
-        android:inputType="number"
-        android:hint="人员数量"
-        android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        />
 
 
     <TextView
@@ -124,7 +113,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="-10dp"
             android:layout_marginLeft="10dp"
-            android:text="- 募股"
+            android:text="- 合伙人招募"
             android:textSize="12sp"
             android:textColor="@color/cmblue_11a2ff"
             android:layout_width="match_parent"
