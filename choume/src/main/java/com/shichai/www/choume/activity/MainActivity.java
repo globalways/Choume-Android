@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.PagerAdapter;
@@ -25,6 +26,7 @@ import com.globalways.user.nano.UserCommon;
 import com.globalways.choume.R;
 import com.shichai.www.choume.activity.chou.ChouListActvity;
 import com.shichai.www.choume.activity.mine.*;
+import com.shichai.www.choume.activity.sponsor.SponsorActivity;
 import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfUserManager;
@@ -180,6 +182,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         btnToLogin.setOnClickListener(this);
         toRegister = (TextView) findViewById(R.id.tvToRegister);
         toRegister.setOnClickListener(this);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SponsorActivity.class));
+            }
+        });
     }
 
     /**
