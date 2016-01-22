@@ -7,10 +7,12 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.R;
 import com.shichai.www.choume.adapter.ImageAdapter;
 import com.shichai.www.choume.tools.Tool;
@@ -34,9 +36,10 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
     public static OnNextListener onNextListener;
     private static final int REQUEST_CODE = 3;
 
-    private EditText et_title,et_des,et_money,et_product,et_product_count, et_requiredProjectAmount, et_requiredProjectEquity;
-    private TextView tv_upload_image,tv_end_time;
+    private EditText et_title,et_des,et_money,et_person_count,et_product,et_product_count, et_requiredProjectAmount, et_requiredProjectEquity;
+    private TextView tv_upload_image,tv_end_time, tvLabelMoney,tvLabelPeople, tvLabelProduct, tvLabelEquity;
     private RadioGroup rgMajorType;
+    private RadioButton rbMoney, rbPeoPle, rbGoods, rbEquity;
     //主要完成指标类型
     private int majorType = -100;
     private long deadline = 0;
@@ -57,11 +60,20 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
     protected void initViews(View rootView, Bundle savedInstanceState) {
         et_title = (EditText) rootView.findViewById(R.id.et_title);
         et_des = (EditText) rootView.findViewById(R.id.et_des);
+
         et_money = (EditText) rootView.findViewById(R.id.et_money);
+        tvLabelMoney = (TextView) rootView.findViewById(R.id.tvLabelMoney);
+
+        et_person_count = (EditText) rootView.findViewById(R.id.et_person_count);
+        tvLabelPeople = (TextView) rootView.findViewById(R.id.tvLabelPeople);
+
         et_product = (EditText) rootView.findViewById(R.id.et_product);
         et_product_count = (EditText) rootView.findViewById(R.id.et_product_count);
+        tvLabelProduct = (TextView) rootView.findViewById(R.id.tvLabelProduct);
+
         et_requiredProjectAmount = (EditText) rootView.findViewById(R.id.et_requiredProjectAmount);
         et_requiredProjectEquity = (EditText) rootView.findViewById(R.id.et_requiredProjectEquity);
+        tvLabelEquity = (TextView) rootView.findViewById(R.id.tvLabelEquity);
 
         gridView = (GridViewForScrollView) rootView.findViewById(R.id.gridView);
         adapter = new ImageAdapter(getActivity());
@@ -70,6 +82,7 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         et_title.addTextChangedListener(this);
         et_des.addTextChangedListener(this);
         et_money.addTextChangedListener(this);
+        et_person_count.addTextChangedListener(this);
         et_product.addTextChangedListener(this);
         et_product_count.addTextChangedListener(this);
         et_requiredProjectAmount.addTextChangedListener(this);
@@ -80,8 +93,14 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         rgMajorType = (RadioGroup) rootView.findViewById(R.id.rgMajorType);
         rgMajorType.setOnCheckedChangeListener(this);
 
+        rbMoney = (RadioButton) rootView.findViewById(R.id.rbMoney);
+        rbPeoPle = (RadioButton) rootView.findViewById(R.id.rbPeoPle);
+        rbGoods = (RadioButton) rootView.findViewById(R.id.rbGoods);
+        rbEquity = (RadioButton) rootView.findViewById(R.id.rbEquity);
+
         tv_upload_image.setOnClickListener(this);
         tv_end_time.setOnClickListener(this);
+        filterViews();
     }
 
     @Override
@@ -150,6 +169,7 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
         String titleStr = et_title.getText().toString().trim();
         String descStr = et_des.getText().toString().trim();
         String moneyStr =  et_money.getText().toString().trim();
+        String peopleStr = et_person_count.getText().toString().trim();
         String goodStr = et_product_count.getText().toString().trim();
         String goodName = et_product.getText().toString().trim();
         String equityAmountStr  = et_requiredProjectAmount.getText().toString().trim();
@@ -166,6 +186,10 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
             return false;
         }
 
+        if (Tool.isEmpty(moneyStr) && Tool.isEmpty(peopleStr) && Tool.isEmpty(goodStr) && Tool.isEmpty(equitStr)) {
+            //UITools.toastMsg(getContext(),"筹资／召集人员／筹集物品/融资 至少填一种");
+            return false;
+        }
 
         if (!(Tool.isEmpty(goodName) == Tool.isEmpty(goodStr))){
             return false;
@@ -188,15 +212,16 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
 
 
     @Override
-    public void commitData(OutsouringCrowdfunding.CfProject cfProject) {
+    public void commitData(CfProject cfProject) {
 
         String titleStr = et_title.getText().toString().trim();
         String descStr = et_des.getText().toString().trim();
         String moneyStr =  et_money.getText().toString().trim();
+        String peopleStr = et_person_count.getText().toString().trim();
         String goodStr = et_product_count.getText().toString().trim();
         String goodName = et_product.getText().toString().trim();
         String equityAmountStr  = et_requiredProjectAmount.getText().toString().trim();
-        String equitStr = et_requiredProjectEquity.getText().toString().trim();
+        String equityStr = et_requiredProjectEquity.getText().toString().trim();
 
 //        if (Tool.isEmpty(titleStr)){
 //            UITools.toastMsg(getContext(),"请填写标题");
@@ -219,14 +244,15 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
             cfProject.requiredGoodsName = goodName;
         }
 
-        if (!Tool.isEmpty(equitStr) && !Tool.isEmpty(equityAmountStr)){
-            cfProject.requiredProjectAmount = Integer.parseInt(equityAmountStr);
-            cfProject.requiredProjectEquity = Integer.parseInt(equitStr);
+        if (!Tool.isEmpty(equityStr) && !Tool.isEmpty(equityAmountStr)){
+            cfProject.requiredProjectAmount = Tool.yuanToFen(equityAmountStr);
+            cfProject.requiredProjectEquity = Integer.parseInt(equityStr);
         }
 
 
         try {
             cfProject.requiredMoneyAmount = Tool.yuanToFen(moneyStr,0);
+            cfProject.requiredPeopleAmount = Integer.parseInt(peopleStr);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -255,5 +281,58 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
                 break;
         }
         onNextListener.onNext(checkFields());
+    }
+
+    /**
+     * 根据不同的项目类型有选择性的显示组建
+     */
+    private void filterViews() {
+        CfProject  cfProject = getSponsorActivity().getCfProject();
+        switch (cfProject.category) {
+            case OutsouringCrowdfunding.HAPPY_CFC:
+                //隐藏物品
+                tvLabelProduct.setVisibility(View.GONE);
+                et_product.setVisibility(View.GONE);
+                et_product_count.setVisibility(View.GONE);
+                rbGoods.setVisibility(View.GONE);
+
+                //隐藏股权合伙
+                tvLabelEquity.setVisibility(View.GONE);
+                et_requiredProjectAmount.setVisibility(View.GONE);
+                et_requiredProjectEquity.setVisibility(View.GONE);
+                rbEquity.setVisibility(View.GONE);
+
+                break;
+            case OutsouringCrowdfunding.MONEY_CFC:
+                //隐藏人员
+                tvLabelPeople.setVisibility(View.GONE);
+                et_person_count.setVisibility(View.GONE);
+                rbPeoPle.setVisibility(View.GONE);
+
+                //隐藏物品
+                tvLabelProduct.setVisibility(View.GONE);
+                et_product.setVisibility(View.GONE);
+                et_product_count.setVisibility(View.GONE);
+                rbGoods.setVisibility(View.GONE);
+
+                //隐藏股权合伙
+                tvLabelEquity.setVisibility(View.GONE);
+                et_requiredProjectAmount.setVisibility(View.GONE);
+                et_requiredProjectEquity.setVisibility(View.GONE);
+                rbEquity.setVisibility(View.GONE);
+
+                break;
+            case OutsouringCrowdfunding.LOVE_CFC:
+                //隐藏股权合伙
+                tvLabelEquity.setVisibility(View.GONE);
+                et_requiredProjectAmount.setVisibility(View.GONE);
+                et_requiredProjectEquity.setVisibility(View.GONE);
+                rbEquity.setVisibility(View.GONE);
+                break;
+            case OutsouringCrowdfunding.PROJECT_CFC:
+                break;
+            case OutsouringCrowdfunding.PRODUCT_CFC:
+                break;
+        }
     }
 }
