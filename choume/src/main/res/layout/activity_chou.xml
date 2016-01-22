@@ -48,6 +48,7 @@
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/scrollView"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <LinearLayout
             android:orientation="vertical"
@@ -59,6 +60,11 @@
                android:layout_height="wrap_content"
                android:layout_width="match_parent"
                android:id="@+id/projectDetailListView"/>
+            <EditText
+                android:id="@+id/et_reply"
+                android:hint="操"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"/>
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>

@@ -1,16 +1,22 @@
 package com.shichai.www.choume.activity.chou;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -67,6 +73,12 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     //项目回复列表
     private CfProjectComment[] comments;
+
+    private EditText et_reply;
+
+    int screenHeight = 0;
+    //软件盘弹起后所占高度阀值
+    int keyHeight = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,6 +198,50 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvAlreadyGoodsAmount = (TextView) headerView.findViewById(R.id.tvAlreadyGoodsAmount);
         tvRemainDays = (TextView) headerView.findViewById(R.id.tvRemainDays);
 
+        et_reply = (EditText) findViewById(R.id.et_reply);
+        et_reply.setVisibility(View.GONE);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                et_reply.setVisibility(View.VISIBLE);
+                et_reply.requestFocus();
+                et_reply.setFocusable(true);
+            }
+        });
+
+        NestedScrollView scrollView = (NestedScrollView) findViewById(R.id.scrollView);
+        scrollView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.e("TTT","XXXX");
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_SCROLL:
+                        et_reply.setVisibility(View.GONE);
+                        et_reply.setFocusable(false);
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        break;
+                    case MotionEvent.ACTION_DOWN:
+                        break;
+                    case MotionEvent.ACTION_CANCEL:
+                    case MotionEvent.ACTION_UP:
+                        break;
+                }
+                return false;
+            }
+        });
+        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                Log.e("TTT","XXXX");
+                if (scrollY != oldScrollY){
+                    et_reply.setVisibility(View.GONE);
+                    et_reply.setFocusable(false);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -302,6 +358,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
         tvRemainDays.setText(String.valueOf(TimeUnit.SECONDS.toDays(currentProject.deadline - currentProject.fundTime)));
         tvTitle.setText(currentProject.title);
+
 
 
         dialog.dismiss();
