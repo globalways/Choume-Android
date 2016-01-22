@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.boom.www.fading.MainActivity">
+    >
     <include
         layout="@layout/app_bar_layout">
     </include>
@@ -24,13 +23,5 @@
         >
     </com.shichai.www.choume.view.PullToRefreshListView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@mipmap/ico_add_white" />
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
