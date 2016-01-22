@@ -7,7 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.R;
 import com.shichai.www.choume.activity.BaseActivity;
@@ -22,6 +24,7 @@ public class AddRewardTypeActivity extends BaseActivity implements View.OnClickL
     public static final String SUPPORT_AMOUNT = "support_amount";
 
     private RadioGroup rg_type;
+    private RadioButton rb_get_money, rb_get_people, rb_get_goods;
     private EditText etAmount;
     private int supportType;
     @Override
@@ -36,6 +39,11 @@ public class AddRewardTypeActivity extends BaseActivity implements View.OnClickL
         rg_type.setOnCheckedChangeListener(this);
         etAmount = (EditText) findViewById(R.id.etAmount);
 
+        rb_get_money = (RadioButton) findViewById(R.id.rb_get_money);
+        rb_get_people = (RadioButton) findViewById(R.id.rb_get_people);
+        rb_get_goods = (RadioButton) findViewById(R.id.rb_get_goods);
+
+        filterViews();
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -76,6 +84,28 @@ public class AddRewardTypeActivity extends BaseActivity implements View.OnClickL
             case R.id.rb_get_goods: supportType = OutsouringCrowdfunding.GOODS_CFPST;break;
             //case 4: supportType = OutsouringCrowdfunding.EQUITY_CFPST;break;
             default: supportType = OutsouringCrowdfunding.INVALID_CFPST;break;
+        }
+    }
+
+    /**
+     * 根据不同的项目类型有选择性的显示组建
+     */
+    private void filterViews() {
+        OutsouringCrowdfunding.CfProject cfProject = SponsorActivity.cfProject;
+        switch (cfProject.category) {
+            case OutsouringCrowdfunding.HAPPY_CFC:
+                rb_get_goods.setVisibility(View.GONE);
+                break;
+            case OutsouringCrowdfunding.MONEY_CFC:
+                rb_get_people.setVisibility(View.GONE);
+                rb_get_goods.setVisibility(View.GONE);
+                break;
+            case OutsouringCrowdfunding.LOVE_CFC:
+                break;
+            case OutsouringCrowdfunding.PROJECT_CFC:
+                break;
+            case OutsouringCrowdfunding.PRODUCT_CFC:
+                break;
         }
     }
 }

@@ -45,7 +45,7 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
 
     private String curFragmentTag = "";
 
-    private CfProject cfProject;
+    public static CfProject cfProject;
     private BaseFragment currentFragment;
     public ArrayList<String> selectedPhotos = new ArrayList<>();
 

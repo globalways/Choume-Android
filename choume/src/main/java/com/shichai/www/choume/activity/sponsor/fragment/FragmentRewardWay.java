@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.R;
 import com.shichai.www.choume.activity.sponsor.AddRewardWayActivity;
+import com.shichai.www.choume.activity.sponsor.SponsorActivity;
 
 import java.util.ArrayList;
 
@@ -55,7 +57,7 @@ public class FragmentRewardWay extends BaseFragment {
         tv_add_reward_way.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent  =new Intent(getActivity(), AddRewardWayActivity.class);
+                Intent intent = new Intent(getActivity(), AddRewardWayActivity.class);
                 startActivityForResult(intent,REQUEST_CODE);
             }
         });
@@ -63,6 +65,19 @@ public class FragmentRewardWay extends BaseFragment {
         listView = (ListView) rootView.findViewById(R.id.rewardListView);
         adapter = new RewardAdapter();
         listView.setAdapter(adapter);
+
+        CfProject cfProject = SponsorActivity.cfProject;
+        //需要入股
+        if (cfProject.requiredProjectAmount != 0) {
+            CfProjectReward reward = new CfProjectReward();
+            long perEquityWorth = cfProject.requiredProjectAmount/(100*cfProject.requiredProjectEquity);
+            reward.desc = "每"+perEquityWorth+"元获得千分之一股份";
+            reward.limitedCount = cfProject.requiredProjectEquity;
+            reward.supportType = OutsouringCrowdfunding.EQUITY_CFPST;
+            reward.amount = 1;
+            rewardArrayList.add(reward);
+            onNextListener.onNext(true);
+        }
     }
 
     @Override

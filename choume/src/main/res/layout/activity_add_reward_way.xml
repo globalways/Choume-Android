@@ -30,7 +30,11 @@
             <EditText
                 android:hint="描述"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 style="@style/CMEditText"
+                android:inputType="textMultiLine"
+                android:gravity="left|top"
+                android:minLines="6"
                 android:layout_margin="10dp"
                 android:id="@+id/et_des" />
 

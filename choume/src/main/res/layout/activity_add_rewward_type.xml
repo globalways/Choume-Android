@@ -18,6 +18,10 @@
             android:orientation="vertical"
             android:layout_height="match_parent"
             android:layout_width="match_parent">
+
+            <TextView
+                    style="@style/CMSectionTitle"
+                    android:text="选择一种支持方式  "/>
             <RadioGroup
                 android:id="@+id/rg_type"
                 android:layout_width="match_parent"
