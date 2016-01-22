@@ -63,6 +63,11 @@ service CfProjectService {
     rpc PassCfProjectInvest(PassCfProjectInvestParam) returns (Response) {}
     // 拒绝项目投资 (http url: /projects/invest/reject [post])
     rpc RejectCfProjectInvest(RejectCfProjectInvestParam) returns (Response) {}
+
+    // 新增项目评论 (http url: /projects/comments [post])
+    rpc NewCfProjectComment(CfProjectCommentParam) returns (CfProjectCommentResp){}
+    // 项目评论列表 (http url: /projects/comments [get])
+    rpc CfProjectComments(CfProjectCommentParam) returns (CfProjectCommentResp) {}
 }
 
 service CfAdminService {
@@ -665,10 +670,12 @@ message CfUser {
 // 消息类型
 enum CfMessageType {
     INVALID_CFMT = 0;
-    // 文字消息
-    TXT_CFMT = 1;
-    // 网页链接
-    WEB_CFMT = 2;
+    // 系统消息
+    SYS_CFMT = 1;
+    // 项目消息
+    PROJECT_CFMT = 2;
+    // 项目评论消息
+    COMMENT_CFMT = 3;
 }
 
 // 众筹系统消息
@@ -681,4 +688,50 @@ message CfMessage {
     CfMessageType type = 3;
     // 消息内容
     string content = 4;
+    // 项目消息此处有值
+    CfProject project = 5;
+    // 评论消息此处有值
+    CfProjectComment comment = 6;
+}
+
+// 项目评论
+message CfProjectComment {
+    int64 id = 1;
+    // 项目id
+    int64 projectId = 2;
+    // 评论人头像
+    string avatar = 3;
+    // 评论人hongid
+    uint64 userId = 4;
+    // 评论人nick
+    string userNick = 5;
+    // 被回复人hongid
+    uint64 repliedUserId = 6;
+    // 被回复人nick
+    string repliedUserNick = 7;
+    // 内容
+    string content = 8;
+    // 评论时间
+    int64 time = 9;
+}
+
+// 项目评论参数
+message CfProjectCommentParam {
+    // 查询时不传递
+    string token = 1;
+    // 项目id
+    int64 projectId = 2;
+    // 被评论人hongid 查询时不传递
+    uint64 repliedUserId = 3;
+    // 评论内容 查询时不传递
+    string content = 4;
+}
+
+// 项目评论返回
+message CfProjectCommentResp {
+    Response resp = 1;
+    // 新增时返回此
+    CfProjectComment comment = 2;
+    // 查询时返回此
+    repeated CfProjectComment comments = 3;
 }

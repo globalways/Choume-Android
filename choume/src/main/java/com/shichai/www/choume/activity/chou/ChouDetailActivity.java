@@ -19,6 +19,8 @@ import android.widget.TextView;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.NewCfProjectInvestParam;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectComment;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectCommentParam;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUserCBConsumeParam;
@@ -62,6 +64,9 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private ProgressBar progressBar;
     private PicassoImageLoader imageLoader = new PicassoImageLoader(this);
     private CfProject currentProject;
+
+    //项目回复列表
+    private CfProjectComment[] comments;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -186,6 +191,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()){
+            //reward
             case R.id.tv_reply:
                 tv_reply.setSelected(true);
                 tv_comment.setSelected(false);
@@ -200,6 +206,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 tv_supporter.setSelected(false);
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
+                adapter.setDataComments(comments);
                 break;
             case R.id.tv_supporter:
                 tv_reply.setSelected(false);
@@ -230,19 +237,43 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             @Override
             public void success(OutsouringCrowdfunding.GetCfProjectResp result) {
                 currentProject = result.project;
-                loadDataToViews(currentProject);
-                //默认显示支持方式
-                tv_reply.performClick();
+
+                //加载项目评论
+                CfProjectCommentParam cfProjectCommentParam = new CfProjectCommentParam();
+                cfProjectCommentParam.projectId = currentProject.id;
+                CfProjectManager.getInstance().loadCfProjectComment(cfProjectCommentParam, new ManagerCallBack<OutsouringCrowdfunding.CfProjectCommentResp>() {
+                    @Override
+                    public void success(OutsouringCrowdfunding.CfProjectCommentResp result) {
+                        loadDataToViews(currentProject);
+                        //默认显示支持方式
+                        tv_reply.performClick();
+                        comments = result.comments;
+                    }
+
+                    @Override
+                    public void warning(int code, String msg) {
+                        UITools.warning(ChouDetailActivity.this, "加载评论信息失败",msg);
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void error(Exception e) {
+                        UITools.toastServerError(ChouDetailActivity.this);
+                        dialog.dismiss();
+                    }
+                });
             }
 
             @Override
             public void warning(int code, String msg) {
                 UITools.warning(ChouDetailActivity.this, "加载项目信息失败",msg);
+                dialog.dismiss();
             }
 
             @Override
             public void error(Exception e) {
                 UITools.toastServerError(ChouDetailActivity.this);
+                dialog.dismiss();
             }
         });
     }

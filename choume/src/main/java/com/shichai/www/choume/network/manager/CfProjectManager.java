@@ -91,4 +91,13 @@ public class CfProjectManager {
         new RejectCfProjectInvestTask().setCallBack(callBack).setTaskParam(param).execute();
     }
 
+    /**
+     * 加载项目评论信息
+     * @param param
+     * @param callBack
+     */
+    public void loadCfProjectComment(final CfProjectCommentParam param, ManagerCallBack<CfProjectCommentResp> callBack) {
+        new CfProjectCommentsTask().setCallBack(callBack).setTaskParam(param).execute();
+    }
+
 }

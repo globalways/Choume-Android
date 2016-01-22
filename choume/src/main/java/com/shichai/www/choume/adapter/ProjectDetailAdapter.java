@@ -13,6 +13,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUser;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectInvest;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectComment;
 import com.shichai.www.choume.tools.CMTool;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class ProjectDetailAdapter extends BaseAdapter {
 
     public static final int TYPE_REWARD    = 1;
     public static final int TYPE_SUPPORTER = 2;
+    public static final int TYPE_COMMENT   = 3;
     private int currentType = TYPE_REWARD;
 
 
@@ -33,6 +35,8 @@ public class ProjectDetailAdapter extends BaseAdapter {
     private CfUser[] cfUsers;
     private CfProjectInvest[] invests;
     private InvestListener investListener;
+    //项目评论
+    private CfProjectComment cfProjectComment[];
 
     public ProjectDetailAdapter(Context context) {
         this.context = context;
@@ -55,6 +59,12 @@ public class ProjectDetailAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
+    public void setDataComments(CfProjectComment[] comments) {
+        this.cfProjectComment = comments;
+        this.currentType = TYPE_COMMENT;
+        notifyDataSetChanged();
+    }
+
     public void clearDatas(){
         cfUsers = null;
         rewards = null;
@@ -72,6 +82,10 @@ public class ProjectDetailAdapter extends BaseAdapter {
                 if (invests == null)
                     return 0;
                 return invests.length;
+            case TYPE_COMMENT:
+                if (cfProjectComment == null)
+                    return 0;
+                return cfProjectComment.length;
             default: return 0;
         }
     }
@@ -87,6 +101,10 @@ public class ProjectDetailAdapter extends BaseAdapter {
                 if (invests == null)
                     return null;
                 return invests[position];
+            case TYPE_COMMENT:
+                if (cfProjectComment == null)
+                    return null;
+                return cfProjectComment[position];
             default: return null;
         }
     }
@@ -103,6 +121,8 @@ public class ProjectDetailAdapter extends BaseAdapter {
                 return getViewReward(convertView, rewards[position]);
             case TYPE_SUPPORTER:
                 return getViewSupport(convertView, invests[position]);
+            case TYPE_COMMENT:
+                return getViewComment(convertView, cfProjectComment[position]);
             default:return null;
         }
     }
@@ -135,6 +155,26 @@ public class ProjectDetailAdapter extends BaseAdapter {
         return convertView;
     }
 
+    private View getViewComment(View convertView, final CfProjectComment comment) {
+        ViewHolderComment holder;
+        if (convertView == null){
+            holder = new ViewHolderComment();
+            convertView = inflater.inflate(R.layout.item_cfproject_comment,null);
+            holder.ivCommentAvatar = (ImageView) convertView.findViewById(R.id.ivCommentAvatar);
+            holder.tvCommentNick = (TextView) convertView.findViewById(R.id.tvCommentNick);
+            holder.tvCommentTime = (TextView) convertView.findViewById(R.id.tvCommentTime);
+            holder.tvReplyToNick = (TextView) convertView.findViewById(R.id.tvReplyToNick);
+            holder.tvCommentContent = (TextView) convertView.findViewById(R.id.tvCommentContent);
+
+            convertView.setTag(holder);
+        }else {
+            holder = (ViewHolderComment) convertView.getTag();
+        }
+
+        holder.tvCommentNick.setText(comment.userNick);
+        return convertView;
+    }
+
     private View getViewSupport(View convertView, final CfProjectInvest invest) {
         ViewHolderSupport holder;
         if (convertView == null){
@@ -157,8 +197,14 @@ public class ProjectDetailAdapter extends BaseAdapter {
 
 
 
+
+
     class ViewHolderReward {
         TextView tvRewardDesc, tvRewardAbbr, tvSupport;
+    }
+    class ViewHolderComment {
+        ImageView ivCommentAvatar;
+        TextView tvCommentNick, tvCommentTime, tvReplyToNick, tvCommentContent;
     }
     class ViewHolderSupport{
         TextView tvUserNick;
