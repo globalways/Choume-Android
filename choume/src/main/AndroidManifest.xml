@@ -94,7 +94,6 @@
         <activity
             android:name="com.shichai.www.choume.activity.chou.ChouDetailActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateVisible|adjustPan"
             android:theme="@style/BaseAppTheme.base" >
         </activity>
         <activity

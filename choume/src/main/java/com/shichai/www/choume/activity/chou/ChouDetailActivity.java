@@ -36,6 +36,7 @@ import com.google.gson.Gson;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.ProjectDetailAdapter;
 import com.shichai.www.choume.application.MyApplication;
+import com.shichai.www.choume.dialog.ReplyDialog;
 import com.shichai.www.choume.network.HttpStatus;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfProjectManager;
@@ -59,7 +60,6 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private ProjectDetailAdapter adapter;
     private View headerView;
     private View tv_reply,tv_comment,tv_supporter;
-    private Context context = this;
     private ImageButton btnCollect;
     private long projectId;
 
@@ -73,12 +73,6 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     //项目回复列表
     private CfProjectComment[] comments;
-
-    private EditText et_reply;
-
-    int screenHeight = 0;
-    //软件盘弹起后所占高度阀值
-    int keyHeight = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -198,49 +192,15 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvAlreadyGoodsAmount = (TextView) headerView.findViewById(R.id.tvAlreadyGoodsAmount);
         tvRemainDays = (TextView) headerView.findViewById(R.id.tvRemainDays);
 
-        et_reply = (EditText) findViewById(R.id.et_reply);
-        et_reply.setVisibility(View.GONE);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                et_reply.setVisibility(View.VISIBLE);
-                et_reply.requestFocus();
-                et_reply.setFocusable(true);
+                ReplyDialog replyDialog = new ReplyDialog(ChouDetailActivity.this,R.style.dialog);
+                replyDialog.show();
             }
         });
 
-        NestedScrollView scrollView = (NestedScrollView) findViewById(R.id.scrollView);
-        scrollView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.e("TTT","XXXX");
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_SCROLL:
-                        et_reply.setVisibility(View.GONE);
-                        et_reply.setFocusable(false);
-                        break;
-                    case MotionEvent.ACTION_MOVE:
-                        break;
-                    case MotionEvent.ACTION_DOWN:
-                        break;
-                    case MotionEvent.ACTION_CANCEL:
-                    case MotionEvent.ACTION_UP:
-                        break;
-                }
-                return false;
-            }
-        });
-        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                Log.e("TTT","XXXX");
-                if (scrollY != oldScrollY){
-                    et_reply.setVisibility(View.GONE);
-                    et_reply.setFocusable(false);
-                }
-            }
-        });
 
     }
 

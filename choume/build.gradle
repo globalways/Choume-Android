@@ -97,6 +97,9 @@ dependencies {
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'com.google.code.gson:gson:2.2.4'
 
+    //RongCloud libs
+    compile project(':IMKit')
+
 }
 
 

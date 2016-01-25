@@ -1,15 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/cmwhite"
-              android:orientation="vertical"
-              tools:context="com.shichai.www.choume.activity.mine.profile.ChangeNickActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="?attr/colorPrimary"
+    >
 
     <include
             layout="@layout/app_bar_layout">
     </include>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
     <RelativeLayout
             android:padding="10dp"
             android:visibility="gone"
@@ -132,6 +137,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
     </RelativeLayout>
+        </LinearLayout>
 
 
 </LinearLayout>

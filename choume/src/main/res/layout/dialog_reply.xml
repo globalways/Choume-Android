@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:hint="操"
+        android:layout_weight="5"
+        android:textColor="@color/black"
+        android:background="@drawable/shape_rec_gray"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:id="@+id/editText" />
+
+    <Button
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:text="发送"
+        android:id="@+id/button" />
+</LinearLayout>
