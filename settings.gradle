@@ -1,1 +1,1 @@
-include ':choume', ':IMKit', ':test'
+include ':choume'
