@@ -42,14 +42,6 @@ android {
         exclude 'META-INF/LICENSE.txt'
     }
 
-    signingConfigs {
-        config {
-            storeFile file("rong.key")
-            storePassword "Amigo123"
-            keyAlias "RongCloud"
-            keyPassword "Amigo123"
-        }
-    }
 }
 
 
@@ -59,25 +51,11 @@ repositories {
     mavenCentral()
 }
 
-//task nativeLibsToJar(type: Zip, description: "create a jar archive of the native libs") {
-//    destinationDir file("$projectDir/libs")
-//    baseName "Native_Libs2"
-//    extension "jar"
-//    from fileTree(dir: "libs", include: "**/*.so")
-//    into "lib"
-//}
-//
-//tasks.withType(JavaCompile) {
-//    compileTask -> compileTask.dependsOn(nativeLibsToJar)
-//}
-
 dependencies {
     compile fileTree(include: ['**/*.jar'], dir: 'libs')
     compile files('libs/ImageLoader.jar')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
-
-    compile project(':IMKit')
 
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.github.bumptech.glide:glide:3.6.0'
@@ -109,10 +87,6 @@ dependencies {
     compile 'com.pnikosis:materialish-progress:1.7'
     compile 'org.apache.commons:commons-lang3:3.3.2'
     compile 'com.google.code.gson:gson:2.2.4'
-
-    //RongCloud libs
-//    compile project(':IMKit')
-//    compile 'com.squareup.picasso:picasso:2.4.0'
 
 }
 
