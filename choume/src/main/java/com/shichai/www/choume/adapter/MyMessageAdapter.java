@@ -6,8 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.globalways.choume.R;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,34 +20,35 @@ import java.util.List;
 public class MyMessageAdapter extends BaseAdapter {
     private Context context;
     private LayoutInflater inflater;
-    private List<String> strings = new ArrayList<>();
+    private List<CfMessage> cfMessages;
 
     public MyMessageAdapter(Context context) {
         this.context = context;
-        strings = new ArrayList<>();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void addDatas(List<String> strings){
-        if (strings != null && strings.size() > 0 ){
-            this.strings.addAll(strings);
-            notifyDataSetChanged();
-        }
+    public void addDatas(List<CfMessage> cfMessages){
+        this.cfMessages = cfMessages;
+        notifyDataSetChanged();
     }
 
     public void clearDatas(){
-        strings.clear();
+        cfMessages.clear();
         notifyDataSetChanged();
     }
 
     @Override
     public int getCount() {
-        return strings.size();
+        if (cfMessages != null) {
+            return cfMessages.size();
+        }else return 0;
     }
 
     @Override
     public Object getItem(int position) {
-        return strings.get(position);
+        if (cfMessages != null) {
+            return cfMessages.get(position);
+        }else return null;
     }
 
     @Override
@@ -59,14 +62,22 @@ public class MyMessageAdapter extends BaseAdapter {
         if (convertView == null){
             holder = new ViewHolder();
             convertView = inflater.inflate(R.layout.item_my_message,null);
+            holder.tvMsgTitle = (TextView) convertView.findViewById(R.id.tvMsgTitle);
+            holder.tvMsgContent = (TextView) convertView.findViewById(R.id.tvMsgContent);
             convertView.setTag(holder);
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.tvMsgTitle.setText(cfMessages.get(position).title);
+        holder.tvMsgContent.setText(cfMessages.get(position).content);
         return convertView;
     }
 
+    public List<CfMessage> getCfMessages() {
+        return cfMessages;
+    }
+
     class ViewHolder{
-        ProgressBar progressBar;
+        TextView tvMsgTitle, tvMsgContent;
     }
 }

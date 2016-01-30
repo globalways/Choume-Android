@@ -27,6 +27,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.NewCfProjectInves
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectComment;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectCommentParam;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectCommentResp;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUserCBConsumeParam;
@@ -47,6 +48,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -86,6 +88,28 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         }else {
             UITools.toastMsg(this, "获取项目信息错误");
         }
+
+        CfProjectCommentParam param = new CfProjectCommentParam();
+        param.projectId = projectId;
+        CfProjectManager.getInstance().loadCfProjectComment(param, new ManagerCallBack<CfProjectCommentResp>() {
+            @Override
+            public void success(CfProjectCommentResp result) {
+                for (CfProjectComment comment : result.comments) {
+                    Log.i("yangping", comment.content);
+                }
+            }
+
+            @Override
+            public void error(Exception e) {
+                super.error(e);
+            }
+
+            @Override
+            public void warning(int code, String msg) {
+                super.warning(code, msg);
+            }
+        });
+
     }
 
     private void ActionBar(){
@@ -193,13 +217,13 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvRemainDays = (TextView) headerView.findViewById(R.id.tvRemainDays);
 
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ReplyDialog replyDialog = new ReplyDialog(ChouDetailActivity.this,R.style.dialog);
-                replyDialog.show();
-            }
-        });
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                ReplyDialog replyDialog = new ReplyDialog(ChouDetailActivity.this,R.style.dialog);
+//                replyDialog.show();
+//            }
+//        });
 
 
     }
@@ -223,6 +247,9 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
                 adapter.setDataComments(comments);
+                ReplyDialog replyDialog = new ReplyDialog(ChouDetailActivity.this,R.style.dialog);
+                replyDialog.show();
+                newComment("cf project comment at:"+ Calendar.getInstance().toString());
                 break;
             case R.id.tv_supporter:
                 tv_reply.setSelected(false);
@@ -461,6 +488,33 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
         progressBar.setProgress(CMTool.generateProjectProgress(currentProject));
 
+    }
+
+    /**
+     * 新增项目评论
+     * @param comment
+     */
+    private void newComment(String comment) {
+        CfProjectCommentParam param = new CfProjectCommentParam();
+        param.content = comment;
+        param.projectId = currentProject.id;
+        param.token = LocalDataConfig.getToken(this);
+        CfProjectManager.getInstance().newCfProjectComment(param, new ManagerCallBack<OutsouringCrowdfunding.CfProjectCommentResp>() {
+            @Override
+            public void success(OutsouringCrowdfunding.CfProjectCommentResp result) {
+                UITools.toastMsg(ChouDetailActivity.this, "comment success");
+            }
+
+            @Override
+            public void warning(int code, String msg) {
+                UITools.warning(ChouDetailActivity.this, "评论失败", msg);
+            }
+
+            @Override
+            public void error(Exception e) {
+                UITools.toastServerError(ChouDetailActivity.this);
+            }
+        });
     }
 
 }

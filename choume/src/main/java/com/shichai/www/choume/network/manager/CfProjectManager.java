@@ -100,4 +100,8 @@ public class CfProjectManager {
         new CfProjectCommentsTask().setCallBack(callBack).setTaskParam(param).execute();
     }
 
+    public void newCfProjectComment(final CfProjectCommentParam param, ManagerCallBack<CfProjectCommentResp> callBack) {
+        new NewCfProjectCommentTask().setCallBack(callBack).setTaskParam(param).execute();
+    }
+
 }

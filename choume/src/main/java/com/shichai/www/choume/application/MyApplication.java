@@ -2,6 +2,7 @@ package com.shichai.www.choume.application;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.multidex.MultiDexApplication;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -9,17 +10,22 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.shichai.www.choume.activity.mine.LoginActivity;
+import com.shichai.www.choume.network.RCMessage;
 import com.shichai.www.choume.tools.LocalDataConfig;
+
+import io.rong.imkit.RongIM;
 
 /**
  * Created by HeJianjun on 2015/11/17.
  */
-public class MyApplication extends Application{
+public class MyApplication extends MultiDexApplication {
 
     private static OutsouringCrowdfunding.CfUser cfUser;
     @Override
     public void onCreate() {
         super.onCreate();
+        RongIM.init(this);
+        RongIM.registerMessageType(RCMessage.class);
         initImageLoader(this);
     }
     private void initImageLoader(Context context) {
@@ -32,7 +38,6 @@ public class MyApplication extends Application{
                 .memoryCacheSize(32 * 1024 * 1024).build();
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config);
-
     }
     public static class Config {
         public static final boolean DEVELOPER_MODE = false;
