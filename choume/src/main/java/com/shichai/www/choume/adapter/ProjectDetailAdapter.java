@@ -15,6 +15,7 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectInvest;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectComment;
 import com.shichai.www.choume.tools.CMTool;
+import com.shichai.www.choume.tools.Tool;
 
 import java.util.List;
 
@@ -163,6 +164,8 @@ public class ProjectDetailAdapter extends BaseAdapter {
             holder.ivCommentAvatar = (ImageView) convertView.findViewById(R.id.ivCommentAvatar);
             holder.tvCommentNick = (TextView) convertView.findViewById(R.id.tvCommentNick);
             holder.tvCommentTime = (TextView) convertView.findViewById(R.id.tvCommentTime);
+            holder.tvReplyToLabel1 = (TextView) convertView.findViewById(R.id.tvReplyToLabel1);
+            holder.tvReplyToLabel2 = (TextView) convertView.findViewById(R.id.tvReplyToLabel2);
             holder.tvReplyToNick = (TextView) convertView.findViewById(R.id.tvReplyToNick);
             holder.tvCommentContent = (TextView) convertView.findViewById(R.id.tvCommentContent);
 
@@ -172,6 +175,15 @@ public class ProjectDetailAdapter extends BaseAdapter {
         }
 
         holder.tvCommentNick.setText(comment.userNick);
+        holder.tvCommentTime.setText(Tool.formatDateTime(comment.time * 1000));
+        holder.tvCommentContent.setText(comment.content);
+        CMTool.loadAvatar(comment.avatar, context, holder.ivCommentAvatar);
+
+        if (comment.repliedUserId != 0) {
+            holder.tvReplyToLabel1.setVisibility(View.VISIBLE);
+            holder.tvReplyToLabel2.setVisibility(View.VISIBLE);
+            holder.tvReplyToNick.setText(comment.repliedUserNick);
+        }
         return convertView;
     }
 
@@ -204,7 +216,7 @@ public class ProjectDetailAdapter extends BaseAdapter {
     }
     class ViewHolderComment {
         ImageView ivCommentAvatar;
-        TextView tvCommentNick, tvCommentTime, tvReplyToNick, tvCommentContent;
+        TextView tvCommentNick, tvCommentTime, tvReplyToNick, tvCommentContent, tvReplyToLabel1, tvReplyToLabel2;
     }
     class ViewHolderSupport{
         TextView tvUserNick;

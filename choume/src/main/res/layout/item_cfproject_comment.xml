@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="horizontal"
+              android:padding="10dp"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <ImageView
             android:id="@+id/ivCommentAvatar"
+            android:layout_gravity="top"
+            android:layout_marginRight="5dp"
             android:layout_width="40dp"
-            android:layout_height="match_parent"/>
+            android:layout_height="40dp"/>
 
     <LinearLayout
             android:layout_width="0dp"
@@ -17,14 +20,18 @@
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="10dp">
+                android:layout_height="wrap_content">
             <TextView
                     android:id="@+id/tvCommentNick"
+                    android:gravity="top"
+                    android:textColor="@color/cmblack_333333"
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
             <TextView
+                    android:gravity="top"
                     android:id="@+id/tvCommentTime"
+                    android:textColor="@color/cmgray_b3b3b3"
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
@@ -42,6 +49,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 <TextView
+                        android:id="@+id/tvReplyToLabel1"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="回复"
@@ -49,9 +58,12 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/cmblack_333333"
                         android:id="@+id/tvReplyToNick"
                         />
                 <TextView
+                        android:id="@+id/tvReplyToLabel2"
+                        android:visibility="gone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=":"

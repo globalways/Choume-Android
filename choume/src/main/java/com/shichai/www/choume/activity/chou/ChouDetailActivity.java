@@ -249,7 +249,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 adapter.setDataComments(comments);
                 ReplyDialog replyDialog = new ReplyDialog(ChouDetailActivity.this,R.style.dialog);
                 replyDialog.show();
-                newComment("cf project comment at:"+ Calendar.getInstance().toString());
+                //newComment("cf project comment at:"+ Calendar.getInstance().toString());
                 break;
             case R.id.tv_supporter:
                 tv_reply.setSelected(false);

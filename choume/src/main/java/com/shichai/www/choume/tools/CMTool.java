@@ -74,7 +74,7 @@ public class CMTool {
      * @param context
      * @param view
      */
-    private static void loadAvatar(String uri,Context context, ImageView view){
+    public static void loadAvatar(String uri,Context context, ImageView view){
         PicassoImageLoader imageLoader = new PicassoImageLoader(context);
         imageLoader.loadUrlImageToView(uri, 200, 200, R.mipmap.test_head,R.mipmap.test_head,view);
     }
