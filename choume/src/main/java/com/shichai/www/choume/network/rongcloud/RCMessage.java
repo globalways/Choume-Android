@@ -1,12 +1,7 @@
-package com.shichai.www.choume.network;
+package com.shichai.www.choume.network.rongcloud;
 
-import android.os.Bundle;
 import android.os.Parcel;
-import android.text.TextUtils;
 import android.util.Log;
-
-import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfMessage;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
