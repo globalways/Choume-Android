@@ -247,7 +247,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
                 adapter.setDataComments(comments);
-                ReplyDialog replyDialog = new ReplyDialog(ChouDetailActivity.this,R.style.dialog);
+                ReplyDialog replyDialog = new ReplyDialog(ChouDetailActivity.this,R.style.dialog_translucent);
                 replyDialog.show();
                 //newComment("cf project comment at:"+ Calendar.getInstance().toString());
                 break;
