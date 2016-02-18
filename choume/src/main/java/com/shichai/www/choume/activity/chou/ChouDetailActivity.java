@@ -2,6 +2,7 @@ package com.shichai.www.choume.activity.chou;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -14,12 +15,15 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
@@ -54,7 +58,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by HeJianjun on 2015/12/22.
  */
-public class ChouDetailActivity extends BaseActivity implements View.OnClickListener, ProjectDetailAdapter.InvestListener{
+public class ChouDetailActivity extends BaseActivity implements View.OnClickListener, ProjectDetailAdapter.InvestListener, AdapterView.OnItemClickListener {
 
     public static final String PROJECT_ID = "project_id";
     private final int REQUEST_NEW_INVEST = 100;
@@ -75,6 +79,13 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     //项目回复列表
     private CfProjectComment[] comments;
+
+    //项目回复控件
+    private LinearLayout llAddCommentArea;
+    private EditText etComments;
+    private Button btnCommentSend;
+    private long replyToUserId = -1;
+    private SoftKeyboard softKeyboard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -189,6 +200,45 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             }
         });
 
+        //项目评论
+        llAddCommentArea = (LinearLayout) findViewById(R.id.llAddCommentArea);
+        etComments = (EditText) findViewById(R.id.etComments);
+        btnCommentSend = (Button) findViewById(R.id.btnCommentSend);
+        btnCommentSend.setOnClickListener(this);
+
+        //监听软键盘开关 FORM https://gist.github.com/felHR85/6070f643d25f5a0b3674 by wyp
+        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.rlChouDetailRoot);
+        InputMethodManager im = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
+
+        softKeyboard = new SoftKeyboard(mainLayout, im);
+        softKeyboard.setSoftKeyboardCallback(new SoftKeyboard.SoftKeyboardChanged()
+        {
+
+            @Override
+            public void onSoftKeyboardHide()
+            {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (Tool.isEmpty(etComments.getText().toString())){
+                            etComments.setText("");
+                            etComments.setHint("评论");
+                            replyToUserId = -1;
+                        }
+                    }
+                });
+                Log.i("yangping", "hide key board");
+            }
+
+            @Override
+            public void onSoftKeyboardShow()
+            {
+                Log.i("yangping", "show key board");
+            }
+        });
+
+
+
         listView = (ListViewForScrollView) findViewById(R.id.projectDetailListView);
         adapter = new ProjectDetailAdapter(this);
         adapter.setInvestListener(this);
@@ -239,6 +289,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
                 adapter.setDataReward(currentProject.rewards);
+                llAddCommentArea.setVisibility(View.GONE);
                 break;
             case R.id.tv_comment:
                 tv_reply.setSelected(false);
@@ -246,9 +297,12 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 tv_supporter.setSelected(false);
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
+                listView.setOnItemClickListener(this);
                 adapter.setDataComments(comments);
-                ReplyDialog replyDialog = new ReplyDialog(ChouDetailActivity.this,R.style.dialog_translucent);
-                replyDialog.show();
+                //显示评论输入框
+                llAddCommentArea.setVisibility(View.VISIBLE);
+                //ReplyDialog replyDialog = new ReplyDialog(ChouDetailActivity.this,R.style.dialog_translucent);
+                //replyDialog.show();
                 //newComment("cf project comment at:"+ Calendar.getInstance().toString());
                 break;
             case R.id.tv_supporter:
@@ -258,6 +312,10 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 adapter.clearDatas();
                 listView.setAdapter(adapter);
                 adapter.setDataSupporter(currentProject.invests);
+                llAddCommentArea.setVisibility(View.GONE);
+                break;
+            case R.id.btnCommentSend: //项目评论
+                newComment(etComments.getText().toString(), replyToUserId);
                 break;
         }
     }
@@ -284,9 +342,9 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 //加载项目评论
                 CfProjectCommentParam cfProjectCommentParam = new CfProjectCommentParam();
                 cfProjectCommentParam.projectId = currentProject.id;
-                CfProjectManager.getInstance().loadCfProjectComment(cfProjectCommentParam, new ManagerCallBack<OutsouringCrowdfunding.CfProjectCommentResp>() {
+                CfProjectManager.getInstance().loadCfProjectComment(cfProjectCommentParam, new ManagerCallBack<CfProjectCommentResp>() {
                     @Override
-                    public void success(OutsouringCrowdfunding.CfProjectCommentResp result) {
+                    public void success(CfProjectCommentResp result) {
                         loadDataToViews(currentProject);
                         //默认显示支持方式
                         tv_reply.performClick();
@@ -405,60 +463,6 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             UITools.toastMsg(this, "您的筹币不足，请先充值兑换");
             return;
         }
-
-//        NewCfProjectInvestParam projectInvestParam = new NewCfProjectInvestParam();
-//        projectInvestParam.cfProjectId = reward.cfProjectId;
-//        projectInvestParam.count = 1;
-//        projectInvestParam.token = LocalDataConfig.getToken(context);
-//        projectInvestParam.cfProjectRewardId = reward.id;
-//        CfProjectManager.getInstance().newCfProjectInvest(projectInvestParam, new ManagerCallBack<OutsouringCrowdfunding.NewCfProjectInvestResp>() {
-//            @Override
-//            public void success(OutsouringCrowdfunding.NewCfProjectInvestResp result) {
-//                //如果是需要付钱的方式，则立马付钱
-//                if (result.invest.coinPay > 0) {
-//                    UITools.toastMsg(context, "参与项目成功，支付...");
-//                    CfUserCBConsumeParam param = new CfUserCBConsumeParam();
-//                    param.coin = result.invest.coinPay;
-//                    param.orderId = result.invest.orderId;
-//                    param.token = LocalDataConfig.getToken(ChouDetailActivity.this);
-//                    CfUserManager.getInstance().cfUserCBConsume(param, new ManagerCallBack<OutsouringCrowdfunding.CfUserCBConsumeResp>() {
-//                        @Override
-//                        public void success(OutsouringCrowdfunding.CfUserCBConsumeResp result) {
-//                            //result.history.
-//                            //UITools.toastMsg(ChouDetailActivity.this, "支付成功");
-//                            //修改本地用户筹币数目
-//                            MyApplication.getCfUser().coin -= result.history.coin;
-//                            refreshProjectDatas(reward);
-//                        }
-//
-//                        @Override
-//                        public void warning(int code, String msg) {
-//                            UITools.warning(ChouDetailActivity.this, "支付筹币失败", HttpStatus.codeOf(code).desc);
-//                        }
-//
-//                        @Override
-//                        public void error(Exception e) {
-//                            UITools.toastServerError(ChouDetailActivity.this);
-//                        }
-//                    });
-//                } else {
-//                    UITools.toastMsg(context, "参与项目成功");
-//                    //重新加载数据
-//                    refreshProjectDatas(reward);
-//                }
-//            }
-//
-//            @Override
-//            public void warning(int code, String msg) {
-//                UITools.warning(context, "参与项目失败", HttpStatus.codeOf(code).desc);
-//            }
-//
-//            @Override
-//            public void error(Exception e) {
-//                UITools.toastServerError(context);
-//            }
-//        });
-
     }
 
     /**
@@ -492,17 +496,58 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     /**
      * 新增项目评论
-     * @param comment
+     * @param comment 评论的内容
+     * @param repliedUserId 回复给某User id,不是回复则传 -1
      */
-    private void newComment(String comment) {
+    private void newComment(String comment, long repliedUserId) {
+        if (Tool.isEmpty(comment)){
+            UITools.toastMsg(this, "评论内容不能为空");
+            return;
+        }
+
+        if (MyApplication.getCfUser() == null) {
+            UITools.toastMsg(this, "请先登录");
+            return;
+        }
+
         CfProjectCommentParam param = new CfProjectCommentParam();
         param.content = comment;
         param.projectId = currentProject.id;
+        if (replyToUserId != -1){
+            param.repliedUserId = repliedUserId;
+        }
         param.token = LocalDataConfig.getToken(this);
         CfProjectManager.getInstance().newCfProjectComment(param, new ManagerCallBack<OutsouringCrowdfunding.CfProjectCommentResp>() {
             @Override
             public void success(OutsouringCrowdfunding.CfProjectCommentResp result) {
-                UITools.toastMsg(ChouDetailActivity.this, "comment success");
+                //UITools.toastMsg(ChouDetailActivity.this, "comment success");
+                etComments.setText("");
+                etComments.setHint("评论");
+                softKeyboard.closeSoftKeyboard();
+
+                //重新加载项目评论列表
+                CfProjectCommentParam cfProjectCommentParam = new CfProjectCommentParam();
+                cfProjectCommentParam.projectId = currentProject.id;
+                CfProjectManager.getInstance().loadCfProjectComment(cfProjectCommentParam, new ManagerCallBack<CfProjectCommentResp>() {
+                    @Override
+                    public void success(CfProjectCommentResp result) {
+                        loadDataToViews(currentProject);
+                        comments = result.comments;
+                        adapter.setDataComments(comments);
+                    }
+
+                    @Override
+                    public void warning(int code, String msg) {
+                        UITools.warning(ChouDetailActivity.this, "加载评论信息失败", msg);
+                        dialog.dismiss();
+                    }
+
+                    @Override
+                    public void error(Exception e) {
+                        UITools.toastServerError(ChouDetailActivity.this);
+                        dialog.dismiss();
+                    }
+                });
             }
 
             @Override
@@ -517,4 +562,27 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         });
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        try {
+            CfProjectComment comment = (CfProjectComment) adapter.getItem(position - 1);
+            //用户点击了自己的评论/回复
+            if (comment.userId == MyApplication.getCfUser().hongId) {
+               //不支持删除评论/回复
+               return;
+            }
+            etComments.setHint("回复 "+comment.userNick);
+            softKeyboard.openSoftKeyboard();
+            etComments.requestFocus();
+            replyToUserId = comment.userId;
+        } catch (Exception e) {
+            return;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        softKeyboard.unRegisterSoftKeyboardCallback();
+    }
 }
