@@ -500,6 +500,10 @@ message CfProjectInvest {
     uint64 rewardAmount = 18;
     // 回报方式类型
     CfProjectSupportType rewardSupportType = 19;
+    // 投资者头像
+    string investorAvatar = 20;
+    // 投资者昵称
+    string investorNick = 21;
 }
 
 // 筹币消费类型
@@ -627,6 +631,8 @@ message CfProject {
     int64 parentProjectId = 33;
     // 利润率  千分之n
     uint64 profitRate = 34;
+    // 介绍
+    string intro = 35;
 }
 
 // 众筹项目图片

@@ -1,19 +1,15 @@
 package com.shichai.www.choume.activity.chou;
 
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -27,21 +23,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
-import com.globalways.choume.proto.nano.OutsouringCrowdfunding.NewCfProjectInvestParam;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectComment;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectCommentParam;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectCommentResp;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
-import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUserCBConsumeParam;
 import com.globalways.choume.R;
 import com.globalways.proto.nano.Common;
 import com.google.gson.Gson;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.ProjectDetailAdapter;
 import com.shichai.www.choume.application.MyApplication;
-import com.shichai.www.choume.dialog.ReplyDialog;
 import com.shichai.www.choume.network.HttpStatus;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfProjectManager;
@@ -50,9 +43,6 @@ import com.shichai.www.choume.tools.*;
 import com.shichai.www.choume.view.ListViewForScrollView;
 import org.apache.commons.lang3.ArrayUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -61,6 +51,8 @@ import java.util.concurrent.TimeUnit;
 public class ChouDetailActivity extends BaseActivity implements View.OnClickListener, ProjectDetailAdapter.InvestListener, AdapterView.OnItemClickListener {
 
     public static final String PROJECT_ID = "project_id";
+    public static final String PROJECT_INTRO = "project_intro";
+    public static final String PROJECT_DESC = "project_desc";
     private final int REQUEST_NEW_INVEST = 100;
     private ListViewForScrollView listView;
     private ProjectDetailAdapter adapter;
@@ -71,7 +63,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     private TextView tvTitle;
     //项目信息
-    private TextView tvProjectName ,tvProjectStatus, tvProjectDesc, tvProgressPercent, tvAlreadyMoneyAmount, tvAlreadyGoodsAmount,tvRemainDays;
+    private TextView tvProjectName ,tvProjectStatus, tvProjectDesc,  tvDescMore, tvProgressPercent, tvAlreadyMoneyAmount, tvAlreadyGoodsAmount,tvRemainDays;
     private ImageView ivProjectCfuserAvatar, ivProjectDetailHeader;
     private ProgressBar progressBar;
     private PicassoImageLoader imageLoader = new PicassoImageLoader(this);
@@ -258,6 +250,8 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvProjectName = (TextView) headerView.findViewById(R.id.tvProjectName);
         tvProjectStatus = (TextView) headerView.findViewById(R.id.tvProjectStatus);
         tvProjectDesc = (TextView) headerView.findViewById(R.id.tvProjectDesc);
+        tvDescMore = (TextView) headerView.findViewById(R.id.tvDescMore);
+        tvDescMore.setOnClickListener(this);
         progressBar   = (ProgressBar) headerView.findViewById(R.id.progressBar);
         ivProjectCfuserAvatar = (ImageView) headerView.findViewById(R.id.ivProjectCfuserAvatar);
 
@@ -316,6 +310,12 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.btnCommentSend: //项目评论
                 newComment(etComments.getText().toString(), replyToUserId);
+                break;
+            case R.id.tvDescMore: //展开项目详细介绍
+                Intent intent = new Intent(this, ChouDescMore.class);
+                intent.putExtra(PROJECT_INTRO, currentProject.intro);
+                intent.putExtra(PROJECT_DESC, currentProject.desc);
+                startActivity(intent);
                 break;
         }
     }
@@ -395,6 +395,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvProjectName.setText(cfProject.title);
         tvProjectStatus.setText(CMTool.getProjectStatus(cfProject.status));
         tvProjectDesc.setText(cfProject.desc);
+
         CMTool.loadProjectUserAvatar(currentProject.hongId,this,ivProjectCfuserAvatar);
         progressBar.setProgress(CMTool.generateProjectProgress(cfProject));
 

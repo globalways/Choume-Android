@@ -1,6 +1,7 @@
 package com.shichai.www.choume.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -200,9 +201,9 @@ public class ProjectDetailAdapter extends BaseAdapter {
             holder = (ViewHolderSupport) convertView.getTag();
         }
 
-        holder.tvUserNick.setText(String.valueOf(invest.hongId));
-        CMTool.loadProjectUserAvatar(invest.hongId, context, holder.ivUserAvatar);
-
+        holder.tvUserNick.setText(invest.investorNick);
+        CMTool.loadAvatar(invest.investorAvatar, context, holder.ivUserAvatar);
+        //CMTool.loadProjectUserAvatar(invest.hongId, context, holder.ivUserAvatar);
         return convertView;
     }
 
