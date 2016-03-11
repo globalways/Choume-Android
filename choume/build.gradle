@@ -87,6 +87,11 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile project(':IMKit')
     compile 'com.android.support:multidex:1.0.0'
+    //textview
+    //compile 'me.biubiubiu.justifytext:library:1.1'
+
+    //progressbar with text
+    compile 'com.daimajia.numberprogressbar:library:1.2@aar'
 }
 
 
@@ -119,3 +124,6 @@ protobuf {
     }
 }
 //end
+dependencies {
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+}

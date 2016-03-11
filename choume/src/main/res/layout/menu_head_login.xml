@@ -19,7 +19,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="众筹"
+        android:text="筹么"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:id="@+id/textView17"

@@ -5,12 +5,14 @@
     <color name="cmblack_333333">#333333</color>  <!--通用字体颜色-->
     <color name="cmblue_11a2ff">#11a2ff</color>   <!--通用蓝色-->
     <color name="cmblue_269afd">#269afd</color>   <!--蓝色按钮pressed-->
+    <color name="cmblue_black">#8a929a</color>
     <color name="cmwhite">#ffffff</color>
     <color name="cmgray">#eeeeee</color>          <!--蓝色按钮disable-->
     <color name="cmgray_light">#f3f3f3</color>
     <color name="cmgray_dark">#d8d8d8</color>
     <color name="cmgray_b3b3b3">#b3b3b3</color>   <!--个人设置属性值颜色-->
     <color name="default_bg">#e6e6e6</color>
+    <color name="cmyellow">#ff9913</color>
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>

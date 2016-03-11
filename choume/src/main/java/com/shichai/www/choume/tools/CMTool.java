@@ -17,6 +17,10 @@ import com.shichai.www.choume.network.manager.CfUserManager;
  * Created by wyp on 15/12/30.
  */
 public class CMTool {
+    public static final String PROJECT = "cfproject";
+    public static final String WEBVIEW_TITLE = "webview_title";
+    public static final String WEBVIEW_CONTENT_HTML = "webview_content_html";
+
     public static String getProjectStatus(int status) {
         switch (status) {
             case OutsouringCrowdfunding.INVALID_CFPS: return "不合法";
@@ -37,6 +41,37 @@ public class CMTool {
             case OutsouringCrowdfunding.EXPIRED_CFPIS: return "过期";
             default: return "未知";
         }
+    }
+
+    /**
+     * 根据回报方式类型(钱,人,物品,股份), 数量, 物品名名称组合出整体的回报方式描述.
+     * @param rewardSupportType 回报方式类型
+     * @param amount 数量
+     * @param requiredGoodsName  物品名称(可选)
+     * @return 回报方式描述
+     */
+    public static String getRewardAbbr(int rewardSupportType, long amount, String requiredGoodsName) {
+        String abbr = "";
+        switch (rewardSupportType) {
+            case OutsouringCrowdfunding.MONEY_CFPST:
+                abbr = amount+" 筹币";
+                break;
+            case OutsouringCrowdfunding.PEOPLE_CFPST:
+                abbr = "人员"+amount+"名";
+                break;
+            case OutsouringCrowdfunding.GOODS_CFPST:
+                if (Tool.isEmpty(requiredGoodsName)){
+                    abbr = "物品"+amount+"件";
+                }else abbr = "物品［"+requiredGoodsName+"］ "+amount+"件";
+                break;
+            case OutsouringCrowdfunding.EQUITY_CFPST:
+                abbr = "入股"+amount;
+                break;
+            case OutsouringCrowdfunding.INVALID_CFPST:
+                abbr = "未知";
+                break;
+        }
+        return abbr;
     }
 
 

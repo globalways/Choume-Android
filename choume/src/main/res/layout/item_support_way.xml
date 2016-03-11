@@ -2,28 +2,34 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:padding="10dp"
-    android:layout_height="match_parent">
+    android:layout_height="60dp">
 
     <TextView
         android:textSize="18sp"
         android:textColor="@color/cmblack_333333"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:id="@+id/tvRewardDesc"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvRewardAbbr"
+        android:layout_below="@id/tvRewardDesc"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
         android:gravity="center"
+        android:layout_centerVertical="true"
         android:textSize="18sp"
         android:textColor="@color/cmblack_333333"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="已获支持:"
-        android:drawableRight="@mipmap/ico_arrow_right"
+        android:drawableRight="@null"
         android:id="@+id/tvRewardSupports"
-        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 </RelativeLayout>

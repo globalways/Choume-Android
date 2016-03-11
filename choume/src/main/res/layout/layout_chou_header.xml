@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    >
+    android:background="@color/white">
     <RelativeLayout
         android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="wrap_content"
         >
 
         <TextView
@@ -66,7 +67,7 @@
             android:layout_alignParentEnd="true" />
 
         <ProgressBar
-            android:layout_marginTop="10dp"
+            android:visibility="gone"
             style="@style/ProgressBar_Mini"
             android:progress="67"
             android:layout_width="match_parent"
@@ -76,12 +77,56 @@
             android:layout_alignLeft="@+id/tvProjectDesc"
             android:layout_alignStart="@+id/tvProjectDesc" />
 
+
+        <LinearLayout
+            android:id="@+id/areaProgress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@id/tvDescMore"
+            android:layout_alignLeft="@id/tvProjectDesc"
+            android:layout_alignStart="@id/tvProjectDesc"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="5dp"
+            >
+
+            <TextView
+                android:id="@+id/tvProgressPercent"
+                android:text="达成度: "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <com.daimajia.numberprogressbar.NumberProgressBar
+
+                android:id="@+id/pbNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+
+                custom:progress_unreached_color="@color/cmgray"
+                custom:progress_reached_color="@color/cmblue_11a2ff"
+
+                custom:progress_unreached_bar_height="3.5dp"
+                custom:progress_reached_bar_height="4dp"
+
+                custom:progress_text_size="10sp"
+                custom:progress_text_color="#3498DB"
+                custom:progress_text_offset="0dp"
+                custom:progress_text_visibility="invisible"
+
+                custom:max="100"
+                custom:progress="75"
+                />
+
+        </LinearLayout>
+
+
         <LinearLayout
             android:layout_marginTop="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_below="@+id/progressBar"
+            android:layout_below="@id/areaProgress"
             android:layout_centerHorizontal="true">
             <LinearLayout
                 android:gravity="center"
@@ -91,22 +136,22 @@
                 android:layout_width="0dp">
 
                 <TextView
+                    android:id="@+id/tvAlreadyPeopleAmountLabel"
                     android:drawablePadding="10dp"
-                    android:drawableTop="@mipmap/ico_progress"
-                    android:textSize="14sp"
-                    android:textColor="@color/border_color"
+                    android:drawableTop="@drawable/selector_chou_detail_renyuan"
+                    android:textSize="12sp"
+                    android:textColor="@color/selector_textview_active"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="众筹进度"
+                    android:text="召集人员"
                     />
 
                 <TextView
-                    android:id="@+id/tvProgressPercent"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:id="@+id/tvAlreadyPeopleAmount"
+                    android:textColor="@color/selector_textview_active"
+                    android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="45%"
                     android:layout_gravity="center_horizontal" />
             </LinearLayout>
             <LinearLayout
@@ -117,10 +162,11 @@
                 android:layout_width="0dp">
 
                 <TextView
+                    android:id="@+id/tvAlreadyMoneyAmountLabel"
                     android:drawablePadding="10dp"
-                    android:drawableTop="@mipmap/ico_jine"
-                    android:textSize="14sp"
-                    android:textColor="@color/border_color"
+                    android:drawableTop="@drawable/selector_chou_detail_jine"
+                    android:textColor="@color/selector_textview_active"
+                    android:textSize="12sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="已筹金额(元)"
@@ -128,8 +174,8 @@
 
                 <TextView
                     android:id="@+id/tvAlreadyMoneyAmount"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textColor="@color/selector_textview_active"
+                    android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5000"
@@ -143,10 +189,11 @@
                 android:layout_width="0dp">
 
                 <TextView
+                    android:id="@+id/tvAlreadyGoodsAmountLable"
                     android:drawablePadding="10dp"
-                    android:drawableTop="@mipmap/ico_goods"
-                    android:textSize="14sp"
-                    android:textColor="@color/border_color"
+                    android:drawableTop="@drawable/selector_chou_detail_wupin"
+                    android:textSize="12sp"
+                    android:textColor="@color/selector_textview_active"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="已筹物品"
@@ -154,7 +201,7 @@
 
                 <TextView
                     android:id="@+id/tvAlreadyGoodsAmount"
-                    android:textColor="@color/black"
+                    android:textColor="@color/selector_textview_active"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,10 +216,11 @@
                 android:layout_width="0dp">
 
                 <TextView
+                    android:id="@+id/tvRemainDaysLabel"
                     android:drawablePadding="10dp"
-                    android:drawableTop="@mipmap/ico_time"
-                    android:textSize="14sp"
-                    android:textColor="@color/border_color"
+                    android:drawableTop="@drawable/selector_chou_detail_time"
+                    android:textSize="12sp"
+                    android:textColor="@color/selector_textview_active"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="剩余时间"
@@ -180,8 +228,8 @@
 
                 <TextView
                     android:id="@+id/tvRemainDays"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
+                    android:textColor="@color/selector_textview_active"
+                    android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="10天"

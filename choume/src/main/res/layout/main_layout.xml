@@ -137,16 +137,17 @@
                 android:layout_width="0dp">
                 <ImageView
                     android:scaleType="fitXY"
-                    android:src="@mipmap/mine_bg"
+                    android:src="@mipmap/home_project"
                     android:layout_height="80dp"
                     android:layout_width="match_parent"/>
 
                 <TextView
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="筹项目"
+                    android:text="项目类"
                     android:id="@+id/textView2"
                     android:layout_gravity="center" />
             </FrameLayout>
@@ -159,15 +160,16 @@
                 android:layout_width="0dp">
                 <ImageView
                     android:scaleType="fitXY"
-                    android:src="@mipmap/mine_bg"
+                    android:src="@mipmap/home_product"
                     android:layout_height="80dp"
                     android:layout_width="match_parent"/>
                 <TextView
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="筹产品"
+                    android:text="产品类"
                     android:layout_gravity="center" />
             </FrameLayout>
             </LinearLayout>
@@ -261,7 +263,10 @@
                 android:layout_width="0dp"/>
         </LinearLayout>
 
-
+        <View
+            android:background="@color/cmwhite"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
     </LinearLayout>
 </ScrollView>
     <android.support.design.widget.FloatingActionButton
@@ -270,7 +275,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:background="@color/blue"
-        android:src="@mipmap/ico_add" />
+        app:backgroundTint="@color/cmblue_11a2ff"
+        android:src="@mipmap/ico_add_white" />
 
     </android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,175 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:background="?attr/colorPrimary"
+    >
+
+    <include
+        layout="@layout/app_bar_layout">
+    </include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:layout_height="65dp">
+
+                <com.shichai.www.choume.view.CircleImageView
+                    android:src="@mipmap/test_head"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/ivUserAvatar"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="username"
+                    android:id="@+id/tvCfUserName"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/ivUserAvatar"
+                    />
+
+                <TextView
+                    android:text="time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tvInvestTime"
+                    android:layout_alignTop="@+id/ivUserAvatar"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+
+                <TextView
+                    android:id="@+id/tvInvestStatus"
+                    android:textColor="@color/cmyellow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    />
+            </RelativeLayout>
+
+
+
+
+            <TextView
+                style="@style/CMSectionTitle"
+                android:text="备注信息"/>
+
+            <TextView
+                style="@style/setting_text"
+                android:drawableRight="@null"
+                android:id="@+id/tvComments"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                />
+            <TextView
+                style="@style/CMSectionTitle"
+                android:text="支持信息"/>
+
+            <RelativeLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    style="@style/setting_attr_text"
+                    android:text="份数"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    style="@style/setting_text"
+                    android:drawableRight="@null"
+                    android:id="@+id/tvRewardCount"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlToChangeNick"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    style="@style/setting_attr_text"
+                    android:text="每份需要支持"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    style="@style/setting_text"
+                    android:drawableRight="@null"
+                    android:id="@+id/tvRewardAmountDesc"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+                <TextView
+                    style="@style/setting_attr_text"
+                    android:text="总计"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    style="@style/setting_text"
+                    android:drawableRight="@null"
+                    android:id="@+id/tvTotal"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="50dp">
+            <TextView
+                android:gravity="center_vertical|center_horizontal"
+                android:id="@+id/tvRefuseInvest"
+                android:text="拒绝"
+                android:textColor="@color/cmwhite"
+                android:background="@color/cmblue_black"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <TextView
+                android:id="@+id/tvPassInvest"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="通过"
+                android:textColor="@color/cmwhite"
+                android:background="@color/cmblue_11a2ff"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+
+</LinearLayout>

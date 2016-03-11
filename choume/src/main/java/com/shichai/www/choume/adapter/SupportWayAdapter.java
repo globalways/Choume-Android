@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.globalways.choume.R;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectReward;
+import com.shichai.www.choume.tools.CMTool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,7 @@ public class SupportWayAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_support_way, null);
             holder.tvRewardDesc = (TextView) convertView.findViewById(R.id.tvRewardDesc);
             holder.tvRewardSupports = (TextView) convertView.findViewById(R.id.tvRewardSupports);
+            holder.tvRewardAbbr = (TextView) convertView.findViewById(R.id.tvRewardAbbr);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -72,11 +74,12 @@ public class SupportWayAdapter extends BaseAdapter {
 
         holder.tvRewardDesc.setText(rewards[position].desc);
         holder.tvRewardSupports.setText("支持数:"+rewards[position].alreadyCount);
+        holder.tvRewardAbbr.setText(CMTool.getRewardAbbr(rewards[position].supportType, rewards[position].amount, ""));
 
         return convertView;
     }
 
     class ViewHolder {
-        TextView tvRewardSupports, tvRewardDesc;
+        TextView tvRewardSupports, tvRewardDesc, tvRewardAbbr;
     }
 }

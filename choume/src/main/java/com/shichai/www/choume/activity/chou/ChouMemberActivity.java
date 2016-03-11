@@ -1,10 +1,12 @@
 package com.shichai.www.choume.activity.chou;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 
 import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
@@ -17,11 +19,13 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectResp;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectInvest;
 import com.globalways.proto.nano.Common;
+import com.google.gson.Gson;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.activity.mine.MySponsorActivity;
 import com.shichai.www.choume.adapter.InvestRecordAdapter;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfProjectManager;
+import com.shichai.www.choume.tools.CMTool;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.UITools;
 import com.shichai.www.choume.tools.Utils;
@@ -32,8 +36,8 @@ import java.util.List;
 /**
  * Created by HeJianjun on 2015/12/28.
  */
-public class ChouMemberActivity extends BaseActivity implements View.OnClickListener{
-
+public class ChouMemberActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+    public static final String INVEST_DETAIL = "invest_detail";
     private long projectId;
     private CfProject cfProject;
 
@@ -45,7 +49,7 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
         setContentView(R.layout.activity_chou_member);
         initActionBar();
         projectId = getIntent().getLongExtra(MySponsorActivity.PROJECT_ID, 0);
-        setTitle("参与者");
+        setTitle("项目支持者列表");
         initViews();
         getProject();
     }
@@ -53,6 +57,7 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
         listView = (SwipeMenuListView) findViewById(R.id.listView);
         adapter = new InvestRecordAdapter(this);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
 
@@ -61,7 +66,7 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
                 SwipeMenuItem itemNotPass = new SwipeMenuItem(getApplicationContext());
                 itemNotPass.setBackground(new ColorDrawable(Color.parseColor("#8a929a")));
                 itemNotPass.setWidth(Utils.dp2px(ChouMemberActivity.this, 90));
-                itemNotPass.setTitle("不同意");
+                itemNotPass.setTitle("拒绝");
                 itemNotPass.setTitleColor(Color.WHITE);
                 itemNotPass.setTitleSize(18);
                 menu.addMenuItem(itemNotPass);
@@ -69,7 +74,7 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
                 SwipeMenuItem itemPass = new SwipeMenuItem(getApplicationContext());
                 itemPass.setBackground(new ColorDrawable(Color.parseColor("#11a2ff")));
                 itemPass.setWidth(Utils.dp2px(ChouMemberActivity.this, 90));
-                itemPass.setTitle("同意");
+                itemPass.setTitle("通过");
                 itemPass.setTitleColor(Color.WHITE);
                 itemPass.setTitleSize(18);
                 menu.addMenuItem(itemPass);
@@ -108,6 +113,7 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
     }
 
     private void getProject() {
+        dialog.show();
         GetCfProjectParam projectParam  = new GetCfProjectParam();
         projectParam.projectId = projectId;
         CfProjectManager.getInstance().getCfProject(projectParam, new ManagerCallBack<GetCfProjectResp>() {
@@ -115,16 +121,20 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
             public void success(GetCfProjectResp result) {
                 cfProject = result.project;
                 adapter.setDatas(cfProject.invests);
+                dialog.dismiss();
             }
 
             @Override
             public void error(Exception e) {
                 UITools.toastServerError(ChouMemberActivity.this);
+                dialog.dismiss();
             }
 
             @Override
             public void warning(int code, String msg) {
                 UITools.warning(ChouMemberActivity.this, "获取项目详细失败", msg);
+                dialog.dismiss();
+
             }
         });
     }
@@ -137,12 +147,12 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
         CfProjectManager.getInstance().rejectCfProjectInvest(param, new ManagerCallBack<Common.Response>() {
             @Override
             public void success(Common.Response result) {
-                UITools.toastMsg(ChouMemberActivity.this, "拒绝投资成功");
+                UITools.toastMsg(ChouMemberActivity.this, "拒绝成功");
             }
 
             @Override
             public void warning(int code, String msg) {
-                UITools.warning(ChouMemberActivity.this, "拒绝投资失败", msg);
+                UITools.warning(ChouMemberActivity.this, "拒绝失败", msg);
             }
 
             @Override
@@ -177,5 +187,12 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
     }
 
 
-
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(ChouMemberActivity.this, ChouMemberDetailActivity.class);
+        Gson gson = new Gson();
+        intent.putExtra(INVEST_DETAIL, gson.toJson((CfProjectInvest)adapter.getItem(position)));
+        intent.putExtra(CMTool.PROJECT, gson.toJson(cfProject));
+        startActivity(intent);
+    }
 }

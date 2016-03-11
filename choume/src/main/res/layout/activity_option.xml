@@ -23,46 +23,55 @@
         android:layout_width="match_parent">
 
         <TextView
+            android:background="@drawable/selector_pressed_gray"
             android:onClick="onClick"
-            android:textColor="@color/border_color"
-            android:textSize="20sp"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:textColor="@color/cmblack_333333"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:gravity="start|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableRight="@mipmap/ico_arrow_right_ccc_small"
             android:text="常见问题"
             android:id="@+id/tv_normal_question" />
 
         <TextView
+            android:background="@drawable/selector_pressed_gray"
             android:onClick="onClick"
-            android:textColor="@color/border_color"
-            android:textSize="20sp"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="意见反馈"
-            android:id="@+id/tv_feedback" />
+            android:textColor="@color/cmblack_333333"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:gravity="start|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableRight="@mipmap/ico_arrow_right_ccc_small"
+            android:text="用户协议"
+            android:id="@+id/tv_agreement" />
 
         <TextView
+            android:background="@drawable/selector_pressed_gray"
             android:onClick="onClick"
-            android:textColor="@color/border_color"
-            android:textSize="20sp"
-            android:layout_margin="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="加入我们"
-            android:id="@+id/tv_join_us" />
+            android:textColor="@color/cmblack_333333"
+            android:textSize="18sp"
+            android:padding="10dp"
+            android:gravity="start|center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:drawableRight="@mipmap/ico_arrow_right_ccc_small"
+            android:text="关于我们"
+            android:id="@+id/tv_about_us" />
 
     </LinearLayout>
-        <TextView
-            android:background="@color/white"
+        <Button
             android:layout_marginTop="10dp"
             android:onClick="onClick"
-            android:textColor="@color/cmblue_11a2ff"
+            android:textColor="@color/cmwhite"
+            android:background="@color/selector_btn_cmbule"
             android:textSize="18sp"
-            android:padding="5dp"
+            android:layout_margin="20dp"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:text="检查更新"
             android:id="@+id/tv_update" />
     </LinearLayout>

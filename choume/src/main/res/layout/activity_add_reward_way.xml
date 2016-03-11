@@ -28,7 +28,7 @@
                 android:id="@+id/et_title" />
 
             <EditText
-                android:hint="描述"
+                android:hint="回报描述"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/CMEditText"

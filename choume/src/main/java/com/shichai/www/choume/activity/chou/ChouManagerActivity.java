@@ -32,6 +32,7 @@ public class ChouManagerActivity extends BaseActivity implements View.OnClickLis
         setContentView(R.layout.activity_chou_manager);
         initActionBar();
         projectId = getIntent().getLongExtra(MySponsorActivity.PROJECT_ID, 0);
+        dialog.show();
         getProject();
         setTitle("加载项目名称...");
 
@@ -82,16 +83,19 @@ public class ChouManagerActivity extends BaseActivity implements View.OnClickLis
             public void success(OutsouringCrowdfunding.GetCfProjectResp result) {
                 cfProject = result.project;
                 loadDatasToView();
+                dialog.dismiss();
             }
 
             @Override
             public void error(Exception e) {
                 UITools.toastServerError(ChouManagerActivity.this);
+                dialog.dismiss();
             }
 
             @Override
             public void warning(int code, String msg) {
                 UITools.warning(ChouManagerActivity.this, "获取项目详细失败", msg);
+                dialog.dismiss();
             }
         });
     }

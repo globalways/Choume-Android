@@ -6,8 +6,8 @@
 
     <com.shichai.www.choume.view.CircleImageView
         android:src="@mipmap/test_head"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:id="@+id/ivUserAvatar"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -16,9 +16,25 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="xxxbbbb"
         android:id="@+id/tvCfUserName"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/ivUserAvatar"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvInvestTime"
         android:layout_alignTop="@+id/ivUserAvatar"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/tvInvestDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/cmblack_333333" android:state_selected="true" /> <!-- value -->
+    <item android:color="@color/cmgray_b3b3b3" android:state_activated="true" /> <!-- label -->
+    <item android:color="@color/cmgray_dark" /> <!-- default disable -->
+</selector>

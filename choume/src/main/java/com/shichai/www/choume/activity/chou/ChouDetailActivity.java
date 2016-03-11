@@ -22,6 +22,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.daimajia.numberprogressbar.NumberProgressBar;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.GetCfProjectParam;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectComment;
@@ -57,15 +58,19 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private ListViewForScrollView listView;
     private ProjectDetailAdapter adapter;
     private View headerView;
-    private View tv_reply,tv_comment,tv_supporter;
+    private View tv_reply, tv_comment, tv_supporter;
     private ImageButton btnCollect;
     private long projectId;
 
     private TextView tvTitle;
     //项目信息
-    private TextView tvProjectName ,tvProjectStatus, tvProjectDesc,  tvDescMore, tvProgressPercent, tvAlreadyMoneyAmount, tvAlreadyGoodsAmount,tvRemainDays;
+    private TextView tvProjectName, tvProjectStatus, tvProjectDesc, tvDescMore,
+            tvAlreadyPeopleAmount, tvAlreadyMoneyAmount, tvAlreadyGoodsAmount, tvRemainDays,
+            tvAlreadyPeopleAmountLabel, tvAlreadyMoneyAmountLabel, tvAlreadyGoodsAmountLabel, tvRemainDaysLabel;
     private ImageView ivProjectCfuserAvatar, ivProjectDetailHeader;
     private ProgressBar progressBar;
+    private NumberProgressBar npbProjectProgress;
+    private TextView tvProgressPercent;
     private PicassoImageLoader imageLoader = new PicassoImageLoader(this);
     private CfProject currentProject;
 
@@ -78,6 +83,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     private Button btnCommentSend;
     private long replyToUserId = -1;
     private SoftKeyboard softKeyboard;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +94,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         projectId = getIntent().getLongExtra(PROJECT_ID, -1);
         if (projectId != -1) {
             loadProject(projectId);
-        }else {
+        } else {
             UITools.toastMsg(this, "获取项目信息错误");
         }
 
@@ -115,7 +121,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     }
 
-    private void ActionBar(){
+    private void ActionBar() {
 
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -126,8 +132,8 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
         View actionbarLayout = LayoutInflater.from(this).inflate(
                 R.layout.actionbar_main_layout, null);
-        ((TextView)actionbarLayout.findViewById(R.id.textView)).setTextColor(getResources().getColor(R.color.white));
-        tvTitle = ((TextView)actionbarLayout.findViewById(R.id.textView));
+        ((TextView) actionbarLayout.findViewById(R.id.textView)).setTextColor(getResources().getColor(R.color.white));
+        tvTitle = ((TextView) actionbarLayout.findViewById(R.id.textView));
         btnCollect = (ImageButton) actionbarLayout.findViewById(R.id.bt_add);
         btnCollect.setImageDrawable(getResources().getDrawable(R.drawable.seletor_collect));
         ab.setCustomView(actionbarLayout);
@@ -203,32 +209,27 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         InputMethodManager im = (InputMethodManager) getSystemService(Service.INPUT_METHOD_SERVICE);
 
         softKeyboard = new SoftKeyboard(mainLayout, im);
-        softKeyboard.setSoftKeyboardCallback(new SoftKeyboard.SoftKeyboardChanged()
-        {
+        softKeyboard.setSoftKeyboardCallback(new SoftKeyboard.SoftKeyboardChanged() {
 
             @Override
-            public void onSoftKeyboardHide()
-            {
+            public void onSoftKeyboardHide() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (Tool.isEmpty(etComments.getText().toString())){
+                        if (Tool.isEmpty(etComments.getText().toString())) {
                             etComments.setText("");
                             etComments.setHint("评论");
                             replyToUserId = -1;
                         }
                     }
                 });
-                Log.i("yangping", "hide key board");
             }
 
             @Override
-            public void onSoftKeyboardShow()
-            {
+            public void onSoftKeyboardShow() {
                 Log.i("yangping", "show key board");
             }
         });
-
 
 
         listView = (ListViewForScrollView) findViewById(R.id.projectDetailListView);
@@ -252,14 +253,25 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         tvProjectDesc = (TextView) headerView.findViewById(R.id.tvProjectDesc);
         tvDescMore = (TextView) headerView.findViewById(R.id.tvDescMore);
         tvDescMore.setOnClickListener(this);
-        progressBar   = (ProgressBar) headerView.findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) headerView.findViewById(R.id.progressBar);
         ivProjectCfuserAvatar = (ImageView) headerView.findViewById(R.id.ivProjectCfuserAvatar);
 
-        tvProgressPercent = (TextView) headerView.findViewById(R.id.tvProgressPercent);
-        tvAlreadyMoneyAmount = (TextView) headerView.findViewById(R.id.tvAlreadyMoneyAmount);
-        tvAlreadyGoodsAmount = (TextView) headerView.findViewById(R.id.tvAlreadyGoodsAmount);
-        tvRemainDays = (TextView) headerView.findViewById(R.id.tvRemainDays);
+        tvAlreadyPeopleAmount = (TextView) headerView.findViewById(R.id.tvAlreadyPeopleAmount);
+        tvAlreadyPeopleAmountLabel = (TextView) headerView.findViewById(R.id.tvAlreadyPeopleAmountLabel);
 
+        tvAlreadyMoneyAmount = (TextView) headerView.findViewById(R.id.tvAlreadyMoneyAmount);
+        tvAlreadyMoneyAmountLabel = (TextView) headerView.findViewById(R.id.tvAlreadyMoneyAmountLabel);
+
+        tvAlreadyGoodsAmount = (TextView) headerView.findViewById(R.id.tvAlreadyGoodsAmount);
+        tvAlreadyGoodsAmountLabel = (TextView) headerView.findViewById(R.id.tvAlreadyGoodsAmountLable);
+
+        tvRemainDays = (TextView) headerView.findViewById(R.id.tvRemainDays);
+        tvRemainDays.setSelected(true);
+        tvRemainDaysLabel = (TextView) headerView.findViewById(R.id.tvRemainDaysLabel);
+        tvRemainDaysLabel.setActivated(true);
+
+        npbProjectProgress = (NumberProgressBar) headerView.findViewById(R.id.pbNumber);
+        tvProgressPercent = (TextView) headerView.findViewById(R.id.tvProgressPercent);
 
 //        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
@@ -274,7 +286,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             //reward
             case R.id.tv_reply:
                 tv_reply.setSelected(true);
@@ -329,7 +341,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadProject(long projetId){
+    private void loadProject(long projetId) {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
         GetCfProjectParam projectParam = new GetCfProjectParam();
@@ -353,7 +365,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
                     @Override
                     public void warning(int code, String msg) {
-                        UITools.warning(ChouDetailActivity.this, "加载评论信息失败",msg);
+                        UITools.warning(ChouDetailActivity.this, "加载评论信息失败", msg);
                         dialog.dismiss();
                     }
 
@@ -367,7 +379,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void warning(int code, String msg) {
-                UITools.warning(ChouDetailActivity.this, "加载项目信息失败",msg);
+                UITools.warning(ChouDetailActivity.this, "加载项目信息失败", msg);
                 dialog.dismiss();
             }
 
@@ -388,25 +400,44 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
         if (cfProject.pics == null || cfProject.pics.length == 0) {
             ivProjectDetailHeader.setVisibility(View.GONE);
-        }else {
-            imageLoader.loadUrlImageToView(cfProject.pics[0].url,400,400,R.mipmap.guangyuan_1,R.mipmap.guangyuan_1,ivProjectDetailHeader);
+        } else {
+            imageLoader.loadUrlImageToView(cfProject.pics[0].url, 400, 400, R.mipmap.guangyuan_1, R.mipmap.guangyuan_1, ivProjectDetailHeader);
         }
 
         tvProjectName.setText(cfProject.title);
         tvProjectStatus.setText(CMTool.getProjectStatus(cfProject.status));
         tvProjectDesc.setText(cfProject.desc);
 
-        CMTool.loadProjectUserAvatar(currentProject.hongId,this,ivProjectCfuserAvatar);
+        CMTool.loadProjectUserAvatar(currentProject.hongId, this, ivProjectCfuserAvatar);
         progressBar.setProgress(CMTool.generateProjectProgress(cfProject));
 
-        tvProgressPercent.setText(CMTool.generateProjectProgress(currentProject)+"%");
-        tvAlreadyMoneyAmount.setText(Tool.fenToYuan(currentProject.alreadyMoneyAmount));
-        tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
+        String progressPercent = new StringBuilder(tvProgressPercent.getText())
+                .append(CMTool.generateProjectProgress(currentProject))
+                .append("%").toString();
+        tvProgressPercent.setText(progressPercent);
+        npbProjectProgress.setProgress(CMTool.generateProjectProgress(currentProject));
+
+        //根据项目需求选择性地显示人员,金额,物品
+        if (currentProject.requiredPeopleAmount > 0) {
+            tvAlreadyPeopleAmountLabel.setActivated(true);
+            tvAlreadyPeopleAmount.setText(currentProject.alreadyPeopleAmount+"人");
+            tvAlreadyPeopleAmount.setSelected(true);
+        } else tvAlreadyPeopleAmount.setText("不可用");
+
+        if (currentProject.requiredMoneyAmount > 0) {
+            tvAlreadyMoneyAmountLabel.setActivated(true);
+            tvAlreadyMoneyAmount.setText(Tool.fenToYuan(currentProject.alreadyMoneyAmount));
+            tvAlreadyMoneyAmount.setSelected(true);
+        }else tvAlreadyMoneyAmount.setText("不可用");
+        if (currentProject.requiredGoodsAmount > 0) {
+
+            tvAlreadyGoodsAmountLabel.setActivated(true);
+            tvAlreadyGoodsAmount.setSelected(true);
+            tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
+        }else tvAlreadyGoodsAmount.setText("不可用");
+
         tvRemainDays.setText(String.valueOf(TimeUnit.SECONDS.toDays(currentProject.deadline - currentProject.fundTime)));
         tvTitle.setText(currentProject.title);
-
-
-
         dialog.dismiss();
     }
 
@@ -469,6 +500,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     /**
      * 当众筹成功后，不从网络获取数据，直接修改本地数据<br>
      * 调整alreadyXXX的数量
+     *
      * @param reward
      */
     private void refreshProjectDatas(CfProjectReward reward) {
@@ -497,11 +529,12 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
     /**
      * 新增项目评论
-     * @param comment 评论的内容
+     *
+     * @param comment       评论的内容
      * @param repliedUserId 回复给某User id,不是回复则传 -1
      */
     private void newComment(String comment, long repliedUserId) {
-        if (Tool.isEmpty(comment)){
+        if (Tool.isEmpty(comment)) {
             UITools.toastMsg(this, "评论内容不能为空");
             return;
         }
@@ -514,13 +547,13 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         CfProjectCommentParam param = new CfProjectCommentParam();
         param.content = comment;
         param.projectId = currentProject.id;
-        if (replyToUserId != -1){
+        if (replyToUserId != -1) {
             param.repliedUserId = repliedUserId;
         }
         param.token = LocalDataConfig.getToken(this);
-        CfProjectManager.getInstance().newCfProjectComment(param, new ManagerCallBack<OutsouringCrowdfunding.CfProjectCommentResp>() {
+        CfProjectManager.getInstance().newCfProjectComment(param, new ManagerCallBack<CfProjectCommentResp>() {
             @Override
-            public void success(OutsouringCrowdfunding.CfProjectCommentResp result) {
+            public void success(CfProjectCommentResp result) {
                 //UITools.toastMsg(ChouDetailActivity.this, "comment success");
                 etComments.setText("");
                 etComments.setHint("评论");
@@ -569,10 +602,10 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             CfProjectComment comment = (CfProjectComment) adapter.getItem(position - 1);
             //用户点击了自己的评论/回复
             if (comment.userId == MyApplication.getCfUser().hongId) {
-               //不支持删除评论/回复
-               return;
+                //不支持删除评论/回复
+                return;
             }
-            etComments.setHint("回复 "+comment.userNick);
+            etComments.setHint("回复 " + comment.userNick);
             softKeyboard.openSoftKeyboard();
             etComments.requestFocus();
             replyToUserId = comment.userId;

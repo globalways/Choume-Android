@@ -187,7 +187,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, SponsorActivity.class));
+                if (MyApplication.getCfUser() == null) {
+                    UITools.toastMsg(MainActivity.this, "请登录后再发起项目");
+                }else startActivity(new Intent(MainActivity.this, SponsorActivity.class));
             }
         });
     }
@@ -232,6 +234,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             @Override
             public void success(Common.Response result) {
                 LocalDataConfig.logout(MainActivity.this);
+                MyApplication.setCfUser(null);
                 showLeftPanelView(false);
             }
 
