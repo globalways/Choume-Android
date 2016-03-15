@@ -127,7 +127,7 @@ public class CertApplyActivity extends BaseActivity implements RadioGroup.OnChec
                     pic.url = result.get(i);
                     pics[i] = pic;
                 }
-                //上传图片完了，提交申请
+                //当上传图片完了，提交申请
                 newCert();
             }
 
