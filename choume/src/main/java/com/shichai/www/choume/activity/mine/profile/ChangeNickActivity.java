@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
 import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserApp;
 import com.globalways.choume.R;
@@ -58,7 +59,7 @@ public class ChangeNickActivity extends BaseActivity {
         }
         final UserApp.ChangeUserNickParam param = new UserApp.ChangeUserNickParam();
         param.token = LocalDataConfig.getToken(this);
-        param.nick  = newNick;
+        param.nick = newNick;
         UserManager.getInstance().changeUserNick(param, new ManagerCallBack<Common.Response>() {
             @Override
             public void success(Common.Response result) {
@@ -73,7 +74,7 @@ public class ChangeNickActivity extends BaseActivity {
 
             @Override
             public void error(Exception e) {
-               UITools.toastServerError(ChangeNickActivity.this);
+                UITools.toastServerError(ChangeNickActivity.this);
             }
         });
     }

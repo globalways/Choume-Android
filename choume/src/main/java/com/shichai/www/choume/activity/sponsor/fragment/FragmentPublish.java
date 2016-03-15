@@ -28,7 +28,7 @@ public class FragmentPublish  extends BaseFragment implements TextWatcher {
 
     @Override
     protected void initViews(View rootView, Bundle savedInstanceState) {
-        onNextListener.onNext(true);
+        //onNextListener.onNext(true);
         et_contact = (EditText) rootView.findViewById(R.id.et_contact);
         et_contact_number = (EditText) rootView.findViewById(R.id.et_contact_number);
         et_contact.addTextChangedListener(this);

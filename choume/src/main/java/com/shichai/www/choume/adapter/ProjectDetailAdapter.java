@@ -195,6 +195,7 @@ public class ProjectDetailAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.item_member,null);
             holder.tvUserNick = (TextView) convertView.findViewById(R.id.tvCfUserName);
             holder.ivUserAvatar = (ImageView) convertView.findViewById(R.id.ivUserAvatar);
+            holder.tvInvestDesc = (TextView) convertView.findViewById(R.id.tvInvestDesc);
 
             convertView.setTag(holder);
         }else {
@@ -203,7 +204,7 @@ public class ProjectDetailAdapter extends BaseAdapter {
 
         holder.tvUserNick.setText(invest.investorNick);
         CMTool.loadAvatar(invest.investorAvatar, context, holder.ivUserAvatar);
-        //CMTool.loadProjectUserAvatar(invest.hongId, context, holder.ivUserAvatar);
+        holder.tvInvestDesc.setText(CMTool.getRewardAbbr(invest.rewardSupportType, invest.rewardAmount * invest.rewardCount, ""));
         return convertView;
     }
 
@@ -220,7 +221,7 @@ public class ProjectDetailAdapter extends BaseAdapter {
         TextView tvCommentNick, tvCommentTime, tvReplyToNick, tvCommentContent, tvReplyToLabel1, tvReplyToLabel2;
     }
     class ViewHolderSupport{
-        TextView tvUserNick;
+        TextView tvUserNick, tvInvestDesc;
         ImageView ivUserAvatar;
     }
 

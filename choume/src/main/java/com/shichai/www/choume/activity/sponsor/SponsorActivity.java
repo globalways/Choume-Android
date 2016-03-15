@@ -158,11 +158,17 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
         if (nextIndex <4 ){
             nextIndex++;
             selectPace(nextIndex);
-            if (nextIndex == 4){
-                bt_next.setText("提交");
-            }else {
-                bt_next.setText("下一步");
+            //改成俏皮文字
+            switch (nextIndex) {
+                case 2 : bt_next.setText("马上就好");break;
+                case 3 : bt_next.setText("最后一步啦");break;
+                case 4 : bt_next.setText("提交");break;
             }
+//            if (nextIndex == 4){
+//                bt_next.setText("提交");
+//            }else {
+//                bt_next.setText("下一步");
+//            }
         }
 
     }

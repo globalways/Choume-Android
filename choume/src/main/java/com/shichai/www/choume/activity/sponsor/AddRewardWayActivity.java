@@ -1,5 +1,6 @@
 package com.shichai.www.choume.activity.sponsor;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -78,7 +79,7 @@ public class AddRewardWayActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE) {
+        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             reward.supportType = data.getIntExtra(AddRewardTypeActivity.SUPPORT_TYPE, -1);
             reward.amount = data.getIntExtra(AddRewardTypeActivity.SUPPORT_AMOUNT, 0);
 

@@ -1,37 +1,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
-  android:orientation="vertical"
-  tools:context="com.shichai.www.choume.activity.mine.profile.CertApplyActivity">
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.shichai.www.choume.activity.mine.profile.CertApplyActivity">
 
 
-    <include
-            layout="@layout/app_bar_layout">
-    </include>
+    <include layout="@layout/app_bar_layout"></include>
+
     <LinearLayout
-        android:background="@color/default_bg"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/default_bg"
+        android:orientation="vertical">
 
-    <ListView
-        android:background="@color/white"
+        <ListView
             android:id="@+id/lvAddrList"
-            android:divider="@color/cmgray"
-            android:dividerHeight="1dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:divider="@color/cmgray"
+            android:dividerHeight="1dp">
 
-    </ListView>
+        </ListView>
 
-    <View
+        <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/cmgray"
-            />
+            android:background="@color/cmgray" />
     </LinearLayout>
 
 </LinearLayout>

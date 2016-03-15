@@ -1,47 +1,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/cmwhite"
-                android:orientation="vertical"
-                tools:context="com.shichai.www.choume.activity.mine.profile.ChangePwdActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/cmwhite"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.shichai.www.choume.activity.mine.profile.ChangePwdActivity">
 
-    <include
-            layout="@layout/app_bar_layout">
-    </include>
+    <include layout="@layout/app_bar_layout"></include>
 
     <RelativeLayout
-            android:orientation="vertical"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp">
 
         <EditText
-                android:id="@+id/etOldPwd"
-                android:background="@color/selector_edittext_bg"
-                android:layout_width="match_parent"
-                android:hint="原密码"
-                android:layout_height="50dp"/>
+            android:id="@+id/etOldPwd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/selector_edittext_bg"
+            android:hint="原密码" />
+
         <EditText
-                android:layout_below="@id/etOldPwd"
-                android:id="@+id/etNewPwd"
-                android:hint="新密码"
-                android:inputType="textPassword"
-                android:layout_marginTop="20dp"
-                android:background="@color/selector_edittext_bg"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+            android:id="@+id/etNewPwd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/etOldPwd"
+            android:layout_marginTop="20dp"
+            android:background="@color/selector_edittext_bg"
+            android:hint="新密码"
+            android:inputType="textPassword" />
+
         <EditText
-                android:layout_below="@id/etNewPwd"
-                android:id="@+id/etRepeat"
-                android:hint="确认新密码"
-                android:inputType="textPassword"
-                android:layout_marginTop="20dp"
-                android:background="@color/selector_edittext_bg"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"/>
+            android:id="@+id/etRepeat"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/etNewPwd"
+            android:layout_marginTop="20dp"
+            android:background="@color/selector_edittext_bg"
+            android:hint="确认新密码"
+            android:inputType="textPassword" />
 
     </RelativeLayout>
 
