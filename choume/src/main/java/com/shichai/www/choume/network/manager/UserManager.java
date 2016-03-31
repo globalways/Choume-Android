@@ -58,6 +58,10 @@ public class UserManager {
         new DelUserAddrTask().setCallBack(callBack).setTaskParam(param).execute();
     }
 
+    public void getUserAddr(final UserApp.GetUserAddrParam param, ManagerCallBack<UserApp.GetUserAddrResp> callBack) {
+        new GetUserAddrTask().setCallBack(callBack).setTaskParam(param).execute();
+    }
+
     public void GetUser(final UserApp.GetUserParam param, ManagerCallBack<UserApp.GetUserResp> callBack){
         new GetUserTask().setCallBack(callBack).setTaskParam(param).execute();
     }

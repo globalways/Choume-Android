@@ -1,5 +1,6 @@
 package com.shichai.www.choume.activity.mine.profile;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import com.globalways.user.nano.UserCommon;
 import com.globalways.choume.R;
+import com.google.gson.Gson;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.adapter.AddressManagerAdapter;
 import com.shichai.www.choume.application.MyApplication;
@@ -18,6 +20,10 @@ import java.util.List;
 
 public class AddressManagerActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
+    public static final String ACTION_GET_ADDR = "get_addr";
+    public static final String ACTION_DEFAULT = "default";
+
+    private String current_action = ACTION_DEFAULT;
     private AddressManagerAdapter adapter;
     private ListView lvAddrList;
     private List<UserCommon.UserAddress> addrList;
@@ -28,6 +34,10 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
         setContentView(R.layout.activity_address_manager);
         initActionBar();
         setTitle("我的地址");
+        current_action = getIntent().getAction();
+        if (current_action == null) {
+            current_action = ACTION_DEFAULT;
+        }
         initViews();
     }
 
@@ -72,8 +82,17 @@ public class AddressManagerActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent intent = new Intent(this, AddressDetailActivity.class);
-        intent.putExtra(ADDR_INDEX, position);
-        startActivity(intent);
+        if (current_action.equals(ACTION_GET_ADDR)) {
+            //参与项目时候获取地址
+            Intent intent = new Intent();
+            intent.putExtra("addr_index", position);
+            setResult(Activity.RESULT_OK, intent);
+            finish();
+        } else {
+            //查看项目详情
+            Intent intent = new Intent(this, AddressDetailActivity.class);
+            intent.putExtra(ADDR_INDEX, position);
+            startActivity(intent);
+        }
     }
 }

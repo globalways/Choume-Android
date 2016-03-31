@@ -27,9 +27,20 @@ service UserAppService {
     rpc UpdateUserAddrs(UpdateUserAddrsParam) returns (Response) {}
     // 删除用户地址(1 or n) (http url: /users/addrs [delete])
     rpc DelUserAddr(DelUserAddrParam) returns (Response) {}
+    // 获取用户地址(1) (http url: /users/addrs/s [get])
+    rpc GetUserAddr(GetUserAddrParam) returns (GetUserAddrResp) {}
 
     // 获取用户 (http url: /users/s [get])
     rpc GetUser(GetUserParam) returns (GetUserResp) {}
+}
+
+message GetUserAddrParam {
+    int64 addrId = 1;
+}
+
+message GetUserAddrResp {
+    Response resp = 1;
+    UserAddress addr = 2;
 }
 
 // 删除用户地址参数列表

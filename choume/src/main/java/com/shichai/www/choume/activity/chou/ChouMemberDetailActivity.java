@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.globalways.choume.R;
@@ -12,10 +13,12 @@ import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProjectInvest;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;
 import com.globalways.proto.nano.Common;
+import com.globalways.user.nano.UserApp;
 import com.google.gson.Gson;
 import com.shichai.www.choume.activity.BaseActivity;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfProjectManager;
+import com.shichai.www.choume.network.manager.UserManager;
 import com.shichai.www.choume.tools.CMTool;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.Tool;
@@ -31,6 +34,11 @@ public class ChouMemberDetailActivity extends BaseActivity implements View.OnCli
 
     private CfProjectInvest invest;
     private CfProject cfProject;
+
+    //address
+    private TextView tvToSelectAddrLabel;
+    private RelativeLayout rlToSelectAddr;
+    private TextView tvAddresName, tvAddresContact, tvAddres;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,12 +92,19 @@ public class ChouMemberDetailActivity extends BaseActivity implements View.OnCli
         tvRefuseInvest.setOnClickListener(this);
         tvPassInvest = (TextView) findViewById(R.id.tvPassInvest);
         tvPassInvest.setOnClickListener(this);
+
+        //address
+        tvToSelectAddrLabel = (TextView) findViewById(R.id.tvToSelectAddrLabel);
+        rlToSelectAddr = (RelativeLayout) findViewById(R.id.rlToSelectAddr);
+        tvAddres = (TextView) findViewById(R.id.tvAddres);
+        tvAddresName = (TextView) findViewById(R.id.tvAddresName);
+        tvAddresContact = (TextView) findViewById(R.id.tvAddresContact);
     }
 
     private void initDatas() {
         CMTool.loadAvatar(invest.investorAvatar, this, ivUserAvatar);
         tvCfUserName.setText(invest.investorNick);
-        tvInvestTime.setText(Tool.formatDateTime(invest.investTime*1000));
+        tvInvestTime.setText(Tool.formatDateTime(invest.investTime * 1000));
         tvInvestStatus.setText(CMTool.getCfProjectInvestStatus(invest.status));
 
         tvComments.setText(Tool.isEmpty(invest.comment)? "暂无": invest.comment);
@@ -97,7 +112,34 @@ public class ChouMemberDetailActivity extends BaseActivity implements View.OnCli
         tvRewardAmountDesc.setText(CMTool.getRewardAbbr(invest.rewardSupportType,
                 invest.rewardAmount, cfProject.requiredGoodsName));
         tvTotal.setText(CMTool.getRewardAbbr(invest.rewardSupportType,
-                invest.rewardCount*invest.rewardAmount, cfProject.requiredGoodsName));
+                invest.rewardCount * invest.rewardAmount, cfProject.requiredGoodsName));
+
+        if (invest.addrId != 0) {
+            tvToSelectAddrLabel.setVisibility(View.VISIBLE);
+            rlToSelectAddr.setVisibility(View.VISIBLE);
+            UserApp.GetUserAddrParam param = new UserApp.GetUserAddrParam();
+            param.addrId = invest.addrId;
+            UserManager.getInstance().getUserAddr(param, new ManagerCallBack<UserApp.GetUserAddrResp>() {
+                @Override
+                public void success(UserApp.GetUserAddrResp result) {
+                    if (result != null) {
+                        tvAddresName.setText(result.addr.name);
+                        tvAddresContact.setText(result.addr.contact);
+                        tvAddres.setText(result.addr.area + " " + result.addr.detail);
+                    }
+                }
+
+                @Override
+                public void warning(int code, String msg) {
+                    UITools.warning(ChouMemberDetailActivity.this, "获取用户地址失败", msg);
+                }
+
+                @Override
+                public void error(Exception e) {
+                    UITools.toastServerError(ChouMemberDetailActivity.this);
+                }
+            });
+        }
     }
 
 

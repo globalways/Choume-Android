@@ -144,7 +144,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(context, msg);
+                UITools.warning(context,"充值失败", msg);
             }
 
             @Override

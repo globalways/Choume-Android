@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
@@ -23,6 +24,7 @@ public class AddRewardWayActivity extends BaseActivity implements View.OnClickLi
 
     private EditText et_des, et_limited;
     private TextView tvSupportDesc;
+    private CheckBox cbNeedAddr, cbNeedPhone;
     private CfProjectReward reward;
     private static final int REQUEST_CODE = 1;
 
@@ -40,6 +42,8 @@ public class AddRewardWayActivity extends BaseActivity implements View.OnClickLi
         et_limited = (EditText) findViewById(R.id.et_limited);
         tvSupportDesc = (TextView) findViewById(R.id.tvSupportDesc);
         tvSupportDesc.setOnClickListener(this);
+        cbNeedAddr = (CheckBox) findViewById(R.id.cbNeedAddr);
+        cbNeedPhone = (CheckBox) findViewById(R.id.cbNeedPhone);
 
     }
 
@@ -58,6 +62,8 @@ public class AddRewardWayActivity extends BaseActivity implements View.OnClickLi
                 }
                 reward.desc = et_des.getText().toString().trim();
                 reward.limitedCount =  Long.parseLong(et_limited.getText().toString().trim());
+                reward.needAddr = cbNeedAddr.isChecked();
+                reward.needPhone = cbNeedAddr.isChecked();
                 FragmentRewardWay.fragmentRewardWay.getRewardArrayList().add(reward);
                 finish();
                 break;

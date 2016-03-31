@@ -84,7 +84,6 @@ public class ChouMemberActivity extends BaseActivity implements View.OnClickList
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                //UITools.toastMsg(ChouMemberActivity.this,menu.getMenuItem(index).getTitle())
                 switch (index) {
                     case 0: rejectInvest(adapter.getInvests()[position]);
                         break;

@@ -411,7 +411,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         CMTool.loadProjectUserAvatar(currentProject.hongId, this, ivProjectCfuserAvatar);
         progressBar.setProgress(CMTool.generateProjectProgress(cfProject));
 
-        String progressPercent = new StringBuilder(tvProgressPercent.getText())
+        String progressPercent = new StringBuilder("达成度: ")
                 .append(CMTool.generateProjectProgress(currentProject))
                 .append("%").toString();
         tvProgressPercent.setText(progressPercent);
@@ -462,7 +462,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                         break;
                 }
 
-                tvProgressPercent.setText(CMTool.generateProjectProgress(currentProject) + "%");
+                tvProgressPercent.setText("达成度: "+CMTool.generateProjectProgress(currentProject) + "%");
                 tvAlreadyMoneyAmount.setText(Tool.fenToYuan(currentProject.alreadyMoneyAmount));
                 tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
                 progressBar.setProgress(CMTool.generateProjectProgress(currentProject));
@@ -473,11 +473,6 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onNewInvest(final CfProjectReward reward) {
 
-        Gson gson = new Gson();
-        Intent intent = new Intent(this, ConfirmActivity.class);
-        intent.putExtra(ConfirmActivity.REWARD_CONFIRM, gson.toJson(reward));
-        intent.putExtra(ConfirmActivity.PROJECT_CONFIRM, gson.toJson(currentProject));
-        startActivityForResult(intent, REQUEST_NEW_INVEST);
 
 
         if (MyApplication.getCfUser() == null) {
@@ -495,6 +490,12 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             UITools.toastMsg(this, "您的筹币不足，请先充值兑换");
             return;
         }
+
+        Gson gson = new Gson();
+        Intent intent = new Intent(this, ConfirmActivity.class);
+        intent.putExtra(ConfirmActivity.REWARD_CONFIRM, gson.toJson(reward));
+        intent.putExtra(ConfirmActivity.PROJECT_CONFIRM, gson.toJson(currentProject));
+        startActivityForResult(intent, REQUEST_NEW_INVEST);
     }
 
     /**

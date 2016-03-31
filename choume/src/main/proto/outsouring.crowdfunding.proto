@@ -554,6 +554,10 @@ message CfProjectReward {
     uint64 additionalCoin = 8;
     // 是否已被删除
     bool del = 9;
+    // 是否需要收货地址
+    bool needAddr = 10;
+    // 是否需要联系方式
+    bool needPhone = 11;
 }
 
 // 用户与项目的收藏关系 many to many

@@ -2,6 +2,7 @@ package com.shichai.www.choume.activity.mine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.drm.DrmStore;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ import com.shichai.www.choume.network.manager.ThirdPartyManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.MD5;
 import com.shichai.www.choume.tools.UITools;
+import com.shichai.www.choume.view.SendSMSCodeButton;
 
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
@@ -32,7 +34,8 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private boolean isRegister  = false;
 
     private EditText etNick, etTel, etPassword, etSmsCode;
-    private Button btnSubmit, btnRequestSmsCode;
+    private Button btnSubmit;
+    private SendSMSCodeButton btnRequestSmsCode;
 
     private String nick,tel,pwd;
 
@@ -56,7 +59,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         //短信验证码
         etSmsCode         = (EditText) findViewById(R.id.etSmsCode);
         btnSubmit         = (Button) findViewById(R.id.btnToRegister);
-        btnRequestSmsCode = (Button) findViewById(R.id.btnRequestSmsCode);
+        btnRequestSmsCode = (SendSMSCodeButton) findViewById(R.id.btnRequestSmsCode);
         btnSubmit.setOnClickListener(this);
         btnRequestSmsCode.setOnClickListener(this);
     }
@@ -110,7 +113,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         UserSms.VarifySMSCodeParam varifyParam = new UserSms.VarifySMSCodeParam();
         varifyParam.appId = HttpConfig.APPID;
         varifyParam.tel   = param.tel;
-        varifyParam.code  = etSmsCode.getText().toString();
+        varifyParam.code  = etSmsCode.getText().toString().trim();
         ThirdPartyManager.getInstance().varifySMSCode(varifyParam, new ManagerCallBack<Common.Response>() {
             @Override
             public void success(Common.Response result) {
@@ -124,7 +127,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
                     @Override
                     public void warning(int code, String msg) {
-                        Toast.makeText(RegisterActivity.this, msg, Toast.LENGTH_SHORT).show();
+                        UITools.warning(RegisterActivity.this, "注册用户失败", msg);
                         isRegister = false;
                     }
 
@@ -140,7 +143,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(context, msg);
+                UITools.warning(RegisterActivity.this, "验证码错误", msg);
             }
 
             @Override
@@ -168,6 +171,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     private void smsCodeRequest(){
         String tel = etTel.getText().toString();
         if (tel == null || tel.isEmpty()){
+            UITools.toastMsg(this, "请输入您的手机号码");
             return;
         }
         UserSms.SendSMSParam param = new UserSms.SendSMSParam();
@@ -179,6 +183,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void success(Common.Response result) {
                 UITools.toastMsg(context, "验证码已经发送，注意查收");
+                btnRequestSmsCode.startTickWork();
                 //btnRequestSmsCode.setText(String.valueOf(result.code));
             }
 
