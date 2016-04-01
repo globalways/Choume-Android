@@ -86,7 +86,7 @@
                 android:layout_alignParentEnd="true" />
 
         <com.shichai.www.choume.view.CircleImageView
-            android:src="@mipmap/test_head"
+            android:src="@mipmap/user_default"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:id="@+id/ivProjectCfuserAvatar"

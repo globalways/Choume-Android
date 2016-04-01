@@ -11,7 +11,7 @@
             android:layout_centerInParent="true"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:src="@mipmap/test_head"
+            android:src="@mipmap/user_default"
             app:border_width="1dp"
             app:border_color="@color/cmwhite" />
 
@@ -21,7 +21,6 @@
             android:textSize="18sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="张三"
             android:drawableRight="@mipmap/ico_wihte_right"
             android:drawablePadding="10dp"
             android:gravity="center"

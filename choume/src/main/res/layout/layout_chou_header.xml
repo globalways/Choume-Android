@@ -58,7 +58,7 @@
             android:layout_height="wrap_content" />
 
         <com.shichai.www.choume.view.CircleImageView
-            android:src="@mipmap/test_head"
+            android:src="@mipmap/user_default"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/ivProjectCfuserAvatar"

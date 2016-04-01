@@ -1,32 +1,50 @@
 package com.shichai.www.choume.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.globalways.choume.R;
+import com.pgyersdk.javabean.AppBean;
+import com.pgyersdk.update.PgyUpdateManager;
+import com.pgyersdk.update.UpdateManagerListener;
 import com.shichai.www.choume.activity.common.WebViewActivity;
 import com.shichai.www.choume.tools.CMTool;
+import com.shichai.www.choume.tools.UITools;
 
 /**
  * Created by HeJianjun on 2015/12/22.
  */
-public class OptionActivity extends BaseActivity implements View.OnClickListener{
+public class OptionActivity extends BaseActivity implements View.OnClickListener {
+
+    private PackageInfo packageInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_option);
         initActionBar();
         setTitle("设置");
+        try {
+            packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void onClick(View v) {
         Intent intent;
         String content;
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tv_normal_question:
                 content = "<p class=\"p1\">\n" +
                         "    <span style=\"font-size: 18px;\"></span>\n" +
@@ -358,7 +376,51 @@ public class OptionActivity extends BaseActivity implements View.OnClickListener
                 startActivity(intent);
                 break;
             case R.id.tv_update:
-                Toast.makeText(this,"暂无",Toast.LENGTH_SHORT).show();
+                PgyUpdateManager.register(OptionActivity.this, new UpdateManagerListener() {
+                    @Override
+                    public void onNoUpdateAvailable() {
+                            UITools.toastMsg(OptionActivity.this, "当前是最新版本");
+                    }
+
+                    @Override
+                    public void onUpdateAvailable(String s) {
+                        //Pgy需要下载后主动调用这个方法才更新本地版本信息
+                        //UpdateManagerListener.updateLocalBuildNumber(s);或者使用这个,但是不能改进度条(丑的一笔)
+                        //startDownloadTask(WelcomeActivity.this, appBean.getDownloadURL());
+                        //由于这个机制太蠢,就通过自己比对versionCode和versionName作为是否更新依据
+                        final AppBean appBean = getAppBeanFromString(s);
+                        //判断是否更新 比对versionCode和versionName
+                        if (String.valueOf(packageInfo.versionCode).equals(appBean.getVersionCode()) &&
+                                packageInfo.versionName.equals(appBean.getVersionName())) {
+                            //不用更新
+                                UITools.toastMsg(OptionActivity.this, "当前是最新版本");
+                        } else {
+                            MaterialDialog.Builder builder = new MaterialDialog.Builder(OptionActivity.this)
+                                    .title("检测到有更新")
+                                    .content(appBean.getReleaseNote()+"\n需要现在下载安装更新吗?")
+                                    .positiveText("下载")
+                                    .positiveColorRes(R.color.cmblue_11a2ff)
+                                    .neutralText("暂不更新")
+                                    .neutralColorRes(R.color.cmyellow)
+                                    .canceledOnTouchOutside(false);
+                            builder.onPositive(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(MaterialDialog dialog, DialogAction which) {
+                                    //调用浏览器下载更新
+                                    Uri uri = Uri.parse(appBean.getDownloadURL());
+                                    Intent it = new Intent(Intent.ACTION_VIEW, uri);
+                                    OptionActivity.this.startActivity(it);
+                                }
+                            }).onNeutral(new MaterialDialog.SingleButtonCallback() {
+                                @Override
+                                public void onClick(MaterialDialog dialog, DialogAction which) {
+                                }
+                            }).show();
+                        }
+                    }
+                });
+
+
                 break;
         }
     }

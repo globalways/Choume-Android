@@ -1,9 +1,12 @@
 package com.shichai.www.choume.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -36,12 +39,12 @@ import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.PicassoImageLoader;
 import com.shichai.www.choume.tools.UITools;
-import com.shichai.www.choume.view.MyDialog;
 
 import java.util.ArrayList;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
 
 public class MainActivity extends BaseActivity implements View.OnClickListener{
 
@@ -224,8 +227,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
         if (!isLogin)
             return;
-        tvUserName.setText(MyApplication.getCfUser().user.tel);
-        imageLoader.loadUrlImageToView(MyApplication.getCfUser().user.avatar, 200, 200, R.mipmap.test_head, R.mipmap.test_head, ivAvatar);
+        tvUserName.setText(MyApplication.getCfUser().user.nick);
+        imageLoader.loadUrlImageToView(MyApplication.getCfUser().user.avatar, 200, 200, R.mipmap.user_default, R.mipmap.user_default, ivAvatar);
 
     }
 
@@ -351,18 +354,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         dot1 = findViewById(R.id.dot1);
         dot2 = findViewById(R.id.dot2);
         dot3 = findViewById(R.id.dot3);
-        dot4 = findViewById(R.id.dot4);
+        //dot4 = findViewById(R.id.dot4);
         viewPager = (ViewPager)findViewById(R.id.viewpager_guide);
         imageSource = new ArrayList<ImageView>();
         LinearLayout.LayoutParams mParams = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 150);
-        for(int i = 0; i < 4;i++){
+        for(int i = 0; i < 3;i++){
             ImageView mImageView = new ImageView(this);
             mImageView.setLayoutParams(mParams);
             mImageView.setAdjustViewBounds(true);
             mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            mImageView.setImageDrawable(getResources().getDrawable(R.mipmap.guangyuan_1));
+            switch (i) {
+                case 0: mImageView.setImageDrawable(getResources().getDrawable(R.mipmap.banner01));break;
+                case 1: mImageView.setImageDrawable(getResources().getDrawable(R.mipmap.banner02));break;
+                case 2: mImageView.setImageDrawable(getResources().getDrawable(R.mipmap.banner03));break;
+            }
+
             imageSource.add(mImageView);
         }
 
@@ -371,7 +379,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         dots.add(dot1);
         dots.add(dot2);
         dots.add(dot3);
-        dots.add(dot4);
+        //dots.add(dot4);
 
         viewPager.setOffscreenPageLimit(1);
 

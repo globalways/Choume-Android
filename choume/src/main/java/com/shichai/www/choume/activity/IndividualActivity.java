@@ -133,7 +133,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         tvSex.setText(UserSex.codeOf(cfUser.user.sex).getDesc());
         tvCert.setText(cfUser.certification == null?"暂无认证": cfUser.certification.name);
         tvAddr.setText(cfUser.user.addrs.length == 0?"暂无地址": cfUser.user.addrs[0].name);
-        imageLoader.loadUrlImageToView(cfUser.user.avatar,200,200,R.mipmap.test_head,R.mipmap.test_head,ivAvatar);
+        imageLoader.loadUrlImageToView(cfUser.user.avatar,200,200,R.mipmap.user_default,R.mipmap.user_default,ivAvatar);
     }
 
     @Override
@@ -161,7 +161,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                              @Override
                              public void success(Common.Response result) {
                                  MyApplication.getCfUser().user.avatar = p.avatar;
-                                 imageLoader.loadUrlImageToView(p.avatar,200,200,R.mipmap.test_head,R.mipmap.test_head,ivAvatar);
+                                 imageLoader.loadUrlImageToView(p.avatar,200,200,R.mipmap.user_default,R.mipmap.user_default,ivAvatar);
                              }
 
                              @Override

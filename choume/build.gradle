@@ -28,8 +28,8 @@ android {
         applicationId "com.globalways.choume"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 6
+        versionName "0.6"
         multiDexEnabled true
     }
     buildTypes {
@@ -53,6 +53,8 @@ android {
 repositories {
     jcenter()
     mavenCentral()
+    //蒲公英 https://www.pgyer.com/
+    maven { url "https://raw.githubusercontent.com/Pgyer/mvn_repo_pgyer/master" }
 }
 
 dependencies {
@@ -92,6 +94,15 @@ dependencies {
 
     //progressbar with text
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
+
+    //蒲公英 https://www.pgyer.com/
+    compile 'com.pgyersdk:sdk:2.2.2'
+
+    //https://github.com/afollestad/material-dialogs.git
+    compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
+        transitive = true
+
+     }
 }
 
 

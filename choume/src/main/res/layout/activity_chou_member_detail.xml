@@ -30,7 +30,7 @@
                     android:layout_height="65dp">
 
                     <com.shichai.www.choume.view.CircleImageView
-                        android:src="@mipmap/test_head"
+                        android:src="@mipmap/user_default"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:id="@+id/ivUserAvatar"

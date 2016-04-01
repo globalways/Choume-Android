@@ -111,7 +111,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(context, msg);
+                UITools.warning(context, "获取您的钱包信息失败", msg);
             }
 
             @Override
@@ -181,7 +181,7 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                         intent.putExtra(RechargeSuccessActivity.ISSUCCESS, false);
                         startActivity(intent);
                         this.finish();
-                        UITools.toastMsg(this, result + "  " + errorMsg + "  " + extraMsg);
+                        UITools.warning(this, "充值失败", result + "  " + errorMsg + "  " + extraMsg);
                         break;
                 }
             }
