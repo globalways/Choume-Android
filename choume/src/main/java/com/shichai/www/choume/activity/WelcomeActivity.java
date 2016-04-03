@@ -25,6 +25,7 @@ import android.widget.ImageView;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.afollestad.materialdialogs.Theme;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.user.nano.UserCommon;
 import com.globalways.choume.R;
@@ -38,6 +39,7 @@ import com.shichai.www.choume.application.MyApplication;
 import com.shichai.www.choume.network.ManagerCallBack;
 import com.shichai.www.choume.network.manager.CfUserManager;
 import com.shichai.www.choume.network.rongcloud.RCMessage;
+import com.shichai.www.choume.tools.CfClientMsg;
 import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.Tool;
 import com.shichai.www.choume.tools.UITools;
@@ -92,8 +94,10 @@ public class WelcomeActivity extends Activity {
                     //不用更新
                     toLogin();
                 } else {
-                    MaterialDialog.Builder builder = new MaterialDialog.Builder(WelcomeActivity.this)
-                            .title("检测到有更新")
+
+                    MaterialDialog.Builder builder = new MaterialDialog.Builder(WelcomeActivity.this);
+                    builder.theme(Theme.LIGHT);
+                            builder.title("检测到有更新")
                             .content(appBean.getReleaseNote()+"\n现在下载安装或稍后在 [系统设置] 中检查更新")
                             .positiveText("下载")
                             .positiveColorRes(R.color.cmblue_11a2ff)
@@ -291,11 +295,12 @@ public class WelcomeActivity extends Activity {
         public boolean onReceived(Message message, int left) {
             int notificationId = 100;
             OutsouringCrowdfunding.CfMessage cfMessage = new Gson().fromJson(((RCMessage) message.getContent()).getContent(), OutsouringCrowdfunding.CfMessage.class);
+            CfClientMsg msg = new CfClientMsg(cfMessage);
             NotificationCompat.Builder mBuilder =
                     new NotificationCompat.Builder(WelcomeActivity.this)
-                            .setSmallIcon(R.mipmap.choume)
-                            .setContentTitle(cfMessage.title)
-                            .setContentText(cfMessage.content)
+                            .setSmallIcon(R.mipmap.choume2)
+                            .setContentTitle(msg.title)
+                            .setContentText(msg.content)
                             .setAutoCancel(true)
                             .setDefaults(Notification.DEFAULT_SOUND);
             // Creates an explicit intent for an Activity in your app

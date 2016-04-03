@@ -59,6 +59,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     //nologin
     private Button btnToLogin;
     private TextView toRegister;
+    private TextView tvNeedHelp;
     //logined
     private PicassoImageLoader imageLoader;
     private TextView tvUserName;
@@ -188,6 +189,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         btnToLogin.setOnClickListener(this);
         toRegister = (TextView) findViewById(R.id.tvToRegister);
         toRegister.setOnClickListener(this);
+        tvNeedHelp = (TextView) findViewById(R.id.tvNeedHelp);
+        tvNeedHelp.setOnClickListener(this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -333,6 +336,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                 break;
             case R.id.tvToRegister:
                 startActivityForResult(new Intent(MainActivity.this, RegisterActivity.class),CODE_TO_REGISTER);
+                break;
+            case R.id.tvNeedHelp:
+                startActivity(new Intent(MainActivity.this, OptionActivity.class));
                 break;
             case R.id.fl_chou_product:
                 intent = new Intent(this,ChouListActvity.class);

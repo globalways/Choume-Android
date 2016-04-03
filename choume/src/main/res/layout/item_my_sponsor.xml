@@ -1,100 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
     android:id="@+id/main"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/cmwhite"
-    android:padding="10dp"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:padding="10dp">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
         <TextView
+            android:id="@+id/tv_my_sponsor_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XXXXXXXXXX"
-            android:id="@+id/tv_my_sponsor_name"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="XXXXXXXXXX"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
 
         <ImageButton
+            android:id="@+id/ibControl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/ibControl"
-            android:padding="10dp"
-            android:src="@mipmap/ico_my_account_option"
-            android:background="#00000000"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentTop="true"
+            android:background="#00000000"
+            android:padding="10dp"
+            android:src="@mipmap/ico_my_account_option"/>
     </RelativeLayout>
+
     <View
+        android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/grey3stroke"
-        android:layout_width="match_parent"/>
+        android:background="@color/grey3stroke"/>
 
     <ImageView
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:id="@+id/ivProjectPic"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:maxHeight="200dp"
-        android:id="@+id/ivProjectPic"
-         />
-    <RelativeLayout
-        android:layout_marginTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:scaleType="centerCrop"
+        />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_width="match_parent">
-
-    <ProgressBar
-        style="@style/ProgressBar_Mini"
         android:layout_marginTop="10dp"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/progressBar"
-        android:layout_below="@+id/tvProgress"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/imageView2"
-        android:layout_toStartOf="@+id/imageView2" />
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ShoWMoney"
-            android:id="@+id/tvProgress"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="50dp">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="@style/ProgressBar_Mini"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tvProgress"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/tvProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:singleLine="true"/>
 
 
-        <TextView
-                android:textSize="12sp"
-                android:visibility="gone"
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp">
+
+            <TextView
+                android:id="@+id/tvProjectStatus"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:id="@+id/tvProjectStatus"
-                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentTop="true"
+                android:textSize="12sp"
+                android:visibility="gone"/>
 
-        <com.shichai.www.choume.view.CircleImageView
-            android:src="@mipmap/user_default"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/ivProjectCfuserAvatar"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            <com.shichai.www.choume.view.CircleImageView
+                android:id="@+id/ivProjectCfuserAvatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/user_default"/>
 
-    </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

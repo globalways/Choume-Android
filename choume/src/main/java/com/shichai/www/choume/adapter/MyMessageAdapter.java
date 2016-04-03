@@ -9,7 +9,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.globalways.choume.R;
+import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfMessage;
+import com.shichai.www.choume.activity.chou.ChouDetailActivity;
+import com.shichai.www.choume.tools.CfClientMsg;
+import com.shichai.www.choume.tools.Tool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +72,9 @@ public class MyMessageAdapter extends BaseAdapter {
         }else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.tvMsgTitle.setText(cfMessages.get(position).title);
-        holder.tvMsgContent.setText(cfMessages.get(position).content);
+        CfClientMsg msg = new CfClientMsg(cfMessages.get(position));
+        holder.tvMsgTitle.setText(msg.title);
+        holder.tvMsgContent.setText(msg.content);
         return convertView;
     }
 

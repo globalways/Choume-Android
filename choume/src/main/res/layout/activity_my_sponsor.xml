@@ -20,7 +20,7 @@
         android:footerDividersEnabled="false"
         android:cacheColorHint="@android:color/transparent"
         android:fadingEdgeLength="0dp"
-        android:dividerHeight="15dp"
+        android:dividerHeight="5dp"
         android:divider="@null"
         android:id="@+id/listView"
         >

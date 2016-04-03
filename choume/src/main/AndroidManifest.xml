@@ -29,7 +29,7 @@
     <application
         android:name="com.shichai.www.choume.application.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/choume2"
+        android:icon="@mipmap/choume_1026"
         android:label="@string/app_name"
         android:supportsRtl="true"
         >

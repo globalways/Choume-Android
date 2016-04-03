@@ -24,7 +24,7 @@
             android:background="@color/white"
             android:textColor="@color/cmblack_333333"
             android:layout_height="wrap_content"
-            android:hint="描述(必填)"
+            android:hint="项目描述,配上图片更有吸引力哦!(必填)"
             android:inputType="textMultiLine"
             android:minLines="4"
             android:gravity="left|top"

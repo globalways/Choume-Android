@@ -146,6 +146,10 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         btnCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //未联网情况下点击收藏错误
+                if (currentProject == null) {
+                    return;
+                }
                 if (!CMTool.isCollectedByCurrentUser(currentProject)) {
                     OutsouringCrowdfunding.UserCollectProjectParam param = new OutsouringCrowdfunding.UserCollectProjectParam();
                     param.projectId = projectId;
@@ -401,7 +405,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
         if (cfProject.pics == null || cfProject.pics.length == 0) {
             ivProjectDetailHeader.setVisibility(View.GONE);
         } else {
-            imageLoader.loadUrlImageToView(cfProject.pics[0].url, 400, 400, R.mipmap.guangyuan_1, R.mipmap.guangyuan_1, ivProjectDetailHeader);
+            imageLoader.loadUrlImageToView(cfProject.pics[0].url, 400, 400, R.mipmap.loading_static, R.mipmap.loading_static, ivProjectDetailHeader);
         }
 
         tvProjectName.setText(cfProject.title);
@@ -466,6 +470,7 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
                 tvAlreadyMoneyAmount.setText(Tool.fenToYuan(currentProject.alreadyMoneyAmount));
                 tvAlreadyGoodsAmount.setText(String.valueOf(currentProject.alreadyGoodsAmount));
                 progressBar.setProgress(CMTool.generateProjectProgress(currentProject));
+                npbProjectProgress.setProgress(CMTool.generateProjectProgress(currentProject));
             }
         }
     }

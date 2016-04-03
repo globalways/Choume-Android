@@ -223,7 +223,7 @@
                     android:textColor="@color/selector_textview_active"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="剩余时间"
+                    android:text="剩余时间(天)"
                     />
 
                 <TextView

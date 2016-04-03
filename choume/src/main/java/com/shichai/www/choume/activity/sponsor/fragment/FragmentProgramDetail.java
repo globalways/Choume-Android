@@ -30,7 +30,7 @@ import me.iwf.photopicker.PhotoPickerActivity;
 import me.iwf.photopicker.utils.PhotoPickerIntent;
 
 /**
- * Created by HeJianjun on 2015/12/28.
+ * 发起项目-详细信息
  */
 public class FragmentProgramDetail extends BaseFragment implements View.OnClickListener,TextWatcher, RadioGroup.OnCheckedChangeListener {
     public static OnNextListener onNextListener;

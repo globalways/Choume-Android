@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by HeJianjun on 2015/12/8.
+ * 项目列表通用adapter
  */
 public class MySponsorAdapter extends BaseAdapter {
 
@@ -133,7 +134,7 @@ public class MySponsorAdapter extends BaseAdapter {
                 }
             }
         });
-        //set datas
+        //填充项目数据
         if (cfProjects != null) {
             holder.main.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -152,7 +153,8 @@ public class MySponsorAdapter extends BaseAdapter {
             if (cfProjects.get(position).pics == null || cfProjects.get(position).pics.length == 0) {
                 holder.ivProjectPic.setVisibility(View.GONE);
             } else {
-                imageLoader.loadUrlImageToView(cfProjects.get(position).pics[0].url, 400, 400, R.mipmap.guangyuan_1, R.mipmap.guangyuan_1, holder.ivProjectPic);
+                holder.ivProjectPic.setVisibility(View.VISIBLE);
+                imageLoader.loadUrlImageToView(cfProjects.get(position).pics[0].url, 400, 400, R.mipmap.loading_static, R.mipmap.loading_static, holder.ivProjectPic);
             }
         } else if (invests != null) {
             final CfProjectInvest invest = invests.get(position);
@@ -167,7 +169,7 @@ public class MySponsorAdapter extends BaseAdapter {
             holder.progressBar.setVisibility(View.GONE);
             holder.ivProjectCfuserAvatar.setVisibility(View.INVISIBLE);
             holder.tvCfProjectName.setText(invest.projectName);
-            imageLoader.loadUrlImageToView(invest.projectPic, 400, 400, R.mipmap.guangyuan_1, R.mipmap.guangyuan_1, holder.ivProjectPic);
+            imageLoader.loadUrlImageToView(invest.projectPic, 400, 400, R.mipmap.loading_static, R.mipmap.loading_static, holder.ivProjectPic);
             holder.tvProgress.setText(getSupportInfo(invest));
         }
         return convertView;
