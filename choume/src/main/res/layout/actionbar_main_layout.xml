@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="cccc"
+        android:text="loading..."
         android:id="@+id/textView"
         android:gravity="center"
         android:textColor="#2d3b4a"

@@ -177,11 +177,24 @@ public class RechargeActivity extends BaseActivity implements View.OnClickListen
                         startActivity(intent);
                         this.finish();
                         break;
-                    default:
+                    case "cancel":
                         intent.putExtra(RechargeSuccessActivity.ISSUCCESS, false);
+                        intent.putExtra(RechargeSuccessActivity.ERROR_MSG, "您已取消本次充值");
                         startActivity(intent);
                         this.finish();
-                        UITools.warning(this, "充值失败", result + "  " + errorMsg + "  " + extraMsg);
+                        break;
+                    case "invalid":
+                        intent.putExtra(RechargeSuccessActivity.ISSUCCESS, false);
+                        intent.putExtra(RechargeSuccessActivity.ERROR_MSG, "未检测到微信客户端");
+                        startActivity(intent);
+                        this.finish();
+                        break;
+                    default:
+                        intent.putExtra(RechargeSuccessActivity.ISSUCCESS, false);
+                        intent.putExtra(RechargeSuccessActivity.ERROR_MSG,errorMsg + "  " + extraMsg);
+                        startActivity(intent);
+                        this.finish();
+                        //UITools.warning(this, "充值失败", result + "  " + errorMsg + "  " + extraMsg);
                         break;
                 }
             }

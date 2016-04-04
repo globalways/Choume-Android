@@ -3,7 +3,7 @@ package com.shichai.www.choume.tools;
 import android.content.Context;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 import com.globalways.choume.R;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding;
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfProject;

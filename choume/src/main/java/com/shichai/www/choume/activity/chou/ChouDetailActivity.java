@@ -104,7 +104,6 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
             @Override
             public void success(CfProjectCommentResp result) {
                 for (CfProjectComment comment : result.comments) {
-                    Log.i("yangping", comment.content);
                 }
             }
 
@@ -231,7 +230,6 @@ public class ChouDetailActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onSoftKeyboardShow() {
-                Log.i("yangping", "show key board");
             }
         });
 

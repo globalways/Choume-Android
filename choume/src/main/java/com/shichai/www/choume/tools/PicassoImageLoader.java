@@ -13,7 +13,7 @@ import java.lang.ref.SoftReference;
 
 /**
  * Picasso图片加载器
- *
+ * @author wyp
  */
 public class PicassoImageLoader {
     private SoftReference<Context> mContext = null;
@@ -42,6 +42,8 @@ public class PicassoImageLoader {
             Picasso.with(mContext.get()).load(getUrl(targetWidth, targetHeight, uri))
                     .resize(targetWidth, targetHeight).centerCrop().placeholder(placeholderResId).error(errorResId)
                     .into(view);
+        }else {
+            view.setImageResource(errorResId);
         }
     }
 
