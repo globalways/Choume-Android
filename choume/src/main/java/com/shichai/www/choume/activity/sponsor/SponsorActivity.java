@@ -295,7 +295,7 @@ public class SponsorActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(SponsorActivity.this, "创建项目失败:" + msg);
+                UITools.warning(SponsorActivity.this, "创建项目失败:", msg, code);
                 dialog.dismiss();
             }
 

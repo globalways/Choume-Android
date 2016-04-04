@@ -78,7 +78,7 @@ public class ChangePwdActivity extends BaseActivity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(ChangePwdActivity.this, msg);
+                UITools.warning(ChangePwdActivity.this,"修改密码失败", msg, code);
             }
 
             @Override
@@ -105,7 +105,7 @@ public class ChangePwdActivity extends BaseActivity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(ChangePwdActivity.this, msg);
+                UITools.warning(ChangePwdActivity.this, "登出失败", msg, code);
             }
 
             @Override

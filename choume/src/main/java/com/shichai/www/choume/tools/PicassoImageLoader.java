@@ -6,6 +6,8 @@ package com.shichai.www.choume.tools;
 
 import android.content.Context;
 import android.widget.ImageView;
+
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -42,6 +44,17 @@ public class PicassoImageLoader {
             Picasso.with(mContext.get()).load(getUrl(targetWidth, targetHeight, uri))
                     .resize(targetWidth, targetHeight).centerCrop().placeholder(placeholderResId).error(errorResId)
                     .into(view);
+        }else {
+            view.setImageResource(errorResId);
+        }
+    }
+
+    public void loadUrlImageToView(String uri, int targetWidth, int targetHeight, int placeholderResId, int errorResId,
+                                   ImageView view, Callback callback) {
+        if (null != mContext && null != uri && !uri.isEmpty() ) {
+            Picasso.with(mContext.get()).load(getUrl(targetWidth, targetHeight, uri))
+                    .resize(targetWidth, targetHeight).centerCrop().placeholder(placeholderResId).error(errorResId)
+                    .into(view, callback);
         }else {
             view.setImageResource(errorResId);
         }

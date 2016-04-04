@@ -143,7 +143,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.warning(RegisterActivity.this, "验证码错误", msg);
+                UITools.warning(RegisterActivity.this, "验证码错误", msg, code);
             }
 
             @Override
@@ -189,7 +189,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(context, msg);
+                UITools.warning(context, "发送验证码失败", msg, code);
             }
 
             @Override
@@ -225,7 +225,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
             @Override
             public void warning(int code, String msg) {
                 setResult(Activity.RESULT_CANCELED);
-                UITools.toastMsg(context, msg);
+                UITools.warning(context, "登录失败", msg, code);
             }
 
             @Override

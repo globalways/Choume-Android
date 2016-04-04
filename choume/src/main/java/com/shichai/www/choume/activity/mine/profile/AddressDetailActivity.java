@@ -154,7 +154,7 @@ public class AddressDetailActivity extends BaseActivity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(AddressDetailActivity.this, msg);
+                UITools.warning(AddressDetailActivity.this,"创建地址失败", msg, code);
             }
 
             @Override

@@ -244,7 +244,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(MainActivity.this, msg);
+                UITools.warning(MainActivity.this,"",msg,code);
             }
 
             @Override

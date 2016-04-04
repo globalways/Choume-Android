@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 import com.shichai.www.choume.activity.MainActivity;
+import com.shichai.www.choume.network.HttpStatus;
 
 /**
  * Created by wyp on 15/12/24.
@@ -20,6 +21,14 @@ public class UITools {
 
     public static void warning(Context context,String friendlymsg, String msg){
         Toast.makeText(context,friendlymsg + "("+msg+")", Toast.LENGTH_SHORT).show();
+    }
+
+    public static void warning(Context context,String friendlymsg, String msg, int code){
+        String finalMsg = friendlymsg + "("+msg+")";
+        if (HttpStatus.codeOf(code) != HttpStatus.UNKNOWN){
+            finalMsg = HttpStatus.codeOf(code).desc;
+        }
+        Toast.makeText(context,finalMsg, Toast.LENGTH_SHORT).show();
     }
 
     public static void jumpToMainActivity(Context context, boolean isLogin) {

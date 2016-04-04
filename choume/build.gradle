@@ -28,8 +28,8 @@ android {
         applicationId "com.globalways.choume"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 9
-        versionName "0.8"
+        versionCode 1
+        versionName "1.0"
         multiDexEnabled true
     }
     buildTypes {
@@ -101,8 +101,11 @@ dependencies {
     //https://github.com/afollestad/material-dialogs.git
     compile('com.github.afollestad.material-dialogs:core:0.8.5.7@aar') {
         transitive = true
-
      }
+    //use for load gif : https://github.com/koush/ion.git
+    //compile 'com.koushikdutta.ion:ion:2.+'
+    //gif
+    //compile 'com.felipecsl:gifimageview:2.0.0'
 }
 
 

@@ -8,8 +8,10 @@ import android.view.MenuItem;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.globalways.choume.proto.nano.OutsouringCrowdfunding.CfUser;
 import com.globalways.proto.nano.Common;
 import com.globalways.user.nano.UserApp;
@@ -25,6 +27,8 @@ import com.shichai.www.choume.tools.LocalDataConfig;
 import com.shichai.www.choume.tools.PicassoImageLoader;
 import com.shichai.www.choume.tools.Tool;
 import com.shichai.www.choume.tools.UITools;
+import com.squareup.picasso.Callback;
+
 import me.iwf.photopicker.PhotoPickerActivity;
 import me.iwf.photopicker.utils.PhotoPickerIntent;
 
@@ -34,6 +38,7 @@ import java.util.List;
 
 /**
  * Created by HeJianjun on 2015/12/22.
+ * 个人信息类
  */
 public class IndividualActivity extends BaseActivity implements View.OnClickListener {
     private static final int CAPTURE_CODE = 1;
@@ -41,6 +46,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
     private RelativeLayout rlToCert, rlToChangeNick, rlToChangeSex, rlToManageAddress, rlToChangePwd;
     private TextView tvNick, tvTel, tvSex, tvCert, tvAddr,tvCertType;
     private ImageView ivAvatar;
+    private ProgressBar pbLoadingAvatar;
     private PicassoImageLoader imageLoader;
 
     @Override
@@ -52,6 +58,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         initViews();
         imageLoader = new PicassoImageLoader(this);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -79,6 +86,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         tvAddr = (TextView) findViewById(R.id.tvAddr);
         tvCert = (TextView) findViewById(R.id.tvCertType);
         ivAvatar = (ImageView) findViewById(R.id.ivAvatar);
+        pbLoadingAvatar = (ProgressBar) findViewById(R.id.pbLoadingAvatar);
         tvCertType = (TextView) findViewById(R.id.tvCertType);
 
         ivAvatar.setOnClickListener(this);
@@ -131,9 +139,9 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
         tvNick.setText(cfUser.user.nick);
         tvTel.setText(cfUser.user.tel);
         tvSex.setText(UserSex.codeOf(cfUser.user.sex).getDesc());
-        tvCert.setText(cfUser.certification == null?"暂无认证": cfUser.certification.name);
-        tvAddr.setText(cfUser.user.addrs.length == 0?"暂无地址": cfUser.user.addrs[0].name);
-        imageLoader.loadUrlImageToView(cfUser.user.avatar,200,200,R.mipmap.user_default,R.mipmap.user_default,ivAvatar);
+        tvCert.setText(cfUser.certification == null ? "暂无认证" : cfUser.certification.name);
+        tvAddr.setText(cfUser.user.addrs.length == 0 ? "暂无地址" : cfUser.user.addrs[0].name);
+        imageLoader.loadUrlImageToView(cfUser.user.avatar, 200, 200, R.mipmap.user_default, R.mipmap.user_default, ivAvatar);
     }
 
     @Override
@@ -150,6 +158,8 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                     e.printStackTrace();
                     return;
                 }
+                pbLoadingAvatar.setVisibility(View.VISIBLE);
+                ivAvatar.setVisibility(View.INVISIBLE);
                  final String userToken = LocalDataConfig.getToken(IndividualActivity.this);
                  new ImageUpLoadManager().upLoadImage(photos.toArray(new String[photos.size()]), userToken, new ManagerCallBack<List<String>>() {
                      @Override
@@ -161,12 +171,23 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                              @Override
                              public void success(Common.Response result) {
                                  MyApplication.getCfUser().user.avatar = p.avatar;
-                                 imageLoader.loadUrlImageToView(p.avatar,200,200,R.mipmap.user_default,R.mipmap.user_default,ivAvatar);
+                                 imageLoader.loadUrlImageToView(p.avatar, 200, 200, R.mipmap.user_default, R.mipmap.user_default, ivAvatar, new Callback() {
+                                     @Override
+                                     public void onSuccess() {
+                                         pbLoadingAvatar.setVisibility(View.INVISIBLE);
+                                         ivAvatar.setVisibility(View.VISIBLE);
+                                     }
+
+                                     @Override
+                                     public void onError() {
+
+                                     }
+                                 });
                              }
 
                              @Override
                              public void warning(int code, String msg) {
-                                 UITools.toastMsg(IndividualActivity.this, msg);
+                                 UITools.warning(IndividualActivity.this,"修改头像失败", msg);
                              }
 
                              @Override
@@ -189,7 +210,7 @@ public class IndividualActivity extends BaseActivity implements View.OnClickList
                      @Override
                      public void warning(int code, String msg) {
                          super.warning(code, msg);
-                         UITools.toastMsg(IndividualActivity.this, msg);
+                         UITools.warning(IndividualActivity.this,"上传头像失败", msg);
                      }
                  });
             }

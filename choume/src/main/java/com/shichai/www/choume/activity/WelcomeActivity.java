@@ -176,7 +176,7 @@ public class WelcomeActivity extends Activity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(WelcomeActivity.this, msg);
+                UITools.warning(WelcomeActivity.this,"自动登录失败", msg);
                 UITools.jumpToMainActivity(WelcomeActivity.this, false);
                 WelcomeActivity.this.finish();
             }

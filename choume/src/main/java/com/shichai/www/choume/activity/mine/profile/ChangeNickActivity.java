@@ -69,7 +69,7 @@ public class ChangeNickActivity extends BaseActivity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(ChangeNickActivity.this, msg);
+                UITools.warning(ChangeNickActivity.this,"修改昵称失败", msg, code);
             }
 
             @Override

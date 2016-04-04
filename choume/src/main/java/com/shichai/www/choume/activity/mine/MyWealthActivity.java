@@ -68,7 +68,7 @@ public class MyWealthActivity extends BaseActivity implements View.OnClickListen
                 startActivity(new Intent(this, RechargeActivity.class));
                 break;
             case R.id.tv_get_cash:
-                Toast.makeText(this,"暂无提现功能",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"敬请期待..",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_exchange_cb:
                 Intent intent = new Intent(this, ExchangeCBActivity.class);
@@ -100,7 +100,7 @@ public class MyWealthActivity extends BaseActivity implements View.OnClickListen
 
             @Override
             public void warning(int code, String msg) {
-                UITools.toastMsg(MyWealthActivity.this, msg);
+                UITools.warning(MyWealthActivity.this,"获取用户账户信息失败", msg, code);
             }
 
             @Override

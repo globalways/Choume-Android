@@ -61,7 +61,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 tel = etTel.getText().toString().trim();
                 pwd = etPassword.getText().toString().trim();
                 login();
-
                 break;
         }
     }
@@ -89,7 +88,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         CfUserManager.getInstance().login(loginAppParam, new ManagerCallBack<OutsouringCrowdfunding.LoginCFAppResp>() {
             @Override
             public void success(OutsouringCrowdfunding.LoginCFAppResp result) {
-                //UITools.toastMsg(context, "登录成功");
                 //跳转
                 MyApplication.setCfUser(result.cfUser);
                 LocalDataConfig.setToken(context, result.token);
@@ -103,7 +101,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void warning(int code, String msg) {
                 setResult(Activity.RESULT_CANCELED);
-                UITools.toastMsg(context, msg);
+                UITools.warning(context, "登录失败", msg, code);
                 dialog.cancel();
             }
 
