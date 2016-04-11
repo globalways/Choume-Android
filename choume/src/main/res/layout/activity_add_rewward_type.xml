@@ -29,7 +29,7 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="需要支持筹币"
+                android:text="需要支持筹币(1RMB=100筹币)"
                 android:id="@+id/rb_get_money" />
             <RadioButton
                 android:layout_width="wrap_content"

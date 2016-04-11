@@ -69,12 +69,14 @@ public class WelcomeActivity extends Activity {
         setContentView(R.layout.activity_welcome);
         ImageView imageViewWelcome = (ImageView) findViewById(R.id.imageWelcome);
 
+        //获取当前版本信息,对比蒲公英版本
         try {
             packageInfo = this.getPackageManager().getPackageInfo(this.getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
 
+        //蒲公英更新回调
         updateManagerListener = new UpdateManagerListener() {
             @Override
             public void onNoUpdateAvailable() {
@@ -86,7 +88,7 @@ public class WelcomeActivity extends Activity {
                 //Pgy需要下载后主动调用这个方法才更新本地版本信息
                 //UpdateManagerListener.updateLocalBuildNumber(s);或者使用这个,但是不能改进度条(丑的一笔)
                 //startDownloadTask(WelcomeActivity.this, appBean.getDownloadURL());
-                //由于这个机制太蠢,就通过自己比对versionCode和versionName作为是否更新依据
+                //由于这两个方案不是很好,就通过比对versionCode和versionName作为是否更新依据
                 final AppBean appBean = getAppBeanFromString(s);
                 //判断是否更新 比对versionCode和versionName
                 if (String.valueOf(packageInfo.versionCode).equals(appBean.getVersionCode()) &&
@@ -226,7 +228,7 @@ public class WelcomeActivity extends Activity {
 
             @Override
             public void warning(int code, String msg) {
-                UITools.warning(WelcomeActivity.this, "消息服务异常", msg);
+                UITools.warningLong(WelcomeActivity.this, "消息服务异常", msg);
                 WelcomeActivity.this.finish();
             }
 
@@ -282,6 +284,9 @@ public class WelcomeActivity extends Activity {
     }
 
 
+    /**
+     * 容云消息监听器
+     */
     private class MyRCMessageListener implements RongIMClient.OnReceiveMessageListener {
 
         /**

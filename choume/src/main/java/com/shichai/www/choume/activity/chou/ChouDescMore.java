@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +56,7 @@ public class ChouDescMore extends BaseActivity {
     private void initViews() {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         wvContainer = (WebView) findViewById(R.id.wvContainer);
+        wvContainer.getSettings().setDefaultTextEncodingName("UTF-8");
         wvContainer.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -99,8 +101,8 @@ public class ChouDescMore extends BaseActivity {
         project_intro = getIntent().getStringExtra(ChouDetailActivity.PROJECT_INTRO);
         project_desc  = getIntent().getStringExtra(ChouDetailActivity.PROJECT_DESC);
         if (Tool.isEmpty(project_intro)) {
-            wvContainer.loadData(project_desc, "text/html", "utf-8");
-        }else wvContainer.loadData(project_intro, "text/html", "utf-8");
+            wvContainer.loadData(project_desc, "text/html; charset=UTF-8", null);
+        }else wvContainer.loadData(project_intro, "text/html; charset=UTF-8", null);
     }
 
 }

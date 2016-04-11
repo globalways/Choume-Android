@@ -23,6 +23,10 @@ public class UITools {
         Toast.makeText(context,friendlymsg + "("+msg+")", Toast.LENGTH_SHORT).show();
     }
 
+    public static void warningLong(Context context, String friendlymsg, String msg) {
+        Toast.makeText(context,friendlymsg + "("+msg+")", Toast.LENGTH_LONG).show();
+    }
+
     public static void warning(Context context,String friendlymsg, String msg, int code){
         String finalMsg = friendlymsg + "("+msg+")";
         if (HttpStatus.codeOf(code) != HttpStatus.UNKNOWN){

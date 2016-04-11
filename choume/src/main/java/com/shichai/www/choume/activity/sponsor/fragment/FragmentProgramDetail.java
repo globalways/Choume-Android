@@ -1,6 +1,7 @@
 package com.shichai.www.choume.activity.sponsor.fragment;
 
 import android.content.Intent;
+import android.database.DataSetObserver;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -77,6 +78,12 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
 
         gridView = (GridViewForScrollView) rootView.findViewById(R.id.gridView);
         adapter = new ImageAdapter(getActivity());
+        adapter.registerDataSetObserver(new DataSetObserver() {
+            @Override
+            public void onChanged() {
+                onNextListener.onNext(checkFields());
+            }
+        });
         gridView.setAdapter(adapter);
 
         et_title.addTextChangedListener(this);
@@ -183,6 +190,11 @@ public class FragmentProgramDetail extends BaseFragment implements View.OnClickL
 
         if (Tool.isEmpty(descStr)) {
             //UITools.toastMsg(getContext(),"请填写描述");
+            return false;
+        }
+
+        //至少选择一张图片
+        if (selectedPhotos.size() < 1) {
             return false;
         }
 

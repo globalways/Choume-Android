@@ -36,8 +36,8 @@
                 android:layout_alignParentStart="true" />
 
             <FrameLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
@@ -46,6 +46,7 @@
                 <com.shichai.www.choume.view.CircleImageView
                     android:id="@+id/ivAvatar"
                     android:scaleType="centerCrop"
+                    android:layout_gravity="center"
                     android:src="@mipmap/user_default"
                     android:layout_width="50dp"
                     android:layout_height="50dp"/>
